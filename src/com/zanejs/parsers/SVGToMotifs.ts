@@ -14,6 +14,14 @@ import Polyline from '../geom/Polyline';
 import Rect from '../geom/Rect';
 import SVGArc from '../geom/SVGArc';
 import CubicBezier from '../geom/CubicBezier';
+import colorToUint from '../utils/color/colorToUint';
+import rotateAroundExternalPoint from '../utils/matrix/rotateAroundExternalPoint';
+import degreeToRadians from '../utils/geom/degreeToRadians';
+import getSkewX from '../utils/matrix/getSkewX';
+import setSkewX from '../utils/matrix/setSkewX';
+import getSkewY from '../utils/matrix/getSkewY';
+import setSkewY from '../utils/matrix/setSkewY';
+import concat from '../utils/matrix/concat';
 
 export default class SVGToMotifs {
 
@@ -61,6 +69,16 @@ export default class SVGToMotifs {
         'y2'
     ];
 
+    private static SUPPORTED_TAG: string[] = [
+        'circle',
+        'ellipse',
+        'line',
+        'path',
+        'polygon',
+        'polyline',
+        'rect'
+    ];
+
     public static getWarnings(): string { return SVGToMotifs._warnings; }
 
     public static parse(svg: string): any[] {
@@ -75,7 +93,7 @@ export default class SVGToMotifs {
 
         // parse SVG tags
         let xmlObject: any = stringToXMLDom(svg);
-        SVGToMotifs.parseTags(xmlObject.children());
+        SVGToMotifs.parseTags(xmlObject.children);
 
         // WARNINGS / ERRORS
         SVGToMotifs._warnings += (SVGToMotifs._eWarnings.length)
@@ -106,32 +124,34 @@ export default class SVGToMotifs {
     }
 
     private static parseTags(elm: any, parentAtt: any = null): void {
+        let tag: any;
         let tagName: string = '';
         let elmAtt: any = {};
-        let m: number = elm.length();
+        let m: number = elm.length;
         for (let i: number = 0; i < m; i++) {
-            tagName = elm[i].name();
+            tag = elm[i];
+            tagName = tag.nodeName;
             tagName = tagName.replace(/.*::/, ''); // remove namespace and capture only tag name
             elmAtt = SVGToMotifs.mergeAttributes(
                 parentAtt,
-                SVGToMotifs.parseAttributes(elm[i].attributes())
+                SVGToMotifs.parseAttributes(tag.attributes)
             ); // inheritance
-            if (tagName !== 'g') {
+            if (SVGToMotifs.SUPPORTED_TAG.indexOf(tagName) > -1) {
                 SVGToMotifs.parseElements(tagName, elmAtt);
             } else {
-                SVGToMotifs.parseTags(elm[i].children(), elmAtt); // inheritance
+                SVGToMotifs.parseTags(tag.children, elmAtt); // inheritance
             }
         }
     }
 
     private static parseAttributes(attList: any): any {
-        let n: number = attList.length();
+        let n: number = attList.length;
         let att: any = {};
         let aName: string = '';
         while (n--) {
-            aName = attList[n].name() + '';
+            aName = attList[n].nodeName + '';
             att[aName] = (aName !== 'transform')
-                ? attList[n]
+                ? attList[n].value
                 : SVGToMotifs.parseTransform(attList[n]);
             SVGToMotifs.validateAttribute(aName);
         }
@@ -147,12 +167,137 @@ export default class SVGToMotifs {
     }
 
     private static parseElements(type: string, att: any): void {
-        // todo
+        // beginFill
+        if (att.fill !== 'none') {
+            var fillColor: number = (att.fill !== undefined) ? colorToUint(att.fill) : 0;
+            var fillOpacity: number = (att['fill-opacity'] !== undefined) ? att['fill-opacity'] : 1;
+            fillOpacity *= (att.opacity !== undefined) ? att.opacity : 1;
+            SVGToMotifs._motifs.push( ['B', [fillColor, limitPrecision(fillOpacity)]] );
+        } else if (type === 'line') {
+            att.fill = 0;
+            SVGToMotifs._motifs.push( ['B', []] ); // fix unfilled line bug
+        }
+
+        // lineStyle
+        if (att.stroke !== undefined || att['stroke-width'] !== undefined) {
+            var thickness: number = (att['stroke-width'] !== undefined) ? att['stroke-width'] : 1;
+            var strokeColor: number = (att.stroke !== undefined) ? colorToUint(att.stroke) : 0;
+            var strokeOpacity: number = (att['stroke-opacity'] !== undefined) ? att['stroke-opacity'] : 1;
+            strokeOpacity *= (att.opacity !== undefined) ? att.opacity : 1;
+            var caps: string = (att['stroke-linecap'] !== undefined && att['stroke-linecap'] !== 'butt')
+                ? att['stroke-linecap']
+                : 'none';
+            var joints: string = (att['stroke-linejoin'] !== undefined) ? att['stroke-linejoin'] : null;
+            var miterlimit: Number = (att['stroke-miterlimit'] !== undefined) ? att['stroke-miterlimit'] : 3;
+            SVGToMotifs._motifs.push( ['S', [limitPrecision(thickness), strokeColor,
+                limitPrecision(strokeOpacity), false, 'normal', caps, joints, miterlimit]] );
+        } else {
+            SVGToMotifs._motifs.push( ['S', []] ); // clear lineStyle
+        }
+
+        // transform matrix
+        if (att.transform) {
+            SVGToMotifs._curMatrix = att.transform;
+            SVGToMotifs._hasTransform = true;
+        } else {
+            SVGToMotifs._hasTransform = false;
+        }
+
+        // shapes
+        switch (type) {
+            case 'circle':
+                SVGToMotifs.eCircle(att.cx, att.cy, att.r);
+                break;
+            case 'ellipse':
+                SVGToMotifs.eEllipse(att.cx, att.cy, att.rx, att.ry);
+                break;
+            case 'line':
+                SVGToMotifs.eLine(att.x1, att.y1, att.x2, att.y2);
+                break;
+            case 'path':
+                SVGToMotifs.ePath(att.d);
+                break;
+            case 'polygon':
+                SVGToMotifs.ePolygon(att.points);
+                break;
+            case 'polyline':
+                SVGToMotifs.ePolyline(att.points);
+                break;
+            case 'rect':
+                SVGToMotifs.eRect(
+                    parseFloat(att.x),
+                    parseFloat(att.y),
+                    parseFloat(att.width),
+                    parseFloat(att.height),
+                    parseFloat(att.rx),
+                    parseFloat(att.ry)
+                );
+                break;
+            default:
+                if (SVGToMotifs._eWarnings.indexOf(type) < 0) {
+                    SVGToMotifs._eWarnings.push(type); // Add element warning
+                }
+                break;
+        }
+
+        // endFill
+        if (att.fill !== 'none') {
+            SVGToMotifs._motifs.push( ['E'] );
+        }
     }
 
     private static parseTransform(str: string): PIXI.Matrix {
-        // todo
-        return new PIXI.Matrix();
+        let mat: PIXI.Matrix = new PIXI.Matrix();
+        let transforms: any = str.match(/[a-zA-Z]+\([\d\-\., ]+\)/g); // split all commands and params
+        let parts: any;
+        let command: string;
+        let params: any;
+        let n: number = transforms.length;
+        while (n--) {
+            parts = (transforms[n] + '').split('(');
+            command = parts[0] + '';
+            params = (parts[1] + '').match(/[\d\-\.]+/g);
+            switch (command) {
+                case 'matrix':
+                    mat = concat(
+                        mat,
+                        new PIXI.Matrix(params[0], params[1], params[2], params[3], params[4], params[5])
+                    );
+                    break;
+                case 'rotate':
+                    if (params.length > 1) {
+                        mat = rotateAroundExternalPoint(mat, new PIXI.Point(params[1], params[2]), params[0]);
+                    } else {
+                        mat.rotate(degreeToRadians(params[0]));
+                    }
+                    break;
+                case 'scale':
+                    // If <sy> is not provided, it is assumed to be equal to <sx>
+                    if (params.length === 1) {
+                        params[1] = params[0];
+                    }
+                    mat.scale(params[0], params[1]);
+                    break;
+                case 'skewX':
+                    var sX: number = getSkewX(mat);
+                    mat = setSkewX(mat, sX + params[0]);
+                    break;
+                case 'skewY':
+                    var sY: number = getSkewY(mat);
+                    mat = setSkewY(mat, sY + params[0]);
+                    break;
+                case 'translate':
+                    mat.translate(params[0], params[1]);
+                    break;
+                default:
+                    // Add transform warning
+                    if (SVGToMotifs._tWarnings.indexOf(command) < 0) {
+                        SVGToMotifs._tWarnings.push(command);
+                    }
+                    break;
+            }
+        }
+        return mat;
     }
 
     private static validateAttribute(att: string): void {
@@ -165,23 +310,29 @@ export default class SVGToMotifs {
 
     private static mergeAttributes(base: any, extend: any): any {
         let merged: any = {};
-        Object.keys(base).map(key => {
-            merged[key] = base[key];
-        });
+        if (base) {
 
-        Object.keys(extend).map(key => {
-            if (key === 'opacity' && merged.hasOwnProperty(key)) {
+            Object.keys(base).map(key => {
+                merged[key] = base[key];
+            });
+        }
 
-                merged[key] = parseFloat(merged[key]) * parseFloat(extend[key]);
+        if (extend) {
 
-            } else if (key === 'transform' && merged.hasOwnProperty(key)) {
-                // Matrix(extend[key]).concat(Matrix(merged[key]));
-                // merged[key] = extend[key];
-                // todo
-            } else {
-                merged[key] = extend[key];
-            }
-        });
+            Object.keys(extend).map(key => {
+                if (key === 'opacity' && merged.hasOwnProperty(key)) {
+
+                    merged[key] = parseFloat(merged[key]) * parseFloat(extend[key]);
+
+                } else if (key === 'transform' && merged.hasOwnProperty(key)) {
+                    // Matrix(extend[key]).concat(Matrix(merged[key]));
+                    // merged[key] = extend[key];
+                    // todo
+                } else {
+                    merged[key] = extend[key];
+                }
+            });
+        }
         return merged;
     }
 
@@ -277,7 +428,7 @@ export default class SVGToMotifs {
             // [command, [params...]]
             commands[i] = (temp.length > 1)
                 ? [temp.substr(0, 1), temp.substr(1).split(',')]
-                : [temp.substr(0, 1)];
+                : [parseFloat(temp.substr(0, 1))];
         }
 
         // TODO: check first command that isn't "m" since path may have multiple moveTo commands at the beginning
@@ -398,19 +549,30 @@ export default class SVGToMotifs {
     }
 
     private static pCubic(params: any[], isRelative: boolean = false): void {
+        let _params = [];
         let c1: PIXI.Point = new PIXI.Point(params[0], params[1]);
         let c2: PIXI.Point = new PIXI.Point(params[2], params[3]);
         let p2: PIXI.Point = new PIXI.Point(params[4], params[5]);
-        if (isRelative) {
-            SVGToMotifs.toAbsolute(c1);
-            SVGToMotifs.toAbsolute(c2);
-            SVGToMotifs.toAbsolute(p2);
+        for (let i = 0; i < params.length; ++i) {
+            _params.push(params[i]);
+            if (_params.length === 6) {
+                c1.set(_params[0], _params[1]);
+                c2.set(_params[2], _params[3]);
+                p2.set(_params[4], _params[5]);
+                if (isRelative) {
+                    SVGToMotifs.toAbsolute(c1);
+                    SVGToMotifs.toAbsolute(c2);
+                    SVGToMotifs.toAbsolute(p2);
+                }
+                let bezier: CubicBezier = new CubicBezier(c1, c2, SVGToMotifs._prevAnchor, p2);
+                if (SVGToMotifs._hasTransform) {
+                    bezier = bezier.transform(SVGToMotifs._curMatrix);
+                }
+                SVGToMotifs._motifs = SVGToMotifs._motifs.concat(bezier.toMotifs());
+                _params = [];
+            }
         }
-        let bezier: CubicBezier = new CubicBezier(c1, c2, SVGToMotifs._prevAnchor, p2);
-        if (SVGToMotifs._hasTransform) {
-            bezier = bezier.transform(SVGToMotifs._curMatrix);
-        }
-        SVGToMotifs._motifs = SVGToMotifs._motifs.concat(bezier.toMotifs());
+
         SVGToMotifs._prevAnchor = p2;
         SVGToMotifs._prevControl = c2;
     }
@@ -447,17 +609,27 @@ export default class SVGToMotifs {
     }
 
     private static pQuad(params: any[], isRelative: boolean = false): void {
+        let _params = [];
         let c: PIXI.Point = new PIXI.Point(params[0], params[1]);
         let p2: PIXI.Point = new PIXI.Point(params[2], params[3]);
-        if (isRelative) {
-            SVGToMotifs.toRelative(c);
-            SVGToMotifs.toRelative(p2);
+        for (let i = 0; i < params.length; ++i) {
+            _params.push(params[i]);
+            if (_params.length === 4) {
+                c.set(_params[0], _params[1]);
+                p2.set(_params[2], _params[3]);
+                if (isRelative) {
+                    SVGToMotifs.toRelative(c);
+                    SVGToMotifs.toRelative(p2);
+                }
+                let quad: QuadraticBezier = new QuadraticBezier(c, SVGToMotifs._prevAnchor, p2);
+                if (SVGToMotifs._hasTransform) {
+                    quad.transform(SVGToMotifs._curMatrix);
+                }
+                SVGToMotifs._motifs = SVGToMotifs._motifs.concat(quad.toMotifs());
+                _params = [];
+            }
         }
-        let quad: QuadraticBezier = new QuadraticBezier(c, SVGToMotifs._prevAnchor, p2);
-        if (SVGToMotifs._hasTransform) {
-            quad.transform(SVGToMotifs._curMatrix);
-        }
-        SVGToMotifs._motifs = SVGToMotifs._motifs.concat(quad.toMotifs());
+
         SVGToMotifs._prevControl = c;
         SVGToMotifs._prevAnchor = p2;
     }
