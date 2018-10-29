@@ -1,4 +1,6 @@
 import compare from '../utils/array/compare';
+import uintToRGBA from '../utils/color/uintToRGBA';
+import padLeft from '../utils/string/padLeft';
 
 export default class MotifsToHTML5CanvasCommands {
 
@@ -11,10 +13,6 @@ export default class MotifsToHTML5CanvasCommands {
     public static toCommandsString(motifs: any[]): string {
         let commands: string = '';
         let n: number = motifs.length;
-
-        commands += '/**\n';
-        commands += '* Generated using SVG To Motifs Parser\n';
-        commands += '*/\n';
 
         for (let i: number = 0; i < n; i++) {
             switch (motifs[i][0]) {
@@ -122,37 +120,16 @@ export default class MotifsToHTML5CanvasCommands {
 
     private static parseColor(color: number, alpha: number = 1): string {
         if (alpha < 1) {
-            return MotifsToHTML5CanvasCommands.uintToRGBA(color, alpha);
+            return uintToRGBA(color, alpha);
         } else if (color) {
             let hex: string = color.toString(16);
             if (hex.length < 6) {
-                hex = MotifsToHTML5CanvasCommands.addZeroes(hex, 6 - hex.length);
+                hex = padLeft(hex, '0', 6 - hex.length);
             }
             return '#' + hex;
         } else {
             return '#000000';
         }
-    }
-
-    private static uintToRGBA(color: number, alpha: number = 1): string {
-        let hex: string = color.toString(16);
-        if (hex.length < 6) {
-          hex = MotifsToHTML5CanvasCommands.addZeroes(hex, 6 - hex.length);
-        }
-        let channels: any = hex.match(/[0-9a-fA-F]{2}/g);
-        let r: number = parseInt(channels[0], 16);
-        let g: number = parseInt(channels[1], 16);
-        let b: number = parseInt(channels[2], 16);
-        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
-    }
-
-    private static addZeroes(str: string, n: number): string {
-        let output: string = '';
-        while (n--) {
-            output += '0';
-        }
-        output += str;
-        return output;
     }
 
     private static quadraticBezier(cx: number, cy: number, px: number, py: number): string {
