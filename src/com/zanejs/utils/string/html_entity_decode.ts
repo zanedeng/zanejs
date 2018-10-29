@@ -10,7 +10,7 @@
  * @param quoteStyle
  * @returns {*}
  */
-import { get_html_translation_table } from './get_html_translation_table';
+import get_html_translation_table from './get_html_translation_table';
 
 export default function html_entity_decode (str: string, quoteStyle: string = ''): any {
     let tmpStr = str.toString();

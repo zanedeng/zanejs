@@ -15,7 +15,7 @@
  */
 import urlencode from './urlencode';
 
-export function http_build_query (formData: any, numericPrefix: string = '', argSeparator: string = '') {
+export default function http_build_query (formData: any, numericPrefix: string = '', argSeparator: string = '') {
 
     let _httpBuildQueryHelper: any =  (key: string, val: any, $argSeparator: string) => {
         let k;

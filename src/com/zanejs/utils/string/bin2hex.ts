@@ -9,7 +9,7 @@
  * @param s
  * @returns {string}
  */
-export default function bin2hex (s: string) {
+export default function bin2hex(s: string) {
     let i;
     let l;
     let o = '';

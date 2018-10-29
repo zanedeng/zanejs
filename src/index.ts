@@ -76,6 +76,40 @@ import SVGArc from './com/zanejs/geom/SVGArc';
 import CSSParser from './com/zanejs/parsers/CSSParser';
 import MotifsToHTML5CanvasCommands from './com/zanejs/parsers/MotifsToHTML5CanvasCommands';
 import SVGToMotifs from './com/zanejs/parsers/SVGToMotifs';
+import MotifsToPixiGraphicsCommands from './com/zanejs/parsers/MotifsToPixiGraphicsCommands';
+import uintToRGBA from './com/zanejs/utils/color/uintToRGBA';
+import addcslashes from './com/zanejs/utils/string/addcslashes';
+import addslashes from './com/zanejs/utils/string/addslashes';
+import bin2hex from './com/zanejs/utils/string/bin2hex';
+import chr from './com/zanejs/utils/string/chr';
+import chunk_split from './com/zanejs/utils/string/chunk_split';
+import count_chars from './com/zanejs/utils/string/count_chars';
+import echo from './com/zanejs/utils/string/echo';
+import endsWith from './com/zanejs/utils/string/endsWith';
+import explode from './com/zanejs/utils/string/explode';
+import firstToUpper from './com/zanejs/utils/string/firstToUpper';
+import get_html_translation_table from './com/zanejs/utils/string/get_html_translation_table';
+import hex2bin from './com/zanejs/utils/string/hex2bin';
+import html_entity_decode from './com/zanejs/utils/string/html_entity_decode';
+import http_build_query from './com/zanejs/utils/string/http_build_query';
+import implode from './com/zanejs/utils/string/implode';
+import number_format from './com/zanejs/utils/string/number_format';
+import padLeft from './com/zanejs/utils/string/padLeft';
+import padRight from './com/zanejs/utils/string/padRight';
+import parse_url from './com/zanejs/utils/string/parse_url';
+import rawurldecode from './com/zanejs/utils/string/rawurldecode';
+import rawurlencode from './com/zanejs/utils/string/rawurlencode';
+import serialize from './com/zanejs/utils/string/serialize';
+import stringsAreEqual from './com/zanejs/utils/string/stringsAreEqual';
+import stringTruncate from './com/zanejs/utils/string/stringTruncate';
+import stripslashes from './com/zanejs/utils/string/stripslashes';
+import unserialize from './com/zanejs/utils/string/unserialize';
+import urldecode from './com/zanejs/utils/string/urldecode';
+import urlencode from './com/zanejs/utils/string/urlencode';
+import utf8_decode from './com/zanejs/utils/string/utf8_decode';
+import utf8_encode from './com/zanejs/utils/string/utf8_encode';
+import xtrim from './com/zanejs/utils/string/xtrim';
+import ajax from './com/zanejs/utils/ajax';
 
 export {
     /* ----- com.zanejs.geom -------- */
@@ -91,7 +125,10 @@ export {
     /* ----- com.zanejs.parsers -------- */
     CSSParser,
     MotifsToHTML5CanvasCommands,
+    MotifsToPixiGraphicsCommands,
     SVGToMotifs,
+    /* ----- com.zanejs.utils -------- */
+    ajax,
     /* ----- com.zanejs.utils.array -------- */
     compare,
     randomSort,
@@ -110,6 +147,7 @@ export {
     rgbToHex,
     rgbToUint,
     uintToHex,
+    uintToRGBA,
     /* ----- com.zanejs.utils.geom -------- */
     degreeToRadians,
     plotPoint,
@@ -147,9 +185,28 @@ export {
     /* ----- com.zanejs.utils.point -------- */
     distance,
     /* ----- com.zanejs.utils.string -------- */
-    trim,
+    addcslashes,
+    addslashes,
+    bin2hex,
+    chr,
+    chunk_split,
+    count_chars,
+    echo,
+    endsWith,
+    explode,
+    firstToUpper,
+    get_html_translation_table,
+    hex2bin,
+    html_entity_decode,
+    http_build_query,
+    implode,
     ltrim,
-    rtrim,
+    number_format,
+    padLeft,
+    padRight,
+    parse_url,
+    rawurldecode,
+    rawurlencode,
     removeAllComments,
     removeAllWhiteSpaces,
     removeLineBreaks,
@@ -161,10 +218,22 @@ export {
     removeSpecialChars,
     removeTabs,
     replaceAccents,
+    rtrim,
+    serialize,
+    stringsAreEqual,
+    stringTruncate,
+    stripslashes,
     toCamelCase,
     toPathFormat,
     toProperCase,
     toTitleFormat,
+    trim,
+    unserialize,
+    urldecode,
+    urlencode,
+    utf8_decode,
+    utf8_encode,
+    xtrim,
     /* ----- com.zanejs.utils.xml -------- */
     stringToXMLDom
 };

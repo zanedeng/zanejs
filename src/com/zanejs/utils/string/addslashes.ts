@@ -9,7 +9,7 @@
  * @param str - 要转义的字符。
  * @returns {string} - 返回转义后的字符
  */
-export default function addslashes (str: string) {
+export default function addslashes(str: string) {
     return (str + '')
         .replace(/[\\"']/g, '\\$&')
         .replace(/\u0000/g, '\\0');
