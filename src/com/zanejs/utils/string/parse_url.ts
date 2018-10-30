@@ -80,8 +80,7 @@ export default function parse_url (str: string, component: string, mode: string 
         parser = /(?:^|&)([^&=]*)=?([^&]*)/g;
         uri[name] = {};
         query = uri[key[12]] || '';
-        query.replace(parser, function ($0: any, $1: any, $2: any)
-        {
+        query.replace(parser, function ($0: any, $1: any, $2: any) {
             if ($1) {
                 uri[name][$1] = $2;
             }

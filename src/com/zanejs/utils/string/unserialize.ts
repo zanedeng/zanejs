@@ -14,8 +14,7 @@
  * @returns {*}
  */
 export default function unserialize (data: any) {
-    let utf8Overhead = function (str: string)
-    {
+    let utf8Overhead = function (str: string) {
         let s = str.length;
         for (let i = str.length - 1; i >= 0; i--) {
             let code = str.charCodeAt(i);
@@ -31,13 +30,11 @@ export default function unserialize (data: any) {
         }
         return s - 1;
     };
-    let error = function (type: string, msg: string, filename: string = '', line: number = 0)
-    {
+    let error = function (type: string, msg: string, filename: string = '', line: number = 0) {
         console.log(msg, filename, line);
     };
 
-    let readUntil = function ($data: any, offset: any, stopchr: any)
-    {
+    let readUntil = function ($data: any, offset: any, stopchr: any) {
         let i = 2;
         let buf = [];
         let $chr = $data.slice(offset, offset + 1);
@@ -53,8 +50,7 @@ export default function unserialize (data: any) {
         return [buf.length, buf.join('')];
     };
 
-    let readChrs = function ($data: any, offset: any, length: number)
-    {
+    let readChrs = function ($data: any, offset: any, length: number) {
         let i, $chr, buf;
 
         buf = [];
@@ -100,8 +96,7 @@ export default function unserialize (data: any) {
 
         switch (dtype) {
             case 'i':
-                typeconvert = function (x: string)
-                {
+                typeconvert = function (x: string) {
                     return parseInt(x, 10);
                 };
                 readData = readUntil($data, dataoffset, ';');
@@ -110,8 +105,7 @@ export default function unserialize (data: any) {
                 dataoffset += chrs + 1;
                 break;
             case 'b':
-                typeconvert = function (x: string)
-                {
+                typeconvert = function (x: string) {
                     return parseInt(x, 10) !== 0;
                 };
                 readData = readUntil($data, dataoffset, ';');

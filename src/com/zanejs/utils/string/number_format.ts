@@ -56,8 +56,7 @@ export default function number_format (num: any, decimals: number, decPoint: str
     let sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep;
     let dec = (typeof decPoint === 'undefined') ? '.' : decPoint;
 
-    let toFixedFix = function ($n: number, $prec: number)
-    {
+    let toFixedFix = function ($n: number, $prec: number) {
         let k = Math.pow(10, $prec);
         return '' + (Math.round($n * k) / k).toFixed($prec);
     };

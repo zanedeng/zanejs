@@ -20,8 +20,7 @@
  */
 export default function urldecode (str: string) {
     return decodeURIComponent((str + '')
-        .replace(/%(?![\da-f]{2})/gi, function ()
-        {
+        .replace(/%(?![\da-f]{2})/gi, function () {
             return '%25';
         })
         .replace(/\+/g, '%20'));

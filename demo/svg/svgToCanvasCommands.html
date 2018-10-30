@@ -65,10 +65,14 @@ L 145.45 8.55 Z"/>
         `;
 
         var motifs = zane.SVGToMotifs.parse(svgStr);
-        console.log(motifs);
-        var commands = zane.MotifsToHTML5CanvasCommands.toCommandsString(motifs);
+        var commands;
+        // commands = zane.MotifsToHTML5CanvasCommands.toCommandsString(motifs);
+        // eval(code + commands);
+        // console.log(commands);
+
+        commands = zane.MotifsToPixiGraphicsCommands.toCommandsString(motifs);
         console.log(commands);
-        eval(code + commands);
+
     </script>
 </body>
 </html>

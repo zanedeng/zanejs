@@ -50,8 +50,7 @@ export default function addcslashes (str: string, charlist: string = ''): string
     let encoded = '';
     let percentHex = /%([\dA-Fa-f]+)/g;
 
-    let _pad = function ($n: any, $c: any)
-    {
+    let _pad = function ($n: any, $c: any) {
         if (($n = $n + '').length < $c) {
             return new Array(++$c - $n.length).join('0') + $n;
         }

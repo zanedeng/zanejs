@@ -133,8 +133,7 @@ export default function ajax(options: IAjaxOptions) {
             xhr.setRequestHeader('Content-Type', contentType);
         }
         // 添加监听
-        xhr.onreadystatechange = function()
-        {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (timeOut !== undefined) {
                     // 由于执行abort()方法后，有可能触发onreadystatechange事件，
