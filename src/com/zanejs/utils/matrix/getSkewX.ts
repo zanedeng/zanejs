@@ -1,5 +1,6 @@
-import radianToDegree from '../geom/radianToDegree';
+module zanejs {
 
-export default function getSkewX(m: PIXI.Matrix): number {
-    return radianToDegree(Math.atan2(-m.c, m.d));
+    export function getSkewX(m: PIXI.Matrix): number {
+        return radianToDegree(Math.atan2(-m.c, m.d));
+    }
 }

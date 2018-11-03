@@ -1,7 +1,7 @@
-import removeSingleLineComments from './removeSingleLineComments';
-import removeMultiLineComments from './removeMultiLineComments';
+module zanejs {
 
-export default function removeAllComments(str: string, replace: string = ''): string {
-    str = str || '';
-    return removeMultiLineComments(removeSingleLineComments(str, replace), replace);
+    export function removeAllComments(str: string, replace: string = ''): string {
+        str = str || '';
+        return removeMultiLineComments(removeSingleLineComments(str, replace), replace);
+    }
 }

@@ -1,6 +1,6 @@
-import rgbToUint from './rgbToUint';
-import uintToHex from './uintToHex';
+module zanejs {
 
-export default function rgbToHex(rgb: string): string {
-    return uintToHex(rgbToUint(rgb));
+    export function rgbToHex(rgb: string): string {
+        return uintToHex(rgbToUint(rgb));
+    }
 }

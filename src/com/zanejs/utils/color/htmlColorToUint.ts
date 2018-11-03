@@ -1,6 +1,7 @@
-import htmlColorToHex from './htmlColorToHex';
-import hexToUint from './hexToUint';
+module zanejs {
 
-export default function htmlColorToUint(htmlColorName: string): number {
-    return hexToUint(htmlColorToHex(htmlColorName));
+    export function htmlColorToUint(htmlColorName: string): number {
+        return hexToUint(htmlColorToHex(htmlColorName));
+    }
+
 }

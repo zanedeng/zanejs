@@ -1,6 +1,6 @@
-import degreeToRadians from '../geom/degreeToRadians';
-import setRotationRadians from './setRotationRadians';
+module zanejs {
 
-export default function setRotation(m: PIXI.Matrix, value: number): PIXI.Matrix {
-    return setRotationRadians(m, degreeToRadians(value));
+    export function setRotation(m: PIXI.Matrix, value: number): PIXI.Matrix {
+        return setRotationRadians(m, degreeToRadians(value));
+    }
 }

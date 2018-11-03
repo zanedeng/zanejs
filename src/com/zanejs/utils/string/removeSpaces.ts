@@ -1,5 +1,7 @@
+module zanejs {
 
-export default function removeSpaces(str: string, replace: string = ''): string {
-    str = str || '';
-    return str.replace(/ +/g, replace);
+    export function removeSpaces(str: string, replace: string = ''): string {
+        str = str || '';
+        return str.replace(/ +/g, replace);
+    }
 }

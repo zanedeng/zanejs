@@ -1,5 +1,6 @@
-import { RAD_TO_DEG } from './degreeToRadians';
+module zanejs {
 
-export default function radianToDegree(radian: number): number {
-  return radian * RAD_TO_DEG;
+    export function radianToDegree(radian: number): number {
+        return radian * RAD_TO_DEG;
+    }
 }

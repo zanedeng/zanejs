@@ -1,5 +1,7 @@
-import getHtmlColors from './getHtmlColors';
+module zanejs {
 
-export default function htmlColorToHex(htmlColorName: string): string {
-  return getHtmlColors()[htmlColorName.toLowerCase()];
+    export function htmlColorToHex(htmlColorName: string): string {
+        return getHtmlColors()[htmlColorName.toLowerCase()];
+    }
+
 }

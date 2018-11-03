@@ -1,32 +1,54 @@
 {
-  "name": "zane",
+  "name": "zanejs",
   "version": "1.0.0",
   "description": "my awesome library",
-  "main": "./dist/zane.min.js",
-  "types": "./dist/zane.d.ts",
-  "scripts": {
-    "dev": "npm run tslint && webpack --mode development",
-    "dev:tsc": "tsc && tsc -m es6 --outDir dist/lib-esm",
-    "dev:watch": "nodemon --exec 'npm run dev || exit 1'",
-    "tslint": "tslint --project .",
-    "build": "npm run tslint && webpack --mode production",
-    "test": "jest && yarn run demo:test",
-    "demo:test": "yarn run build && cd demo && yarn install && yarn test",
-    "clean": "rm -rf dist"
-  },
-  "repository": "https://github.com/zanedeng/zanejs.git",
   "author": "zane deng <zane.deng@qq.com>",
+  "main": "./bin/zanejs.js",
+  "types": "./bin/zanejs.d.ts",
+  "homepage": "https://github.com/zanedeng/zanejs",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zanedeng/zanejs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanedeng/zanejs.git"
+  },
+  "scripts": {
+    "cleanup": "rimraf bin && mkdirp bin",
+    "prestart": "yarn cleanup",
+    "start": "parallelshell \"yarn watch\"",
+    "watch": "tsc -w",
+    "prebuild": "yarn cleanup",
+    "make:dts": "node scripts/make_dts.js",
+    "build": "tsc && yarn make:dts",
+    "docs": "typedoc --out ./docs/ --readme README.md ./src/",
+    "check:browserify": "yarn checkpack browserify -e test/checkpack.ts",
+    "check:webpack": "yarn checkpack webpack -e test/checkpack.ts",
+    "check:vanillajs": "yarn checkpack vanillajs -e test/checkpack.ts",
+    "check:all": "yarn build && yarn check:browserify && yarn check:webpack && yarn check:vanillajs"
+  },
   "devDependencies": {
-    "@types/jest": "^23.3.7",
-    "jest": "^23.6.0",
-    "nodemon": "^1.17.5",
-    "ts-jest": "^23.10.4",
-    "ts-loader": "^5.2.2",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "uglifyjs-webpack-plugin": "^1.2.6",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.8"
-  }
+    "@types/lodash": "^4.14.108",
+    "checkpack": "^0.3",
+    "del": "~2.2.0",
+    "glob": "~7.1.1",
+    "mkdirp": "~0.5.1",
+    "parallelshell": "~2.0.0",
+    "pixi.js": "~4.8.1",
+    "rimraf": "~2.5.3",
+    "tmp": "^0.0.33",
+    "ts-helpers": "~1.1.2",
+    "typedoc": "^0.9.0",
+    "typescript": "^2.8.3"
+  },
+  "dependencies": {
+    "@types/pixi.js": "^4.8.0"
+  },
+  "files": [
+    "bin/",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
 }

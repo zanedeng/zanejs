@@ -1,5 +1,6 @@
-import getSkewYRadians from './getSkewYRadians';
+module zanejs {
 
-export default function getRotationRadians(m: PIXI.Matrix): number {
-    return getSkewYRadians(m);
+    export function getRotationRadians(m: PIXI.Matrix): number {
+        return getSkewYRadians(m);
+    }
 }

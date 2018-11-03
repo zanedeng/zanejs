@@ -1,12 +1,13 @@
-import toProperCase from './toProperCase';
+module zanejs {
 
-export default function toCamelCase(str: string): string {
-    str = str || '';
-    str = str.replace('-', ' ');
-    str = toProperCase(str).replace(' ', '');
-    // lowercase first letter
-    function capsFn(): string {
-        return arguments[0].toLowerCase();
+    export function toCamelCase(str: string): string {
+        str = str || '';
+        str = str.replace('-', ' ');
+        str = toProperCase(str).replace(' ', '');
+        // lowercase first letter
+        function capsFn(): string {
+            return arguments[0].toLowerCase();
+        }
+        return str.replace(/\b\w/g, capsFn);
     }
-    return str.replace(/\b\w/g, capsFn);
 }
