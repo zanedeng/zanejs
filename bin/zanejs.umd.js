@@ -1,4 +1,16 @@
-var zanejs;
+
+(function (root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("qqw", [], factory);
+	else if(typeof exports === 'object')
+		exports["qqw"] = factory();
+	else
+		root["qqw"] = factory();
+})(window, function() {
+	var zanejs = {};
+	
 (function (zanejs) {
     var Symbol = window.Symbol;
     var idCounter = 0;
@@ -34,7 +46,7 @@ var zanejs;
     zanejs.Pool = Pool;
     zanejs.pool = new Pool();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var State = (function () {
         function State(state) {
@@ -74,7 +86,7 @@ var zanejs;
     }());
     zanejs.State = State;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var AssetsBundle = (function () {
         function AssetsBundle() {
@@ -83,7 +95,7 @@ var zanejs;
     }());
     zanejs.AssetsBundle = AssetsBundle;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var AssetsBundleEvent = (function () {
         function AssetsBundleEvent() {
@@ -95,7 +107,7 @@ var zanejs;
     }());
     zanejs.AssetsBundleEvent = AssetsBundleEvent;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var AssetsManager = (function () {
         function AssetsManager() {
@@ -105,13 +117,13 @@ var zanejs;
     }());
     zanejs.AssetsManager = AssetsManager;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function paserZipMiddleware(resource, next) {
     }
     zanejs.paserZipMiddleware = paserZipMiddleware;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Arc = (function () {
         function Arc(cx, cy, rx, ry, rotation, angleStart, angleExtent) {
@@ -228,7 +240,7 @@ var zanejs;
     }());
     zanejs.Arc = Arc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var CubicBezier = (function () {
         function CubicBezier(c1, c2, p1, p2) {
@@ -344,7 +356,7 @@ var zanejs;
     }());
     zanejs.CubicBezier = CubicBezier;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Ellipse = (function () {
         function Ellipse(cx, cy, rx, ry) {
@@ -430,7 +442,7 @@ var zanejs;
     }());
     zanejs.Ellipse = Ellipse;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Line = (function () {
         function Line(start, end) {
@@ -509,7 +521,7 @@ var zanejs;
     }());
     zanejs.Line = Line;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Polyline = (function () {
         function Polyline(pts) {
@@ -591,7 +603,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var zanejs;
+
 (function (zanejs) {
     var Polygon = (function (_super) {
         __extends(Polygon, _super);
@@ -622,7 +634,7 @@ var zanejs;
     }(zanejs.Polyline));
     zanejs.Polygon = Polygon;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var QuadraticBezier = (function () {
         function QuadraticBezier(c, p1, p2) {
@@ -711,7 +723,7 @@ var zanejs;
     }());
     zanejs.QuadraticBezier = QuadraticBezier;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Rect = (function () {
         function Rect(x, y, wid, hei, rx, ry) {
@@ -785,7 +797,7 @@ var zanejs;
     }());
     zanejs.Rect = Rect;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var SVGArc = (function (_super) {
         __extends(SVGArc, _super);
@@ -852,7 +864,7 @@ var zanejs;
     }(zanejs.Arc));
     zanejs.SVGArc = SVGArc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Controller = (function () {
         function Controller(cmd) {
@@ -941,7 +953,7 @@ var zanejs;
     }());
     zanejs.Controller = Controller;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MVCApp = (function () {
         function MVCApp() {
@@ -960,7 +972,7 @@ var zanejs;
     }());
     zanejs.MVCApp = MVCApp;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Model = (function () {
         function Model(name, data) {
@@ -1016,7 +1028,7 @@ var zanejs;
     }());
     zanejs.Model = Model;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var View = (function () {
         function View(name, viewComponent) {
@@ -1131,7 +1143,7 @@ var zanejs;
     }());
     zanejs.View = View;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var CSSParser = (function () {
         function CSSParser() {
@@ -1185,7 +1197,7 @@ var zanejs;
     }());
     zanejs.CSSParser = CSSParser;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MotifsToHTML5CanvasCommands = (function () {
         function MotifsToHTML5CanvasCommands() {
@@ -1362,7 +1374,7 @@ var zanejs;
     }());
     zanejs.MotifsToHTML5CanvasCommands = MotifsToHTML5CanvasCommands;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MotifsToPixiGraphicsCommands = (function () {
         function MotifsToPixiGraphicsCommands() {
@@ -1500,7 +1512,7 @@ var zanejs;
     }());
     zanejs.MotifsToPixiGraphicsCommands = MotifsToPixiGraphicsCommands;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var SVGToMotifs = (function () {
         function SVGToMotifs() {
@@ -2054,7 +2066,7 @@ var zanejs;
     }());
     zanejs.SVGToMotifs = SVGToMotifs;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function ajax(options) {
         var url = options.url || '', type = (options.type || 'get').toLowerCase(), data = options.data || null, contentType = options.contentType || '', dataType = options.dataType || '', async = options.async === undefined && true, timeOut = options.timeOut, before = options.before || function () { }, error = options.error || function () { }, success = options.success || function () { }, timeoutBool = false, timeoutFlag = null, xhr = null;
@@ -2171,7 +2183,7 @@ var zanejs;
     }
     zanejs.ajax = ajax;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_chunk(input, size, preserveKeys) {
         if (preserveKeys === void 0) { preserveKeys = false; }
@@ -2230,7 +2242,7 @@ var zanejs;
     }
     zanejs.array_chunk = array_chunk;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_combine(keys, values) {
         var newArray = {};
@@ -2259,7 +2271,7 @@ var zanejs;
     }
     zanejs.array_combine = array_combine;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_count_values(array) {
         var tmpArr = {};
@@ -2300,7 +2312,7 @@ var zanejs;
     }
     zanejs.array_count_values = array_count_values;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff() {
         var args = [];
@@ -2329,7 +2341,7 @@ var zanejs;
     }
     zanejs.array_diff = array_diff;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_assoc() {
         var args = [];
@@ -2360,7 +2372,7 @@ var zanejs;
     }
     zanejs.array_diff_assoc = array_diff_assoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_key() {
         var args = [];
@@ -2389,7 +2401,7 @@ var zanejs;
     }
     zanejs.array_diff_key = array_diff_key;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_uassoc() {
         var args = [];
@@ -2424,7 +2436,7 @@ var zanejs;
     }
     zanejs.array_diff_uassoc = array_diff_uassoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_ukey() {
         var args = [];
@@ -2459,7 +2471,7 @@ var zanejs;
     }
     zanejs.array_diff_ukey = array_diff_ukey;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_fill(startIndex, num, mixedVal) {
         var key;
@@ -2473,7 +2485,7 @@ var zanejs;
     }
     zanejs.array_fill = array_fill;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_fill_keys(keys, value) {
         var retObj = {};
@@ -2484,7 +2496,7 @@ var zanejs;
     }
     zanejs.array_fill_keys = array_fill_keys;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_filter(arr, func) {
         var retObj = {};
@@ -2504,7 +2516,7 @@ var zanejs;
     }
     zanejs.array_filter = array_filter;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_flip(trans) {
         var key;
@@ -2519,7 +2531,7 @@ var zanejs;
     }
     zanejs.array_flip = array_flip;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_intersect() {
         var args = [];
@@ -2554,7 +2566,7 @@ var zanejs;
     }
     zanejs.array_intersect = array_intersect;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_intersect_assoc() {
         var args = [];
@@ -2589,7 +2601,7 @@ var zanejs;
     }
     zanejs.array_intersect_assoc = array_intersect_assoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_merge() {
         var args = [];
@@ -2643,7 +2655,7 @@ var zanejs;
     }
     zanejs.array_merge = array_merge;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_unique(inputArr) {
         var tmpArr2 = {};
@@ -2665,7 +2677,7 @@ var zanejs;
     }
     zanejs.array_unique = array_unique;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_values(input) {
         var tmpArr = [];
@@ -2676,7 +2688,7 @@ var zanejs;
     }
     zanejs.array_values = array_values;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function compare(arr1, arr2) {
         if (arr1.length !== arr2.length) {
@@ -2693,7 +2705,7 @@ var zanejs;
     }
     zanejs.compare = compare;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRandomArrayElements(arr, count) {
         var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -2707,7 +2719,7 @@ var zanejs;
     }
     zanejs.getRandomArrayElements = getRandomArrayElements;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function indexByObjectValue(arr, attribute, value) {
         for (var i = 0, l = arr.length; i < l; ++i) {
@@ -2720,14 +2732,14 @@ var zanejs;
     }
     zanejs.indexByObjectValue = indexByObjectValue;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function is_array(input) {
         return typeof (input) === 'object' && (input instanceof Array);
     }
     zanejs.is_array = is_array;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSort(arr) {
         function randomize(elementA, elementB) {
@@ -2746,7 +2758,7 @@ var zanejs;
     }
     zanejs.randomSort = randomSort;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeEmptyItems(arr) {
         function isNotEmpty(item, index, array) {
@@ -2756,7 +2768,7 @@ var zanejs;
     }
     zanejs.removeEmptyItems = removeEmptyItems;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toStringArray(arr) {
         var str = '[';
@@ -2791,7 +2803,7 @@ var zanejs;
     }
     zanejs.toStringArray = toStringArray;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function colorToHex(color) {
         if (isNaN(color)) {
@@ -2814,7 +2826,7 @@ var zanejs;
     }
     zanejs.colorToHex = colorToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function colorToUint(color) {
         if (/^rgb\(\d+\,\d+\,\d+\)/.test(color)) {
@@ -2832,7 +2844,7 @@ var zanejs;
     }
     zanejs.colorToUint = colorToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function fadeColor(startColor, endColor, position) {
         var r = startColor >> 16;
@@ -2845,7 +2857,7 @@ var zanejs;
     }
     zanejs.fadeColor = fadeColor;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var _htmlColors = null;
     function getHtmlColors() {
@@ -3008,7 +3020,7 @@ var zanejs;
     }
     zanejs.cleanHtmlColors = cleanHtmlColors;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function hexToUint(hex) {
         hex = hex || '';
@@ -3020,21 +3032,21 @@ var zanejs;
     }
     zanejs.hexToUint = hexToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function htmlColorToHex(htmlColorName) {
         return zanejs.getHtmlColors()[htmlColorName.toLowerCase()];
     }
     zanejs.htmlColorToHex = htmlColorToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function htmlColorToUint(htmlColorName) {
         return zanejs.hexToUint(zanejs.htmlColorToHex(htmlColorName));
     }
     zanejs.htmlColorToUint = htmlColorToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function percToUint(perc) {
         var x = zanejs.uint(perc.replace('%', ''));
@@ -3042,14 +3054,14 @@ var zanejs;
     }
     zanejs.percToUint = percToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rgbToHex(rgb) {
         return zanejs.uintToHex(zanejs.rgbToUint(rgb));
     }
     zanejs.rgbToHex = rgbToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rgbToUint(rgb) {
         var colors = rgb
@@ -3070,14 +3082,14 @@ var zanejs;
     }
     zanejs.rgbToUint = rgbToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uintToHex(u) {
         return '#' + u.toString(16).toUpperCase();
     }
     zanejs.uintToHex = uintToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uintToRGBA(color, alpha) {
         if (alpha === void 0) { alpha = 1; }
@@ -3093,14 +3105,14 @@ var zanejs;
     }
     zanejs.uintToRGBA = uintToRGBA;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function deleteCookie(name) {
         zanejs.setCookie(name, '', -1);
     }
     zanejs.deleteCookie = deleteCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getCookie(name) {
         name = name + '=';
@@ -3118,7 +3130,7 @@ var zanejs;
     }
     zanejs.getCookie = getCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setCookie(name, value, seconds) {
         var expires;
@@ -3134,7 +3146,7 @@ var zanejs;
     }
     zanejs.setCookie = setCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function checkdate(m, d, y) {
         return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0))
@@ -3142,7 +3154,7 @@ var zanejs;
     }
     zanejs.checkdate = checkdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function date(format, timestamp) {
         var jsdate, f;
@@ -3315,7 +3327,7 @@ var zanejs;
     }
     zanejs.date = date;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getdate(timestamp) {
         if (timestamp === void 0) { timestamp = undefined; }
@@ -3345,7 +3357,7 @@ var zanejs;
     }
     zanejs.getdate = getdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gettimeofday(returnFloat) {
         if (returnFloat === void 0) { returnFloat = false; }
@@ -3367,7 +3379,7 @@ var zanejs;
     }
     zanejs.gettimeofday = gettimeofday;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gmdate(format, timestamp) {
         var dt = typeof timestamp === 'undefined' ? new Date()
@@ -3378,7 +3390,7 @@ var zanejs;
     }
     zanejs.gmdate = gmdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gmmktime() {
         var args = [];
@@ -3407,7 +3419,7 @@ var zanejs;
     }
     zanejs.gmmktime = gmmktime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function idate(format, timestamp) {
         if (format === undefined) {
@@ -3475,7 +3487,7 @@ var zanejs;
     }
     zanejs.idate = idate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function microtime(getAsFloat) {
         var s;
@@ -3499,7 +3511,7 @@ var zanejs;
     }
     zanejs.microtime = microtime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function mktime() {
         var args = [];
@@ -3529,7 +3541,7 @@ var zanejs;
     }
     zanejs.mktime = mktime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function strtotime(text, now) {
         var parsed, match, today;
@@ -3746,14 +3758,14 @@ var zanejs;
     }
     zanejs.strtotime = strtotime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function time() {
         return Math.floor(new Date().getTime() / 1000);
     }
     zanejs.time = time;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function basename(path, suffix) {
         if (suffix === void 0) { suffix = null; }
@@ -3770,7 +3782,7 @@ var zanejs;
     }
     zanejs.basename = basename;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function dirname(path) {
         return path.replace(/\\/g, '/')
@@ -3778,14 +3790,14 @@ var zanejs;
     }
     zanejs.dirname = dirname;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getExtension(filePath) {
         return filePath.split('.').pop();
     }
     zanejs.getExtension = getExtension;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getFileNameFromUrl(url) {
         if (url) {
@@ -3795,7 +3807,7 @@ var zanejs;
     }
     zanejs.getFileNameFromUrl = getFileNameFromUrl;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     zanejs.PI = Math.PI;
     zanejs.DEG_TO_RAD = zanejs.PI / 180;
@@ -3805,7 +3817,7 @@ var zanejs;
     }
     zanejs.degreeToRadians = degreeToRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function plotPoint(g, p, color, size) {
         if (color === void 0) { color = 0xFF0000; }
@@ -3816,14 +3828,14 @@ var zanejs;
     }
     zanejs.plotPoint = plotPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function radianToDegree(radian) {
         return radian * zanejs.RAD_TO_DEG;
     }
     zanejs.radianToDegree = radianToDegree;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function reflectPoint(point, pivot) {
         var rx = pivot.x - point.x;
@@ -3832,7 +3844,7 @@ var zanejs;
     }
     zanejs.reflectPoint = reflectPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function concat(m1, m2) {
         var a = m1.a * m2.a;
@@ -3859,63 +3871,63 @@ var zanejs;
     }
     zanejs.concat = concat;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRotation(m) {
         return zanejs.radianToDegree(zanejs.getRotationRadians(m));
     }
     zanejs.getRotation = getRotation;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRotationRadians(m) {
         return zanejs.getSkewYRadians(m);
     }
     zanejs.getRotationRadians = getRotationRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getScaleX(m) {
         return Math.sqrt(m.a * m.a + m.b * m.b);
     }
     zanejs.getScaleX = getScaleX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getScaleY(m) {
         return Math.sqrt(m.c * m.c + m.d * m.d);
     }
     zanejs.getScaleY = getScaleY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewX(m) {
         return zanejs.radianToDegree(Math.atan2(-m.c, m.d));
     }
     zanejs.getSkewX = getSkewX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewXRadians(m) {
         return Math.atan2(-m.c, m.d);
     }
     zanejs.getSkewXRadians = getSkewXRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewY(m) {
         return zanejs.radianToDegree(Math.atan2(m.b, m.a));
     }
     zanejs.getSkewY = getSkewY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewYRadians(m) {
         return Math.atan2(m.b, m.a);
     }
     zanejs.getSkewYRadians = getSkewYRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function matchInternalPointWithExternal(m, internalPoint, externalPoint) {
         var mat = m.clone();
@@ -3928,7 +3940,7 @@ var zanejs;
     }
     zanejs.matchInternalPointWithExternal = matchInternalPointWithExternal;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rotateAroundExternalPoint(m, pivot, angleDegrees) {
         var mat = m.clone();
@@ -3941,7 +3953,7 @@ var zanejs;
     }
     zanejs.rotateAroundExternalPoint = rotateAroundExternalPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rotateAroundInternalPoint(m, pivot, angleDegrees) {
         pivot = zanejs.transformPoint(m, pivot);
@@ -3949,14 +3961,14 @@ var zanejs;
     }
     zanejs.rotateAroundInternalPoint = rotateAroundInternalPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setRotation(m, value) {
         return zanejs.setRotationRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setRotation = setRotation;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setRotationRadians(m, value) {
         var curRotation = zanejs.getRotationRadians(m);
@@ -3966,7 +3978,7 @@ var zanejs;
     }
     zanejs.setRotationRadians = setRotationRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setScaleX(m, value) {
         var mat = m.clone();
@@ -3985,7 +3997,7 @@ var zanejs;
     }
     zanejs.setScaleX = setScaleX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setScaleY(m, value) {
         var mat = m.clone();
@@ -4004,14 +4016,14 @@ var zanejs;
     }
     zanejs.setScaleY = setScaleY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewX(m, value) {
         return zanejs.setSkewXRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewX = setSkewX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewXRadians(m, value) {
         var mat = m.clone();
@@ -4022,14 +4034,14 @@ var zanejs;
     }
     zanejs.setSkewXRadians = setSkewXRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewY(m, value) {
         return zanejs.setSkewYRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewY = setSkewY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewYRadians(m, value) {
         var mat = m.clone();
@@ -4040,7 +4052,7 @@ var zanejs;
     }
     zanejs.setSkewYRadians = setSkewYRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function transformPoint(m, pivot, resultPoint) {
         var x = m.a * pivot.x + m.c * pivot.y + m.tx;
@@ -4054,7 +4066,7 @@ var zanejs;
     }
     zanejs.transformPoint = transformPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addLeadingZeroes(n, zeroes) {
         if (zeroes === void 0) { zeroes = 1; }
@@ -4069,14 +4081,14 @@ var zanejs;
     }
     zanejs.addLeadingZeroes = addLeadingZeroes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function clamp(val, min, max) {
         return Math.max(Math.min(val, max), min);
     }
     zanejs.clamp = clamp;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function createStepsBetween(begin, end, steps) {
         steps++;
@@ -4090,14 +4102,14 @@ var zanejs;
     }
     zanejs.createStepsBetween = createStepsBetween;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isBetween(value, firstValue, secondValue) {
         return !(value < Math.min(firstValue, secondValue) || value > Math.max(firstValue, secondValue));
     }
     zanejs.isBetween = isBetween;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEqual(val1, val2, precision) {
         if (precision === void 0) { precision = 0; }
@@ -4105,35 +4117,35 @@ var zanejs;
     }
     zanejs.isEqual = isEqual;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEven(value) {
         return (value & 1) === 0;
     }
     zanejs.isEven = isEven;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isInteger(value) {
         return (value % 1) === 0;
     }
     zanejs.isInteger = isInteger;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isNegative(value) {
         return !zanejs.isPositive(value);
     }
     zanejs.isNegative = isNegative;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isOdd(value) {
         return !zanejs.isEven(value);
     }
     zanejs.isOdd = isOdd;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isOne(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4141,14 +4153,14 @@ var zanejs;
     }
     zanejs.isOne = isOne;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPositive(value) {
         return value >= 0;
     }
     zanejs.isPositive = isPositive;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPowerOf2() {
         var args = [];
@@ -4167,7 +4179,7 @@ var zanejs;
     }
     zanejs.isPowerOf2 = isPowerOf2;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPrime(value) {
         if (value === 1 || value === 2) {
@@ -4186,7 +4198,7 @@ var zanejs;
     }
     zanejs.isPrime = isPrime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isZero(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4194,7 +4206,7 @@ var zanejs;
     }
     zanejs.isZero = isZero;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function limitPrecision(n, maxPrecision) {
         if (maxPrecision === void 0) { maxPrecision = 2; }
@@ -4205,14 +4217,14 @@ var zanejs;
     }
     zanejs.limitPrecision = limitPrecision;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomIntegerWithinRange(min, max) {
         return Math.round(zanejs.randomWithinRange(min, max));
     }
     zanejs.randomIntegerWithinRange = randomIntegerWithinRange;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSign(chance) {
         if (chance === void 0) { chance = 0.5; }
@@ -4220,7 +4232,7 @@ var zanejs;
     }
     zanejs.randomSign = randomSign;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomWithinRange(min, max) {
         if (min > max) {
@@ -4232,7 +4244,7 @@ var zanejs;
     }
     zanejs.randomWithinRange = randomWithinRange;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function round(value, digits) {
         digits = Math.pow(10, digits);
@@ -4240,14 +4252,14 @@ var zanejs;
     }
     zanejs.round = round;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uint(value) {
         return parseInt(value, undefined) >>> 32;
     }
     zanejs.uint = uint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function assign(obj, params) {
         Object.keys(params).map(function (name) {
@@ -4257,7 +4269,7 @@ var zanejs;
     }
     zanejs.assign = assign;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function combine(defaultVars, additionalVars) {
         var combinedObject = {};
@@ -4271,7 +4283,7 @@ var zanejs;
     }
     zanejs.combine = combine;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getQualifiedClassName(value) {
         var type = typeof value;
@@ -4294,21 +4306,21 @@ var zanejs;
     }
     zanejs.getQualifiedClassName = getQualifiedClassName;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isArray(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
     }
     zanejs.isArray = isArray;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isBool(obj) {
         return obj === true || obj === false;
     }
     zanejs.isBool = isBool;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEmpty(val) {
         if (val) {
@@ -4320,21 +4332,21 @@ var zanejs;
     }
     zanejs.isEmpty = isEmpty;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isFunction(obj) {
         return Object.prototype.toString.call(obj) === '[object Function]';
     }
     zanejs.isFunction = isFunction;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isObject(obj) {
         return Object.prototype.toString.call(obj) === '[object Object]';
     }
     zanejs.isObject = isObject;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isSpecial(obj) {
         var undef;
@@ -4342,21 +4354,21 @@ var zanejs;
     }
     zanejs.isSpecial = isSpecial;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isString(obj) {
         return Object.prototype.toString.call(obj) === '[object String]';
     }
     zanejs.isString = isString;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isUndefined(obj) {
         return obj === void 0;
     }
     zanejs.isUndefined = isUndefined;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function merge(base, extend) {
         var merged = {};
@@ -4370,7 +4382,7 @@ var zanejs;
     }
     zanejs.merge = merge;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function object_change_key_case(obj, cs) {
         if (cs === void 0) { cs = 'CASE_LOWER'; }
@@ -4389,7 +4401,7 @@ var zanejs;
     }
     zanejs.object_change_key_case = object_change_key_case;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toObject(objString) {
         var o = {};
@@ -4404,14 +4416,14 @@ var zanejs;
     }
     zanejs.toObject = toObject;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function distance(p1, p2) {
         return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     }
     zanejs.distance = distance;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Random = (function () {
         function Random(seed) {
@@ -4433,7 +4445,7 @@ var zanejs;
     }());
     zanejs.Random = Random;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function mt_rand(min, max) {
         var argc = arguments.length;
@@ -4452,21 +4464,21 @@ var zanejs;
     }
     zanejs.mt_rand = mt_rand;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomBoolean() {
         return zanejs.randomChance(0.5);
     }
     zanejs.randomBoolean = randomBoolean;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomChance(percent) {
         return Math.random() < percent;
     }
     zanejs.randomChance = randomChance;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomCharacters(amount, charSet) {
         if (charSet === void 0) { charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; }
@@ -4482,7 +4494,7 @@ var zanejs;
     }
     zanejs.randomCharacters = randomCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomLowercaseCharacters(amount) {
         var str = '';
@@ -4493,7 +4505,7 @@ var zanejs;
     }
     zanejs.randomLowercaseCharacters = randomLowercaseCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomNumberString(amount) {
         var str = '';
@@ -4504,7 +4516,7 @@ var zanejs;
     }
     zanejs.randomNumberString = randomNumberString;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSpecialCharacters(amount) {
         var str = '';
@@ -4515,14 +4527,14 @@ var zanejs;
     }
     zanejs.randomSpecialCharacters = randomSpecialCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomToken() {
         return Math.random().toString(36).substr(2);
     }
     zanejs.randomToken = randomToken;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addcslashes(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -4668,7 +4680,7 @@ var zanejs;
     }
     zanejs.addcslashes = addcslashes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addslashes(str) {
         return (str + '')
@@ -4677,7 +4689,7 @@ var zanejs;
     }
     zanejs.addslashes = addslashes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function bin2hex(s) {
         var i;
@@ -4694,7 +4706,7 @@ var zanejs;
     }
     zanejs.bin2hex = bin2hex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function chr(codePt) {
         if (codePt > 0xFFFF) {
@@ -4705,7 +4717,7 @@ var zanejs;
     }
     zanejs.chr = chr;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function chunk_split(body, chunklen, end) {
         chunklen = parseInt(String(chunklen), 10) || 76;
@@ -4718,7 +4730,7 @@ var zanejs;
     }
     zanejs.chunk_split = chunk_split;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function count_chars(str, mode) {
         var result = {};
@@ -4758,7 +4770,7 @@ var zanejs;
     }
     zanejs.count_chars = count_chars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function echo() {
         var args = [];
@@ -4769,14 +4781,14 @@ var zanejs;
     }
     zanejs.echo = echo;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function endsWith(input, suffix) {
         return (suffix === input.substring(input.length - suffix.length));
     }
     zanejs.endsWith = endsWith;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function explode(delimiter, str, limit) {
         if (arguments.length < 2 ||
@@ -4825,14 +4837,14 @@ var zanejs;
     }
     zanejs.explode = explode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function firstToUpper(str) {
         return str.charAt(0).toUpperCase() + str.substr(1);
     }
     zanejs.firstToUpper = firstToUpper;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function get_html_translation_table(table, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -4977,7 +4989,7 @@ var zanejs;
     }
     zanejs.get_html_translation_table = get_html_translation_table;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function hex2bin(s) {
         var ret = [];
@@ -4996,7 +5008,7 @@ var zanejs;
     }
     zanejs.hex2bin = hex2bin;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function html_entity_decode(str, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -5016,7 +5028,7 @@ var zanejs;
     }
     zanejs.html_entity_decode = html_entity_decode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function http_build_query(formData, numericPrefix, argSeparator) {
         if (numericPrefix === void 0) { numericPrefix = ''; }
@@ -5068,7 +5080,7 @@ var zanejs;
     }
     zanejs.http_build_query = http_build_query;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function implode(glue, pieces) {
         var i = '';
@@ -5092,7 +5104,7 @@ var zanejs;
     }
     zanejs.implode = implode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function ltrim(str) {
         str = str || '';
@@ -5100,7 +5112,7 @@ var zanejs;
     }
     zanejs.ltrim = ltrim;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function number_format(num, decimals, decPoint, thousandsSep) {
         num = (num + '').replace(/[^0-9+\-Ee.]/g, '');
@@ -5124,7 +5136,7 @@ var zanejs;
     }
     zanejs.number_format = number_format;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function padLeft(value, padChar, length) {
         var s = value;
@@ -5135,7 +5147,7 @@ var zanejs;
     }
     zanejs.padLeft = padLeft;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function padRight(value, padChar, length) {
         var s = value;
@@ -5146,7 +5158,7 @@ var zanejs;
     }
     zanejs.padRight = padRight;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function parse_url(str, component, mode) {
         if (mode === void 0) { mode = 'php'; }
@@ -5214,7 +5226,7 @@ var zanejs;
     }
     zanejs.parse_url = parse_url;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rawurldecode(str) {
         return decodeURIComponent((str + '')
@@ -5224,7 +5236,7 @@ var zanejs;
     }
     zanejs.rawurldecode = rawurldecode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rawurlencode(str) {
         str = (str + '');
@@ -5237,7 +5249,7 @@ var zanejs;
     }
     zanejs.rawurlencode = rawurlencode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeAllComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5246,7 +5258,7 @@ var zanejs;
     }
     zanejs.removeAllComments = removeAllComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeAllWhiteSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5255,7 +5267,7 @@ var zanejs;
     }
     zanejs.removeAllWhiteSpaces = removeAllWhiteSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeLineBreaks(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5264,7 +5276,7 @@ var zanejs;
     }
     zanejs.removeLineBreaks = removeLineBreaks;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeMultiLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5273,7 +5285,7 @@ var zanejs;
     }
     zanejs.removeMultiLineComments = removeMultiLineComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeMultipleSpaces(str, replace) {
         if (replace === void 0) { replace = ' '; }
@@ -5282,7 +5294,7 @@ var zanejs;
     }
     zanejs.removeMultipleSpaces = removeMultipleSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeNonWordChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5291,7 +5303,7 @@ var zanejs;
     }
     zanejs.removeNonWordChars = removeNonWordChars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSingleLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5300,7 +5312,7 @@ var zanejs;
     }
     zanejs.removeSingleLineComments = removeSingleLineComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5309,7 +5321,7 @@ var zanejs;
     }
     zanejs.removeSpaces = removeSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSpecialChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5318,7 +5330,7 @@ var zanejs;
     }
     zanejs.removeSpecialChars = removeSpecialChars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeTabs(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5327,7 +5339,7 @@ var zanejs;
     }
     zanejs.removeTabs = removeTabs;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function replaceAccents(str) {
         str = str || '';
@@ -5358,7 +5370,7 @@ var zanejs;
     }
     zanejs.replaceAccents = replaceAccents;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rtrim(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -5374,7 +5386,7 @@ var zanejs;
     }
     zanejs.chop = chop;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function serialize(mixedValue) {
         var val, key, okey;
@@ -5470,7 +5482,7 @@ var zanejs;
     }
     zanejs.serialize = serialize;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function stringTruncate(value, length, suffix) {
         if (suffix === void 0) { suffix = '...'; }
@@ -5492,7 +5504,7 @@ var zanejs;
     }
     zanejs.stringTruncate = stringTruncate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function stringsAreEqual(s1, s2, caseSensitive) {
         if (caseSensitive === void 0) { caseSensitive = false; }
@@ -5500,7 +5512,7 @@ var zanejs;
     }
     zanejs.stringsAreEqual = stringsAreEqual;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function stripslashes(str) {
         return (str + '').replace(/\\(.?)/g, function (s, n1) {
@@ -5518,7 +5530,7 @@ var zanejs;
     }
     zanejs.stripslashes = stripslashes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toCamelCase(str) {
         str = str || '';
@@ -5531,7 +5543,7 @@ var zanejs;
     }
     zanejs.toCamelCase = toCamelCase;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toPathFormat() {
         var rest = [];
@@ -5549,7 +5561,7 @@ var zanejs;
     }
     zanejs.toPathFormat = toPathFormat;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toProperCase(str) {
         str = str || '';
@@ -5560,7 +5572,7 @@ var zanejs;
     }
     zanejs.toProperCase = toProperCase;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toTitleFormat(path, defaultTitle, separator) {
         if (defaultTitle === void 0) { defaultTitle = ''; }
@@ -5578,7 +5590,7 @@ var zanejs;
     }
     zanejs.toTitleFormat = toTitleFormat;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function trim(str) {
         str = str || '';
@@ -5586,7 +5598,7 @@ var zanejs;
     }
     zanejs.trim = trim;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function unserialize(data) {
         var utf8Overhead = function (str) {
@@ -5747,7 +5759,7 @@ var zanejs;
     }
     zanejs.unserialize = unserialize;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function urldecode(str) {
         return decodeURIComponent((str + '')
@@ -5758,7 +5770,7 @@ var zanejs;
     }
     zanejs.urldecode = urldecode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function urlencode(str) {
         str = (str + '');
@@ -5772,7 +5784,7 @@ var zanejs;
     }
     zanejs.urlencode = urlencode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function utf8_decode(strData) {
         var tmpArr = [];
@@ -5816,7 +5828,7 @@ var zanejs;
     }
     zanejs.utf8_decode = utf8_decode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function utf8_encode(argString) {
         if (argString === null || typeof argString === 'undefined') {
@@ -5867,7 +5879,7 @@ var zanejs;
     }
     zanejs.utf8_encode = utf8_encode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function xtrim(str) {
         if (str === void 0) { str = ''; }
@@ -5889,7 +5901,7 @@ var zanejs;
     }
     zanejs.xtrim = xtrim;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isOldIOS() {
         var win = window;
@@ -5903,7 +5915,7 @@ var zanejs;
     }
     zanejs.isOldIOS = _isOldIOS();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     zanejs.emptyVideoData = '' +
         'data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAACKBtZGF0AAAC8wYF///v3EXpveb' +
@@ -5969,7 +5981,7 @@ var zanejs;
         'AAFnVkdGEAAAAObmFtZVN0ZXJlbwAAAHB1ZHRhAAAAaG1ldGEAAAAAAAAAIWhkbHIAAAAAAAAAAG1kaXJhcHBsAAAAAAAAAAAAAAAAO2l' +
         'sc3QAAAAzqXRvbwAAACtkYXRhAAAAAQAAAABIYW5kQnJha2UgMC4xMC4yIDIwMTUwNjExMDA=';
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var NoSleep = (function () {
         function NoSleep() {
@@ -6018,7 +6030,7 @@ var zanejs;
     }());
     zanejs.NoSleep = NoSleep;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function buildBridgedWorker(workerFunction, workerExportNames, mainExportNames, mainExportHandles) {
         var baseWorkerStr = workerFunction.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1];
@@ -6100,7 +6112,7 @@ var zanejs;
     }
     zanejs.buildBridgedWorker = buildBridgedWorker;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function call_user_func(cb, parameters) {
         parameters = Array.prototype.slice.call(arguments, 1);
@@ -6108,7 +6120,7 @@ var zanejs;
     }
     zanejs.call_user_func = call_user_func;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function call_user_func_array(cb, parameters) {
         var func;
@@ -6153,7 +6165,7 @@ var zanejs;
     }
     zanejs.call_user_func_array = call_user_func_array;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function cancelRequestAnimationFrame() {
         var w = window;
@@ -6170,7 +6182,7 @@ var zanejs;
     }
     zanejs.cancelRequestAnimationFrame = cancelRequestAnimationFrame;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     zanejs.emptyImageData = '' +
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2l' +
@@ -6213,7 +6225,7 @@ var zanejs;
     zanejs.emptyImageElement = document.createElement('img');
     zanejs.emptyImageElement.setAttribute('src', zanejs.emptyImageData);
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var fn = (function () {
         var val;
@@ -6292,7 +6304,7 @@ var zanejs;
     }
     zanejs.onFullscreenError = onFullscreenError;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getOrientation() {
         if (typeof window.orientation === 'undefined') {
@@ -6312,14 +6324,14 @@ var zanejs;
     }
     zanejs.getOrientation = getOrientation;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getParams() {
         return zanejs.getUrlParams(document.location.href);
     }
     zanejs.getParams = getParams;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getUrlParams(url) {
         url = url.split('?')[1];
@@ -6335,7 +6347,7 @@ var zanejs;
     }
     zanejs.getUrlParams = getUrlParams;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _iOSVersion() {
         if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -6346,7 +6358,7 @@ var zanejs;
     }
     zanejs.iOSVersion = _iOSVersion();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function innerHeight() {
         var _height;
@@ -6365,7 +6377,7 @@ var zanejs;
     }
     zanejs.innerHeight = innerHeight;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function innerWidth() {
         var _width;
@@ -6384,7 +6396,7 @@ var zanejs;
     }
     zanejs.innerWidth = innerWidth;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     zanejs.ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
     function _isIE() {
@@ -6392,63 +6404,63 @@ var zanejs;
     }
     zanejs.isIE = _isIE();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isAndroid() {
         return zanejs.ua.match(/android/i) != null;
     }
     zanejs.isAndroid = _isAndroid();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isChrome() {
         return zanejs.ua.match(/chrome/i) != null;
     }
     zanejs.isChrome = _isChrome();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isIOS() {
         return zanejs.ua.match(/(ipad|iphone|ipod)/i) != null;
     }
     zanejs.isIOS = _isIOS();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isOpera() {
         return zanejs.ua.match(/opera/i) != null;
     }
     zanejs.isOpera = _isOpera();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isQQBrowser() {
         return zanejs.ua.match(/MQQBrowser/i) != null;
     }
     zanejs.isQQBrowser = _isQQBrowser();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isSafari() {
         return (zanejs.ua.toLowerCase().indexOf('safari') !== -1);
     }
     zanejs.isSafari = _isSafari();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isWebkit() {
         return zanejs.ua.match(/webkit/i) != null;
     }
     zanejs.isWebkit = _isWebkit();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _isWeiXin() {
         return zanejs.ua.match(/MicroMessenger/i) != null;
     }
     zanejs.isWeiXin = _isWeiXin();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function magical(Class) {
         return function () {
@@ -6489,14 +6501,14 @@ var zanejs;
     }
     zanejs.magical = magical;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function _mobileHTML5() {
         return (zanejs.ua.match(/(mobile|pre\/|xoom)/i) != null || zanejs.isIOS || zanejs.isAndroid);
     }
     zanejs.mobileHTML5 = _mobileHTML5();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function onVisibilityChange(callback) {
         var state, visibilityChange, doc = document;
@@ -6524,7 +6536,7 @@ var zanejs;
     }
     zanejs.onVisibilityChange = onVisibilityChange;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function openWindow(anchor, options) {
         var args = '';
@@ -6579,7 +6591,7 @@ var zanejs;
     }
     zanejs.openWindow = openWindow;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function requestAnimationFrame() {
         var w = window;
@@ -6595,7 +6607,7 @@ var zanejs;
     }
     zanejs.requestAnimationFrame = requestAnimationFrame;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function touchSupported() {
         var win = window;
@@ -6606,7 +6618,7 @@ var zanejs;
     }
     zanejs.touchSupported = touchSupported;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function create3DContext(canvas, webGLSettings) {
         var names = ['webgl', 'experimental-webgl', 'webkit-3d', 'moz-webgl'];
@@ -6625,7 +6637,7 @@ var zanejs;
     }
     zanejs.create3DContext = create3DContext;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isWebGLSupported() {
         var contextOptions = { stencil: true, failIfMajorPerformanceCaveat: true };
@@ -6652,7 +6664,7 @@ var zanejs;
     }
     zanejs.isWebGLSupported = isWebGLSupported;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function stringToXMLDom(str) {
         var xmlDoc = null;
@@ -6670,7 +6682,7 @@ var zanejs;
     }
     zanejs.stringToXMLDom = stringToXMLDom;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var WS = (function () {
         function WS(url, protocols, options) {
@@ -6802,7 +6814,7 @@ var zanejs;
     }());
     zanejs.WS = WS;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var WSManager = (function () {
         function WSManager() {
@@ -6831,3 +6843,5 @@ var zanejs;
     zanejs.WSManager = WSManager;
 })(zanejs || (zanejs = {}));
 //# sourceMappingURL=zanejs.js.map
+	return zanejs;
+});
