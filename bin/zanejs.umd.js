@@ -3,11 +3,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("qqw", [], factory);
+		define("zanejs", [], factory);
 	else if(typeof exports === 'object')
-		exports["qqw"] = factory();
+		exports["zanejs"] = factory();
 	else
-		root["qqw"] = factory();
+		root["zanejs"] = factory();
 })(window, function() {
 	var zanejs = {};
 	

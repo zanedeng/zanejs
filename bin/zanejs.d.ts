@@ -1,5 +1,30 @@
 /// <reference types="pixi.js" />
 declare module zanejs {
+    class Pool {
+        constructor();
+        getPoolBySign(name: string): any;
+        getItemByClass(name: string, ClassName: any): any;
+        recover(name: string, instance: any): void;
+    }
+    let pool: Pool;
+}
+declare module zanejs {
+    class State {
+        private state;
+        private last;
+        private count;
+        private locked;
+        constructor(state: string);
+        setTo(state: string): void;
+        value(): string;
+        tick(): void;
+        first(): boolean;
+        equal(state: string): boolean;
+        isIn(): boolean;
+        isNotIn(): boolean;
+    }
+}
+declare module zanejs {
     class AssetsBundle {
     }
 }
@@ -344,7 +369,67 @@ declare module zanejs {
     function ajax(options: IAjaxOptions): void;
 }
 declare module zanejs {
+    function array_chunk(input: any, size: number, preserveKeys?: boolean): any[];
+}
+declare module zanejs {
+    function array_combine(keys: any[], values: any[]): {};
+}
+declare module zanejs {
+    function array_count_values(array: any): {};
+}
+declare module zanejs {
+    function array_diff_assoc(...args: any[]): {};
+}
+declare module zanejs {
+    function array_diff_key(...args: any[]): {};
+}
+declare module zanejs {
+    function array_diff_uassoc(...args: any[]): {};
+}
+declare module zanejs {
+    function array_diff_ukey(...args: any[]): {};
+}
+declare module zanejs {
+    function array_diff(...args: any[]): {};
+}
+declare module zanejs {
+    function array_fill_keys(keys: string[], value: any): {};
+}
+declare module zanejs {
+    function array_fill(startIndex: number, num: number, mixedVal: any): {};
+}
+declare module zanejs {
+    function array_filter(arr: any[], func: (v: any) => any): {};
+}
+declare module zanejs {
+    function array_flip(trans: any): {};
+}
+declare module zanejs {
+    function array_intersect_assoc(...args: any[]): {};
+}
+declare module zanejs {
+    function array_intersect(...args: any[]): {};
+}
+declare module zanejs {
+    function array_merge(...args: any[]): any;
+}
+declare module zanejs {
+    function array_unique(inputArr: any): {};
+}
+declare module zanejs {
+    function array_values(input: any): any[];
+}
+declare module zanejs {
     function compare(arr1: any[], arr2: any[]): boolean;
+}
+declare module zanejs {
+    function getRandomArrayElements(arr: any[], count: number): any[];
+}
+declare module zanejs {
+    function indexByObjectValue(arr: Array<any>, attribute: string, value: any): number;
+}
+declare module zanejs {
+    function is_array(input: any): boolean;
 }
 declare module zanejs {
     function randomSort(arr: any[]): any[];
@@ -391,6 +476,60 @@ declare module zanejs {
 }
 declare module zanejs {
     function uintToRGBA(color: number, alpha?: number): string;
+}
+declare module zanejs {
+    function deleteCookie(name: string): void;
+}
+declare module zanejs {
+    function getCookie(name: string): any;
+}
+declare module zanejs {
+    function setCookie(name: string, value: any, seconds: number): void;
+}
+declare module zanejs {
+    function checkdate(m: number, d: number, y: number): boolean;
+}
+declare module zanejs {
+    function date(format: string, timestamp: any): string;
+}
+declare module zanejs {
+    function getdate(timestamp?: any): any;
+}
+declare module zanejs {
+    function gettimeofday(returnFloat?: boolean): any;
+}
+declare module zanejs {
+    function gmdate(format: string, timestamp: any): string;
+}
+declare module zanejs {
+    function gmmktime(...args: any[]): any;
+}
+declare module zanejs {
+    function idate(format: string, timestamp: any): any;
+}
+declare module zanejs {
+    function microtime(getAsFloat: boolean): any;
+}
+declare module zanejs {
+    function mktime(...args: any[]): any;
+}
+declare module zanejs {
+    function strtotime(text: string, now: any): any;
+}
+declare module zanejs {
+    function time(): number;
+}
+declare module zanejs {
+    function basename(path: string, suffix?: string): string;
+}
+declare module zanejs {
+    function dirname(path: string): string;
+}
+declare module zanejs {
+    function getExtension(filePath: string): string;
+}
+declare module zanejs {
+    function getFileNameFromUrl(url: string): string;
 }
 declare module zanejs {
     let PI: number;
@@ -471,22 +610,143 @@ declare module zanejs {
     function transformPoint(m: PIXI.Matrix, pivot: PIXI.Point, resultPoint?: PIXI.Point): PIXI.Point;
 }
 declare module zanejs {
+    function addLeadingZeroes(n: number, zeroes?: number): string;
+}
+declare module zanejs {
+    function clamp(val: number, min: number, max: number): number;
+}
+declare module zanejs {
+    function createStepsBetween(begin: number, end: number, steps: number): number[];
+}
+declare module zanejs {
+    function isBetween(value: number, firstValue: number, secondValue: number): boolean;
+}
+declare module zanejs {
+    function isEqual(val1: number, val2: number, precision?: number): boolean;
+}
+declare module zanejs {
+    function isEven(value: number): boolean;
+}
+declare module zanejs {
+    function isInteger(value: number): boolean;
+}
+declare module zanejs {
+    function isNegative(value: number): boolean;
+}
+declare module zanejs {
+    function isOdd(value: number): boolean;
+}
+declare module zanejs {
+    function isOne(value: number, tolerance?: number): boolean;
+}
+declare module zanejs {
+    function isPositive(value: number): boolean;
+}
+declare module zanejs {
+    function isPowerOf2(...args: number[]): boolean;
+}
+declare module zanejs {
+    function isPrime(value: number): boolean;
+}
+declare module zanejs {
+    function isZero(value: number, tolerance?: number): boolean;
+}
+declare module zanejs {
     function limitPrecision(n: number, maxPrecision?: number): number;
+}
+declare module zanejs {
+    function randomIntegerWithinRange(min: number, max: number): number;
+}
+declare module zanejs {
+    function randomSign(chance?: number): number;
+}
+declare module zanejs {
+    function randomWithinRange(min: number, max: number): number;
+}
+declare module zanejs {
+    function round(value: number, digits: number): number;
 }
 declare module zanejs {
     function uint(value: any): number;
 }
 declare module zanejs {
+    function assign(obj: any, params: any): any;
+}
+declare module zanejs {
+    function combine(defaultVars: any, additionalVars: any): any;
+}
+declare module zanejs {
     function getQualifiedClassName(value: any): string;
 }
 declare module zanejs {
+    function isArray(obj: any): boolean;
+}
+declare module zanejs {
+    function isBool(obj: any): boolean;
+}
+declare module zanejs {
+    function isEmpty(val: any): boolean;
+}
+declare module zanejs {
+    function isFunction(obj: any): boolean;
+}
+declare module zanejs {
+    function isObject(obj: any): boolean;
+}
+declare module zanejs {
+    function isSpecial(obj: any): boolean;
+}
+declare module zanejs {
+    function isString(obj: any): boolean;
+}
+declare module zanejs {
+    function isUndefined(obj: any): boolean;
+}
+declare module zanejs {
     function merge(base: any, extend: any): any;
+}
+declare module zanejs {
+    function object_change_key_case(obj: any, cs?: string): any;
 }
 declare module zanejs {
     function toObject(objString: string): any;
 }
 declare module zanejs {
     function distance(p1: PIXI.Point, p2: PIXI.Point): number;
+}
+declare module zanejs {
+    function mt_rand(min: number, max: number): number;
+}
+declare module zanejs {
+    class Random {
+        private static MAX_UINT;
+        private static MAX_RATIO;
+        seed: number;
+        constructor(seed: number);
+        next(): number;
+        private nextSeed;
+    }
+}
+declare module zanejs {
+    function randomBoolean(): boolean;
+}
+declare module zanejs {
+    function randomChance(percent: number): boolean;
+}
+declare module zanejs {
+    function randomCharacters(amount: number, charSet?: string): string;
+}
+declare module zanejs {
+    function randomLowercaseCharacters(amount: number): string;
+}
+declare module zanejs {
+    function randomNumberString(amount: number): string;
+}
+declare module zanejs {
+    function randomSpecialCharacters(amount: number): string;
+}
+declare module zanejs {
+    function randomToken(): string;
 }
 declare module zanejs {
     function addcslashes(str: string, charlist?: string): string;
@@ -637,6 +897,115 @@ declare module zanejs {
 }
 declare module zanejs {
     function xtrim(str?: string): string;
+}
+declare module zanejs {
+    function buildBridgedWorker(workerFunction: Function, workerExportNames: Array<string>, mainExportNames: Array<string>, mainExportHandles: Array<Function>): any;
+}
+declare module zanejs {
+    function call_user_func_array(cb: any, parameters: any[]): any;
+}
+declare module zanejs {
+    function call_user_func(cb: any, parameters: any[]): any;
+}
+declare module zanejs {
+    function cancelRequestAnimationFrame(): Function;
+}
+declare module zanejs {
+    let emptyImageData: string;
+    let emptyImageElement: HTMLImageElement;
+}
+declare module zanejs {
+    let emptyVideoData: string;
+}
+declare module zanejs {
+    function requestFullscreen(elem?: HTMLElement): void;
+    function exitFullscreen(): void;
+    function isFullscreen(): boolean;
+    function toggleFullscreen(elem?: HTMLElement): void;
+    function onFullscreenChange(callback: (evt: DocumentEvent) => any): void;
+    function onFullscreenError(callback: (evt: DocumentEvent) => any): void;
+}
+declare module zanejs {
+    function getOrientation(): number;
+}
+declare module zanejs {
+    function getParams(): {};
+}
+declare module zanejs {
+    function getUrlParams(url: string): {};
+}
+declare module zanejs {
+    function innerHeight(): number;
+}
+declare module zanejs {
+    function innerWidth(): number;
+}
+declare module zanejs {
+    let iOSVersion: number[];
+}
+declare module zanejs {
+    let isAndroid: boolean;
+}
+declare module zanejs {
+    let isChrome: boolean;
+}
+declare module zanejs {
+    let ua: string;
+    let isIE: boolean;
+}
+declare module zanejs {
+    let isIOS: boolean;
+}
+declare module zanejs {
+    let isOldIOS: boolean;
+}
+declare module zanejs {
+    let isOpera: boolean;
+}
+declare module zanejs {
+    let isQQBrowser: boolean;
+}
+declare module zanejs {
+    let isSafari: boolean;
+}
+declare module zanejs {
+    let isWebkit: boolean;
+}
+declare module zanejs {
+    let isWeiXin: boolean;
+}
+declare module zanejs {
+    function magical(Class: any): (...args: any[]) => any;
+}
+declare module zanejs {
+    let mobileHTML5: boolean;
+}
+declare module zanejs {
+    class NoSleep {
+        private static timer;
+        private static video;
+        static enable(): void;
+        static disable(): void;
+        private static initVideo;
+    }
+}
+declare module zanejs {
+    function onVisibilityChange(callback: (visibilityState: string) => void): void;
+}
+declare module zanejs {
+    function openWindow(anchor: string, options: any): boolean;
+}
+declare module zanejs {
+    function requestAnimationFrame(): Function;
+}
+declare module zanejs {
+    function touchSupported(): boolean;
+}
+declare module zanejs {
+    function create3DContext(canvas: HTMLCanvasElement, webGLSettings: any): WebGLRenderingContext;
+}
+declare module zanejs {
+    function isWebGLSupported(): boolean;
 }
 declare module zanejs {
     function stringToXMLDom(str: string): any;
