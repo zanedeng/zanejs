@@ -1,4 +1,6 @@
-/// <reference types="pixi.js" />
+/// <reference path="../typings/pixi.js.d.ts" />
+/// <reference path="../typings/fairygui.d.ts" />
+/// <reference path="../typings/jszip.d.ts" />
 declare module zanejs {
     class Pool {
         constructor();
@@ -25,7 +27,23 @@ declare module zanejs {
     }
 }
 declare module zanejs {
-    class AssetsBundle {
+    class AssetsBundle extends PIXI.utils.EventEmitter {
+        name: string;
+        progress: number;
+        private _afterMiddlewares;
+        private _beforeMiddlewares;
+        private _assets;
+        constructor();
+        readonly afterMiddlewares: Function[];
+        readonly beforeMiddlewares: Function[];
+        getAssets(): any[];
+        addBeforeMiddleware(func: Function): void;
+        addAfterMiddleware(func: Function): void;
+        add(name: string, url: string, options?: PIXI.loaders.LoaderOptions, cb?: Function): AssetsBundle;
+        isExist(name: string): boolean;
+        onDispose(): void;
+        reset(): void;
+        private _checkExist;
     }
 }
 declare module zanejs {
@@ -37,6 +55,19 @@ declare module zanejs {
 }
 declare module zanejs {
     class AssetsManager {
+        static readonly loader: PIXI.loaders.Loader;
+        static addIgnoreFile(file: string): void;
+        static addIgnoreFiles(files: string[]): void;
+        static deleteIgnoreFiles(files: string[]): void;
+        static clearIgnoreFiles(): void;
+        static loadAssetBundle(bundle: AssetsBundle): void;
+        static getResById(id: string): PIXI.loaders.Resource;
+        static getResByUrl(url: string): any;
+        static clearResLoader(destroyBase?: boolean, otherHandler?: Function): void;
+        private static _loadAssetBundle;
+        private static _onLoadAssetError;
+        private static _onLoadAssetProgress;
+        private static _onLoadAssetComplete;
         constructor();
     }
 }
@@ -124,14 +155,6 @@ declare module zanejs {
     }
 }
 declare module zanejs {
-    class Polygon extends Polyline {
-        constructor(pts: PIXI.Point[]);
-        points: PIXI.Point[];
-        transform(matrix: PIXI.Matrix): Polygon;
-        clone(): Polyline;
-    }
-}
-declare module zanejs {
     class Polyline {
         protected _points: PIXI.Point[];
         constructor(pts: PIXI.Point[]);
@@ -143,6 +166,14 @@ declare module zanejs {
         transform(matrix: PIXI.Matrix): Polyline;
         clone(): Polyline;
         toString(): string;
+    }
+}
+declare module zanejs {
+    class Polygon extends Polyline {
+        constructor(pts: PIXI.Point[]);
+        points: PIXI.Point[];
+        transform(matrix: PIXI.Matrix): Polygon;
+        clone(): Polyline;
     }
 }
 declare module zanejs {
@@ -212,6 +243,13 @@ declare module zanejs {
     }
 }
 declare module zanejs {
+    class MVCApp {
+        registerController(cmd: string, controllClass: IControllerClass): Controller;
+        registerModel(name: string, modelClass: IModelClass, data?: any): Model;
+        registerView(name: string, viewClass: IViewClass, viewComponent: any): View;
+    }
+}
+declare module zanejs {
     interface IModelClass {
         new (name: string, data?: any): Model;
     }
@@ -225,13 +263,6 @@ declare module zanejs {
         onRegister(): void;
         onRemove(): void;
         sendEvent(type: string, data?: any): void;
-    }
-}
-declare module zanejs {
-    class MVCApp {
-        registerController(cmd: string, controllClass: IControllerClass): Controller;
-        registerModel(name: string, modelClass: IModelClass, data?: any): Model;
-        registerView(name: string, viewClass: IViewClass, viewComponent: any): View;
     }
 }
 declare module zanejs {
@@ -378,6 +409,9 @@ declare module zanejs {
     function array_count_values(array: any): {};
 }
 declare module zanejs {
+    function array_diff(...args: any[]): {};
+}
+declare module zanejs {
     function array_diff_assoc(...args: any[]): {};
 }
 declare module zanejs {
@@ -390,13 +424,10 @@ declare module zanejs {
     function array_diff_ukey(...args: any[]): {};
 }
 declare module zanejs {
-    function array_diff(...args: any[]): {};
+    function array_fill(startIndex: number, num: number, mixedVal: any): {};
 }
 declare module zanejs {
     function array_fill_keys(keys: string[], value: any): {};
-}
-declare module zanejs {
-    function array_fill(startIndex: number, num: number, mixedVal: any): {};
 }
 declare module zanejs {
     function array_filter(arr: any[], func: (v: any) => any): {};
@@ -405,10 +436,10 @@ declare module zanejs {
     function array_flip(trans: any): {};
 }
 declare module zanejs {
-    function array_intersect_assoc(...args: any[]): {};
+    function array_intersect(...args: any[]): {};
 }
 declare module zanejs {
-    function array_intersect(...args: any[]): {};
+    function array_intersect_assoc(...args: any[]): {};
 }
 declare module zanejs {
     function array_merge(...args: any[]): any;
@@ -715,9 +746,6 @@ declare module zanejs {
     function distance(p1: PIXI.Point, p2: PIXI.Point): number;
 }
 declare module zanejs {
-    function mt_rand(min: number, max: number): number;
-}
-declare module zanejs {
     class Random {
         private static MAX_UINT;
         private static MAX_RATIO;
@@ -726,6 +754,9 @@ declare module zanejs {
         next(): number;
         private nextSeed;
     }
+}
+declare module zanejs {
+    function mt_rand(min: number, max: number): number;
 }
 declare module zanejs {
     function randomBoolean(): boolean;
@@ -857,10 +888,10 @@ declare module zanejs {
     function serialize(mixedValue: any): any;
 }
 declare module zanejs {
-    function stringsAreEqual(s1: string, s2: string, caseSensitive?: boolean): boolean;
+    function stringTruncate(value: string, length: number, suffix?: string): string;
 }
 declare module zanejs {
-    function stringTruncate(value: string, length: number, suffix?: string): string;
+    function stringsAreEqual(s1: string, s2: string, caseSensitive?: boolean): boolean;
 }
 declare module zanejs {
     function stripslashes(str: string): string;
@@ -899,13 +930,28 @@ declare module zanejs {
     function xtrim(str?: string): string;
 }
 declare module zanejs {
+    let isOldIOS: boolean;
+}
+declare module zanejs {
+    let emptyVideoData: string;
+}
+declare module zanejs {
+    class NoSleep {
+        private static timer;
+        private static video;
+        static enable(): void;
+        static disable(): void;
+        private static initVideo;
+    }
+}
+declare module zanejs {
     function buildBridgedWorker(workerFunction: Function, workerExportNames: Array<string>, mainExportNames: Array<string>, mainExportHandles: Array<Function>): any;
 }
 declare module zanejs {
-    function call_user_func_array(cb: any, parameters: any[]): any;
+    function call_user_func(cb: any, parameters: any[]): any;
 }
 declare module zanejs {
-    function call_user_func(cb: any, parameters: any[]): any;
+    function call_user_func_array(cb: any, parameters: any[]): any;
 }
 declare module zanejs {
     function cancelRequestAnimationFrame(): Function;
@@ -913,9 +959,6 @@ declare module zanejs {
 declare module zanejs {
     let emptyImageData: string;
     let emptyImageElement: HTMLImageElement;
-}
-declare module zanejs {
-    let emptyVideoData: string;
 }
 declare module zanejs {
     function requestFullscreen(elem?: HTMLElement): void;
@@ -935,13 +978,17 @@ declare module zanejs {
     function getUrlParams(url: string): {};
 }
 declare module zanejs {
+    let iOSVersion: number[];
+}
+declare module zanejs {
     function innerHeight(): number;
 }
 declare module zanejs {
     function innerWidth(): number;
 }
 declare module zanejs {
-    let iOSVersion: number[];
+    let ua: string;
+    let isIE: boolean;
 }
 declare module zanejs {
     let isAndroid: boolean;
@@ -950,14 +997,7 @@ declare module zanejs {
     let isChrome: boolean;
 }
 declare module zanejs {
-    let ua: string;
-    let isIE: boolean;
-}
-declare module zanejs {
     let isIOS: boolean;
-}
-declare module zanejs {
-    let isOldIOS: boolean;
 }
 declare module zanejs {
     let isOpera: boolean;
@@ -979,15 +1019,6 @@ declare module zanejs {
 }
 declare module zanejs {
     let mobileHTML5: boolean;
-}
-declare module zanejs {
-    class NoSleep {
-        private static timer;
-        private static video;
-        static enable(): void;
-        static disable(): void;
-        private static initVideo;
-    }
 }
 declare module zanejs {
     function onVisibilityChange(callback: (visibilityState: string) => void): void;

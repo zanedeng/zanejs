@@ -44,11 +44,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.2.tgz#d77f9faa027cadad9c912cd47f4f8b07b0fb0864"
   integrity sha512-53ElVDSnZeFUUFIYzI8WLQ25IhWzb6vbddNp8UHlXQyU0ET2RhV5zg0NfubzU7iNMh5bBXb0htCzfvrSVNgzaQ==
 
-"@types/pixi.js@^4.8.0":
-  version "4.8.2"
-  resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.8.2.tgz#e711c8d083752e0f24bbe069e6bb361111fb4d2a"
-  integrity sha512-W5ER6is/fjaFzzl1F+B8kw0mNu0LSCUKNwIWaIFRb24a9jHEnvNo/sL0L/vP/ryTAVCo7/ZTcE2f+zE7rVZBdA==
-
 "@types/shelljs@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@types/shelljs/-/shelljs-0.7.0.tgz#229c157c6bc1e67d6b990e6c5e18dbd2ff58cff0"

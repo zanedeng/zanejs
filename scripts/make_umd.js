@@ -1,19 +1,24 @@
 #!/usr/bin/env node
-var fs = require('fs');
-var path = require('path');
-var filePath = path.resolve(__dirname, '../bin/zanejs.js');
-var fileContent = '' + fs.readFileSync(filePath);
+const fs = require('fs');
+const path = require('path');
+const spawn = require('child_process').spawn;
+const pkg = require('../package.json');
 
-var umdCode = `
+const compilerFilePath = path.resolve('closure-compiler-v20180506.jar');
+const filePath = path.resolve('bin/zanejs.js');
+const minFilePath = path.resolve('bin/zanejs.min.js');
+
+const fileContent = '' + fs.readFileSync(filePath);
+const umdCode = `
 (function (root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("zanejs", [], factory);
+		define("${pkg.name}", [], factory);
 	else if(typeof exports === 'object')
-		exports["zanejs"] = factory();
+		exports["${pkg.name}"] = factory();
 	else
-		root["zanejs"] = factory();
+		root["${pkg.name}"] = factory();
 })(window, function() {
 	var zanejs = {};
 	${fileContent}
@@ -22,6 +27,24 @@ var umdCode = `
 `;
 
 fs.writeFileSync(
-	path.resolve('bin/zanejs.umd.js'),
+	filePath,
 	umdCode.replace(/var zanejs;/g, '')
 );
+
+var args = [
+	'-jar', compilerFilePath
+];
+args.push('--js', filePath);
+args.push('--js_output_file', minFilePath);
+var child = spawn('java', args);
+child.stdout.on('data', function(data) {
+	console.log(data.toString());
+});
+
+child.stderr.on("data", function (data) {
+	console.log(data.toString());
+});
+child.on('exit', function (code) {
+	// console.log('child process exited with code ' + code);
+	console.log('compiler is over!');
+})
