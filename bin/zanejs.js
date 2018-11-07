@@ -1,16 +1,4 @@
-
-(function (root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("zanejs", [], factory);
-	else if(typeof exports === 'object')
-		exports["zanejs"] = factory();
-	else
-		root["zanejs"] = factory();
-})(window, function() {
-	var zanejs = {};
-	
+var zanejs;
 (function (zanejs) {
     var Symbol = window.Symbol;
     var idCounter = 0;
@@ -46,7 +34,7 @@
     zanejs.Pool = Pool;
     zanejs.pool = new Pool();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var State = (function () {
         function State(state) {
@@ -96,7 +84,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
+var zanejs;
 (function (zanejs) {
     var AssetsBundle = (function (_super) {
         __extends(AssetsBundle, _super);
@@ -165,7 +153,7 @@ var __extends = (this && this.__extends) || (function () {
     }(PIXI.utils.EventEmitter));
     zanejs.AssetsBundle = AssetsBundle;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var AssetsBundleEvent = (function () {
         function AssetsBundleEvent() {
@@ -177,7 +165,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.AssetsBundleEvent = AssetsBundleEvent;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var _resLoader = new PIXI.loaders.Loader('', 6);
     var _ignoreFileList = [];
@@ -319,7 +307,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.AssetsManager = AssetsManager;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function paserFui(file, relativePath, callback) {
         var baseName = file.name.substring(file.name.lastIndexOf('/') + 1, file.name.lastIndexOf('.'));
@@ -400,7 +388,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.paserZipMiddleware = paserZipMiddleware;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Arc = (function () {
         function Arc(cx, cy, rx, ry, rotation, angleStart, angleExtent) {
@@ -517,7 +505,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Arc = Arc;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var CubicBezier = (function () {
         function CubicBezier(c1, c2, p1, p2) {
@@ -633,7 +621,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.CubicBezier = CubicBezier;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Ellipse = (function () {
         function Ellipse(cx, cy, rx, ry) {
@@ -719,7 +707,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Ellipse = Ellipse;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Line = (function () {
         function Line(start, end) {
@@ -798,7 +786,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Line = Line;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Polyline = (function () {
         function Polyline(pts) {
@@ -870,7 +858,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Polyline = Polyline;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Polygon = (function (_super) {
         __extends(Polygon, _super);
@@ -901,7 +889,7 @@ var __extends = (this && this.__extends) || (function () {
     }(zanejs.Polyline));
     zanejs.Polygon = Polygon;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var QuadraticBezier = (function () {
         function QuadraticBezier(c, p1, p2) {
@@ -990,7 +978,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.QuadraticBezier = QuadraticBezier;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Rect = (function () {
         function Rect(x, y, wid, hei, rx, ry) {
@@ -1064,7 +1052,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Rect = Rect;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var SVGArc = (function (_super) {
         __extends(SVGArc, _super);
@@ -1131,7 +1119,7 @@ var __extends = (this && this.__extends) || (function () {
     }(zanejs.Arc));
     zanejs.SVGArc = SVGArc;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Controller = (function () {
         function Controller(cmd) {
@@ -1220,7 +1208,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Controller = Controller;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var MVCApp = (function () {
         function MVCApp() {
@@ -1239,7 +1227,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.MVCApp = MVCApp;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Model = (function () {
         function Model(name, data) {
@@ -1295,7 +1283,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Model = Model;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var View = (function () {
         function View(name, viewComponent) {
@@ -1410,61 +1398,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.View = View;
 })(zanejs || (zanejs = {}));
-
-(function (zanejs) {
-    var CSSParser = (function () {
-        function CSSParser() {
-            this._css = {};
-        }
-        CSSParser.prototype.parseCSS = function (cssStr) {
-            cssStr = zanejs.removeAllComments(cssStr);
-            var cssArr = cssStr.match(/([\w \.:\#]+\{.+?\})/g);
-            this.parseSelectors(cssArr);
-        };
-        Object.defineProperty(CSSParser.prototype, "selectors", {
-            get: function () {
-                var selectors = [];
-                Object.keys(this._css).map(function (key) {
-                    selectors.push(key);
-                });
-                return selectors;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        CSSParser.prototype.getStyle = function (selector) { return this._css[selector]; };
-        CSSParser.prototype.setStyle = function (selector, styleObj) {
-            if (this._css[selector] === undefined)
-                this._css[selector] = {};
-            this._css[selector] = styleObj;
-        };
-        CSSParser.prototype.clear = function () { this._css = {}; };
-        CSSParser.prototype.parseSelectors = function (cssArr) {
-            var selector;
-            var properties;
-            var n = cssArr.length;
-            for (var i = 0; i < n; i++) {
-                selector = zanejs.trim(cssArr[i].match(/.+(?=\{)/g)[0]);
-                properties = cssArr[i].match(/(?<=\{).+(?=\})/g)[0];
-                this.setStyle(selector, this.parseProperties(properties));
-            }
-        };
-        CSSParser.prototype.parseProperties = function (propStr) {
-            var result = {};
-            var properties = propStr.match(/\b\w[\w-:\#\/ ,]+/g);
-            var curProp;
-            var n = properties.length;
-            for (var j = 0; j < n; j++) {
-                curProp = properties[j].split(':');
-                result[zanejs.toCamelCase(curProp[0])] = zanejs.trim(curProp[1]);
-            }
-            return result;
-        };
-        return CSSParser;
-    }());
-    zanejs.CSSParser = CSSParser;
-})(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var MotifsToHTML5CanvasCommands = (function () {
         function MotifsToHTML5CanvasCommands() {
@@ -1641,7 +1575,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.MotifsToHTML5CanvasCommands = MotifsToHTML5CanvasCommands;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var MotifsToPixiGraphicsCommands = (function () {
         function MotifsToPixiGraphicsCommands() {
@@ -1779,7 +1713,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.MotifsToPixiGraphicsCommands = MotifsToPixiGraphicsCommands;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var SVGToMotifs = (function () {
         function SVGToMotifs() {
@@ -2076,7 +2010,6 @@ var __extends = (this && this.__extends) || (function () {
                 temp = zanejs.trim(zanejs.removeMultipleSpaces(commands[i]));
                 temp = temp.replace(/([a-zA-Z]) /g, '$1');
                 temp = zanejs.removeAllWhiteSpaces(temp, ',');
-                temp = temp.replace(/((?<![a-zA-Z]|,)-)/g, ',$&');
                 commands[i] = (temp.length > 1)
                     ? [temp.substr(0, 1), temp.substr(1).split(',')]
                     : [parseFloat(temp.substr(0, 1))];
@@ -2333,7 +2266,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.SVGToMotifs = SVGToMotifs;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function ajax(options) {
         var url = options.url || '', type = (options.type || 'get').toLowerCase(), data = options.data || null, contentType = options.contentType || '', dataType = options.dataType || '', async = options.async === undefined && true, timeOut = options.timeOut, before = options.before || function () { }, error = options.error || function () { }, success = options.success || function () { }, timeoutBool = false, timeoutFlag = null, xhr = null;
@@ -2450,7 +2383,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.ajax = ajax;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_chunk(input, size, preserveKeys) {
         if (preserveKeys === void 0) { preserveKeys = false; }
@@ -2509,7 +2442,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_chunk = array_chunk;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_combine(keys, values) {
         var newArray = {};
@@ -2538,7 +2471,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_combine = array_combine;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_count_values(array) {
         var tmpArr = {};
@@ -2579,7 +2512,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_count_values = array_count_values;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_diff() {
         var args = [];
@@ -2608,7 +2541,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_diff = array_diff;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_diff_assoc() {
         var args = [];
@@ -2639,7 +2572,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_diff_assoc = array_diff_assoc;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_diff_key() {
         var args = [];
@@ -2668,7 +2601,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_diff_key = array_diff_key;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_diff_uassoc() {
         var args = [];
@@ -2703,7 +2636,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_diff_uassoc = array_diff_uassoc;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_diff_ukey() {
         var args = [];
@@ -2738,7 +2671,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_diff_ukey = array_diff_ukey;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_fill(startIndex, num, mixedVal) {
         var key;
@@ -2752,7 +2685,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_fill = array_fill;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_fill_keys(keys, value) {
         var retObj = {};
@@ -2763,7 +2696,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_fill_keys = array_fill_keys;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_filter(arr, func) {
         var retObj = {};
@@ -2783,7 +2716,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_filter = array_filter;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_flip(trans) {
         var key;
@@ -2798,7 +2731,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_flip = array_flip;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_intersect() {
         var args = [];
@@ -2833,7 +2766,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_intersect = array_intersect;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_intersect_assoc() {
         var args = [];
@@ -2868,7 +2801,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_intersect_assoc = array_intersect_assoc;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_merge() {
         var args = [];
@@ -2922,7 +2855,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_merge = array_merge;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_unique(inputArr) {
         var tmpArr2 = {};
@@ -2944,7 +2877,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_unique = array_unique;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function array_values(input) {
         var tmpArr = [];
@@ -2955,7 +2888,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.array_values = array_values;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function compare(arr1, arr2) {
         if (arr1.length !== arr2.length) {
@@ -2972,7 +2905,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.compare = compare;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getRandomArrayElements(arr, count) {
         var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -2986,7 +2919,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getRandomArrayElements = getRandomArrayElements;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function indexByObjectValue(arr, attribute, value) {
         for (var i = 0, l = arr.length; i < l; ++i) {
@@ -2999,14 +2932,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.indexByObjectValue = indexByObjectValue;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function is_array(input) {
         return typeof (input) === 'object' && (input instanceof Array);
     }
     zanejs.is_array = is_array;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomSort(arr) {
         function randomize(elementA, elementB) {
@@ -3025,7 +2958,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomSort = randomSort;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeEmptyItems(arr) {
         function isNotEmpty(item, index, array) {
@@ -3035,7 +2968,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeEmptyItems = removeEmptyItems;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toStringArray(arr) {
         var str = '[';
@@ -3070,7 +3003,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toStringArray = toStringArray;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function colorToHex(color) {
         if (isNaN(color)) {
@@ -3093,7 +3026,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.colorToHex = colorToHex;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function colorToUint(color) {
         if (/^rgb\(\d+\,\d+\,\d+\)/.test(color)) {
@@ -3111,7 +3044,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.colorToUint = colorToUint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function fadeColor(startColor, endColor, position) {
         var r = startColor >> 16;
@@ -3124,7 +3057,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.fadeColor = fadeColor;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var _htmlColors = null;
     function getHtmlColors() {
@@ -3287,7 +3220,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.cleanHtmlColors = cleanHtmlColors;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function hexToUint(hex) {
         hex = hex || '';
@@ -3299,21 +3232,21 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.hexToUint = hexToUint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function htmlColorToHex(htmlColorName) {
         return zanejs.getHtmlColors()[htmlColorName.toLowerCase()];
     }
     zanejs.htmlColorToHex = htmlColorToHex;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function htmlColorToUint(htmlColorName) {
         return zanejs.hexToUint(zanejs.htmlColorToHex(htmlColorName));
     }
     zanejs.htmlColorToUint = htmlColorToUint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function percToUint(perc) {
         var x = zanejs.uint(perc.replace('%', ''));
@@ -3321,14 +3254,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.percToUint = percToUint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rgbToHex(rgb) {
         return zanejs.uintToHex(zanejs.rgbToUint(rgb));
     }
     zanejs.rgbToHex = rgbToHex;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rgbToUint(rgb) {
         var colors = rgb
@@ -3349,14 +3282,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.rgbToUint = rgbToUint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function uintToHex(u) {
         return '#' + u.toString(16).toUpperCase();
     }
     zanejs.uintToHex = uintToHex;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function uintToRGBA(color, alpha) {
         if (alpha === void 0) { alpha = 1; }
@@ -3372,14 +3305,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.uintToRGBA = uintToRGBA;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function deleteCookie(name) {
         zanejs.setCookie(name, '', -1);
     }
     zanejs.deleteCookie = deleteCookie;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getCookie(name) {
         name = name + '=';
@@ -3397,7 +3330,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getCookie = getCookie;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setCookie(name, value, seconds) {
         var expires;
@@ -3413,7 +3346,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setCookie = setCookie;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function checkdate(m, d, y) {
         return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0))
@@ -3421,7 +3354,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.checkdate = checkdate;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function date(format, timestamp) {
         var jsdate, f;
@@ -3594,7 +3527,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.date = date;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getdate(timestamp) {
         if (timestamp === void 0) { timestamp = undefined; }
@@ -3624,7 +3557,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getdate = getdate;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function gettimeofday(returnFloat) {
         if (returnFloat === void 0) { returnFloat = false; }
@@ -3646,7 +3579,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.gettimeofday = gettimeofday;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function gmdate(format, timestamp) {
         var dt = typeof timestamp === 'undefined' ? new Date()
@@ -3657,7 +3590,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.gmdate = gmdate;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function gmmktime() {
         var args = [];
@@ -3686,7 +3619,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.gmmktime = gmmktime;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function idate(format, timestamp) {
         if (format === undefined) {
@@ -3754,7 +3687,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.idate = idate;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function microtime(getAsFloat) {
         var s;
@@ -3778,7 +3711,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.microtime = microtime;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function mktime() {
         var args = [];
@@ -3808,7 +3741,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.mktime = mktime;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function strtotime(text, now) {
         var parsed, match, today;
@@ -4025,14 +3958,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.strtotime = strtotime;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function time() {
         return Math.floor(new Date().getTime() / 1000);
     }
     zanejs.time = time;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function basename(path, suffix) {
         if (suffix === void 0) { suffix = null; }
@@ -4049,7 +3982,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.basename = basename;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function dirname(path) {
         return path.replace(/\\/g, '/')
@@ -4057,14 +3990,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.dirname = dirname;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getExtension(filePath) {
         return filePath.split('.').pop();
     }
     zanejs.getExtension = getExtension;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getFileNameFromUrl(url) {
         if (url) {
@@ -4074,7 +4007,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getFileNameFromUrl = getFileNameFromUrl;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     zanejs.PI = Math.PI;
     zanejs.DEG_TO_RAD = zanejs.PI / 180;
@@ -4084,7 +4017,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.degreeToRadians = degreeToRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function plotPoint(g, p, color, size) {
         if (color === void 0) { color = 0xFF0000; }
@@ -4095,14 +4028,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.plotPoint = plotPoint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function radianToDegree(radian) {
         return radian * zanejs.RAD_TO_DEG;
     }
     zanejs.radianToDegree = radianToDegree;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function reflectPoint(point, pivot) {
         var rx = pivot.x - point.x;
@@ -4111,7 +4044,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.reflectPoint = reflectPoint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function concat(m1, m2) {
         var a = m1.a * m2.a;
@@ -4138,63 +4071,63 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.concat = concat;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getRotation(m) {
         return zanejs.radianToDegree(zanejs.getRotationRadians(m));
     }
     zanejs.getRotation = getRotation;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getRotationRadians(m) {
         return zanejs.getSkewYRadians(m);
     }
     zanejs.getRotationRadians = getRotationRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getScaleX(m) {
         return Math.sqrt(m.a * m.a + m.b * m.b);
     }
     zanejs.getScaleX = getScaleX;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getScaleY(m) {
         return Math.sqrt(m.c * m.c + m.d * m.d);
     }
     zanejs.getScaleY = getScaleY;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getSkewX(m) {
         return zanejs.radianToDegree(Math.atan2(-m.c, m.d));
     }
     zanejs.getSkewX = getSkewX;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getSkewXRadians(m) {
         return Math.atan2(-m.c, m.d);
     }
     zanejs.getSkewXRadians = getSkewXRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getSkewY(m) {
         return zanejs.radianToDegree(Math.atan2(m.b, m.a));
     }
     zanejs.getSkewY = getSkewY;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getSkewYRadians(m) {
         return Math.atan2(m.b, m.a);
     }
     zanejs.getSkewYRadians = getSkewYRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function matchInternalPointWithExternal(m, internalPoint, externalPoint) {
         var mat = m.clone();
@@ -4207,7 +4140,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.matchInternalPointWithExternal = matchInternalPointWithExternal;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rotateAroundExternalPoint(m, pivot, angleDegrees) {
         var mat = m.clone();
@@ -4220,7 +4153,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.rotateAroundExternalPoint = rotateAroundExternalPoint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rotateAroundInternalPoint(m, pivot, angleDegrees) {
         pivot = zanejs.transformPoint(m, pivot);
@@ -4228,14 +4161,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.rotateAroundInternalPoint = rotateAroundInternalPoint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setRotation(m, value) {
         return zanejs.setRotationRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setRotation = setRotation;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setRotationRadians(m, value) {
         var curRotation = zanejs.getRotationRadians(m);
@@ -4245,7 +4178,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setRotationRadians = setRotationRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setScaleX(m, value) {
         var mat = m.clone();
@@ -4264,7 +4197,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setScaleX = setScaleX;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setScaleY(m, value) {
         var mat = m.clone();
@@ -4283,14 +4216,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setScaleY = setScaleY;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setSkewX(m, value) {
         return zanejs.setSkewXRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewX = setSkewX;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setSkewXRadians(m, value) {
         var mat = m.clone();
@@ -4301,14 +4234,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setSkewXRadians = setSkewXRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setSkewY(m, value) {
         return zanejs.setSkewYRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewY = setSkewY;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function setSkewYRadians(m, value) {
         var mat = m.clone();
@@ -4319,7 +4252,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.setSkewYRadians = setSkewYRadians;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function transformPoint(m, pivot, resultPoint) {
         var x = m.a * pivot.x + m.c * pivot.y + m.tx;
@@ -4333,7 +4266,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.transformPoint = transformPoint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function addLeadingZeroes(n, zeroes) {
         if (zeroes === void 0) { zeroes = 1; }
@@ -4348,14 +4281,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.addLeadingZeroes = addLeadingZeroes;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function clamp(val, min, max) {
         return Math.max(Math.min(val, max), min);
     }
     zanejs.clamp = clamp;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function createStepsBetween(begin, end, steps) {
         steps++;
@@ -4369,14 +4302,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.createStepsBetween = createStepsBetween;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isBetween(value, firstValue, secondValue) {
         return !(value < Math.min(firstValue, secondValue) || value > Math.max(firstValue, secondValue));
     }
     zanejs.isBetween = isBetween;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isEqual(val1, val2, precision) {
         if (precision === void 0) { precision = 0; }
@@ -4384,35 +4317,35 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isEqual = isEqual;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isEven(value) {
         return (value & 1) === 0;
     }
     zanejs.isEven = isEven;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isInteger(value) {
         return (value % 1) === 0;
     }
     zanejs.isInteger = isInteger;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isNegative(value) {
         return !zanejs.isPositive(value);
     }
     zanejs.isNegative = isNegative;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isOdd(value) {
         return !zanejs.isEven(value);
     }
     zanejs.isOdd = isOdd;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isOne(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4420,14 +4353,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isOne = isOne;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isPositive(value) {
         return value >= 0;
     }
     zanejs.isPositive = isPositive;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isPowerOf2() {
         var args = [];
@@ -4446,7 +4379,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isPowerOf2 = isPowerOf2;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isPrime(value) {
         if (value === 1 || value === 2) {
@@ -4465,7 +4398,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isPrime = isPrime;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isZero(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4473,7 +4406,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isZero = isZero;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function limitPrecision(n, maxPrecision) {
         if (maxPrecision === void 0) { maxPrecision = 2; }
@@ -4484,14 +4417,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.limitPrecision = limitPrecision;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomIntegerWithinRange(min, max) {
         return Math.round(zanejs.randomWithinRange(min, max));
     }
     zanejs.randomIntegerWithinRange = randomIntegerWithinRange;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomSign(chance) {
         if (chance === void 0) { chance = 0.5; }
@@ -4499,7 +4432,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomSign = randomSign;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomWithinRange(min, max) {
         if (min > max) {
@@ -4511,7 +4444,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomWithinRange = randomWithinRange;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function round(value, digits) {
         digits = Math.pow(10, digits);
@@ -4519,14 +4452,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.round = round;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function uint(value) {
         return parseInt(value, undefined) >>> 32;
     }
     zanejs.uint = uint;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function assign(obj, params) {
         Object.keys(params).map(function (name) {
@@ -4536,7 +4469,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.assign = assign;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function combine(defaultVars, additionalVars) {
         var combinedObject = {};
@@ -4550,7 +4483,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.combine = combine;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getQualifiedClassName(value) {
         var type = typeof value;
@@ -4573,21 +4506,21 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getQualifiedClassName = getQualifiedClassName;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isArray(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
     }
     zanejs.isArray = isArray;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isBool(obj) {
         return obj === true || obj === false;
     }
     zanejs.isBool = isBool;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isEmpty(val) {
         if (val) {
@@ -4599,21 +4532,21 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isEmpty = isEmpty;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isFunction(obj) {
         return Object.prototype.toString.call(obj) === '[object Function]';
     }
     zanejs.isFunction = isFunction;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isObject(obj) {
         return Object.prototype.toString.call(obj) === '[object Object]';
     }
     zanejs.isObject = isObject;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isSpecial(obj) {
         var undef;
@@ -4621,21 +4554,21 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isSpecial = isSpecial;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isString(obj) {
         return Object.prototype.toString.call(obj) === '[object String]';
     }
     zanejs.isString = isString;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isUndefined(obj) {
         return obj === void 0;
     }
     zanejs.isUndefined = isUndefined;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function merge(base, extend) {
         var merged = {};
@@ -4649,7 +4582,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.merge = merge;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function object_change_key_case(obj, cs) {
         if (cs === void 0) { cs = 'CASE_LOWER'; }
@@ -4668,7 +4601,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.object_change_key_case = object_change_key_case;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toObject(objString) {
         var o = {};
@@ -4683,14 +4616,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toObject = toObject;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function distance(p1, p2) {
         return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     }
     zanejs.distance = distance;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var Random = (function () {
         function Random(seed) {
@@ -4712,7 +4645,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.Random = Random;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function mt_rand(min, max) {
         var argc = arguments.length;
@@ -4731,21 +4664,21 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.mt_rand = mt_rand;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomBoolean() {
         return zanejs.randomChance(0.5);
     }
     zanejs.randomBoolean = randomBoolean;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomChance(percent) {
         return Math.random() < percent;
     }
     zanejs.randomChance = randomChance;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomCharacters(amount, charSet) {
         if (charSet === void 0) { charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; }
@@ -4761,7 +4694,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomCharacters = randomCharacters;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomLowercaseCharacters(amount) {
         var str = '';
@@ -4772,7 +4705,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomLowercaseCharacters = randomLowercaseCharacters;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomNumberString(amount) {
         var str = '';
@@ -4783,7 +4716,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomNumberString = randomNumberString;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomSpecialCharacters(amount) {
         var str = '';
@@ -4794,14 +4727,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.randomSpecialCharacters = randomSpecialCharacters;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function randomToken() {
         return Math.random().toString(36).substr(2);
     }
     zanejs.randomToken = randomToken;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function addcslashes(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -4947,7 +4880,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.addcslashes = addcslashes;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function addslashes(str) {
         return (str + '')
@@ -4956,7 +4889,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.addslashes = addslashes;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function bin2hex(s) {
         var i;
@@ -4973,7 +4906,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.bin2hex = bin2hex;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function chr(codePt) {
         if (codePt > 0xFFFF) {
@@ -4984,7 +4917,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.chr = chr;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function chunk_split(body, chunklen, end) {
         chunklen = parseInt(String(chunklen), 10) || 76;
@@ -4997,7 +4930,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.chunk_split = chunk_split;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function count_chars(str, mode) {
         var result = {};
@@ -5037,7 +4970,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.count_chars = count_chars;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function echo() {
         var args = [];
@@ -5048,14 +4981,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.echo = echo;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function endsWith(input, suffix) {
         return (suffix === input.substring(input.length - suffix.length));
     }
     zanejs.endsWith = endsWith;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function explode(delimiter, str, limit) {
         if (arguments.length < 2 ||
@@ -5104,14 +5037,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.explode = explode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function firstToUpper(str) {
         return str.charAt(0).toUpperCase() + str.substr(1);
     }
     zanejs.firstToUpper = firstToUpper;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function get_html_translation_table(table, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -5256,7 +5189,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.get_html_translation_table = get_html_translation_table;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function hex2bin(s) {
         var ret = [];
@@ -5275,7 +5208,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.hex2bin = hex2bin;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function html_entity_decode(str, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -5295,7 +5228,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.html_entity_decode = html_entity_decode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function http_build_query(formData, numericPrefix, argSeparator) {
         if (numericPrefix === void 0) { numericPrefix = ''; }
@@ -5347,7 +5280,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.http_build_query = http_build_query;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function implode(glue, pieces) {
         var i = '';
@@ -5371,7 +5304,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.implode = implode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function ltrim(str) {
         str = str || '';
@@ -5379,7 +5312,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.ltrim = ltrim;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function number_format(num, decimals, decPoint, thousandsSep) {
         num = (num + '').replace(/[^0-9+\-Ee.]/g, '');
@@ -5403,10 +5336,10 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.number_format = number_format;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function padLeft(value, padChar, length) {
-        var s = value;
+        var s = value + '';
         while (s.length < length) {
             s = padChar + s;
         }
@@ -5414,10 +5347,10 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.padLeft = padLeft;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function padRight(value, padChar, length) {
-        var s = value;
+        var s = value + '';
         while (s.length < length) {
             s += padChar;
         }
@@ -5425,7 +5358,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.padRight = padRight;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function parse_url(str, component, mode) {
         if (mode === void 0) { mode = 'php'; }
@@ -5493,7 +5426,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.parse_url = parse_url;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rawurldecode(str) {
         return decodeURIComponent((str + '')
@@ -5503,7 +5436,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.rawurldecode = rawurldecode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rawurlencode(str) {
         str = (str + '');
@@ -5516,7 +5449,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.rawurlencode = rawurlencode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeAllComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5525,7 +5458,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeAllComments = removeAllComments;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeAllWhiteSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5534,7 +5467,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeAllWhiteSpaces = removeAllWhiteSpaces;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeLineBreaks(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5543,7 +5476,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeLineBreaks = removeLineBreaks;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeMultiLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5552,7 +5485,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeMultiLineComments = removeMultiLineComments;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeMultipleSpaces(str, replace) {
         if (replace === void 0) { replace = ' '; }
@@ -5561,7 +5494,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeMultipleSpaces = removeMultipleSpaces;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeNonWordChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5570,7 +5503,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeNonWordChars = removeNonWordChars;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeSingleLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5579,7 +5512,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeSingleLineComments = removeSingleLineComments;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5588,7 +5521,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeSpaces = removeSpaces;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeSpecialChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5597,7 +5530,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeSpecialChars = removeSpecialChars;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function removeTabs(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5606,7 +5539,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.removeTabs = removeTabs;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function replaceAccents(str) {
         str = str || '';
@@ -5637,7 +5570,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.replaceAccents = replaceAccents;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function rtrim(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -5653,7 +5586,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.chop = chop;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function serialize(mixedValue) {
         var val, key, okey;
@@ -5749,7 +5682,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.serialize = serialize;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function stringTruncate(value, length, suffix) {
         if (suffix === void 0) { suffix = '...'; }
@@ -5771,7 +5704,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.stringTruncate = stringTruncate;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function stringsAreEqual(s1, s2, caseSensitive) {
         if (caseSensitive === void 0) { caseSensitive = false; }
@@ -5779,7 +5712,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.stringsAreEqual = stringsAreEqual;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function stripslashes(str) {
         return (str + '').replace(/\\(.?)/g, function (s, n1) {
@@ -5797,7 +5730,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.stripslashes = stripslashes;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toCamelCase(str) {
         str = str || '';
@@ -5810,7 +5743,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toCamelCase = toCamelCase;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toPathFormat() {
         var rest = [];
@@ -5828,7 +5761,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toPathFormat = toPathFormat;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toProperCase(str) {
         str = str || '';
@@ -5839,7 +5772,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toProperCase = toProperCase;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function toTitleFormat(path, defaultTitle, separator) {
         if (defaultTitle === void 0) { defaultTitle = ''; }
@@ -5857,7 +5790,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.toTitleFormat = toTitleFormat;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function trim(str) {
         str = str || '';
@@ -5865,7 +5798,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.trim = trim;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function unserialize(data) {
         var utf8Overhead = function (str) {
@@ -6026,7 +5959,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.unserialize = unserialize;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function urldecode(str) {
         return decodeURIComponent((str + '')
@@ -6037,7 +5970,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.urldecode = urldecode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function urlencode(str) {
         str = (str + '');
@@ -6051,7 +5984,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.urlencode = urlencode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function utf8_decode(strData) {
         var tmpArr = [];
@@ -6095,7 +6028,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.utf8_decode = utf8_decode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function utf8_encode(argString) {
         if (argString === null || typeof argString === 'undefined') {
@@ -6146,7 +6079,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.utf8_encode = utf8_encode;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function xtrim(str) {
         if (str === void 0) { str = ''; }
@@ -6168,7 +6101,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.xtrim = xtrim;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isOldIOS() {
         var win = window;
@@ -6182,7 +6115,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isOldIOS = _isOldIOS();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     zanejs.emptyVideoData = '' +
         'data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAACKBtZGF0AAAC8wYF///v3EXpveb' +
@@ -6248,7 +6181,7 @@ var __extends = (this && this.__extends) || (function () {
         'AAFnVkdGEAAAAObmFtZVN0ZXJlbwAAAHB1ZHRhAAAAaG1ldGEAAAAAAAAAIWhkbHIAAAAAAAAAAG1kaXJhcHBsAAAAAAAAAAAAAAAAO2l' +
         'sc3QAAAAzqXRvbwAAACtkYXRhAAAAAQAAAABIYW5kQnJha2UgMC4xMC4yIDIwMTUwNjExMDA=';
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var NoSleep = (function () {
         function NoSleep() {
@@ -6297,7 +6230,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.NoSleep = NoSleep;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function buildBridgedWorker(workerFunction, workerExportNames, mainExportNames, mainExportHandles) {
         var baseWorkerStr = workerFunction.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1];
@@ -6379,7 +6312,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.buildBridgedWorker = buildBridgedWorker;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function call_user_func(cb, parameters) {
         parameters = Array.prototype.slice.call(arguments, 1);
@@ -6387,7 +6320,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.call_user_func = call_user_func;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function call_user_func_array(cb, parameters) {
         var func;
@@ -6432,7 +6365,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.call_user_func_array = call_user_func_array;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function cancelRequestAnimationFrame() {
         var w = window;
@@ -6449,7 +6382,71 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.cancelRequestAnimationFrame = cancelRequestAnimationFrame;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
+(function (zanejs) {
+    function createInstance(clazz, args, props) {
+        if (args === void 0) { args = []; }
+        if (props === void 0) { props = null; }
+        if (!clazz)
+            return null;
+        if (!zanejs.is_array(args)) {
+            args = [args];
+        }
+        var instance;
+        if (args) {
+            switch (args.length) {
+                case 0:
+                    instance = new clazz();
+                    break;
+                case 1:
+                    instance = new clazz(args[0]);
+                    break;
+                case 2:
+                    instance = new clazz(args[0], args[1]);
+                    break;
+                case 3:
+                    instance = new clazz(args[0], args[1], args[2]);
+                    break;
+                case 4:
+                    instance = new clazz(args[0], args[1], args[2], args[3]);
+                    break;
+                case 5:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4]);
+                    break;
+                case 6:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5]);
+                    break;
+                case 7:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                    break;
+                case 8:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                    break;
+                case 9:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                    break;
+                case 10:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+                    break;
+                default:
+                    return null;
+            }
+        }
+        else {
+            instance = new clazz();
+        }
+        if (props) {
+            Object.keys(props).map(function (key) {
+                if (instance.hasOwnProperty(key)) {
+                    instance[key] = props[key];
+                }
+            });
+        }
+        return instance;
+    }
+    zanejs.createInstance = createInstance;
+})(zanejs || (zanejs = {}));
+var zanejs;
 (function (zanejs) {
     zanejs.emptyImageData = '' +
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2l' +
@@ -6490,9 +6487,11 @@ var __extends = (this && this.__extends) || (function () {
         'wAAAAAAMPOUlj8DPn/ne/siAAAAAAAAJp46+s7rA0QAAAAAAADoA/QBIgAAAAAAAN73Duj9H/D0ndYHiAAAAAAAABg29e93Xh8gAgAAAAAAI' +
         'H0H6ANEAAAAAAAA6AP0ASIAAAAAAADmmgsAAP//AwCuazpEOXa+fwAAAABJRU5ErkJggg==';
     zanejs.emptyImageElement = document.createElement('img');
-    zanejs.emptyImageElement.setAttribute('src', zanejs.emptyImageData);
+    if (zanejs.emptyImageElement && zanejs.emptyImageElement.setAttribute) {
+        zanejs.emptyImageElement.setAttribute('src', zanejs.emptyImageData);
+    }
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var fn = (function () {
         var val;
@@ -6571,7 +6570,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.onFullscreenError = onFullscreenError;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getOrientation() {
         if (typeof window.orientation === 'undefined') {
@@ -6591,14 +6590,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getOrientation = getOrientation;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getParams() {
         return zanejs.getUrlParams(document.location.href);
     }
     zanejs.getParams = getParams;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function getUrlParams(url) {
         url = url.split('?')[1];
@@ -6614,7 +6613,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.getUrlParams = getUrlParams;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _iOSVersion() {
         if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -6625,7 +6624,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.iOSVersion = _iOSVersion();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function innerHeight() {
         var _height;
@@ -6644,7 +6643,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.innerHeight = innerHeight;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function innerWidth() {
         var _width;
@@ -6663,7 +6662,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.innerWidth = innerWidth;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     zanejs.ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
     function _isIE() {
@@ -6671,63 +6670,63 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isIE = _isIE();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isAndroid() {
         return zanejs.ua.match(/android/i) != null;
     }
     zanejs.isAndroid = _isAndroid();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isChrome() {
         return zanejs.ua.match(/chrome/i) != null;
     }
     zanejs.isChrome = _isChrome();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isIOS() {
         return zanejs.ua.match(/(ipad|iphone|ipod)/i) != null;
     }
     zanejs.isIOS = _isIOS();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isOpera() {
         return zanejs.ua.match(/opera/i) != null;
     }
     zanejs.isOpera = _isOpera();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isQQBrowser() {
         return zanejs.ua.match(/MQQBrowser/i) != null;
     }
     zanejs.isQQBrowser = _isQQBrowser();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isSafari() {
         return (zanejs.ua.toLowerCase().indexOf('safari') !== -1);
     }
     zanejs.isSafari = _isSafari();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isWebkit() {
         return zanejs.ua.match(/webkit/i) != null;
     }
     zanejs.isWebkit = _isWebkit();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _isWeiXin() {
         return zanejs.ua.match(/MicroMessenger/i) != null;
     }
     zanejs.isWeiXin = _isWeiXin();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function magical(Class) {
         return function () {
@@ -6768,14 +6767,14 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.magical = magical;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function _mobileHTML5() {
         return (zanejs.ua.match(/(mobile|pre\/|xoom)/i) != null || zanejs.isIOS || zanejs.isAndroid);
     }
     zanejs.mobileHTML5 = _mobileHTML5();
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function onVisibilityChange(callback) {
         var state, visibilityChange, doc = document;
@@ -6803,7 +6802,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.onVisibilityChange = onVisibilityChange;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function openWindow(anchor, options) {
         var args = '';
@@ -6858,7 +6857,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.openWindow = openWindow;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function requestAnimationFrame() {
         var w = window;
@@ -6874,7 +6873,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.requestAnimationFrame = requestAnimationFrame;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function touchSupported() {
         var win = window;
@@ -6885,7 +6884,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.touchSupported = touchSupported;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function create3DContext(canvas, webGLSettings) {
         var names = ['webgl', 'experimental-webgl', 'webkit-3d', 'moz-webgl'];
@@ -6904,7 +6903,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.create3DContext = create3DContext;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function isWebGLSupported() {
         var contextOptions = { stencil: true, failIfMajorPerformanceCaveat: true };
@@ -6931,7 +6930,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.isWebGLSupported = isWebGLSupported;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     function stringToXMLDom(str) {
         var xmlDoc = null;
@@ -6949,7 +6948,7 @@ var __extends = (this && this.__extends) || (function () {
     }
     zanejs.stringToXMLDom = stringToXMLDom;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var WS = (function () {
         function WS(url, protocols, options) {
@@ -6965,6 +6964,12 @@ var __extends = (this && this.__extends) || (function () {
             this._timeout = 10000;
             this._heartBeatTimer = null;
             this._closeTimer = null;
+            this._header = null;
+            this._onclose = null;
+            this._onerror = null;
+            this._onopen = null;
+            this._onmessage = null;
+            this._autoReconnect = true;
             Object.keys(options).forEach(function (key) {
                 var _key = '_' + key;
                 if (_this.hasOwnProperty(_key)) {
@@ -6996,6 +7001,16 @@ var __extends = (this && this.__extends) || (function () {
                 this._websocket.close(code, reason);
             }
         };
+        WS.prototype.reconnect = function () {
+            var _this = this;
+            if (this._reconnectLock)
+                return;
+            this._reconnectLock = true;
+            setTimeout(function () {
+                _this.initWebsocket();
+                _this._reconnectLock = false;
+            }, this._timeout);
+        };
         WS.prototype.initWebsocket = function () {
             var _this = this;
             try {
@@ -7009,12 +7024,14 @@ var __extends = (this && this.__extends) || (function () {
                     this._websocket.onClose = function () {
                         if (_this._onclose)
                             _this._onclose();
-                        _this.reconnect();
+                        if (_this._autoReconnect)
+                            _this.reconnect();
                     };
                     this._websocket.onError = function (errMsg) {
                         if (_this._onerror)
                             _this._onerror(errMsg);
-                        _this.reconnect();
+                        if (_this._autoReconnect)
+                            _this.reconnect();
                     };
                     this._websocket.onOpen = function (header) {
                         if (_this._onopen)
@@ -7029,19 +7046,21 @@ var __extends = (this && this.__extends) || (function () {
                 }
                 else {
                     this._websocket = new WebSocket(this._url, this._protocols);
-                    this._websocket.onclose = function () {
+                    this._websocket.onclose = function (evt) {
                         if (_this._onclose)
-                            _this._onclose();
-                        _this.reconnect();
+                            _this._onclose(evt);
+                        if (_this._autoReconnect)
+                            _this.reconnect();
                     };
-                    this._websocket.onerror = function () {
+                    this._websocket.onerror = function (evt) {
                         if (_this._onerror)
-                            _this._onerror();
-                        _this.reconnect();
+                            _this._onerror(evt);
+                        if (_this._autoReconnect)
+                            _this.reconnect();
                     };
-                    this._websocket.onopen = function () {
+                    this._websocket.onopen = function (evt) {
                         if (_this._onopen)
-                            _this._onopen();
+                            _this._onopen(evt);
                         _this.heartCheck();
                     };
                     this._websocket.onmessage = function (evt) {
@@ -7052,18 +7071,9 @@ var __extends = (this && this.__extends) || (function () {
                 }
             }
             catch (e) {
-                this.reconnect();
+                if (this._autoReconnect)
+                    this.reconnect();
             }
-        };
-        WS.prototype.reconnect = function () {
-            var _this = this;
-            if (this._reconnectLock)
-                return;
-            this._reconnectLock = true;
-            setTimeout(function () {
-                _this.initWebsocket();
-                _this._reconnectLock = false;
-            }, this._timeout);
         };
         WS.prototype.heartCheck = function () {
             var _this = this;
@@ -7081,7 +7091,7 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.WS = WS;
 })(zanejs || (zanejs = {}));
-
+var zanejs;
 (function (zanejs) {
     var WSManager = (function () {
         function WSManager() {
@@ -7109,6 +7119,261 @@ var __extends = (this && this.__extends) || (function () {
     }());
     zanejs.WSManager = WSManager;
 })(zanejs || (zanejs = {}));
+var zanejs;
+(function (zanejs) {
+    var re = {
+        not_string: /[^s]/,
+        not_bool: /[^t]/,
+        not_type: /[^T]/,
+        not_primitive: /[^v]/,
+        number: /[diefg]/,
+        numeric_arg: /[bcdiefguxX]/,
+        json: /[j]/,
+        not_json: /[^j]/,
+        text: /^[^\x25]+/,
+        modulo: /^\x25{2}/,
+        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
+        key: /^([a-z_][a-z_\d]*)/i,
+        key_access: /^\.([a-z_][a-z_\d]*)/i,
+        index_access: /^\[(\d+)\]/,
+        sign: /^[\+\-]/
+    };
+    var sprintfCache = {};
+    function sprintfParse(fmt) {
+        if (sprintfCache[fmt]) {
+            return sprintfCache[fmt];
+        }
+        var _fmt = fmt, match, parseTree = [], argNames = 0;
+        while (_fmt) {
+            if ((match = re.text.exec(_fmt)) !== null) {
+                parseTree.push(match[0]);
+            }
+            else if ((match = re.modulo.exec(_fmt)) !== null) {
+                parseTree.push('%');
+            }
+            else if ((match = re.placeholder.exec(_fmt)) !== null) {
+                if (match[2]) {
+                    argNames |= 1;
+                    var fieldList = [], replacementField = match[2], fieldMatch = [];
+                    if ((fieldMatch = re.key.exec(replacementField)) !== null) {
+                        fieldList.push(fieldMatch[1]);
+                        while ((replacementField = replacementField.substring(fieldMatch[0].length)) !== '') {
+                            if ((fieldMatch = re.key_access.exec(replacementField)) !== null) {
+                                fieldList.push(fieldMatch[1]);
+                            }
+                            else if ((fieldMatch = re.index_access.exec(replacementField)) !== null) {
+                                fieldList.push(fieldMatch[1]);
+                            }
+                            else {
+                                throw new SyntaxError('[sprintf] failed to parse named argument key');
+                            }
+                        }
+                    }
+                    else {
+                        throw new SyntaxError('[sprintf] failed to parse named argument key');
+                    }
+                    match[2] = fieldList;
+                }
+                else {
+                    argNames |= 2;
+                }
+                if (argNames === 3) {
+                    throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported');
+                }
+                parseTree.push({
+                    placeholder: match[0],
+                    param_no: match[1],
+                    keys: match[2],
+                    sign: match[3],
+                    pad_char: match[4],
+                    align: match[5],
+                    width: match[6],
+                    precision: match[7],
+                    type: match[8]
+                });
+            }
+            else {
+                throw new SyntaxError('[sprintf] unexpected placeholder');
+            }
+            _fmt = _fmt.substring(match[0].length);
+        }
+        return sprintfCache[fmt] = parseTree;
+    }
+    function sprintfFormat(parseTree, argv) {
+        var cursor = 0, treeLength = parseTree.length, arg, output = '', i, k, ph, pad, padCharacter, padLength, isPositive, sign;
+        for (i = 0; i < treeLength; i++) {
+            if (typeof parseTree[i] === 'string') {
+                output += parseTree[i];
+            }
+            else if (typeof parseTree[i] === 'object') {
+                ph = parseTree[i];
+                if (ph.keys) {
+                    arg = argv[cursor];
+                    for (k = 0; k < ph.keys.length; k++) {
+                        if (arg === undefined) {
+                            throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k - 1]));
+                        }
+                        arg = arg[ph.keys[k]];
+                    }
+                }
+                else if (ph.param_no) {
+                    arg = argv[ph.param_no];
+                }
+                else {
+                    arg = argv[cursor++];
+                }
+                if (re.not_type.test(ph.type) &&
+                    re.not_primitive.test(ph.type) &&
+                    arg instanceof Function) {
+                    arg = arg();
+                }
+                if (re.numeric_arg.test(ph.type) &&
+                    (typeof arg !== 'number' && isNaN(arg))) {
+                    throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg));
+                }
+                if (re.number.test(ph.type)) {
+                    isPositive = arg >= 0;
+                }
+                switch (ph.type) {
+                    case 'b':
+                        arg = parseInt(arg, 10).toString(2);
+                        break;
+                    case 'c':
+                        arg = String.fromCharCode(parseInt(arg, 10));
+                        break;
+                    case 'd':
+                    case 'i':
+                        arg = parseInt(arg, 10);
+                        break;
+                    case 'j':
+                        arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width, 10) : 0);
+                        break;
+                    case 'e':
+                        arg = ph.precision
+                            ? parseFloat(arg).toExponential(ph.precision)
+                            : parseFloat(arg).toExponential();
+                        break;
+                    case 'f':
+                        arg = ph.precision
+                            ? parseFloat(arg).toFixed(ph.precision)
+                            : parseFloat(arg);
+                        break;
+                    case 'g':
+                        arg = ph.precision
+                            ? String(Number(arg.toPrecision(ph.precision)))
+                            : parseFloat(arg);
+                        break;
+                    case 'o':
+                        arg = (parseInt(arg, 10) >>> 0).toString(8);
+                        break;
+                    case 's':
+                        arg = String(arg);
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg);
+                        break;
+                    case 't':
+                        arg = String(!!arg);
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg);
+                        break;
+                    case 'T':
+                        arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase();
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg);
+                        break;
+                    case 'u':
+                        arg = parseInt(arg, 10) >>> 0;
+                        break;
+                    case 'v':
+                        arg = arg.valueOf();
+                        arg = (ph.precision ? arg.substring(0, ph.precision) : arg);
+                        break;
+                    case 'x':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16);
+                        break;
+                    case 'X':
+                        arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase();
+                        break;
+                    default:
+                }
+                if (re.json.test(ph.type)) {
+                    output += arg;
+                }
+                else {
+                    if (re.number.test(ph.type) && (!isPositive || ph.sign)) {
+                        sign = isPositive ? '+' : '-';
+                        arg = arg.toString().replace(re.sign, '');
+                    }
+                    else {
+                        sign = '';
+                    }
+                    padCharacter = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' ';
+                    padLength = ph.width - (sign + arg).length;
+                    pad = ph.width ? (padLength > 0 ? padCharacter.repeat(padLength) : '') : '';
+                    output += ph.align
+                        ? sign + arg + pad
+                        : (padCharacter === '0'
+                            ? sign + pad + arg
+                            : pad + sign + arg);
+                }
+            }
+        }
+        return output;
+    }
+    function sprintf(fmt) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        return sprintfFormat(sprintfParse(fmt), args);
+    }
+    zanejs.sprintf = sprintf;
+    function vsprintf(fmt, argv) {
+        return sprintf.apply(null, [fmt].concat(argv || []));
+    }
+    zanejs.vsprintf = vsprintf;
+})(zanejs || (zanejs = {}));
+var zanejs;
+(function (zanejs) {
+    function cookie(name, value, options) {
+        if (value === void 0) { value = void 0; }
+        if (options === void 0) { options = void 0; }
+        if (typeof value !== 'undefined') {
+            options = options || {};
+            if (value === null) {
+                value = '';
+                options = zanejs.merge({}, options);
+                options.expires = -1;
+            }
+            var expires = '';
+            if (options.expires && (typeof options.expires === 'number' || options.expires.toUTCString)) {
+                var date_2;
+                if (typeof options.expires === 'number') {
+                    date_2 = new Date();
+                    date_2.setTime(date_2.getTime() + (options.expires * 24 * 60 * 60 * 1000));
+                }
+                else {
+                    date_2 = options.expires;
+                }
+                expires = '; expires=' + date_2.toUTCString();
+            }
+            var path = options.path ? '; path=' + (options.path) : '';
+            var domain = options.domain ? '; domain=' + (options.domain) : '';
+            var secure = options.secure ? '; secure' : '';
+            document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+        }
+        else {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var _cookie = zanejs.trim(cookies[i]);
+                    if (_cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(_cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    }
+    zanejs.cookie = cookie;
+})(zanejs || (zanejs = {}));
 //# sourceMappingURL=zanejs.js.map
-	return zanejs;
-});

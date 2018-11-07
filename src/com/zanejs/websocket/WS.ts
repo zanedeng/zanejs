@@ -75,6 +75,7 @@ module zanejs {
         private _onerror: any;
         private _onopen: any;
         private _onmessage: any;
+        private _autoReconnect: boolean;
 
         constructor(url: string, protocols: string | string[] = [], options: any = {}) {
             this._url = url;
@@ -86,6 +87,12 @@ module zanejs {
             this._timeout = 10000; // 重连频率
             this._heartBeatTimer = null;
             this._closeTimer = null;
+            this._header = null;
+            this._onclose = null;
+            this._onerror = null;
+            this._onopen = null;
+            this._onmessage = null;
+            this._autoReconnect = true;
             Object.keys(options).forEach(key => {
                 let _key = '_' + key;
                 if (this.hasOwnProperty(_key)) {
@@ -128,6 +135,21 @@ module zanejs {
         }
 
         /**
+         * 重新创建一个 WebSocket 连接
+         */
+        public reconnect(): void {
+            if (this._reconnectLock) return;
+            this._reconnectLock = true;
+            setTimeout(
+                () => {
+                    this.initWebsocket();
+                    this._reconnectLock = false;
+                },
+                this._timeout
+            );
+        }
+
+        /**
          * 初始化 WebSocket 连接
          */
         private initWebsocket(): void {
@@ -141,11 +163,11 @@ module zanejs {
                     });
                     this._websocket.onClose = () => {
                         if (this._onclose) this._onclose();
-                        this.reconnect();
+                        if (this._autoReconnect) this.reconnect();
                     };
                     this._websocket.onError = (errMsg: string) => {
                         if (this._onerror) this._onerror(errMsg);
-                        this.reconnect();
+                        if (this._autoReconnect) this.reconnect();
                     };
                     this._websocket.onOpen = (header: any) => {
                         if (this._onopen) this._onopen(header);
@@ -157,16 +179,16 @@ module zanejs {
                     };
                 } else {
                     this._websocket = new WebSocket(this._url, this._protocols);
-                    this._websocket.onclose = () => {
-                        if (this._onclose) this._onclose();
-                        this.reconnect();
+                    this._websocket.onclose = (evt) => {
+                        if (this._onclose) this._onclose(evt);
+                        if (this._autoReconnect) this.reconnect();
                     };
-                    this._websocket.onerror = () => {
-                        if (this._onerror) this._onerror();
-                        this.reconnect();
+                    this._websocket.onerror = (evt) => {
+                        if (this._onerror) this._onerror(evt);
+                        if (this._autoReconnect) this.reconnect();
                     };
-                    this._websocket.onopen = () => {
-                        if (this._onopen) this._onopen();
+                    this._websocket.onopen = (evt) => {
+                        if (this._onopen) this._onopen(evt);
                         this.heartCheck();
                     };
                     this._websocket.onmessage = (evt) => {
@@ -175,23 +197,8 @@ module zanejs {
                     };
                 }
             } catch (e) {
-                this.reconnect();
+                if (this._autoReconnect) this.reconnect();
             }
-        }
-
-        /**
-         * 重新创建一个 WebSocket 连接
-         */
-        private reconnect(): void {
-            if (this._reconnectLock) return;
-            this._reconnectLock = true;
-            setTimeout(
-                () => {
-                    this.initWebsocket();
-                    this._reconnectLock = false;
-                },
-                this._timeout
-            );
         }
 
         /**

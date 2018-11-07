@@ -47,5 +47,7 @@ module zanejs {
      * @type {HTMLElementTagNameMap[string]}
      */
     export let emptyImageElement: HTMLImageElement = document.createElement('img');
-    emptyImageElement.setAttribute('src', emptyImageData);
+    if (emptyImageElement && emptyImageElement.setAttribute) {
+        emptyImageElement.setAttribute('src', emptyImageData);
+    }
 }

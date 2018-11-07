@@ -291,19 +291,6 @@ declare module zanejs {
     }
 }
 declare module zanejs {
-    class CSSParser {
-        private _css;
-        constructor();
-        parseCSS(cssStr: string): void;
-        readonly selectors: string[];
-        getStyle(selector: string): any;
-        setStyle(selector: string, styleObj: any): void;
-        clear(): void;
-        private parseSelectors;
-        private parseProperties;
-    }
-}
-declare module zanejs {
     class MotifsToHTML5CanvasCommands {
         private static _prevFillStyle;
         private static _prevLineStyle;
@@ -957,6 +944,9 @@ declare module zanejs {
     function cancelRequestAnimationFrame(): Function;
 }
 declare module zanejs {
+    function createInstance(clazz: any, args?: any[], props?: any): any;
+}
+declare module zanejs {
     let emptyImageData: string;
     let emptyImageElement: HTMLImageElement;
 }
@@ -1057,11 +1047,12 @@ declare module zanejs {
         private _onerror;
         private _onopen;
         private _onmessage;
+        private _autoReconnect;
         constructor(url: string, protocols?: string | string[], options?: any);
         send(data: any): void;
         close(code?: number, reason?: string): void;
+        reconnect(): void;
         private initWebsocket;
-        private reconnect;
         private heartCheck;
     }
 }
@@ -1073,4 +1064,11 @@ declare module zanejs {
         static getConnectionsFrom(url: string): WS;
         constructor();
     }
+}
+declare module zanejs {
+    function sprintf(fmt: string, ...args: any[]): string;
+    function vsprintf(fmt: string, argv: any): any;
+}
+declare module zanejs {
+    function cookie(name: string, value?: any, options?: any): any;
 }

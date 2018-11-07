@@ -401,7 +401,7 @@ module zanejs {
                 temp = removeAllWhiteSpaces(temp, ',');
                 // add "," before all "-" but the ones that already
                 // have a comma before it and the ones that are just after a "commmand char"
-                temp = temp.replace(/((?<![a-zA-Z]|,)-)/g, ',$&');
+                // temp = temp.replace(/((?<![a-zA-Z]|,)-)/g, ',$&');
                 // [command, [params...]]
                 commands[i] = (temp.length > 1)
                     ? [temp.substr(0, 1), temp.substr(1).split(',')]
