@@ -22,7 +22,7 @@ module zanejs {
      * @param mode
      * @returns {*}
      */
-    export function parse_url (str: string, component: string, mode: string = 'php') {
+    export function parseUri (str: string, component: string, mode: string = 'php') {
         let query;
         let key = [
             'source',

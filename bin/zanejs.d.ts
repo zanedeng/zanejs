@@ -826,9 +826,6 @@ declare module zanejs {
     function padRight(value: string, padChar: string, length: number): string;
 }
 declare module zanejs {
-    function parse_url(str: string, component: string, mode?: string): any;
-}
-declare module zanejs {
     function rawurldecode(str: string): string;
 }
 declare module zanejs {
@@ -1071,4 +1068,7 @@ declare module zanejs {
 }
 declare module zanejs {
     function cookie(name: string, value?: any, options?: any): any;
+}
+declare module zanejs {
+    function parseUri(str: string, component: string, mode?: string): any;
 }

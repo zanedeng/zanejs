@@ -5360,74 +5360,6 @@ var zanejs;
 })(zanejs || (zanejs = {}));
 var zanejs;
 (function (zanejs) {
-    function parse_url(str, component, mode) {
-        if (mode === void 0) { mode = 'php'; }
-        var query;
-        var key = [
-            'source',
-            'scheme',
-            'authority',
-            'userInfo',
-            'user',
-            'pass',
-            'host',
-            'port',
-            'relative',
-            'path',
-            'directory',
-            'file',
-            'query',
-            'fragment'
-        ];
-        var parser = {
-            php: new RegExp([
-                '(?:([^:\\/?#]+):)?',
-                '(?:\\/\\/()(?:(?:()(?:([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
-                '()',
-                '(?:(()(?:(?:[^?#\\/]*\\/)*)()(?:[^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
-            ].join('')),
-            strict: new RegExp([
-                '(?:([^:\\/?#]+):)?',
-                '(?:\\/\\/((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
-                '((((?:[^?#\\/]*\\/)*)([^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
-            ].join('')),
-            loose: new RegExp([
-                '(?:(?![^:@]+:[^:@\\/]*@)([^:\\/?#.]+):)?',
-                '(?:\\/\\/\\/?)?',
-                '((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?)',
-                '(((\\/(?:[^?#](?![^?#\\/]*\\.[^?#\\/.]+(?:[?#]|$)))*\\/?)?([^?#\\/]*))',
-                '(?:\\?([^#]*))?(?:#(.*))?)'
-            ].join(''))
-        };
-        var m = parser[mode].exec(str);
-        var uri = {};
-        var i = 14;
-        while (i--) {
-            if (m[i]) {
-                uri[key[i]] = m[i];
-            }
-        }
-        if (component) {
-            return uri[component.replace('PHP_URL_', '').toLowerCase()];
-        }
-        if (mode !== 'php') {
-            var name_1 = 'queryKey';
-            parser = /(?:^|&)([^&=]*)=?([^&]*)/g;
-            uri[name_1] = {};
-            query = uri[key[12]] || '';
-            query.replace(parser, function ($0, $1, $2) {
-                if ($1) {
-                    uri[name_1][$1] = $2;
-                }
-            });
-        }
-        delete uri.source;
-        return uri;
-    }
-    zanejs.parse_url = parse_url;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
     function rawurldecode(str) {
         return decodeURIComponent((str + '')
             .replace(/%(?![\da-f]{2})/gi, function () {
@@ -6237,30 +6169,30 @@ var zanejs;
         var extraWorkerStr = [];
         extraWorkerStr.push('var main = {};\n');
         for (var i = 0; i < mainExportNames.length; i++) {
-            var name_2 = mainExportNames[i];
-            if (name_2.charAt(name_2.length - 1) === '*') {
-                name_2 = name_2.substr(0, name_2.length - 1);
-                mainExportNames[i] = name_2;
-                extraWorkerStr.push('main.' + name_2 + ' = function(/* arguments */){\n ' +
+            var name_1 = mainExportNames[i];
+            if (name_1.charAt(name_1.length - 1) === '*') {
+                name_1 = name_1.substr(0, name_1.length - 1);
+                mainExportNames[i] = name_1;
+                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
                     'var args = Array.prototype.slice.call(arguments); ' +
                     'var buffers = args.pop(); \n ' +
-                    'self.postMessage({foo:\'' + name_2 + '\', args:args}, buffers)\n' +
+                    'self.postMessage({foo:\'' + name_1 + '\', args:args}, buffers)\n' +
                     '}; \n');
             }
             else {
-                extraWorkerStr.push('main.' + name_2 + ' = function(/* arguments */){\n ' +
+                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
                     'var args = Array.prototype.slice.call(arguments); \n ' +
-                    'self.postMessage({foo:\'' + name_2 + '\', args:args})\n' +
+                    'self.postMessage({foo:\'' + name_1 + '\', args:args})\n' +
                     '}; \n');
             }
         }
         var tmpStr = [];
         for (var i = 0; i < workerExportNames.length; i++) {
-            var name_3 = workerExportNames[i];
-            name_3 = name_3.charAt(name_3.length - 1) === '*'
-                ? name_3.substr(0, name_3.length - 1)
-                : name_3;
-            tmpStr.push(name_3 + ': ' + name_3);
+            var name_2 = workerExportNames[i];
+            name_2 = name_2.charAt(name_2.length - 1) === '*'
+                ? name_2.substr(0, name_2.length - 1)
+                : name_2;
+            tmpStr.push(name_2 + ': ' + name_2);
         }
         extraWorkerStr.push('var foos={' + tmpStr.join(',') + '};\n');
         extraWorkerStr.push('self.onmessage = function(e){\n');
@@ -6299,13 +6231,13 @@ var zanejs;
             }
         };
         for (var i = 0; i < workerExportNames.length; i++) {
-            var name_4 = workerExportNames[i];
-            if (name_4.charAt(name_4.length - 1) === '*') {
-                name_4 = name_4.substr(0, name_4.length - 1);
-                ret[name_4] = makePostMessageForFunction(name_4, true);
+            var name_3 = workerExportNames[i];
+            if (name_3.charAt(name_3.length - 1) === '*') {
+                name_3 = name_3.substr(0, name_3.length - 1);
+                ret[name_3] = makePostMessageForFunction(name_3, true);
             }
             else {
-                ret[name_4] = makePostMessageForFunction(name_4, false);
+                ret[name_3] = makePostMessageForFunction(name_3, false);
             }
         }
         return ret;
@@ -7375,5 +7307,73 @@ var zanejs;
         }
     }
     zanejs.cookie = cookie;
+})(zanejs || (zanejs = {}));
+var zanejs;
+(function (zanejs) {
+    function parseUri(str, component, mode) {
+        if (mode === void 0) { mode = 'php'; }
+        var query;
+        var key = [
+            'source',
+            'scheme',
+            'authority',
+            'userInfo',
+            'user',
+            'pass',
+            'host',
+            'port',
+            'relative',
+            'path',
+            'directory',
+            'file',
+            'query',
+            'fragment'
+        ];
+        var parser = {
+            php: new RegExp([
+                '(?:([^:\\/?#]+):)?',
+                '(?:\\/\\/()(?:(?:()(?:([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
+                '()',
+                '(?:(()(?:(?:[^?#\\/]*\\/)*)()(?:[^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
+            ].join('')),
+            strict: new RegExp([
+                '(?:([^:\\/?#]+):)?',
+                '(?:\\/\\/((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?))?',
+                '((((?:[^?#\\/]*\\/)*)([^?#]*))(?:\\?([^#]*))?(?:#(.*))?)'
+            ].join('')),
+            loose: new RegExp([
+                '(?:(?![^:@]+:[^:@\\/]*@)([^:\\/?#.]+):)?',
+                '(?:\\/\\/\\/?)?',
+                '((?:(([^:@\\/]*):?([^:@\\/]*))?@)?([^:\\/?#]*)(?::(\\d*))?)',
+                '(((\\/(?:[^?#](?![^?#\\/]*\\.[^?#\\/.]+(?:[?#]|$)))*\\/?)?([^?#\\/]*))',
+                '(?:\\?([^#]*))?(?:#(.*))?)'
+            ].join(''))
+        };
+        var m = parser[mode].exec(str);
+        var uri = {};
+        var i = 14;
+        while (i--) {
+            if (m[i]) {
+                uri[key[i]] = m[i];
+            }
+        }
+        if (component) {
+            return uri[component.replace('PHP_URL_', '').toLowerCase()];
+        }
+        if (mode !== 'php') {
+            var name_4 = 'queryKey';
+            parser = /(?:^|&)([^&=]*)=?([^&]*)/g;
+            uri[name_4] = {};
+            query = uri[key[12]] || '';
+            query.replace(parser, function ($0, $1, $2) {
+                if ($1) {
+                    uri[name_4][$1] = $2;
+                }
+            });
+        }
+        delete uri.source;
+        return uri;
+    }
+    zanejs.parseUri = parseUri;
 })(zanejs || (zanejs = {}));
 //# sourceMappingURL=zanejs.js.map
