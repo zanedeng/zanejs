@@ -17,6 +17,11 @@ module zanejs {
         private _protocols: string[];
 
         /**
+         * 指定收到的二进制数据的格式
+         */
+        private _binaryType: string;
+
+        /**
          * WebSocket 连接
          * @type {WebSocket}
          * @private
@@ -38,11 +43,11 @@ module zanejs {
         private _heartBeatTime: number;
 
         /**
-         * 心跳包数据
-         * @type {string|ArrayBuffer}
+         * 心跳包发送处理函数
+         * @type {Function}
          * @private
          */
-        private _heartBeatData: any;
+        private _heartBeatHandler: Function;
 
         /**
          * 创建 WebSocket 连接超时时间
@@ -81,9 +86,10 @@ module zanejs {
             this._url = url;
             this._protocols = protocols as string[];
             this._websocket = null;
+            this._binaryType = 'blob';
             this._reconnectLock = false; // 心跳检测频率锁
             this._heartBeatTime = 60000; // 心跳频率
-            this._heartBeatData = '';   // 心跳包数据
+            this._heartBeatHandler = null;   // 心跳处理函数
             this._timeout = 10000; // 重连频率
             this._heartBeatTimer = null;
             this._closeTimer = null;
@@ -179,6 +185,7 @@ module zanejs {
                     };
                 } else {
                     this._websocket = new WebSocket(this._url, this._protocols);
+                    this._websocket.binaryType = this._binaryType;
                     this._websocket.onclose = (evt) => {
                         if (this._onclose) this._onclose(evt);
                         if (this._autoReconnect) this.reconnect();
@@ -209,7 +216,9 @@ module zanejs {
             clearTimeout(this._heartBeatTimer);
             this._heartBeatTimer = setTimeout(
                 () => {
-                    this._websocket.send('');
+                    if (this._heartBeatHandler) {
+                        this._heartBeatHandler();
+                    }
                     this._closeTimer = setTimeout(
                         () => {
                             this._websocket.close();

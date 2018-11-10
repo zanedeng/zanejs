@@ -372,6 +372,66 @@ declare module zanejs {
     }
 }
 declare module zanejs {
+    class ByteArray {
+        endian: string;
+        protected _bufferExtSize: number;
+        protected _data: DataView;
+        protected _bytes: Uint8Array;
+        protected _position: number;
+        protected _writePosition: number;
+        private EOFByte;
+        private EOFCodePoint;
+        constructor(buffer?: ArrayBuffer | Uint8Array, bufferExtSize?: number);
+        readonly readAvailable: number;
+        readonly bytesAvailable: number;
+        readonly bytes: Uint8Array;
+        dataView: DataView;
+        readonly rawBuffer: ArrayBuffer;
+        buffer: ArrayBuffer;
+        readonly bufferOffset: number;
+        position: number;
+        length: number;
+        readBoolean(): boolean;
+        readByte(): number;
+        readBytes(bytes: ByteArray, offset?: number, length?: number): void;
+        readDouble(): number;
+        readFloat(): number;
+        readInt(): number;
+        readShort(): number;
+        readUnsignedByte(): number;
+        readUnsignedInt(): number;
+        readUnsignedShort(): number;
+        readUTF(): string;
+        readUTFBytes(length: number): string;
+        writeBoolean(value: boolean): void;
+        writeByte(value: number): void;
+        writeBytes(bytes: ByteArray, offset?: number, length?: number): void;
+        writeDouble(value: number): void;
+        writeFloat(value: number): void;
+        writeInt(value: number): void;
+        writeShort(value: number): void;
+        writeUnsignedInt(value: number): void;
+        writeUnsignedShort(value: number): void;
+        writeUTF(value: string): void;
+        writeUTFBytes(value: string): void;
+        writeUint8Array(bytes: Uint8Array | ArrayLike<number>, validateBuffer?: boolean): void;
+        validate(len: number): boolean;
+        clear(): void;
+        protected _validateBuffer(value: number): void;
+        private _encodeUTF8;
+        private _decodeUTF8;
+        private _encoderError;
+        private _decoderError;
+        private _stringToCodePoints;
+    }
+}
+declare module zanejs {
+    class Endian {
+        static LITTLE_ENDIAN: string;
+        static BIG_ENDIAN: string;
+    }
+}
+declare module zanejs {
     interface IAjaxOptions {
         url: string;
         type?: string;
@@ -457,6 +517,21 @@ declare module zanejs {
 }
 declare module zanejs {
     function toStringArray(arr: any): string;
+}
+declare module zanejs {
+    function arrayBufferToString(buffer: ArrayBuffer): string;
+}
+declare module zanejs {
+    function binaryToString(binary: string): string;
+}
+declare module zanejs {
+    function stringToArrayBuffer(str: string): any;
+}
+declare module zanejs {
+    function stringToBinary(str: string): any;
+}
+declare module zanejs {
+    function stringToUint8Array(str: string): any;
 }
 declare module zanejs {
     function colorToHex(color: any): any;
@@ -635,6 +710,9 @@ declare module zanejs {
 }
 declare module zanejs {
     function createStepsBetween(begin: number, end: number, steps: number): number[];
+}
+declare module zanejs {
+    function inRange(a: number, min: number, max: number): boolean;
 }
 declare module zanejs {
     function isBetween(value: number, firstValue: number, secondValue: number): boolean;
@@ -872,6 +950,10 @@ declare module zanejs {
     function serialize(mixedValue: any): any;
 }
 declare module zanejs {
+    function sprintf(fmt: string, ...args: any[]): string;
+    function vsprintf(fmt: string, argv: any): any;
+}
+declare module zanejs {
     function stringTruncate(value: string, length: number, suffix?: string): string;
 }
 declare module zanejs {
@@ -939,6 +1021,9 @@ declare module zanejs {
 }
 declare module zanejs {
     function cancelRequestAnimationFrame(): Function;
+}
+declare module zanejs {
+    function cookie(name: string, value?: any, options?: any): any;
 }
 declare module zanejs {
     function createInstance(clazz: any, args?: any[], props?: any): any;
@@ -1014,6 +1099,9 @@ declare module zanejs {
     function openWindow(anchor: string, options: any): boolean;
 }
 declare module zanejs {
+    function parseUri(str: string, component: string, mode?: string): any;
+}
+declare module zanejs {
     function requestAnimationFrame(): Function;
 }
 declare module zanejs {
@@ -1032,10 +1120,11 @@ declare module zanejs {
     class WS {
         private _url;
         private _protocols;
+        private _binaryType;
         private _websocket;
         private _reconnectLock;
         private _heartBeatTime;
-        private _heartBeatData;
+        private _heartBeatHandler;
         private _timeout;
         private _heartBeatTimer;
         private _closeTimer;
@@ -1061,14 +1150,4 @@ declare module zanejs {
         static getConnectionsFrom(url: string): WS;
         constructor();
     }
-}
-declare module zanejs {
-    function sprintf(fmt: string, ...args: any[]): string;
-    function vsprintf(fmt: string, argv: any): any;
-}
-declare module zanejs {
-    function cookie(name: string, value?: any, options?: any): any;
-}
-declare module zanejs {
-    function parseUri(str: string, component: string, mode?: string): any;
 }

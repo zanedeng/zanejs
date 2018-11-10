@@ -1,4 +1,16 @@
-var zanejs;
+
+(function (root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("zanejs", [], factory);
+	else if(typeof exports === 'object')
+		exports["zanejs"] = factory();
+	else
+		root["zanejs"] = factory();
+})(window, function() {
+	var zanejs = {};
+	
 (function (zanejs) {
     var Symbol = window.Symbol;
     var idCounter = 0;
@@ -34,7 +46,7 @@ var zanejs;
     zanejs.Pool = Pool;
     zanejs.pool = new Pool();
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var State = (function () {
         function State(state) {
@@ -84,7 +96,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var zanejs;
+
 (function (zanejs) {
     var AssetsBundle = (function (_super) {
         __extends(AssetsBundle, _super);
@@ -153,7 +165,7 @@ var zanejs;
     }(PIXI.utils.EventEmitter));
     zanejs.AssetsBundle = AssetsBundle;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var AssetsBundleEvent = (function () {
         function AssetsBundleEvent() {
@@ -165,7 +177,7 @@ var zanejs;
     }());
     zanejs.AssetsBundleEvent = AssetsBundleEvent;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var _resLoader = new PIXI.loaders.Loader('', 6);
     var _ignoreFileList = [];
@@ -307,7 +319,7 @@ var zanejs;
     }());
     zanejs.AssetsManager = AssetsManager;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function paserFui(file, relativePath, callback) {
         var baseName = file.name.substring(file.name.lastIndexOf('/') + 1, file.name.lastIndexOf('.'));
@@ -388,7 +400,7 @@ var zanejs;
     }
     zanejs.paserZipMiddleware = paserZipMiddleware;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Arc = (function () {
         function Arc(cx, cy, rx, ry, rotation, angleStart, angleExtent) {
@@ -505,7 +517,7 @@ var zanejs;
     }());
     zanejs.Arc = Arc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var CubicBezier = (function () {
         function CubicBezier(c1, c2, p1, p2) {
@@ -621,7 +633,7 @@ var zanejs;
     }());
     zanejs.CubicBezier = CubicBezier;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Ellipse = (function () {
         function Ellipse(cx, cy, rx, ry) {
@@ -707,7 +719,7 @@ var zanejs;
     }());
     zanejs.Ellipse = Ellipse;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Line = (function () {
         function Line(start, end) {
@@ -786,7 +798,7 @@ var zanejs;
     }());
     zanejs.Line = Line;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Polyline = (function () {
         function Polyline(pts) {
@@ -858,7 +870,7 @@ var zanejs;
     }());
     zanejs.Polyline = Polyline;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Polygon = (function (_super) {
         __extends(Polygon, _super);
@@ -889,7 +901,7 @@ var zanejs;
     }(zanejs.Polyline));
     zanejs.Polygon = Polygon;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var QuadraticBezier = (function () {
         function QuadraticBezier(c, p1, p2) {
@@ -978,7 +990,7 @@ var zanejs;
     }());
     zanejs.QuadraticBezier = QuadraticBezier;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Rect = (function () {
         function Rect(x, y, wid, hei, rx, ry) {
@@ -1052,7 +1064,7 @@ var zanejs;
     }());
     zanejs.Rect = Rect;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var SVGArc = (function (_super) {
         __extends(SVGArc, _super);
@@ -1119,7 +1131,7 @@ var zanejs;
     }(zanejs.Arc));
     zanejs.SVGArc = SVGArc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Controller = (function () {
         function Controller(cmd) {
@@ -1208,7 +1220,7 @@ var zanejs;
     }());
     zanejs.Controller = Controller;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MVCApp = (function () {
         function MVCApp() {
@@ -1227,7 +1239,7 @@ var zanejs;
     }());
     zanejs.MVCApp = MVCApp;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Model = (function () {
         function Model(name, data) {
@@ -1283,7 +1295,7 @@ var zanejs;
     }());
     zanejs.Model = Model;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var View = (function () {
         function View(name, viewComponent) {
@@ -1398,7 +1410,7 @@ var zanejs;
     }());
     zanejs.View = View;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MotifsToHTML5CanvasCommands = (function () {
         function MotifsToHTML5CanvasCommands() {
@@ -1575,7 +1587,7 @@ var zanejs;
     }());
     zanejs.MotifsToHTML5CanvasCommands = MotifsToHTML5CanvasCommands;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var MotifsToPixiGraphicsCommands = (function () {
         function MotifsToPixiGraphicsCommands() {
@@ -1713,7 +1725,7 @@ var zanejs;
     }());
     zanejs.MotifsToPixiGraphicsCommands = MotifsToPixiGraphicsCommands;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var SVGToMotifs = (function () {
         function SVGToMotifs() {
@@ -2266,7 +2278,554 @@ var zanejs;
     }());
     zanejs.SVGToMotifs = SVGToMotifs;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
+(function (zanejs) {
+    var ByteArraySize;
+    (function (ByteArraySize) {
+        ByteArraySize[ByteArraySize["SIZE_OF_BOOLEAN"] = 1] = "SIZE_OF_BOOLEAN";
+        ByteArraySize[ByteArraySize["SIZE_OF_INT8"] = 1] = "SIZE_OF_INT8";
+        ByteArraySize[ByteArraySize["SIZE_OF_INT16"] = 2] = "SIZE_OF_INT16";
+        ByteArraySize[ByteArraySize["SIZE_OF_INT32"] = 4] = "SIZE_OF_INT32";
+        ByteArraySize[ByteArraySize["SIZE_OF_UINT8"] = 1] = "SIZE_OF_UINT8";
+        ByteArraySize[ByteArraySize["SIZE_OF_UINT16"] = 2] = "SIZE_OF_UINT16";
+        ByteArraySize[ByteArraySize["SIZE_OF_UINT32"] = 4] = "SIZE_OF_UINT32";
+        ByteArraySize[ByteArraySize["SIZE_OF_FLOAT32"] = 4] = "SIZE_OF_FLOAT32";
+        ByteArraySize[ByteArraySize["SIZE_OF_FLOAT64"] = 8] = "SIZE_OF_FLOAT64";
+    })(ByteArraySize || (ByteArraySize = {}));
+    var ByteArray = (function () {
+        function ByteArray(buffer, bufferExtSize) {
+            if (bufferExtSize === void 0) { bufferExtSize = 0; }
+            this._bufferExtSize = 0;
+            this.EOFByte = -1;
+            this.EOFCodePoint = -1;
+            if (bufferExtSize < 0) {
+                bufferExtSize = 0;
+            }
+            this._bufferExtSize = bufferExtSize;
+            var bytes, wpos = 0;
+            if (buffer) {
+                var uint8 = void 0;
+                if (buffer instanceof Uint8Array) {
+                    uint8 = buffer;
+                    wpos = buffer.length;
+                }
+                else {
+                    wpos = buffer.byteLength;
+                    uint8 = new Uint8Array(buffer);
+                }
+                if (bufferExtSize === 0) {
+                    bytes = new Uint8Array(wpos);
+                }
+                else {
+                    var multi = (wpos / bufferExtSize | 0) + 1;
+                    bytes = new Uint8Array(multi * bufferExtSize);
+                }
+                bytes.set(uint8);
+            }
+            else {
+                bytes = new Uint8Array(bufferExtSize);
+            }
+            this._writePosition = wpos;
+            this._position = 0;
+            this._bytes = bytes;
+            this._data = new DataView(bytes.buffer);
+            this.endian = zanejs.Endian.BIG_ENDIAN;
+        }
+        Object.defineProperty(ByteArray.prototype, "readAvailable", {
+            get: function () {
+                return this._writePosition - this._position;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "bytesAvailable", {
+            get: function () {
+                return this._data.byteLength - this._position;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "bytes", {
+            get: function () {
+                return this._bytes;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "dataView", {
+            get: function () {
+                return this._data;
+            },
+            set: function (value) {
+                this.buffer = value.buffer;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "rawBuffer", {
+            get: function () {
+                return this._data.buffer;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "buffer", {
+            get: function () {
+                return this._data.buffer.slice(0, this._writePosition);
+            },
+            set: function (value) {
+                var wpos = value.byteLength;
+                var uint8 = new Uint8Array(value);
+                var bufferExtSize = this._bufferExtSize;
+                var bytes;
+                if (bufferExtSize === 0) {
+                    bytes = new Uint8Array(wpos);
+                }
+                else {
+                    var multi = (wpos / bufferExtSize | 0) + 1;
+                    bytes = new Uint8Array(multi * bufferExtSize);
+                }
+                bytes.set(uint8);
+                this._writePosition = wpos;
+                this._bytes = bytes;
+                this._data = new DataView(bytes.buffer);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "bufferOffset", {
+            get: function () {
+                return this._data.byteOffset;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "position", {
+            get: function () {
+                return this._position;
+            },
+            set: function (value) {
+                this._position = value;
+                if (value > this._writePosition) {
+                    this._writePosition = value;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ByteArray.prototype, "length", {
+            get: function () {
+                return this._writePosition;
+            },
+            set: function (value) {
+                this._writePosition = value;
+                if (this._data.byteLength > value) {
+                    this._position = value;
+                }
+                this._validateBuffer(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ByteArray.prototype.readBoolean = function () {
+            if (this.validate(1)) {
+                return !!this._bytes[this.position++];
+            }
+        };
+        ByteArray.prototype.readByte = function () {
+            if (this.validate(1)) {
+                return this._data.getInt8(this.position++);
+            }
+        };
+        ByteArray.prototype.readBytes = function (bytes, offset, length) {
+            if (offset === void 0) { offset = 0; }
+            if (length === void 0) { length = 0; }
+            if (!bytes) {
+                return;
+            }
+            var pos = this._position;
+            var available = this._writePosition - pos;
+            if (available < 0) {
+                throw new Error('遇到文件尾');
+                return;
+            }
+            if (length === 0) {
+                length = available;
+            }
+            else if (length > available) {
+                throw new Error('遇到文件尾');
+                return;
+            }
+            var position = bytes._position;
+            bytes._position = 0;
+            bytes._validateBuffer(offset + length);
+            bytes._position = position;
+            bytes._bytes.set(this._bytes.subarray(pos, pos + length), offset);
+            this.position += length;
+        };
+        ByteArray.prototype.readDouble = function () {
+            if (this.validate(8)) {
+                var value = this._data.getFloat64(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 8;
+                return value;
+            }
+        };
+        ByteArray.prototype.readFloat = function () {
+            if (this.validate(4)) {
+                var value = this._data.getFloat32(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 4;
+                return value;
+            }
+        };
+        ByteArray.prototype.readInt = function () {
+            if (this.validate(4)) {
+                var value = this._data.getInt32(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 4;
+                return value;
+            }
+        };
+        ByteArray.prototype.readShort = function () {
+            if (this.validate(2)) {
+                var value = this._data.getInt16(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 2;
+                return value;
+            }
+        };
+        ByteArray.prototype.readUnsignedByte = function () {
+            if (this.validate(1)) {
+                return this._bytes[this.position++];
+            }
+        };
+        ByteArray.prototype.readUnsignedInt = function () {
+            if (this.validate(4)) {
+                var value = this._data.getUint32(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 4;
+                return value;
+            }
+        };
+        ByteArray.prototype.readUnsignedShort = function () {
+            if (this.validate(2)) {
+                var value = this._data.getUint16(this._position, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+                this.position += 2;
+                return value;
+            }
+        };
+        ByteArray.prototype.readUTF = function () {
+            var length = this.readUnsignedShort();
+            if (length > 0) {
+                return this.readUTFBytes(length);
+            }
+            else {
+                return '';
+            }
+        };
+        ByteArray.prototype.readUTFBytes = function (length) {
+            if (!this.validate(length)) {
+                return;
+            }
+            var data = this._data;
+            var bytes = new Uint8Array(data.buffer, data.byteOffset + this._position, length);
+            this.position += length;
+            return this._decodeUTF8(bytes);
+        };
+        ByteArray.prototype.writeBoolean = function (value) {
+            this._validateBuffer(1);
+            this._bytes[this.position++] = +value;
+        };
+        ByteArray.prototype.writeByte = function (value) {
+            this._validateBuffer(1);
+            this._bytes[this.position++] = value & 0xff;
+        };
+        ByteArray.prototype.writeBytes = function (bytes, offset, length) {
+            if (offset === void 0) { offset = 0; }
+            if (length === void 0) { length = 0; }
+            var writeLength;
+            if (offset < 0) {
+                return;
+            }
+            if (length < 0) {
+                return;
+            }
+            else if (length === 0) {
+                writeLength = bytes.length - offset;
+            }
+            else {
+                writeLength = Math.min(bytes.length - offset, length);
+            }
+            if (writeLength > 0) {
+                this._validateBuffer(writeLength);
+                this._bytes.set(bytes._bytes.subarray(offset, offset + writeLength), this._position);
+                this.position = this._position + writeLength;
+            }
+        };
+        ByteArray.prototype.writeDouble = function (value) {
+            this._validateBuffer(8);
+            this._data.setFloat64(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 8;
+        };
+        ByteArray.prototype.writeFloat = function (value) {
+            this._validateBuffer(4);
+            this._data.setFloat32(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 4;
+        };
+        ByteArray.prototype.writeInt = function (value) {
+            this._validateBuffer(4);
+            this._data.setInt32(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 4;
+        };
+        ByteArray.prototype.writeShort = function (value) {
+            this._validateBuffer(2);
+            this._data.setInt16(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 2;
+        };
+        ByteArray.prototype.writeUnsignedInt = function (value) {
+            this._validateBuffer(4);
+            this._data.setUint32(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 4;
+        };
+        ByteArray.prototype.writeUnsignedShort = function (value) {
+            this._validateBuffer(2);
+            this._data.setUint16(this._position, value, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 2;
+        };
+        ByteArray.prototype.writeUTF = function (value) {
+            var utf8bytes = this._encodeUTF8(value);
+            var length = utf8bytes.length;
+            this._validateBuffer(2 + length);
+            this._data.setUint16(this._position, length, this.endian === zanejs.Endian.LITTLE_ENDIAN);
+            this.position += 2;
+            this.writeUint8Array(utf8bytes, false);
+        };
+        ByteArray.prototype.writeUTFBytes = function (value) {
+            this.writeUint8Array(this._encodeUTF8(value));
+        };
+        ByteArray.prototype.writeUint8Array = function (bytes, validateBuffer) {
+            if (validateBuffer === void 0) { validateBuffer = true; }
+            var pos = this._position;
+            var npos = pos + bytes.length;
+            if (validateBuffer) {
+                this._validateBuffer(npos);
+            }
+            this.bytes.set(bytes, pos);
+            this.position = npos;
+        };
+        ByteArray.prototype.validate = function (len) {
+            var bl = this._bytes.length;
+            if (bl > 0 && this._position + len <= bl) {
+                return true;
+            }
+            else {
+                throw new Error('遇到文件尾');
+            }
+        };
+        ByteArray.prototype.clear = function () {
+            var buffer = new ArrayBuffer(this._bufferExtSize);
+            this._data = new DataView(buffer);
+            this._bytes = new Uint8Array(buffer);
+            this._position = 0;
+            this._writePosition = 0;
+        };
+        ByteArray.prototype._validateBuffer = function (value) {
+            if (this._data.byteLength < value) {
+                var be = this._bufferExtSize;
+                var tmp = void 0;
+                if (be === 0) {
+                    tmp = new Uint8Array(value);
+                }
+                else {
+                    var nLen = ((value / be >> 0) + 1) * be;
+                    tmp = new Uint8Array(nLen);
+                }
+                tmp.set(this._bytes);
+                this._bytes = tmp;
+                this._data = new DataView(tmp.buffer);
+            }
+        };
+        ByteArray.prototype._encodeUTF8 = function (str) {
+            var pos = 0;
+            var codePoints = this._stringToCodePoints(str);
+            var outputBytes = [];
+            while (codePoints.length > pos) {
+                var codePoint = codePoints[pos++];
+                if (zanejs.inRange(codePoint, 0xD800, 0xDFFF)) {
+                    this._encoderError(codePoint);
+                }
+                else if (zanejs.inRange(codePoint, 0x0000, 0x007f)) {
+                    outputBytes.push(codePoint);
+                }
+                else {
+                    var count = void 0, offset = void 0;
+                    if (zanejs.inRange(codePoint, 0x0080, 0x07FF)) {
+                        count = 1;
+                        offset = 0xC0;
+                    }
+                    else if (zanejs.inRange(codePoint, 0x0800, 0xFFFF)) {
+                        count = 2;
+                        offset = 0xE0;
+                    }
+                    else if (zanejs.inRange(codePoint, 0x10000, 0x10FFFF)) {
+                        count = 3;
+                        offset = 0xF0;
+                    }
+                    outputBytes.push(Math.floor(codePoint / Math.pow(64, count)) + offset);
+                    while (count > 0) {
+                        var temp = Math.floor(codePoint / Math.pow(64, count - 1));
+                        outputBytes.push(0x80 + (temp % 64));
+                        count -= 1;
+                    }
+                }
+            }
+            return new Uint8Array(outputBytes);
+        };
+        ByteArray.prototype._decodeUTF8 = function (data) {
+            var fatal = false;
+            var pos = 0;
+            var result = '';
+            var codePoint;
+            var utf8CodePoint = 0;
+            var utf8BytesNeeded = 0;
+            var utf8BytesSeen = 0;
+            var utf8LowerBoundary = 0;
+            while (data.length > pos) {
+                var _byte = data[pos++];
+                if (_byte === this.EOFByte) {
+                    if (utf8BytesNeeded !== 0) {
+                        codePoint = this._decoderError(fatal);
+                    }
+                    else {
+                        codePoint = this.EOFCodePoint;
+                    }
+                }
+                else {
+                    if (utf8BytesNeeded === 0) {
+                        if (zanejs.inRange(_byte, 0x00, 0x7F)) {
+                            codePoint = _byte;
+                        }
+                        else {
+                            if (zanejs.inRange(_byte, 0xC2, 0xDF)) {
+                                utf8BytesNeeded = 1;
+                                utf8LowerBoundary = 0x80;
+                                utf8CodePoint = _byte - 0xC0;
+                            }
+                            else if (zanejs.inRange(_byte, 0xE0, 0xEF)) {
+                                utf8BytesNeeded = 2;
+                                utf8LowerBoundary = 0x800;
+                                utf8CodePoint = _byte - 0xE0;
+                            }
+                            else if (zanejs.inRange(_byte, 0xF0, 0xF4)) {
+                                utf8BytesNeeded = 3;
+                                utf8LowerBoundary = 0x10000;
+                                utf8CodePoint = _byte - 0xF0;
+                            }
+                            else {
+                                this._decoderError(fatal);
+                            }
+                            utf8CodePoint = utf8CodePoint * Math.pow(64, utf8BytesNeeded);
+                            codePoint = null;
+                        }
+                    }
+                    else if (!zanejs.inRange(_byte, 0x80, 0xBF)) {
+                        utf8CodePoint = 0;
+                        utf8BytesNeeded = 0;
+                        utf8BytesSeen = 0;
+                        utf8LowerBoundary = 0;
+                        pos--;
+                        codePoint = this._decoderError(fatal, _byte);
+                    }
+                    else {
+                        utf8BytesSeen += 1;
+                        utf8CodePoint = utf8CodePoint +
+                            (_byte - 0x80) * Math.pow(64, utf8BytesNeeded - utf8BytesSeen);
+                        if (utf8BytesSeen !== utf8BytesNeeded) {
+                            codePoint = null;
+                        }
+                        else {
+                            var cp = utf8CodePoint;
+                            var lowerBoundary = utf8LowerBoundary;
+                            utf8CodePoint = 0;
+                            utf8BytesNeeded = 0;
+                            utf8BytesSeen = 0;
+                            utf8LowerBoundary = 0;
+                            if (zanejs.inRange(cp, lowerBoundary, 0x10FFFF) && !zanejs.inRange(cp, 0xD800, 0xDFFF)) {
+                                codePoint = cp;
+                            }
+                            else {
+                                codePoint = this._decoderError(fatal, _byte);
+                            }
+                        }
+                    }
+                }
+                if (codePoint !== null && codePoint !== this.EOFCodePoint) {
+                    if (codePoint <= 0xFFFF) {
+                        if (codePoint > 0)
+                            result += String.fromCharCode(codePoint);
+                    }
+                    else {
+                        codePoint -= 0x10000;
+                        result += String.fromCharCode(0xD800 + ((codePoint >> 10) & 0x3ff));
+                        result += String.fromCharCode(0xDC00 + (codePoint & 0x3ff));
+                    }
+                }
+            }
+            return result;
+        };
+        ByteArray.prototype._encoderError = function (codePoint) {
+            throw new Error('EncodingError! The code point ' + codePoint + ' could not be encoded.');
+        };
+        ByteArray.prototype._decoderError = function (fatal, optCodePoint) {
+            if (fatal) {
+                throw new Error('DecodingError!');
+            }
+            return optCodePoint || 0xFFFD;
+        };
+        ByteArray.prototype._stringToCodePoints = function (str) {
+            var cps = [];
+            var i = 0, n = str.length;
+            while (i < str.length) {
+                var c = str.charCodeAt(i);
+                if (!zanejs.inRange(c, 0xD800, 0xDFFF)) {
+                    cps.push(c);
+                }
+                else if (zanejs.inRange(c, 0xDC00, 0xDFFF)) {
+                    cps.push(0xFFFD);
+                }
+                else {
+                    if (i === n - 1) {
+                        cps.push(0xFFFD);
+                    }
+                    else {
+                        var d = str.charCodeAt(i + 1);
+                        if (zanejs.inRange(d, 0xDC00, 0xDFFF)) {
+                            var a = c & 0x3FF;
+                            var b = d & 0x3FF;
+                            i += 1;
+                            cps.push(0x10000 + (a << 10) + b);
+                        }
+                        else {
+                            cps.push(0xFFFD);
+                        }
+                    }
+                }
+                i += 1;
+            }
+            return cps;
+        };
+        return ByteArray;
+    }());
+    zanejs.ByteArray = ByteArray;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    var Endian = (function () {
+        function Endian() {
+        }
+        Endian.LITTLE_ENDIAN = 'littleEndian';
+        Endian.BIG_ENDIAN = 'bigEndian';
+        return Endian;
+    }());
+    zanejs.Endian = Endian;
+})(zanejs || (zanejs = {}));
+
 (function (zanejs) {
     function ajax(options) {
         var url = options.url || '', type = (options.type || 'get').toLowerCase(), data = options.data || null, contentType = options.contentType || '', dataType = options.dataType || '', async = options.async === undefined && true, timeOut = options.timeOut, before = options.before || function () { }, error = options.error || function () { }, success = options.success || function () { }, timeoutBool = false, timeoutFlag = null, xhr = null;
@@ -2383,7 +2942,7 @@ var zanejs;
     }
     zanejs.ajax = ajax;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_chunk(input, size, preserveKeys) {
         if (preserveKeys === void 0) { preserveKeys = false; }
@@ -2442,7 +3001,7 @@ var zanejs;
     }
     zanejs.array_chunk = array_chunk;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_combine(keys, values) {
         var newArray = {};
@@ -2471,7 +3030,7 @@ var zanejs;
     }
     zanejs.array_combine = array_combine;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_count_values(array) {
         var tmpArr = {};
@@ -2512,7 +3071,7 @@ var zanejs;
     }
     zanejs.array_count_values = array_count_values;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff() {
         var args = [];
@@ -2541,7 +3100,7 @@ var zanejs;
     }
     zanejs.array_diff = array_diff;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_assoc() {
         var args = [];
@@ -2572,7 +3131,7 @@ var zanejs;
     }
     zanejs.array_diff_assoc = array_diff_assoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_key() {
         var args = [];
@@ -2601,7 +3160,7 @@ var zanejs;
     }
     zanejs.array_diff_key = array_diff_key;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_uassoc() {
         var args = [];
@@ -2636,7 +3195,7 @@ var zanejs;
     }
     zanejs.array_diff_uassoc = array_diff_uassoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_diff_ukey() {
         var args = [];
@@ -2671,7 +3230,7 @@ var zanejs;
     }
     zanejs.array_diff_ukey = array_diff_ukey;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_fill(startIndex, num, mixedVal) {
         var key;
@@ -2685,7 +3244,7 @@ var zanejs;
     }
     zanejs.array_fill = array_fill;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_fill_keys(keys, value) {
         var retObj = {};
@@ -2696,7 +3255,7 @@ var zanejs;
     }
     zanejs.array_fill_keys = array_fill_keys;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_filter(arr, func) {
         var retObj = {};
@@ -2716,7 +3275,7 @@ var zanejs;
     }
     zanejs.array_filter = array_filter;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_flip(trans) {
         var key;
@@ -2731,7 +3290,7 @@ var zanejs;
     }
     zanejs.array_flip = array_flip;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_intersect() {
         var args = [];
@@ -2766,7 +3325,7 @@ var zanejs;
     }
     zanejs.array_intersect = array_intersect;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_intersect_assoc() {
         var args = [];
@@ -2801,7 +3360,7 @@ var zanejs;
     }
     zanejs.array_intersect_assoc = array_intersect_assoc;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_merge() {
         var args = [];
@@ -2855,16 +3414,18 @@ var zanejs;
     }
     zanejs.array_merge = array_merge;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_unique(inputArr) {
         var tmpArr2 = {};
         var _arraySearch = function (needle, haystack) {
-            Object.keys(haystack).map(function (key) {
+            var keys = Object.keys(haystack);
+            for (var i = 0; i < keys.length; ++i) {
+                var key = keys[i];
                 if ((haystack[key] + '') === (needle + '')) {
                     return key;
                 }
-            });
+            }
             return false;
         };
         Object.keys(inputArr).map(function (key) {
@@ -2877,7 +3438,7 @@ var zanejs;
     }
     zanejs.array_unique = array_unique;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function array_values(input) {
         var tmpArr = [];
@@ -2888,7 +3449,7 @@ var zanejs;
     }
     zanejs.array_values = array_values;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function compare(arr1, arr2) {
         if (arr1.length !== arr2.length) {
@@ -2905,7 +3466,7 @@ var zanejs;
     }
     zanejs.compare = compare;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRandomArrayElements(arr, count) {
         var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -2919,7 +3480,7 @@ var zanejs;
     }
     zanejs.getRandomArrayElements = getRandomArrayElements;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function indexByObjectValue(arr, attribute, value) {
         for (var i = 0, l = arr.length; i < l; ++i) {
@@ -2932,14 +3493,14 @@ var zanejs;
     }
     zanejs.indexByObjectValue = indexByObjectValue;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function is_array(input) {
         return typeof (input) === 'object' && (input instanceof Array);
     }
     zanejs.is_array = is_array;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSort(arr) {
         function randomize(elementA, elementB) {
@@ -2958,7 +3519,7 @@ var zanejs;
     }
     zanejs.randomSort = randomSort;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeEmptyItems(arr) {
         function isNotEmpty(item, index, array) {
@@ -2968,7 +3529,7 @@ var zanejs;
     }
     zanejs.removeEmptyItems = removeEmptyItems;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toStringArray(arr) {
         var str = '[';
@@ -3003,7 +3564,82 @@ var zanejs;
     }
     zanejs.toStringArray = toStringArray;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
+(function (zanejs) {
+    function arrayBufferToString(buffer) {
+        return zanejs.binaryToString(String.fromCharCode.apply(null, Array.prototype.slice.apply(new Uint8Array(buffer))));
+    }
+    zanejs.arrayBufferToString = arrayBufferToString;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function binaryToString(binary) {
+        var error;
+        try {
+            return decodeURIComponent(escape(binary));
+        }
+        catch (_error) {
+            error = _error;
+            if (error instanceof URIError) {
+                return binary;
+            }
+            else {
+                throw error;
+            }
+        }
+    }
+    zanejs.binaryToString = binaryToString;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stringToArrayBuffer(str) {
+        return zanejs.stringToUint8Array(str).buffer;
+    }
+    zanejs.stringToArrayBuffer = stringToArrayBuffer;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stringToBinary(str) {
+        var chars, code, i, isUCS2, len, _i;
+        len = str.length;
+        chars = [];
+        isUCS2 = false;
+        for (i = _i = 0; 0 <= len ? _i < len : _i > len; i = 0 <= len ? ++_i : --_i) {
+            code = String.prototype.charCodeAt.call(str, i);
+            if (code > 255) {
+                isUCS2 = true;
+                chars = null;
+                break;
+            }
+            else {
+                chars.push(code);
+            }
+        }
+        if (isUCS2 === true) {
+            return unescape(encodeURIComponent(str));
+        }
+        else {
+            return String.fromCharCode.apply(null, Array.prototype.slice.apply(chars));
+        }
+    }
+    zanejs.stringToBinary = stringToBinary;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stringToUint8Array(str) {
+        var binary, binLen, buffer, chars, i, _i;
+        binary = zanejs.stringToBinary(str);
+        binLen = binary.length;
+        buffer = new ArrayBuffer(binLen);
+        chars = new Uint8Array(buffer);
+        for (i = _i = 0; 0 <= binLen ? _i < binLen : _i > binLen; i = 0 <= binLen ? ++_i : --_i) {
+            chars[i] = String.prototype.charCodeAt.call(binary, i);
+        }
+        return chars;
+    }
+    zanejs.stringToUint8Array = stringToUint8Array;
+})(zanejs || (zanejs = {}));
+
 (function (zanejs) {
     function colorToHex(color) {
         if (isNaN(color)) {
@@ -3026,7 +3662,7 @@ var zanejs;
     }
     zanejs.colorToHex = colorToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function colorToUint(color) {
         if (/^rgb\(\d+\,\d+\,\d+\)/.test(color)) {
@@ -3044,7 +3680,7 @@ var zanejs;
     }
     zanejs.colorToUint = colorToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function fadeColor(startColor, endColor, position) {
         var r = startColor >> 16;
@@ -3057,7 +3693,7 @@ var zanejs;
     }
     zanejs.fadeColor = fadeColor;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var _htmlColors = null;
     function getHtmlColors() {
@@ -3220,7 +3856,7 @@ var zanejs;
     }
     zanejs.cleanHtmlColors = cleanHtmlColors;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function hexToUint(hex) {
         hex = hex || '';
@@ -3232,21 +3868,21 @@ var zanejs;
     }
     zanejs.hexToUint = hexToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function htmlColorToHex(htmlColorName) {
         return zanejs.getHtmlColors()[htmlColorName.toLowerCase()];
     }
     zanejs.htmlColorToHex = htmlColorToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function htmlColorToUint(htmlColorName) {
         return zanejs.hexToUint(zanejs.htmlColorToHex(htmlColorName));
     }
     zanejs.htmlColorToUint = htmlColorToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function percToUint(perc) {
         var x = zanejs.uint(perc.replace('%', ''));
@@ -3254,14 +3890,14 @@ var zanejs;
     }
     zanejs.percToUint = percToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rgbToHex(rgb) {
         return zanejs.uintToHex(zanejs.rgbToUint(rgb));
     }
     zanejs.rgbToHex = rgbToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rgbToUint(rgb) {
         var colors = rgb
@@ -3282,14 +3918,14 @@ var zanejs;
     }
     zanejs.rgbToUint = rgbToUint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uintToHex(u) {
         return '#' + u.toString(16).toUpperCase();
     }
     zanejs.uintToHex = uintToHex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uintToRGBA(color, alpha) {
         if (alpha === void 0) { alpha = 1; }
@@ -3305,14 +3941,14 @@ var zanejs;
     }
     zanejs.uintToRGBA = uintToRGBA;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function deleteCookie(name) {
         zanejs.setCookie(name, '', -1);
     }
     zanejs.deleteCookie = deleteCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getCookie(name) {
         name = name + '=';
@@ -3330,7 +3966,7 @@ var zanejs;
     }
     zanejs.getCookie = getCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setCookie(name, value, seconds) {
         var expires;
@@ -3346,7 +3982,7 @@ var zanejs;
     }
     zanejs.setCookie = setCookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function checkdate(m, d, y) {
         return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0))
@@ -3354,7 +3990,7 @@ var zanejs;
     }
     zanejs.checkdate = checkdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function date(format, timestamp) {
         var jsdate, f;
@@ -3527,7 +4163,7 @@ var zanejs;
     }
     zanejs.date = date;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getdate(timestamp) {
         if (timestamp === void 0) { timestamp = undefined; }
@@ -3557,7 +4193,7 @@ var zanejs;
     }
     zanejs.getdate = getdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gettimeofday(returnFloat) {
         if (returnFloat === void 0) { returnFloat = false; }
@@ -3579,7 +4215,7 @@ var zanejs;
     }
     zanejs.gettimeofday = gettimeofday;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gmdate(format, timestamp) {
         var dt = typeof timestamp === 'undefined' ? new Date()
@@ -3590,7 +4226,7 @@ var zanejs;
     }
     zanejs.gmdate = gmdate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function gmmktime() {
         var args = [];
@@ -3619,7 +4255,7 @@ var zanejs;
     }
     zanejs.gmmktime = gmmktime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function idate(format, timestamp) {
         if (format === undefined) {
@@ -3687,7 +4323,7 @@ var zanejs;
     }
     zanejs.idate = idate;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function microtime(getAsFloat) {
         var s;
@@ -3711,7 +4347,7 @@ var zanejs;
     }
     zanejs.microtime = microtime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function mktime() {
         var args = [];
@@ -3741,7 +4377,7 @@ var zanejs;
     }
     zanejs.mktime = mktime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function strtotime(text, now) {
         var parsed, match, today;
@@ -3958,14 +4594,14 @@ var zanejs;
     }
     zanejs.strtotime = strtotime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function time() {
         return Math.floor(new Date().getTime() / 1000);
     }
     zanejs.time = time;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function basename(path, suffix) {
         if (suffix === void 0) { suffix = null; }
@@ -3982,7 +4618,7 @@ var zanejs;
     }
     zanejs.basename = basename;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function dirname(path) {
         return path.replace(/\\/g, '/')
@@ -3990,14 +4626,14 @@ var zanejs;
     }
     zanejs.dirname = dirname;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getExtension(filePath) {
         return filePath.split('.').pop();
     }
     zanejs.getExtension = getExtension;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getFileNameFromUrl(url) {
         if (url) {
@@ -4007,7 +4643,7 @@ var zanejs;
     }
     zanejs.getFileNameFromUrl = getFileNameFromUrl;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     zanejs.PI = Math.PI;
     zanejs.DEG_TO_RAD = zanejs.PI / 180;
@@ -4017,7 +4653,7 @@ var zanejs;
     }
     zanejs.degreeToRadians = degreeToRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function plotPoint(g, p, color, size) {
         if (color === void 0) { color = 0xFF0000; }
@@ -4028,14 +4664,14 @@ var zanejs;
     }
     zanejs.plotPoint = plotPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function radianToDegree(radian) {
         return radian * zanejs.RAD_TO_DEG;
     }
     zanejs.radianToDegree = radianToDegree;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function reflectPoint(point, pivot) {
         var rx = pivot.x - point.x;
@@ -4044,7 +4680,7 @@ var zanejs;
     }
     zanejs.reflectPoint = reflectPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function concat(m1, m2) {
         var a = m1.a * m2.a;
@@ -4071,63 +4707,63 @@ var zanejs;
     }
     zanejs.concat = concat;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRotation(m) {
         return zanejs.radianToDegree(zanejs.getRotationRadians(m));
     }
     zanejs.getRotation = getRotation;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getRotationRadians(m) {
         return zanejs.getSkewYRadians(m);
     }
     zanejs.getRotationRadians = getRotationRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getScaleX(m) {
         return Math.sqrt(m.a * m.a + m.b * m.b);
     }
     zanejs.getScaleX = getScaleX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getScaleY(m) {
         return Math.sqrt(m.c * m.c + m.d * m.d);
     }
     zanejs.getScaleY = getScaleY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewX(m) {
         return zanejs.radianToDegree(Math.atan2(-m.c, m.d));
     }
     zanejs.getSkewX = getSkewX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewXRadians(m) {
         return Math.atan2(-m.c, m.d);
     }
     zanejs.getSkewXRadians = getSkewXRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewY(m) {
         return zanejs.radianToDegree(Math.atan2(m.b, m.a));
     }
     zanejs.getSkewY = getSkewY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getSkewYRadians(m) {
         return Math.atan2(m.b, m.a);
     }
     zanejs.getSkewYRadians = getSkewYRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function matchInternalPointWithExternal(m, internalPoint, externalPoint) {
         var mat = m.clone();
@@ -4140,7 +4776,7 @@ var zanejs;
     }
     zanejs.matchInternalPointWithExternal = matchInternalPointWithExternal;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rotateAroundExternalPoint(m, pivot, angleDegrees) {
         var mat = m.clone();
@@ -4153,7 +4789,7 @@ var zanejs;
     }
     zanejs.rotateAroundExternalPoint = rotateAroundExternalPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rotateAroundInternalPoint(m, pivot, angleDegrees) {
         pivot = zanejs.transformPoint(m, pivot);
@@ -4161,14 +4797,14 @@ var zanejs;
     }
     zanejs.rotateAroundInternalPoint = rotateAroundInternalPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setRotation(m, value) {
         return zanejs.setRotationRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setRotation = setRotation;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setRotationRadians(m, value) {
         var curRotation = zanejs.getRotationRadians(m);
@@ -4178,7 +4814,7 @@ var zanejs;
     }
     zanejs.setRotationRadians = setRotationRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setScaleX(m, value) {
         var mat = m.clone();
@@ -4197,7 +4833,7 @@ var zanejs;
     }
     zanejs.setScaleX = setScaleX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setScaleY(m, value) {
         var mat = m.clone();
@@ -4216,14 +4852,14 @@ var zanejs;
     }
     zanejs.setScaleY = setScaleY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewX(m, value) {
         return zanejs.setSkewXRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewX = setSkewX;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewXRadians(m, value) {
         var mat = m.clone();
@@ -4234,14 +4870,14 @@ var zanejs;
     }
     zanejs.setSkewXRadians = setSkewXRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewY(m, value) {
         return zanejs.setSkewYRadians(m, zanejs.degreeToRadians(value));
     }
     zanejs.setSkewY = setSkewY;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function setSkewYRadians(m, value) {
         var mat = m.clone();
@@ -4252,7 +4888,7 @@ var zanejs;
     }
     zanejs.setSkewYRadians = setSkewYRadians;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function transformPoint(m, pivot, resultPoint) {
         var x = m.a * pivot.x + m.c * pivot.y + m.tx;
@@ -4266,7 +4902,7 @@ var zanejs;
     }
     zanejs.transformPoint = transformPoint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addLeadingZeroes(n, zeroes) {
         if (zeroes === void 0) { zeroes = 1; }
@@ -4281,14 +4917,14 @@ var zanejs;
     }
     zanejs.addLeadingZeroes = addLeadingZeroes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function clamp(val, min, max) {
         return Math.max(Math.min(val, max), min);
     }
     zanejs.clamp = clamp;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function createStepsBetween(begin, end, steps) {
         steps++;
@@ -4302,14 +4938,21 @@ var zanejs;
     }
     zanejs.createStepsBetween = createStepsBetween;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
+(function (zanejs) {
+    function inRange(a, min, max) {
+        return min <= a && a <= max;
+    }
+    zanejs.inRange = inRange;
+})(zanejs || (zanejs = {}));
+
 (function (zanejs) {
     function isBetween(value, firstValue, secondValue) {
         return !(value < Math.min(firstValue, secondValue) || value > Math.max(firstValue, secondValue));
     }
     zanejs.isBetween = isBetween;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEqual(val1, val2, precision) {
         if (precision === void 0) { precision = 0; }
@@ -4317,35 +4960,35 @@ var zanejs;
     }
     zanejs.isEqual = isEqual;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEven(value) {
         return (value & 1) === 0;
     }
     zanejs.isEven = isEven;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isInteger(value) {
         return (value % 1) === 0;
     }
     zanejs.isInteger = isInteger;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isNegative(value) {
         return !zanejs.isPositive(value);
     }
     zanejs.isNegative = isNegative;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isOdd(value) {
         return !zanejs.isEven(value);
     }
     zanejs.isOdd = isOdd;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isOne(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4353,14 +4996,14 @@ var zanejs;
     }
     zanejs.isOne = isOne;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPositive(value) {
         return value >= 0;
     }
     zanejs.isPositive = isPositive;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPowerOf2() {
         var args = [];
@@ -4379,7 +5022,7 @@ var zanejs;
     }
     zanejs.isPowerOf2 = isPowerOf2;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isPrime(value) {
         if (value === 1 || value === 2) {
@@ -4398,7 +5041,7 @@ var zanejs;
     }
     zanejs.isPrime = isPrime;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isZero(value, tolerance) {
         if (tolerance === void 0) { tolerance = 0; }
@@ -4406,7 +5049,7 @@ var zanejs;
     }
     zanejs.isZero = isZero;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function limitPrecision(n, maxPrecision) {
         if (maxPrecision === void 0) { maxPrecision = 2; }
@@ -4417,14 +5060,14 @@ var zanejs;
     }
     zanejs.limitPrecision = limitPrecision;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomIntegerWithinRange(min, max) {
         return Math.round(zanejs.randomWithinRange(min, max));
     }
     zanejs.randomIntegerWithinRange = randomIntegerWithinRange;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSign(chance) {
         if (chance === void 0) { chance = 0.5; }
@@ -4432,7 +5075,7 @@ var zanejs;
     }
     zanejs.randomSign = randomSign;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomWithinRange(min, max) {
         if (min > max) {
@@ -4444,7 +5087,7 @@ var zanejs;
     }
     zanejs.randomWithinRange = randomWithinRange;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function round(value, digits) {
         digits = Math.pow(10, digits);
@@ -4452,14 +5095,14 @@ var zanejs;
     }
     zanejs.round = round;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function uint(value) {
         return parseInt(value, undefined) >>> 32;
     }
     zanejs.uint = uint;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function assign(obj, params) {
         Object.keys(params).map(function (name) {
@@ -4469,7 +5112,7 @@ var zanejs;
     }
     zanejs.assign = assign;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function combine(defaultVars, additionalVars) {
         var combinedObject = {};
@@ -4483,7 +5126,7 @@ var zanejs;
     }
     zanejs.combine = combine;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function getQualifiedClassName(value) {
         var type = typeof value;
@@ -4506,21 +5149,21 @@ var zanejs;
     }
     zanejs.getQualifiedClassName = getQualifiedClassName;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isArray(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
     }
     zanejs.isArray = isArray;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isBool(obj) {
         return obj === true || obj === false;
     }
     zanejs.isBool = isBool;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isEmpty(val) {
         if (val) {
@@ -4532,21 +5175,21 @@ var zanejs;
     }
     zanejs.isEmpty = isEmpty;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isFunction(obj) {
         return Object.prototype.toString.call(obj) === '[object Function]';
     }
     zanejs.isFunction = isFunction;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isObject(obj) {
         return Object.prototype.toString.call(obj) === '[object Object]';
     }
     zanejs.isObject = isObject;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isSpecial(obj) {
         var undef;
@@ -4554,21 +5197,21 @@ var zanejs;
     }
     zanejs.isSpecial = isSpecial;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isString(obj) {
         return Object.prototype.toString.call(obj) === '[object String]';
     }
     zanejs.isString = isString;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function isUndefined(obj) {
         return obj === void 0;
     }
     zanejs.isUndefined = isUndefined;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function merge(base, extend) {
         var merged = {};
@@ -4582,7 +5225,7 @@ var zanejs;
     }
     zanejs.merge = merge;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function object_change_key_case(obj, cs) {
         if (cs === void 0) { cs = 'CASE_LOWER'; }
@@ -4601,7 +5244,7 @@ var zanejs;
     }
     zanejs.object_change_key_case = object_change_key_case;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function toObject(objString) {
         var o = {};
@@ -4616,14 +5259,14 @@ var zanejs;
     }
     zanejs.toObject = toObject;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function distance(p1, p2) {
         return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     }
     zanejs.distance = distance;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var Random = (function () {
         function Random(seed) {
@@ -4645,7 +5288,7 @@ var zanejs;
     }());
     zanejs.Random = Random;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function mt_rand(min, max) {
         var argc = arguments.length;
@@ -4664,21 +5307,21 @@ var zanejs;
     }
     zanejs.mt_rand = mt_rand;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomBoolean() {
         return zanejs.randomChance(0.5);
     }
     zanejs.randomBoolean = randomBoolean;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomChance(percent) {
         return Math.random() < percent;
     }
     zanejs.randomChance = randomChance;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomCharacters(amount, charSet) {
         if (charSet === void 0) { charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; }
@@ -4694,7 +5337,7 @@ var zanejs;
     }
     zanejs.randomCharacters = randomCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomLowercaseCharacters(amount) {
         var str = '';
@@ -4705,7 +5348,7 @@ var zanejs;
     }
     zanejs.randomLowercaseCharacters = randomLowercaseCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomNumberString(amount) {
         var str = '';
@@ -4716,7 +5359,7 @@ var zanejs;
     }
     zanejs.randomNumberString = randomNumberString;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomSpecialCharacters(amount) {
         var str = '';
@@ -4727,14 +5370,14 @@ var zanejs;
     }
     zanejs.randomSpecialCharacters = randomSpecialCharacters;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function randomToken() {
         return Math.random().toString(36).substr(2);
     }
     zanejs.randomToken = randomToken;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addcslashes(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -4880,7 +5523,7 @@ var zanejs;
     }
     zanejs.addcslashes = addcslashes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function addslashes(str) {
         return (str + '')
@@ -4889,7 +5532,7 @@ var zanejs;
     }
     zanejs.addslashes = addslashes;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function bin2hex(s) {
         var i;
@@ -4906,7 +5549,7 @@ var zanejs;
     }
     zanejs.bin2hex = bin2hex;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function chr(codePt) {
         if (codePt > 0xFFFF) {
@@ -4917,7 +5560,7 @@ var zanejs;
     }
     zanejs.chr = chr;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function chunk_split(body, chunklen, end) {
         chunklen = parseInt(String(chunklen), 10) || 76;
@@ -4930,7 +5573,7 @@ var zanejs;
     }
     zanejs.chunk_split = chunk_split;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function count_chars(str, mode) {
         var result = {};
@@ -4970,7 +5613,7 @@ var zanejs;
     }
     zanejs.count_chars = count_chars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function echo() {
         var args = [];
@@ -4981,14 +5624,14 @@ var zanejs;
     }
     zanejs.echo = echo;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function endsWith(input, suffix) {
         return (suffix === input.substring(input.length - suffix.length));
     }
     zanejs.endsWith = endsWith;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function explode(delimiter, str, limit) {
         if (arguments.length < 2 ||
@@ -5037,14 +5680,14 @@ var zanejs;
     }
     zanejs.explode = explode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function firstToUpper(str) {
         return str.charAt(0).toUpperCase() + str.substr(1);
     }
     zanejs.firstToUpper = firstToUpper;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function get_html_translation_table(table, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -5189,7 +5832,7 @@ var zanejs;
     }
     zanejs.get_html_translation_table = get_html_translation_table;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function hex2bin(s) {
         var ret = [];
@@ -5208,7 +5851,7 @@ var zanejs;
     }
     zanejs.hex2bin = hex2bin;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function html_entity_decode(str, quoteStyle) {
         if (quoteStyle === void 0) { quoteStyle = ''; }
@@ -5228,7 +5871,7 @@ var zanejs;
     }
     zanejs.html_entity_decode = html_entity_decode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function http_build_query(formData, numericPrefix, argSeparator) {
         if (numericPrefix === void 0) { numericPrefix = ''; }
@@ -5280,7 +5923,7 @@ var zanejs;
     }
     zanejs.http_build_query = http_build_query;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function implode(glue, pieces) {
         var i = '';
@@ -5304,7 +5947,7 @@ var zanejs;
     }
     zanejs.implode = implode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function ltrim(str) {
         str = str || '';
@@ -5312,7 +5955,7 @@ var zanejs;
     }
     zanejs.ltrim = ltrim;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function number_format(num, decimals, decPoint, thousandsSep) {
         num = (num + '').replace(/[^0-9+\-Ee.]/g, '');
@@ -5336,7 +5979,7 @@ var zanejs;
     }
     zanejs.number_format = number_format;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function padLeft(value, padChar, length) {
         var s = value + '';
@@ -5347,7 +5990,7 @@ var zanejs;
     }
     zanejs.padLeft = padLeft;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function padRight(value, padChar, length) {
         var s = value + '';
@@ -5358,7 +6001,7 @@ var zanejs;
     }
     zanejs.padRight = padRight;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rawurldecode(str) {
         return decodeURIComponent((str + '')
@@ -5368,7 +6011,7 @@ var zanejs;
     }
     zanejs.rawurldecode = rawurldecode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rawurlencode(str) {
         str = (str + '');
@@ -5381,7 +6024,7 @@ var zanejs;
     }
     zanejs.rawurlencode = rawurlencode;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeAllComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5390,7 +6033,7 @@ var zanejs;
     }
     zanejs.removeAllComments = removeAllComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeAllWhiteSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5399,7 +6042,7 @@ var zanejs;
     }
     zanejs.removeAllWhiteSpaces = removeAllWhiteSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeLineBreaks(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5408,7 +6051,7 @@ var zanejs;
     }
     zanejs.removeLineBreaks = removeLineBreaks;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeMultiLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5417,7 +6060,7 @@ var zanejs;
     }
     zanejs.removeMultiLineComments = removeMultiLineComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeMultipleSpaces(str, replace) {
         if (replace === void 0) { replace = ' '; }
@@ -5426,7 +6069,7 @@ var zanejs;
     }
     zanejs.removeMultipleSpaces = removeMultipleSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeNonWordChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5435,7 +6078,7 @@ var zanejs;
     }
     zanejs.removeNonWordChars = removeNonWordChars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSingleLineComments(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5444,7 +6087,7 @@ var zanejs;
     }
     zanejs.removeSingleLineComments = removeSingleLineComments;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSpaces(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5453,7 +6096,7 @@ var zanejs;
     }
     zanejs.removeSpaces = removeSpaces;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeSpecialChars(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5462,7 +6105,7 @@ var zanejs;
     }
     zanejs.removeSpecialChars = removeSpecialChars;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function removeTabs(str, replace) {
         if (replace === void 0) { replace = ''; }
@@ -5471,7 +6114,7 @@ var zanejs;
     }
     zanejs.removeTabs = removeTabs;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function replaceAccents(str) {
         str = str || '';
@@ -5502,7 +6145,7 @@ var zanejs;
     }
     zanejs.replaceAccents = replaceAccents;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function rtrim(str, charlist) {
         if (charlist === void 0) { charlist = ''; }
@@ -5518,7 +6161,7 @@ var zanejs;
     }
     zanejs.chop = chop;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     function serialize(mixedValue) {
         var val, key, okey;
@@ -5614,1444 +6257,7 @@ var zanejs;
     }
     zanejs.serialize = serialize;
 })(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function stringTruncate(value, length, suffix) {
-        if (suffix === void 0) { suffix = '...'; }
-        var out = '';
-        var l = length;
-        if (value) {
-            l -= suffix.length;
-            var trunc = value;
-            if (trunc.length > l) {
-                trunc = trunc.substr(0, l);
-                if (/[^\s]/.test(value.charAt(l))) {
-                    trunc = zanejs.rtrim(trunc.replace(/\w+$|\s+$/, ''));
-                }
-                trunc += suffix;
-            }
-            out = trunc;
-        }
-        return out;
-    }
-    zanejs.stringTruncate = stringTruncate;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function stringsAreEqual(s1, s2, caseSensitive) {
-        if (caseSensitive === void 0) { caseSensitive = false; }
-        return (caseSensitive) ? (s1 === s2) : (s1.toUpperCase() === s2.toUpperCase());
-    }
-    zanejs.stringsAreEqual = stringsAreEqual;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function stripslashes(str) {
-        return (str + '').replace(/\\(.?)/g, function (s, n1) {
-            switch (n1) {
-                case '\\':
-                    return '\\';
-                case '0':
-                    return '\u0000';
-                case '':
-                    return '';
-                default:
-                    return n1;
-            }
-        });
-    }
-    zanejs.stripslashes = stripslashes;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function toCamelCase(str) {
-        str = str || '';
-        str = str.replace('-', ' ');
-        str = zanejs.toProperCase(str).replace(' ', '');
-        function capsFn() {
-            return arguments[0].toLowerCase();
-        }
-        return str.replace(/\b\w/g, capsFn);
-    }
-    zanejs.toCamelCase = toCamelCase;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function toPathFormat() {
-        var rest = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            rest[_i] = arguments[_i];
-        }
-        var path = '/';
-        for (var i = 0; i < rest.length; i++) {
-            path += (rest[i]) ? zanejs.removeNonWordChars(rest[i]) + '/' : '';
-        }
-        path = zanejs.replaceAccents(path);
-        path = zanejs.removeMultipleSpaces(path);
-        path = path.toLowerCase().replace(/\s/g, '-');
-        return path;
-    }
-    zanejs.toPathFormat = toPathFormat;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function toProperCase(str) {
-        str = str || '';
-        function capsFn() {
-            return arguments[0].toUpperCase();
-        }
-        return str.toLowerCase().replace(/^[a-z\xE0-\xFF]|\s[a-z\xE0-\xFF]/g, capsFn);
-    }
-    zanejs.toProperCase = toProperCase;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function toTitleFormat(path, defaultTitle, separator) {
-        if (defaultTitle === void 0) { defaultTitle = ''; }
-        if (separator === void 0) { separator = ' | '; }
-        path = path || '';
-        function isNotEmpty(item, index, array) {
-            return (item.length > 0);
-        }
-        var pathsArr = path.split('/').filter(isNotEmpty);
-        for (var i = 0; i < pathsArr.length; i++) {
-            defaultTitle = pathsArr[i] + separator + defaultTitle;
-        }
-        defaultTitle = defaultTitle.replace(/\-/g, ' ').replace(/\_/g, ' ');
-        return zanejs.toProperCase(defaultTitle);
-    }
-    zanejs.toTitleFormat = toTitleFormat;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function trim(str) {
-        str = str || '';
-        return str.replace(/^\s+|\s+$/g, '');
-    }
-    zanejs.trim = trim;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function unserialize(data) {
-        var utf8Overhead = function (str) {
-            var s = str.length;
-            for (var i = str.length - 1; i >= 0; i--) {
-                var code = str.charCodeAt(i);
-                if (code > 0x7f && code <= 0x7ff) {
-                    s++;
-                }
-                else if (code > 0x7ff && code <= 0xffff) {
-                    s += 2;
-                }
-                if (code >= 0xDC00 && code <= 0xDFFF) {
-                    i--;
-                }
-            }
-            return s - 1;
-        };
-        var error = function (type, msg, filename, line) {
-            if (filename === void 0) { filename = ''; }
-            if (line === void 0) { line = 0; }
-            console.log(msg, filename, line);
-        };
-        var readUntil = function ($data, offset, stopchr) {
-            var i = 2;
-            var buf = [];
-            var $chr = $data.slice(offset, offset + 1);
-            while ($chr !== stopchr) {
-                if ((i + offset) > $data.length) {
-                    error('Error', 'Invalid');
-                }
-                buf.push($chr);
-                $chr = $data.slice(offset + (i - 1), offset + i);
-                i += 1;
-            }
-            return [buf.length, buf.join('')];
-        };
-        var readChrs = function ($data, offset, length) {
-            var i, $chr, buf;
-            buf = [];
-            for (i = 0; i < length; i++) {
-                $chr = $data.slice(offset + (i - 1), offset + i);
-                buf.push($chr);
-                length -= utf8Overhead($chr);
-            }
-            return [buf.length, buf.join('')];
-        };
-        function _unserialize($data, offset) {
-            var dtype;
-            var dataoffset;
-            var keyandchrs;
-            var keys;
-            var contig;
-            var length;
-            var array;
-            var readdata;
-            var readData;
-            var ccount;
-            var stringlength;
-            var i;
-            var key;
-            var kprops;
-            var kchrs;
-            var vprops;
-            var vchrs;
-            var value;
-            var chrs = 0;
-            var typeconvert = function (x) {
-                return x;
-            };
-            if (!offset) {
-                offset = 0;
-            }
-            dtype = ($data.slice(offset, offset + 1)).toLowerCase();
-            dataoffset = offset + 2;
-            switch (dtype) {
-                case 'i':
-                    typeconvert = function (x) {
-                        return parseInt(x, 10);
-                    };
-                    readData = readUntil($data, dataoffset, ';');
-                    chrs = readData[0];
-                    readdata = readData[1];
-                    dataoffset += chrs + 1;
-                    break;
-                case 'b':
-                    typeconvert = function (x) {
-                        return parseInt(x, 10) !== 0;
-                    };
-                    readData = readUntil($data, dataoffset, ';');
-                    chrs = readData[0];
-                    readdata = readData[1];
-                    dataoffset += chrs + 1;
-                    break;
-                case 'd':
-                    typeconvert = function (x) {
-                        return parseFloat(x);
-                    };
-                    readData = readUntil($data, dataoffset, ';');
-                    chrs = readData[0];
-                    readdata = readData[1];
-                    dataoffset += chrs + 1;
-                    break;
-                case 'n':
-                    readdata = null;
-                    break;
-                case 's':
-                    ccount = readUntil($data, dataoffset, ':');
-                    chrs = ccount[0];
-                    stringlength = ccount[1];
-                    dataoffset += chrs + 2;
-                    readData = readChrs($data, dataoffset + 1, parseInt(stringlength, 10));
-                    chrs = readData[0];
-                    readdata = readData[1];
-                    dataoffset += chrs + 2;
-                    if (chrs !== parseInt(stringlength, 10) && chrs !== readdata.length) {
-                        error('SyntaxError', 'String length mismatch');
-                    }
-                    break;
-                case 'a':
-                    readdata = {};
-                    keyandchrs = readUntil($data, dataoffset, ':');
-                    chrs = keyandchrs[0];
-                    keys = keyandchrs[1];
-                    dataoffset += chrs + 2;
-                    length = parseInt(keys, 10);
-                    contig = true;
-                    for (i = 0; i < length; i++) {
-                        kprops = _unserialize($data, dataoffset);
-                        kchrs = kprops[1];
-                        key = kprops[2];
-                        dataoffset += kchrs;
-                        vprops = _unserialize($data, dataoffset);
-                        vchrs = vprops[1];
-                        value = vprops[2];
-                        dataoffset += vchrs;
-                        if (key !== i) {
-                            contig = false;
-                        }
-                        readdata[key] = value;
-                    }
-                    if (contig) {
-                        array = new Array(length);
-                        for (i = 0; i < length; i++) {
-                            array[i] = readdata[i];
-                        }
-                        readdata = array;
-                    }
-                    dataoffset += 1;
-                    break;
-                default:
-                    error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype);
-                    break;
-            }
-            return [dtype, dataoffset - offset, typeconvert(readdata)];
-        }
-        return _unserialize((data + ''), 0)[2];
-    }
-    zanejs.unserialize = unserialize;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function urldecode(str) {
-        return decodeURIComponent((str + '')
-            .replace(/%(?![\da-f]{2})/gi, function () {
-            return '%25';
-        })
-            .replace(/\+/g, '%20'));
-    }
-    zanejs.urldecode = urldecode;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function urlencode(str) {
-        str = (str + '');
-        return encodeURIComponent(str)
-            .replace(/!/g, '%21')
-            .replace(/'/g, '%27')
-            .replace(/\(/g, '%28')
-            .replace(/\)/g, '%29')
-            .replace(/\*/g, '%2A')
-            .replace(/%20/g, '+');
-    }
-    zanejs.urlencode = urlencode;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function utf8_decode(strData) {
-        var tmpArr = [];
-        var i = 0;
-        var c1 = 0;
-        var seqlen = 0;
-        strData += '';
-        while (i < strData.length) {
-            c1 = strData.charCodeAt(i) & 0xFF;
-            seqlen = 0;
-            if (c1 <= 0xBF) {
-                c1 = (c1 & 0x7F);
-                seqlen = 1;
-            }
-            else if (c1 <= 0xDF) {
-                c1 = (c1 & 0x1F);
-                seqlen = 2;
-            }
-            else if (c1 <= 0xEF) {
-                c1 = (c1 & 0x0F);
-                seqlen = 3;
-            }
-            else {
-                c1 = (c1 & 0x07);
-                seqlen = 4;
-            }
-            for (var ai = 1; ai < seqlen; ++ai) {
-                c1 = ((c1 << 0x06) | (strData.charCodeAt(ai + i) & 0x3F));
-            }
-            if (seqlen === 4) {
-                c1 -= 0x10000;
-                tmpArr.push(String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF)));
-                tmpArr.push(String.fromCharCode(0xDC00 | (c1 & 0x3FF)));
-            }
-            else {
-                tmpArr.push(String.fromCharCode(c1));
-            }
-            i += seqlen;
-        }
-        return tmpArr.join('');
-    }
-    zanejs.utf8_decode = utf8_decode;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function utf8_encode(argString) {
-        if (argString === null || typeof argString === 'undefined') {
-            return '';
-        }
-        var str = (argString + '');
-        var utftext = '';
-        var start;
-        var end;
-        var stringl = 0;
-        start = end = 0;
-        stringl = str.length;
-        for (var n = 0; n < stringl; n++) {
-            var c1 = str.charCodeAt(n);
-            var enc = null;
-            if (c1 < 128) {
-                end++;
-            }
-            else if (c1 > 127 && c1 < 2048) {
-                enc = String.fromCharCode((c1 >> 6) | 192, (c1 & 63) | 128);
-            }
-            else if ((c1 & 0xF800) !== 0xD800) {
-                enc = String.fromCharCode((c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
-            }
-            else {
-                if ((c1 & 0xFC00) !== 0xD800) {
-                    throw new RangeError('Unmatched trail surrogate at ' + n);
-                }
-                var c2 = str.charCodeAt(++n);
-                if ((c2 & 0xFC00) !== 0xDC00) {
-                    throw new RangeError('Unmatched lead surrogate at ' + (n - 1));
-                }
-                c1 = ((c1 & 0x3FF) << 10) + (c2 & 0x3FF) + 0x10000;
-                enc = String.fromCharCode((c1 >> 18) | 240, ((c1 >> 12) & 63) | 128, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
-            }
-            if (enc !== null) {
-                if (end > start) {
-                    utftext += str.slice(start, end);
-                }
-                utftext += enc;
-                start = end = n + 1;
-            }
-        }
-        if (end > start) {
-            utftext += str.slice(start, stringl);
-        }
-        return utftext;
-    }
-    zanejs.utf8_encode = utf8_encode;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function xtrim(str) {
-        if (str === void 0) { str = ''; }
-        str = (!str) ? '' : str;
-        var o = '';
-        var TAB = 9;
-        var LINEFEED = 10;
-        var CARRIAGE = 13;
-        var SPACE = 32;
-        for (var i = 0; i < str.length; i++) {
-            if (str.charCodeAt(i) !== SPACE &&
-                str.charCodeAt(i) !== CARRIAGE &&
-                str.charCodeAt(i) !== LINEFEED &&
-                str.charCodeAt(i) !== TAB) {
-                o += str.charAt(i);
-            }
-        }
-        return o;
-    }
-    zanejs.xtrim = xtrim;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isOldIOS() {
-        var win = window;
-        var ver = '' + (/CPU.*OS ([0-9_]{3,4})[0-9_]{0,1}|(CPU like).*AppleWebKit.*Mobile/i.exec(zanejs.ua)
-            || [0, ''])[1];
-        ver = ver
-            .replace('undefined', '3_2')
-            .replace('_', '.')
-            .replace('_', '');
-        return parseFloat(ver) < 10 && !win.MSStream;
-    }
-    zanejs.isOldIOS = _isOldIOS();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    zanejs.emptyVideoData = '' +
-        'data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAACKBtZGF0AAAC8wYF///v3EXpveb' +
-        'ZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE0MiByMjQ3OSBkZDc5YTYxIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIw' +
-        'MDMtMjAxNCAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTEgZGVibG9jaz0xO' +
-        'jA6MCBhbmFseXNlPTB4MToweDExMSBtZT1oZXggc3VibWU9MiBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0wIG1lX3Jhbm' +
-        'dlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MCA4eDhkY3Q9MCBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3F' +
-        'wX29mZnNldD0wIHRocmVhZHM9NiBsb29rYWhlYWRfdGhyZWFkcz0xIHNsaWNlZF90aHJlYWRzPTAgbnI9MCBkZWNpbWF0ZT0xIGludGVy' +
-        'bGFjZWQ9MCBibHVyYXlfY29tcGF0PTAgY29uc3RyYWluZWRfaW50cmE9MCBiZnJhbWVzPTMgYl9weXJhbWlkPTIgYl9hZGFwdD0xIGJfY' +
-        'mlhcz0wIGRpcmVjdD0xIHdlaWdodGI9MSBvcGVuX2dvcD0wIHdlaWdodHA9MSBrZXlpbnQ9MzAwIGtleWludF9taW49MzAgc2NlbmVjdX' +
-        'Q9NDAgaW50cmFfcmVmcmVzaD0wIHJjX2xvb2thaGVhZD0xMCByYz1jcmYgbWJ0cmVlPTEgY3JmPTIwLjAgcWNvbXA9MC42MCBxcG1pbj0' +
-        'wIHFwbWF4PTY5IHFwc3RlcD00IHZidl9tYXhyYXRlPTIwMDAwIHZidl9idWZzaXplPTI1MDAwIGNyZl9tYXg9MC4wIG5hbF9ocmQ9bm9u' +
-        'ZSBmaWxsZXI9MCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAAAOWWIhAA3//p+C7v8tDDSTjf97w55i3SbRPO4ZY+hkjD5hbkAkL3zp' +
-        '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' +
-        '8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAA' +
-        'ADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEA' +
-        'AAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAANAAAADQAAAQBzdGNvAAAAAAAAADwAAAAwAAADZ' +
-        'AAAA3QAAAONAAADoAAAA7kAAAPQAAAD6wAAA/4AAAQXAAAELgAABEMAAARcAAAEbwAABIwAAAShAAAEugAABM0AAATkAAAE/wAABRIAAA' +
-        'UrAAAFQgAABV0AAAVwAAAFiQAABaAAAAW1AAAFzgAABeEAAAX+AAAGEwAABiwAAAY/AAAGVgAABnEAAAaEAAAGnQAABrQAAAbPAAAG4gA' +
-        'ABvUAAAcSAAAHJwAAB0AAAAdTAAAHcAAAB4UAAAeeAAAHsQAAB8gAAAfjAAAH9gAACA8AAAgmAAAIQQAACFQAAAhnAAAIhAAACJcAAAMs' +
-        'dHJhawAAAFx0a2hkAAAAA9WAgl/VgIJfAAAAAgAAAAAAAAf8AAAAAAAAAAAAAAABAQAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA' +
-        'AAAAAAAQAAAAAAAAAAAAAAAAAACsm1kaWEAAAAgbWRoZAAAAADVgIJf1YCCXwAArEQAAWAAVcQAAAAAACdoZGxyAAAAAAAAAABzb3VuAA' +
-        'AAAAAAAAAAAAAAU3RlcmVvAAAAAmNtaW5mAAAAEHNtaGQAAAAAAAAAAAAAACRkaW5mAAAAHGRyZWYAAAAAAAAAAQAAAAx1cmwgAAAAAQA' +
-        'AAidzdGJsAAAAZ3N0c2QAAAAAAAAAAQAAAFdtcDRhAAAAAAAAAAEAAAAAAAAAAAACABAAAAAArEQAAAAAADNlc2RzAAAAAAOAgIAiAAIA' +
-        'BICAgBRAFQAAAAADDUAAAAAABYCAgAISEAaAgIABAgAAABhzdHRzAAAAAAAAAAEAAABYAAAEAAAAABxzdHNjAAAAAAAAAAEAAAABAAAAA' +
-        'QAAAAEAAAAUc3RzegAAAAAAAAAGAAAAWAAAAXBzdGNvAAAAAAAAAFgAAAOBAAADhwAAA5oAAAOtAAADswAAA8oAAAPfAAAD5QAAA/gAAA' +
-        'QLAAAEEQAABCgAAAQ9AAAEUAAABFYAAARpAAAEgAAABIYAAASbAAAErgAABLQAAATHAAAE3gAABPMAAAT5AAAFDAAABR8AAAUlAAAFPAA' +
-        'ABVEAAAVXAAAFagAABX0AAAWDAAAFmgAABa8AAAXCAAAFyAAABdsAAAXyAAAF+AAABg0AAAYgAAAGJgAABjkAAAZQAAAGZQAABmsAAAZ+' +
-        'AAAGkQAABpcAAAauAAAGwwAABskAAAbcAAAG7wAABwYAAAcMAAAHIQAABzQAAAc6AAAHTQAAB2QAAAdqAAAHfwAAB5IAAAeYAAAHqwAAB' +
-        '8IAAAfXAAAH3QAAB/AAAAgDAAAICQAACCAAAAg1AAAIOwAACE4AAAhhAAAIeAAACH4AAAiRAAAIpAAACKoAAAiwAAAItgAACLwAAAjCAA' +
-        'AAFnVkdGEAAAAObmFtZVN0ZXJlbwAAAHB1ZHRhAAAAaG1ldGEAAAAAAAAAIWhkbHIAAAAAAAAAAG1kaXJhcHBsAAAAAAAAAAAAAAAAO2l' +
-        'sc3QAAAAzqXRvbwAAACtkYXRhAAAAAQAAAABIYW5kQnJha2UgMC4xMC4yIDIwMTUwNjExMDA=';
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    var NoSleep = (function () {
-        function NoSleep() {
-        }
-        NoSleep.enable = function () {
-            NoSleep.initVideo();
-            if (zanejs.isOldIOS) {
-                NoSleep.disable();
-                NoSleep.timer = window.setInterval(function () {
-                    window.location.href = '/';
-                    window.setTimeout(window.stop, 0);
-                }, 15000);
-            }
-            else {
-                NoSleep.video.play();
-            }
-        };
-        NoSleep.disable = function () {
-            NoSleep.initVideo();
-            if (zanejs.isOldIOS) {
-                if (NoSleep.timer) {
-                    window.clearInterval(NoSleep.timer);
-                    NoSleep.timer = null;
-                }
-            }
-            else {
-                NoSleep.video.pause();
-            }
-        };
-        NoSleep.initVideo = function () {
-            if (!NoSleep.video) {
-                var video_1 = document.createElement('video');
-                video_1.setAttribute('playsinline', 'true');
-                video_1.setAttribute('type', 'video/mp4');
-                video_1.setAttribute('x5-video-player-type', 'h5');
-                video_1.setAttribute('src', zanejs.emptyVideoData);
-                video_1.addEventListener('timeupdate', function () {
-                    if (video_1.currentTime > 0.5) {
-                        video_1.currentTime = Math.random();
-                    }
-                });
-                NoSleep.video = video_1;
-            }
-        };
-        return NoSleep;
-    }());
-    zanejs.NoSleep = NoSleep;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function buildBridgedWorker(workerFunction, workerExportNames, mainExportNames, mainExportHandles) {
-        var baseWorkerStr = workerFunction.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1];
-        var extraWorkerStr = [];
-        extraWorkerStr.push('var main = {};\n');
-        for (var i = 0; i < mainExportNames.length; i++) {
-            var name_1 = mainExportNames[i];
-            if (name_1.charAt(name_1.length - 1) === '*') {
-                name_1 = name_1.substr(0, name_1.length - 1);
-                mainExportNames[i] = name_1;
-                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
-                    'var args = Array.prototype.slice.call(arguments); ' +
-                    'var buffers = args.pop(); \n ' +
-                    'self.postMessage({foo:\'' + name_1 + '\', args:args}, buffers)\n' +
-                    '}; \n');
-            }
-            else {
-                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
-                    'var args = Array.prototype.slice.call(arguments); \n ' +
-                    'self.postMessage({foo:\'' + name_1 + '\', args:args})\n' +
-                    '}; \n');
-            }
-        }
-        var tmpStr = [];
-        for (var i = 0; i < workerExportNames.length; i++) {
-            var name_2 = workerExportNames[i];
-            name_2 = name_2.charAt(name_2.length - 1) === '*'
-                ? name_2.substr(0, name_2.length - 1)
-                : name_2;
-            tmpStr.push(name_2 + ': ' + name_2);
-        }
-        extraWorkerStr.push('var foos={' + tmpStr.join(',') + '};\n');
-        extraWorkerStr.push('self.onmessage = function(e){\n');
-        extraWorkerStr.push('if(e.data.foo in foos) \n  ' +
-            'foos[e.data.foo].apply(null, e.data.args); \n ' +
-            'else \n ' +
-            'throw(new Error(\'Main thread requested function \' + e.data.foo + \'. But it is not available.\'));\n');
-        extraWorkerStr.push('\n};\n');
-        var fullWorkerStr = baseWorkerStr +
-            '\n\n/*==== STUFF ADDED BY BuildBridgeWorker ==== */\n\n' + extraWorkerStr.join('');
-        var url = window.URL.createObjectURL(new Blob([fullWorkerStr], { type: 'text/javascript' }));
-        var theWorker = new Worker(url);
-        theWorker.onmessage = function (e) {
-            var fooInd = mainExportNames.indexOf(e.data.foo);
-            if (fooInd !== -1) {
-                mainExportHandles[fooInd].apply(null, e.data.args);
-            }
-            else {
-                throw (new Error('Worker requested function ' + e.data.foo + '. But it is not available.'));
-            }
-        };
-        var ret = { blobURL: url };
-        var makePostMessageForFunction = function (name, hasBuffers) {
-            if (hasBuffers) {
-                return function () {
-                    var args = Array.prototype.slice.call(arguments);
-                    var buffers = args.pop();
-                    theWorker.postMessage({ foo: name, args: args }, buffers);
-                };
-            }
-            else {
-                return function () {
-                    var args = Array.prototype.slice.call(arguments);
-                    theWorker.postMessage({ foo: name, args: args });
-                };
-            }
-        };
-        for (var i = 0; i < workerExportNames.length; i++) {
-            var name_3 = workerExportNames[i];
-            if (name_3.charAt(name_3.length - 1) === '*') {
-                name_3 = name_3.substr(0, name_3.length - 1);
-                ret[name_3] = makePostMessageForFunction(name_3, true);
-            }
-            else {
-                ret[name_3] = makePostMessageForFunction(name_3, false);
-            }
-        }
-        return ret;
-    }
-    zanejs.buildBridgedWorker = buildBridgedWorker;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function call_user_func(cb, parameters) {
-        parameters = Array.prototype.slice.call(arguments, 1);
-        return zanejs.call_user_func_array(cb, parameters);
-    }
-    zanejs.call_user_func = call_user_func;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function call_user_func_array(cb, parameters) {
-        var func;
-        var scope = null;
-        var validJSFunctionNamePattern = /^[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*$/;
-        if (typeof cb === 'string') {
-            if (typeof window[cb] === 'function') {
-                func = window[cb];
-            }
-            else if (cb.match(validJSFunctionNamePattern)) {
-                func = (new Function(null, 'return ' + cb)());
-            }
-        }
-        else if (Object.prototype.toString.call(cb) === '[object Array]') {
-            if (typeof cb[0] === 'string') {
-                if (cb[0].match(validJSFunctionNamePattern)) {
-                    func = eval(cb[0] + '[\'' + cb[1] + '\']');
-                }
-            }
-            else {
-                func = cb[0][cb[1]];
-            }
-            if (typeof cb[0] === 'string') {
-                if (typeof window[cb[0]] === 'function') {
-                    scope = window[cb[0]];
-                }
-                else if (cb[0].match(validJSFunctionNamePattern)) {
-                    scope = eval(cb[0]);
-                }
-            }
-            else if (typeof cb[0] === 'object') {
-                scope = cb[0];
-            }
-        }
-        else if (typeof cb === 'function') {
-            func = cb;
-        }
-        if (typeof func !== 'function') {
-            throw new Error(func + ' is not a valid function');
-        }
-        return func.apply(scope, parameters);
-    }
-    zanejs.call_user_func_array = call_user_func_array;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function cancelRequestAnimationFrame() {
-        var w = window;
-        return w.cancelAnimationFrame ||
-            w.webkitCancelAnimationFrame ||
-            w.webkitCancelRequestAnimationFrame ||
-            w.mozCancelAnimationFrame ||
-            w.mozCancelRequestAnimationFrame ||
-            w.oCancelRequestAnimationFrame ||
-            w.msCancelRequestAnimationFrame ||
-            function (timeoutId) {
-                return window.clearTimeout(timeoutId);
-            };
-    }
-    zanejs.cancelRequestAnimationFrame = cancelRequestAnimationFrame;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function createInstance(clazz, args, props) {
-        if (args === void 0) { args = []; }
-        if (props === void 0) { props = null; }
-        if (!clazz)
-            return null;
-        if (!zanejs.is_array(args)) {
-            args = [args];
-        }
-        var instance;
-        if (args) {
-            switch (args.length) {
-                case 0:
-                    instance = new clazz();
-                    break;
-                case 1:
-                    instance = new clazz(args[0]);
-                    break;
-                case 2:
-                    instance = new clazz(args[0], args[1]);
-                    break;
-                case 3:
-                    instance = new clazz(args[0], args[1], args[2]);
-                    break;
-                case 4:
-                    instance = new clazz(args[0], args[1], args[2], args[3]);
-                    break;
-                case 5:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4]);
-                    break;
-                case 6:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5]);
-                    break;
-                case 7:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
-                    break;
-                case 8:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
-                    break;
-                case 9:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
-                    break;
-                case 10:
-                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
-                    break;
-                default:
-                    return null;
-            }
-        }
-        else {
-            instance = new clazz();
-        }
-        if (props) {
-            Object.keys(props).map(function (key) {
-                if (instance.hasOwnProperty(key)) {
-                    instance[key] = props[key];
-                }
-            });
-        }
-        return instance;
-    }
-    zanejs.createInstance = createInstance;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    zanejs.emptyImageData = '' +
-        'data:image/png;base64,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';
-    zanejs.emptyImageElement = document.createElement('img');
-    if (zanejs.emptyImageElement && zanejs.emptyImageElement.setAttribute) {
-        zanejs.emptyImageElement.setAttribute('src', zanejs.emptyImageData);
-    }
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    var fn = (function () {
-        var val;
-        var fnMap = [
-            [
-                'requestFullscreen', 'exitFullscreen', 'fullscreenElement',
-                'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'
-            ],
-            [
-                'webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement',
-                'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'
-            ],
-            [
-                'webkitRequestFullScreen', 'webkitCancelFullScreen', 'webkitCurrentFullScreenElement',
-                'webkitCancelFullScreen', 'webkitfullscreenchange', 'webkitfullscreenerror'
-            ],
-            [
-                'mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement',
-                'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'
-            ],
-            [
-                'msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement',
-                'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError'
-            ]
-        ];
-        var ret = {};
-        for (var i = 0, l = fnMap.length; i < l; i++) {
-            val = fnMap[i];
-            if (val && val[1] in document) {
-                for (i = 0; i < val.length; i++) {
-                    ret[fnMap[0][i]] = val[i];
-                }
-                return ret;
-            }
-        }
-        return false;
-    })();
-    var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
-    function requestFullscreen(elem) {
-        if (elem === void 0) { elem = null; }
-        var request = fn.requestFullscreen;
-        elem = elem || document.documentElement;
-        if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
-            elem[request]();
-        }
-        else {
-            var el = Element;
-            elem[request](keyboardAllowed && el.ALLOW_KEYBOARD_INPUT);
-        }
-    }
-    zanejs.requestFullscreen = requestFullscreen;
-    function exitFullscreen() {
-        document[fn.exitFullscreen]();
-    }
-    zanejs.exitFullscreen = exitFullscreen;
-    function isFullscreen() {
-        return Boolean(document[fn.fullscreenElement]);
-    }
-    zanejs.isFullscreen = isFullscreen;
-    function toggleFullscreen(elem) {
-        if (elem === void 0) { elem = null; }
-        if (isFullscreen()) {
-            this.exitFullscreen();
-        }
-        else {
-            this.requestFullscreen(elem);
-        }
-    }
-    zanejs.toggleFullscreen = toggleFullscreen;
-    function onFullscreenChange(callback) {
-        document.addEventListener(fn.fullscreenchange, callback, false);
-    }
-    zanejs.onFullscreenChange = onFullscreenChange;
-    function onFullscreenError(callback) {
-        document.addEventListener(fn.fullscreenerror, callback, false);
-    }
-    zanejs.onFullscreenError = onFullscreenError;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function getOrientation() {
-        if (typeof window.orientation === 'undefined') {
-            var w = zanejs.innerWidth();
-            var h = zanejs.innerHeight();
-            return w > h ? 1 : 2;
-        }
-        else {
-            if (window.orientation === 180 || window.orientation === 0) {
-                return 2;
-            }
-            else if (window.orientation === 90 || window.orientation === -90) {
-                return 1;
-            }
-            return 0;
-        }
-    }
-    zanejs.getOrientation = getOrientation;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function getParams() {
-        return zanejs.getUrlParams(document.location.href);
-    }
-    zanejs.getParams = getParams;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function getUrlParams(url) {
-        url = url.split('?')[1];
-        var pl = /\+/g;
-        var search = /([^&=]+)=?([^&]*)/g;
-        var decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); };
-        var urlParams = {};
-        var match;
-        while (match = search.exec(url)) {
-            urlParams[decode(match[1])] = decode(match[2]);
-        }
-        return urlParams;
-    }
-    zanejs.getUrlParams = getUrlParams;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _iOSVersion() {
-        if (/iP(hone|od|ad)/.test(navigator.platform)) {
-            var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
-            return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || '0', 10)];
-        }
-        return [0, 0, 0];
-    }
-    zanejs.iOSVersion = _iOSVersion();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function innerHeight() {
-        var _height;
-        if (window.innerHeight) {
-            _height = window.innerHeight;
-        }
-        else {
-            if (document.compatMode === 'CSS1Compat') {
-                _height = document.documentElement.clientHeight;
-            }
-            else {
-                _height = document.body.clientHeight;
-            }
-        }
-        return _height;
-    }
-    zanejs.innerHeight = innerHeight;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function innerWidth() {
-        var _width;
-        if (window.innerWidth) {
-            _width = window.innerWidth;
-        }
-        else {
-            if (document.compatMode === 'CSS1Compat') {
-                _width = document.documentElement.clientWidth;
-            }
-            else {
-                _width = document.body.clientWidth;
-            }
-        }
-        return _width;
-    }
-    zanejs.innerWidth = innerWidth;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    zanejs.ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-    function _isIE() {
-        return zanejs.ua.match(/msie/i) != null;
-    }
-    zanejs.isIE = _isIE();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isAndroid() {
-        return zanejs.ua.match(/android/i) != null;
-    }
-    zanejs.isAndroid = _isAndroid();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isChrome() {
-        return zanejs.ua.match(/chrome/i) != null;
-    }
-    zanejs.isChrome = _isChrome();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isIOS() {
-        return zanejs.ua.match(/(ipad|iphone|ipod)/i) != null;
-    }
-    zanejs.isIOS = _isIOS();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isOpera() {
-        return zanejs.ua.match(/opera/i) != null;
-    }
-    zanejs.isOpera = _isOpera();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isQQBrowser() {
-        return zanejs.ua.match(/MQQBrowser/i) != null;
-    }
-    zanejs.isQQBrowser = _isQQBrowser();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isSafari() {
-        return (zanejs.ua.toLowerCase().indexOf('safari') !== -1);
-    }
-    zanejs.isSafari = _isSafari();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isWebkit() {
-        return zanejs.ua.match(/webkit/i) != null;
-    }
-    zanejs.isWebkit = _isWebkit();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _isWeiXin() {
-        return zanejs.ua.match(/MicroMessenger/i) != null;
-    }
-    zanejs.isWeiXin = _isWeiXin();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function magical(Class) {
-        return function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            return new window.Proxy(new (Class.bind.apply(Class, [void 0].concat(args)))(), {
-                get: function (target, key, receiver) {
-                    if (typeof target[key] !== 'undefined') {
-                        return target[key];
-                    }
-                    if (typeof target.__get === 'function') {
-                        return target.__get(key);
-                    }
-                    else if (typeof target.__call === 'function') {
-                        return function () {
-                            var $args = [];
-                            for (var _i = 0; _i < arguments.length; _i++) {
-                                $args[_i] = arguments[_i];
-                            }
-                            target.__call.apply(this, [key].concat($args));
-                        };
-                    }
-                },
-                set: function (target, key, value, receiver) {
-                    if (typeof target[key] !== 'undefined') {
-                        target[key] = value;
-                        return;
-                    }
-                    if (typeof target.__set === 'function') {
-                        target.__set(key, value);
-                        return;
-                    }
-                }
-            });
-        };
-    }
-    zanejs.magical = magical;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function _mobileHTML5() {
-        return (zanejs.ua.match(/(mobile|pre\/|xoom)/i) != null || zanejs.isIOS || zanejs.isAndroid);
-    }
-    zanejs.mobileHTML5 = _mobileHTML5();
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function onVisibilityChange(callback) {
-        var state, visibilityChange, doc = document;
-        if (typeof doc.hidden !== 'undefined') {
-            visibilityChange = 'visibilitychange';
-            state = 'visibilityState';
-        }
-        else if (typeof doc.mozHidden !== 'undefined') {
-            visibilityChange = 'mozvisibilitychange';
-            state = 'mozVisibilityState';
-        }
-        else if (typeof doc.msHidden !== 'undefined') {
-            visibilityChange = 'msvisibilitychange';
-            state = 'msVisibilityState';
-        }
-        else if (typeof doc.webkitHidden !== 'undefined') {
-            visibilityChange = 'webkitvisibilitychange';
-            state = 'webkitVisibilityState';
-        }
-        doc.addEventListener(visibilityChange, function () {
-            if (callback) {
-                callback(document[state]);
-            }
-        }, false);
-    }
-    zanejs.onVisibilityChange = onVisibilityChange;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function openWindow(anchor, options) {
-        var args = '';
-        if (typeof (options) === 'undefined') {
-            options = {};
-        }
-        if (typeof (options.name) === 'undefined') {
-            options.name = 'win' + Math.round(Math.random() * 100000);
-        }
-        if (typeof (options.height) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
-            args += 'height=' + options.height + ',';
-        }
-        if (typeof (options.width) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
-            args += 'width=' + options.width + ',';
-        }
-        if (typeof (options.fullscreen) !== 'undefined') {
-            args += 'width=' + screen.availWidth + ',';
-            args += 'height=' + screen.availHeight + ',';
-        }
-        if (typeof (options.center) === 'undefined') {
-            options.x = 0;
-            options.y = 0;
-            args += 'screenx=' + options.x + ',';
-            args += 'screeny=' + options.y + ',';
-            args += 'left=' + options.x + ',';
-            args += 'top=' + options.y + ',';
-        }
-        if (typeof (options.center) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
-            options.y = Math.floor((screen.availHeight - (options.height || screen.height)) / 2)
-                - (screen.height - screen.availHeight);
-            options.x = Math.floor((screen.availWidth - (options.width || screen.width)) / 2)
-                - (screen.width - screen.availWidth);
-            args += 'screenx=' + options.x + ',';
-            args += 'screeny=' + options.y + ',';
-            args += 'left=' + options.x + ',';
-            args += 'top=' + options.y + ',';
-        }
-        if (typeof (options.scrollbars) !== 'undefined') {
-            args += 'scrollbars=1,';
-        }
-        if (typeof (options.menubar) !== 'undefined') {
-            args += 'menubar=1,';
-        }
-        if (typeof (options.locationbar) !== 'undefined') {
-            args += 'location=1,';
-        }
-        if (typeof (options.resizable) !== 'undefined') {
-            args += 'resizable=1,';
-        }
-        var win = window.open(anchor, options.name, args);
-        return false;
-    }
-    zanejs.openWindow = openWindow;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function requestAnimationFrame() {
-        var w = window;
-        return w.requestAnimationFrame ||
-            w.webkitAnimationFrame ||
-            w.webkitRequestAnimationFrame ||
-            w.mozRequestAnimationFrame ||
-            w.oRequestAnimationFrame ||
-            w.msRequestAnimationFrame ||
-            function (callback, element) {
-                return window.setTimeout(callback, 1000 / 60);
-            };
-    }
-    zanejs.requestAnimationFrame = requestAnimationFrame;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function touchSupported() {
-        var win = window;
-        var doc = document;
-        return (('ontouchstart' in win) ||
-            ('undefined' !== typeof win.TouchEvent) ||
-            ('undefined' !== typeof doc.createTouch));
-    }
-    zanejs.touchSupported = touchSupported;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function create3DContext(canvas, webGLSettings) {
-        var names = ['webgl', 'experimental-webgl', 'webkit-3d', 'moz-webgl'];
-        var context = null;
-        for (var ii = 0; ii < names.length; ++ii) {
-            try {
-                context = canvas.getContext(names[ii], webGLSettings);
-            }
-            catch (e) {
-            }
-            if (context) {
-                break;
-            }
-        }
-        return context;
-    }
-    zanejs.create3DContext = create3DContext;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function isWebGLSupported() {
-        var contextOptions = { stencil: true, failIfMajorPerformanceCaveat: true };
-        try {
-            var win = window;
-            if (!win.WebGLRenderingContext) {
-                return false;
-            }
-            var canvas = document.createElement('canvas');
-            var gl = zanejs.create3DContext(canvas, contextOptions);
-            var success = !!(gl && gl.getContextAttributes().stencil);
-            if (gl) {
-                var loseContext = gl.getExtension('WEBGL_lose_context');
-                if (loseContext) {
-                    loseContext.loseContext();
-                }
-            }
-            gl = null;
-            return success;
-        }
-        catch (e) {
-            return false;
-        }
-    }
-    zanejs.isWebGLSupported = isWebGLSupported;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    function stringToXMLDom(str) {
-        var xmlDoc = null;
-        if (window.DOMParser) {
-            var parser = new DOMParser();
-            xmlDoc = parser.parseFromString(str, 'text/xml');
-        }
-        else {
-            var ActiveXObject = window.ActiveXObject;
-            xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
-            xmlDoc.async = 'false';
-            xmlDoc.loadXML(str);
-        }
-        return xmlDoc;
-    }
-    zanejs.stringToXMLDom = stringToXMLDom;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    var WS = (function () {
-        function WS(url, protocols, options) {
-            if (protocols === void 0) { protocols = []; }
-            if (options === void 0) { options = {}; }
-            var _this = this;
-            this._url = url;
-            this._protocols = protocols;
-            this._websocket = null;
-            this._reconnectLock = false;
-            this._heartBeatTime = 60000;
-            this._heartBeatData = '';
-            this._timeout = 10000;
-            this._heartBeatTimer = null;
-            this._closeTimer = null;
-            this._header = null;
-            this._onclose = null;
-            this._onerror = null;
-            this._onopen = null;
-            this._onmessage = null;
-            this._autoReconnect = true;
-            Object.keys(options).forEach(function (key) {
-                var _key = '_' + key;
-                if (_this.hasOwnProperty(_key)) {
-                    _this[_key] = options[key];
-                }
-            });
-            this.initWebsocket();
-        }
-        WS.prototype.send = function (data) {
-            var $ws = window.wx;
-            if ($ws) {
-                this._websocket.send({
-                    data: data
-                });
-            }
-            else {
-                this._websocket.send(data);
-            }
-        };
-        WS.prototype.close = function (code, reason) {
-            var $ws = window.wx;
-            if ($ws) {
-                this._websocket.close({
-                    code: code,
-                    reason: reason
-                });
-            }
-            else {
-                this._websocket.close(code, reason);
-            }
-        };
-        WS.prototype.reconnect = function () {
-            var _this = this;
-            if (this._reconnectLock)
-                return;
-            this._reconnectLock = true;
-            setTimeout(function () {
-                _this.initWebsocket();
-                _this._reconnectLock = false;
-            }, this._timeout);
-        };
-        WS.prototype.initWebsocket = function () {
-            var _this = this;
-            try {
-                var $ws = window.wx;
-                if ($ws) {
-                    this._websocket = $ws.connectSocket({
-                        url: this._url,
-                        protocols: this._protocols,
-                        header: this._header
-                    });
-                    this._websocket.onClose = function () {
-                        if (_this._onclose)
-                            _this._onclose();
-                        if (_this._autoReconnect)
-                            _this.reconnect();
-                    };
-                    this._websocket.onError = function (errMsg) {
-                        if (_this._onerror)
-                            _this._onerror(errMsg);
-                        if (_this._autoReconnect)
-                            _this.reconnect();
-                    };
-                    this._websocket.onOpen = function (header) {
-                        if (_this._onopen)
-                            _this._onopen(header);
-                        _this.heartCheck();
-                    };
-                    this._websocket.onMessage = function (data) {
-                        if (_this._onmessage)
-                            _this._onmessage(data);
-                        _this.heartCheck();
-                    };
-                }
-                else {
-                    this._websocket = new WebSocket(this._url, this._protocols);
-                    this._websocket.onclose = function (evt) {
-                        if (_this._onclose)
-                            _this._onclose(evt);
-                        if (_this._autoReconnect)
-                            _this.reconnect();
-                    };
-                    this._websocket.onerror = function (evt) {
-                        if (_this._onerror)
-                            _this._onerror(evt);
-                        if (_this._autoReconnect)
-                            _this.reconnect();
-                    };
-                    this._websocket.onopen = function (evt) {
-                        if (_this._onopen)
-                            _this._onopen(evt);
-                        _this.heartCheck();
-                    };
-                    this._websocket.onmessage = function (evt) {
-                        if (_this._onmessage)
-                            _this._onmessage(evt.data);
-                        _this.heartCheck();
-                    };
-                }
-            }
-            catch (e) {
-                if (this._autoReconnect)
-                    this.reconnect();
-            }
-        };
-        WS.prototype.heartCheck = function () {
-            var _this = this;
-            clearTimeout(this._closeTimer);
-            clearTimeout(this._heartBeatTimer);
-            this._heartBeatTimer = setTimeout(function () {
-                _this._websocket.send('');
-                _this._closeTimer = setTimeout(function () {
-                    _this._websocket.close();
-                    _this._websocket = null;
-                }, _this._heartBeatTime);
-            }, this._heartBeatTime);
-        };
-        return WS;
-    }());
-    zanejs.WS = WS;
-})(zanejs || (zanejs = {}));
-var zanejs;
-(function (zanejs) {
-    var WSManager = (function () {
-        function WSManager() {
-            throw new Error('This is a STATIC CLASS and should not be instantiated.');
-        }
-        WSManager.subscribe = function (url, protocols, options) {
-            if (protocols === void 0) { protocols = []; }
-            if (options === void 0) { options = {}; }
-            if (!WSManager.connections[url]) {
-                WSManager.connections[url] = new zanejs.WS(url, protocols, options);
-            }
-            return WSManager.connections[url];
-        };
-        WSManager.unSubscribe = function (url, code, reason) {
-            var ws = WSManager.connections[url];
-            if (ws) {
-                ws.close(code, reason);
-            }
-        };
-        WSManager.getConnectionsFrom = function (url) {
-            return WSManager.connections[url];
-        };
-        WSManager.connections = {};
-        return WSManager;
-    }());
-    zanejs.WSManager = WSManager;
-})(zanejs || (zanejs = {}));
-var zanejs;
+
 (function (zanejs) {
     var re = {
         not_string: /[^s]/,
@@ -7262,7 +6468,707 @@ var zanejs;
     }
     zanejs.vsprintf = vsprintf;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
+(function (zanejs) {
+    function stringTruncate(value, length, suffix) {
+        if (suffix === void 0) { suffix = '...'; }
+        var out = '';
+        var l = length;
+        if (value) {
+            l -= suffix.length;
+            var trunc = value;
+            if (trunc.length > l) {
+                trunc = trunc.substr(0, l);
+                if (/[^\s]/.test(value.charAt(l))) {
+                    trunc = zanejs.rtrim(trunc.replace(/\w+$|\s+$/, ''));
+                }
+                trunc += suffix;
+            }
+            out = trunc;
+        }
+        return out;
+    }
+    zanejs.stringTruncate = stringTruncate;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stringsAreEqual(s1, s2, caseSensitive) {
+        if (caseSensitive === void 0) { caseSensitive = false; }
+        return (caseSensitive) ? (s1 === s2) : (s1.toUpperCase() === s2.toUpperCase());
+    }
+    zanejs.stringsAreEqual = stringsAreEqual;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stripslashes(str) {
+        return (str + '').replace(/\\(.?)/g, function (s, n1) {
+            switch (n1) {
+                case '\\':
+                    return '\\';
+                case '0':
+                    return '\u0000';
+                case '':
+                    return '';
+                default:
+                    return n1;
+            }
+        });
+    }
+    zanejs.stripslashes = stripslashes;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function toCamelCase(str) {
+        str = str || '';
+        str = str.replace('-', ' ');
+        str = zanejs.toProperCase(str).replace(' ', '');
+        function capsFn() {
+            return arguments[0].toLowerCase();
+        }
+        return str.replace(/\b\w/g, capsFn);
+    }
+    zanejs.toCamelCase = toCamelCase;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function toPathFormat() {
+        var rest = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            rest[_i] = arguments[_i];
+        }
+        var path = '/';
+        for (var i = 0; i < rest.length; i++) {
+            path += (rest[i]) ? zanejs.removeNonWordChars(rest[i]) + '/' : '';
+        }
+        path = zanejs.replaceAccents(path);
+        path = zanejs.removeMultipleSpaces(path);
+        path = path.toLowerCase().replace(/\s/g, '-');
+        return path;
+    }
+    zanejs.toPathFormat = toPathFormat;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function toProperCase(str) {
+        str = str || '';
+        function capsFn() {
+            return arguments[0].toUpperCase();
+        }
+        return str.toLowerCase().replace(/^[a-z\xE0-\xFF]|\s[a-z\xE0-\xFF]/g, capsFn);
+    }
+    zanejs.toProperCase = toProperCase;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function toTitleFormat(path, defaultTitle, separator) {
+        if (defaultTitle === void 0) { defaultTitle = ''; }
+        if (separator === void 0) { separator = ' | '; }
+        path = path || '';
+        function isNotEmpty(item, index, array) {
+            return (item.length > 0);
+        }
+        var pathsArr = path.split('/').filter(isNotEmpty);
+        for (var i = 0; i < pathsArr.length; i++) {
+            defaultTitle = pathsArr[i] + separator + defaultTitle;
+        }
+        defaultTitle = defaultTitle.replace(/\-/g, ' ').replace(/\_/g, ' ');
+        return zanejs.toProperCase(defaultTitle);
+    }
+    zanejs.toTitleFormat = toTitleFormat;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function trim(str) {
+        str = str || '';
+        return str.replace(/^\s+|\s+$/g, '');
+    }
+    zanejs.trim = trim;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function unserialize(data) {
+        var utf8Overhead = function (str) {
+            var s = str.length;
+            for (var i = str.length - 1; i >= 0; i--) {
+                var code = str.charCodeAt(i);
+                if (code > 0x7f && code <= 0x7ff) {
+                    s++;
+                }
+                else if (code > 0x7ff && code <= 0xffff) {
+                    s += 2;
+                }
+                if (code >= 0xDC00 && code <= 0xDFFF) {
+                    i--;
+                }
+            }
+            return s - 1;
+        };
+        var error = function (type, msg, filename, line) {
+            if (filename === void 0) { filename = ''; }
+            if (line === void 0) { line = 0; }
+            console.log(msg, filename, line);
+        };
+        var readUntil = function ($data, offset, stopchr) {
+            var i = 2;
+            var buf = [];
+            var $chr = $data.slice(offset, offset + 1);
+            while ($chr !== stopchr) {
+                if ((i + offset) > $data.length) {
+                    error('Error', 'Invalid');
+                }
+                buf.push($chr);
+                $chr = $data.slice(offset + (i - 1), offset + i);
+                i += 1;
+            }
+            return [buf.length, buf.join('')];
+        };
+        var readChrs = function ($data, offset, length) {
+            var i, $chr, buf;
+            buf = [];
+            for (i = 0; i < length; i++) {
+                $chr = $data.slice(offset + (i - 1), offset + i);
+                buf.push($chr);
+                length -= utf8Overhead($chr);
+            }
+            return [buf.length, buf.join('')];
+        };
+        function _unserialize($data, offset) {
+            var dtype;
+            var dataoffset;
+            var keyandchrs;
+            var keys;
+            var contig;
+            var length;
+            var array;
+            var readdata;
+            var readData;
+            var ccount;
+            var stringlength;
+            var i;
+            var key;
+            var kprops;
+            var kchrs;
+            var vprops;
+            var vchrs;
+            var value;
+            var chrs = 0;
+            var typeconvert = function (x) {
+                return x;
+            };
+            if (!offset) {
+                offset = 0;
+            }
+            dtype = ($data.slice(offset, offset + 1)).toLowerCase();
+            dataoffset = offset + 2;
+            switch (dtype) {
+                case 'i':
+                    typeconvert = function (x) {
+                        return parseInt(x, 10);
+                    };
+                    readData = readUntil($data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case 'b':
+                    typeconvert = function (x) {
+                        return parseInt(x, 10) !== 0;
+                    };
+                    readData = readUntil($data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case 'd':
+                    typeconvert = function (x) {
+                        return parseFloat(x);
+                    };
+                    readData = readUntil($data, dataoffset, ';');
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 1;
+                    break;
+                case 'n':
+                    readdata = null;
+                    break;
+                case 's':
+                    ccount = readUntil($data, dataoffset, ':');
+                    chrs = ccount[0];
+                    stringlength = ccount[1];
+                    dataoffset += chrs + 2;
+                    readData = readChrs($data, dataoffset + 1, parseInt(stringlength, 10));
+                    chrs = readData[0];
+                    readdata = readData[1];
+                    dataoffset += chrs + 2;
+                    if (chrs !== parseInt(stringlength, 10) && chrs !== readdata.length) {
+                        error('SyntaxError', 'String length mismatch');
+                    }
+                    break;
+                case 'a':
+                    readdata = {};
+                    keyandchrs = readUntil($data, dataoffset, ':');
+                    chrs = keyandchrs[0];
+                    keys = keyandchrs[1];
+                    dataoffset += chrs + 2;
+                    length = parseInt(keys, 10);
+                    contig = true;
+                    for (i = 0; i < length; i++) {
+                        kprops = _unserialize($data, dataoffset);
+                        kchrs = kprops[1];
+                        key = kprops[2];
+                        dataoffset += kchrs;
+                        vprops = _unserialize($data, dataoffset);
+                        vchrs = vprops[1];
+                        value = vprops[2];
+                        dataoffset += vchrs;
+                        if (key !== i) {
+                            contig = false;
+                        }
+                        readdata[key] = value;
+                    }
+                    if (contig) {
+                        array = new Array(length);
+                        for (i = 0; i < length; i++) {
+                            array[i] = readdata[i];
+                        }
+                        readdata = array;
+                    }
+                    dataoffset += 1;
+                    break;
+                default:
+                    error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype);
+                    break;
+            }
+            return [dtype, dataoffset - offset, typeconvert(readdata)];
+        }
+        return _unserialize((data + ''), 0)[2];
+    }
+    zanejs.unserialize = unserialize;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function urldecode(str) {
+        return decodeURIComponent((str + '')
+            .replace(/%(?![\da-f]{2})/gi, function () {
+            return '%25';
+        })
+            .replace(/\+/g, '%20'));
+    }
+    zanejs.urldecode = urldecode;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function urlencode(str) {
+        str = (str + '');
+        return encodeURIComponent(str)
+            .replace(/!/g, '%21')
+            .replace(/'/g, '%27')
+            .replace(/\(/g, '%28')
+            .replace(/\)/g, '%29')
+            .replace(/\*/g, '%2A')
+            .replace(/%20/g, '+');
+    }
+    zanejs.urlencode = urlencode;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function utf8_decode(strData) {
+        var tmpArr = [];
+        var i = 0;
+        var c1 = 0;
+        var seqlen = 0;
+        strData += '';
+        while (i < strData.length) {
+            c1 = strData.charCodeAt(i) & 0xFF;
+            seqlen = 0;
+            if (c1 <= 0xBF) {
+                c1 = (c1 & 0x7F);
+                seqlen = 1;
+            }
+            else if (c1 <= 0xDF) {
+                c1 = (c1 & 0x1F);
+                seqlen = 2;
+            }
+            else if (c1 <= 0xEF) {
+                c1 = (c1 & 0x0F);
+                seqlen = 3;
+            }
+            else {
+                c1 = (c1 & 0x07);
+                seqlen = 4;
+            }
+            for (var ai = 1; ai < seqlen; ++ai) {
+                c1 = ((c1 << 0x06) | (strData.charCodeAt(ai + i) & 0x3F));
+            }
+            if (seqlen === 4) {
+                c1 -= 0x10000;
+                tmpArr.push(String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF)));
+                tmpArr.push(String.fromCharCode(0xDC00 | (c1 & 0x3FF)));
+            }
+            else {
+                tmpArr.push(String.fromCharCode(c1));
+            }
+            i += seqlen;
+        }
+        return tmpArr.join('');
+    }
+    zanejs.utf8_decode = utf8_decode;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function utf8_encode(argString) {
+        if (argString === null || typeof argString === 'undefined') {
+            return '';
+        }
+        var str = (argString + '');
+        var utftext = '';
+        var start;
+        var end;
+        var stringl = 0;
+        start = end = 0;
+        stringl = str.length;
+        for (var n = 0; n < stringl; n++) {
+            var c1 = str.charCodeAt(n);
+            var enc = null;
+            if (c1 < 128) {
+                end++;
+            }
+            else if (c1 > 127 && c1 < 2048) {
+                enc = String.fromCharCode((c1 >> 6) | 192, (c1 & 63) | 128);
+            }
+            else if ((c1 & 0xF800) !== 0xD800) {
+                enc = String.fromCharCode((c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
+            }
+            else {
+                if ((c1 & 0xFC00) !== 0xD800) {
+                    throw new RangeError('Unmatched trail surrogate at ' + n);
+                }
+                var c2 = str.charCodeAt(++n);
+                if ((c2 & 0xFC00) !== 0xDC00) {
+                    throw new RangeError('Unmatched lead surrogate at ' + (n - 1));
+                }
+                c1 = ((c1 & 0x3FF) << 10) + (c2 & 0x3FF) + 0x10000;
+                enc = String.fromCharCode((c1 >> 18) | 240, ((c1 >> 12) & 63) | 128, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128);
+            }
+            if (enc !== null) {
+                if (end > start) {
+                    utftext += str.slice(start, end);
+                }
+                utftext += enc;
+                start = end = n + 1;
+            }
+        }
+        if (end > start) {
+            utftext += str.slice(start, stringl);
+        }
+        return utftext;
+    }
+    zanejs.utf8_encode = utf8_encode;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function xtrim(str) {
+        if (str === void 0) { str = ''; }
+        str = (!str) ? '' : str;
+        var o = '';
+        var TAB = 9;
+        var LINEFEED = 10;
+        var CARRIAGE = 13;
+        var SPACE = 32;
+        for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) !== SPACE &&
+                str.charCodeAt(i) !== CARRIAGE &&
+                str.charCodeAt(i) !== LINEFEED &&
+                str.charCodeAt(i) !== TAB) {
+                o += str.charAt(i);
+            }
+        }
+        return o;
+    }
+    zanejs.xtrim = xtrim;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isOldIOS() {
+        var win = window;
+        var ver = '' + (/CPU.*OS ([0-9_]{3,4})[0-9_]{0,1}|(CPU like).*AppleWebKit.*Mobile/i.exec(zanejs.ua)
+            || [0, ''])[1];
+        ver = ver
+            .replace('undefined', '3_2')
+            .replace('_', '.')
+            .replace('_', '');
+        return parseFloat(ver) < 10 && !win.MSStream;
+    }
+    zanejs.isOldIOS = _isOldIOS();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    zanejs.emptyVideoData = '' +
+        'data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAACKBtZGF0AAAC8wYF///v3EXpveb' +
+        'ZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE0MiByMjQ3OSBkZDc5YTYxIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIw' +
+        'MDMtMjAxNCAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTEgZGVibG9jaz0xO' +
+        'jA6MCBhbmFseXNlPTB4MToweDExMSBtZT1oZXggc3VibWU9MiBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0wIG1lX3Jhbm' +
+        'dlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MCA4eDhkY3Q9MCBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3F' +
+        'wX29mZnNldD0wIHRocmVhZHM9NiBsb29rYWhlYWRfdGhyZWFkcz0xIHNsaWNlZF90aHJlYWRzPTAgbnI9MCBkZWNpbWF0ZT0xIGludGVy' +
+        'bGFjZWQ9MCBibHVyYXlfY29tcGF0PTAgY29uc3RyYWluZWRfaW50cmE9MCBiZnJhbWVzPTMgYl9weXJhbWlkPTIgYl9hZGFwdD0xIGJfY' +
+        'mlhcz0wIGRpcmVjdD0xIHdlaWdodGI9MSBvcGVuX2dvcD0wIHdlaWdodHA9MSBrZXlpbnQ9MzAwIGtleWludF9taW49MzAgc2NlbmVjdX' +
+        'Q9NDAgaW50cmFfcmVmcmVzaD0wIHJjX2xvb2thaGVhZD0xMCByYz1jcmYgbWJ0cmVlPTEgY3JmPTIwLjAgcWNvbXA9MC42MCBxcG1pbj0' +
+        'wIHFwbWF4PTY5IHFwc3RlcD00IHZidl9tYXhyYXRlPTIwMDAwIHZidl9idWZzaXplPTI1MDAwIGNyZl9tYXg9MC4wIG5hbF9ocmQ9bm9u' +
+        'ZSBmaWxsZXI9MCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAAAOWWIhAA3//p+C7v8tDDSTjf97w55i3SbRPO4ZY+hkjD5hbkAkL3zp' +
+        'J6h/LR1CAABzgB1kqqzUorlhQAAAAxBmiQYhn/+qZYADLgAAAAJQZ5CQhX/AAj5IQADQGgcIQADQGgcAAAACQGeYUQn/wALKCEAA0BoHA' +
+        'AAAAkBnmNEJ/8ACykhAANAaBwhAANAaBwAAAANQZpoNExDP/6plgAMuSEAA0BoHAAAAAtBnoZFESwr/wAI+SEAA0BoHCEAA0BoHAAAAAk' +
+        'BnqVEJ/8ACykhAANAaBwAAAAJAZ6nRCf/AAsoIQADQGgcIQADQGgcAAAADUGarDRMQz/+qZYADLghAANAaBwAAAALQZ7KRRUsK/8ACPkh' +
+        'AANAaBwAAAAJAZ7pRCf/AAsoIQADQGgcIQADQGgcAAAACQGe60Qn/wALKCEAA0BoHAAAAA1BmvA0TEM//qmWAAy5IQADQGgcIQADQGgcA' +
+        'AAAC0GfDkUVLCv/AAj5IQADQGgcAAAACQGfLUQn/wALKSEAA0BoHCEAA0BoHAAAAAkBny9EJ/8ACyghAANAaBwAAAANQZs0NExDP/6plg' +
+        'AMuCEAA0BoHAAAAAtBn1JFFSwr/wAI+SEAA0BoHCEAA0BoHAAAAAkBn3FEJ/8ACyghAANAaBwAAAAJAZ9zRCf/AAsoIQADQGgcIQADQGg' +
+        'cAAAADUGbeDRMQz/+qZYADLkhAANAaBwAAAALQZ+WRRUsK/8ACPghAANAaBwhAANAaBwAAAAJAZ+1RCf/AAspIQADQGgcAAAACQGft0Qn' +
+        '/wALKSEAA0BoHCEAA0BoHAAAAA1Bm7w0TEM//qmWAAy4IQADQGgcAAAAC0Gf2kUVLCv/AAj5IQADQGgcAAAACQGf+UQn/wALKCEAA0BoH' +
+        'CEAA0BoHAAAAAkBn/tEJ/8ACykhAANAaBwAAAANQZvgNExDP/6plgAMuSEAA0BoHCEAA0BoHAAAAAtBnh5FFSwr/wAI+CEAA0BoHAAAAA' +
+        'kBnj1EJ/8ACyghAANAaBwhAANAaBwAAAAJAZ4/RCf/AAspIQADQGgcAAAADUGaJDRMQz/+qZYADLghAANAaBwAAAALQZ5CRRUsK/8ACPk' +
+        'hAANAaBwhAANAaBwAAAAJAZ5hRCf/AAsoIQADQGgcAAAACQGeY0Qn/wALKSEAA0BoHCEAA0BoHAAAAA1Bmmg0TEM//qmWAAy5IQADQGgc' +
+        'AAAAC0GehkUVLCv/AAj5IQADQGgcIQADQGgcAAAACQGepUQn/wALKSEAA0BoHAAAAAkBnqdEJ/8ACyghAANAaBwAAAANQZqsNExDP/6pl' +
+        'gAMuCEAA0BoHCEAA0BoHAAAAAtBnspFFSwr/wAI+SEAA0BoHAAAAAkBnulEJ/8ACyghAANAaBwhAANAaBwAAAAJAZ7rRCf/AAsoIQADQG' +
+        'gcAAAADUGa8DRMQz/+qZYADLkhAANAaBwhAANAaBwAAAALQZ8ORRUsK/8ACPkhAANAaBwAAAAJAZ8tRCf/AAspIQADQGgcIQADQGgcAAA' +
+        'ACQGfL0Qn/wALKCEAA0BoHAAAAA1BmzQ0TEM//qmWAAy4IQADQGgcAAAAC0GfUkUVLCv/AAj5IQADQGgcIQADQGgcAAAACQGfcUQn/wAL' +
+        'KCEAA0BoHAAAAAkBn3NEJ/8ACyghAANAaBwhAANAaBwAAAANQZt4NExC//6plgAMuSEAA0BoHAAAAAtBn5ZFFSwr/wAI+CEAA0BoHCEAA' +
+        '0BoHAAAAAkBn7VEJ/8ACykhAANAaBwAAAAJAZ+3RCf/AAspIQADQGgcAAAADUGbuzRMQn/+nhAAYsAhAANAaBwhAANAaBwAAAAJQZ/aQh' +
+        'P/AAspIQADQGgcAAAACQGf+UQn/wALKCEAA0BoHCEAA0BoHCEAA0BoHCEAA0BoHCEAA0BoHCEAA0BoHAAACiFtb292AAAAbG12aGQAAAA' +
+        'A1YCCX9WAgl8AAAPoAAAH/AABAAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA' +
+        'AAAAAAAAAAAAAAAAAAAAAAADAAAAGGlvZHMAAAAAEICAgAcAT////v7/AAAF+XRyYWsAAABcdGtoZAAAAAPVgIJf1YCCXwAAAAEAAAAAA' +
+        'AAH0AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAygAAAMoAAAAAACRlZHRzAAAAHGVsc3' +
+        'QAAAAAAAAAAQAAB9AAABdwAAEAAAAABXFtZGlhAAAAIG1kaGQAAAAA1YCCX9WAgl8AAV+QAAK/IFXEAAAAAAAtaGRscgAAAAAAAAAAdml' +
+        'kZQAAAAAAAAAAAAAAAFZpZGVvSGFuZGxlcgAAAAUcbWluZgAAABR2bWhkAAAAAQAAAAAAAAAAAAAAJGRpbmYAAAAcZHJlZgAAAAAAAAAB' +
+        'AAAADHVybCAAAAABAAAE3HN0YmwAAACYc3RzZAAAAAAAAAABAAAAiGF2YzEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAygDKAEgAAABIA' +
+        'AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY//8AAAAyYXZjQwFNQCj/4QAbZ01AKOyho3ySTUBAQFAAAAMAEA' +
+        'Ar8gDxgxlgAQAEaO+G8gAAABhzdHRzAAAAAAAAAAEAAAA8AAALuAAAABRzdHNzAAAAAAAAAAEAAAABAAAB8GN0dHMAAAAAAAAAPAAAAAE' +
+        'AABdwAAAAAQAAOpgAAAABAAAXcAAAAAEAAAAAAAAAAQAAC7gAAAABAAA6mAAAAAEAABdwAAAAAQAAAAAAAAABAAALuAAAAAEAADqYAAAA' +
+        'AQAAF3AAAAABAAAAAAAAAAEAAAu4AAAAAQAAOpgAAAABAAAXcAAAAAEAAAAAAAAAAQAAC7gAAAABAAA6mAAAAAEAABdwAAAAAQAAAAAAA' +
+        'AABAAALuAAAAAEAADqYAAAAAQAAF3AAAAABAAAAAAAAAAEAAAu4AAAAAQAAOpgAAAABAAAXcAAAAAEAAAAAAAAAAQAAC7gAAAABAAA6mA' +
+        'AAAAEAABdwAAAAAQAAAAAAAAABAAALuAAAAAEAADqYAAAAAQAAF3AAAAABAAAAAAAAAAEAAAu4AAAAAQAAOpgAAAABAAAXcAAAAAEAAAA' +
+        'AAAAAAQAAC7gAAAABAAA6mAAAAAEAABdwAAAAAQAAAAAAAAABAAALuAAAAAEAADqYAAAAAQAAF3AAAAABAAAAAAAAAAEAAAu4AAAAAQAA' +
+        'OpgAAAABAAAXcAAAAAEAAAAAAAAAAQAAC7gAAAABAAA6mAAAAAEAABdwAAAAAQAAAAAAAAABAAALuAAAAAEAAC7gAAAAAQAAF3AAAAABA' +
+        'AAAAAAAABxzdHNjAAAAAAAAAAEAAAABAAAAAQAAAAEAAAEEc3RzegAAAAAAAAAAAAAAPAAAAzQAAAAQAAAADQAAAA0AAAANAAAAEQAAAA' +
+        '8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAA' +
+        'ADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEA' +
+        'AAAPAAAADQAAAA0AAAARAAAADwAAAA0AAAANAAAAEQAAAA8AAAANAAAADQAAABEAAAANAAAADQAAAQBzdGNvAAAAAAAAADwAAAAwAAADZ' +
+        'AAAA3QAAAONAAADoAAAA7kAAAPQAAAD6wAAA/4AAAQXAAAELgAABEMAAARcAAAEbwAABIwAAAShAAAEugAABM0AAATkAAAE/wAABRIAAA' +
+        'UrAAAFQgAABV0AAAVwAAAFiQAABaAAAAW1AAAFzgAABeEAAAX+AAAGEwAABiwAAAY/AAAGVgAABnEAAAaEAAAGnQAABrQAAAbPAAAG4gA' +
+        'ABvUAAAcSAAAHJwAAB0AAAAdTAAAHcAAAB4UAAAeeAAAHsQAAB8gAAAfjAAAH9gAACA8AAAgmAAAIQQAACFQAAAhnAAAIhAAACJcAAAMs' +
+        'dHJhawAAAFx0a2hkAAAAA9WAgl/VgIJfAAAAAgAAAAAAAAf8AAAAAAAAAAAAAAABAQAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA' +
+        'AAAAAAAQAAAAAAAAAAAAAAAAAACsm1kaWEAAAAgbWRoZAAAAADVgIJf1YCCXwAArEQAAWAAVcQAAAAAACdoZGxyAAAAAAAAAABzb3VuAA' +
+        'AAAAAAAAAAAAAAU3RlcmVvAAAAAmNtaW5mAAAAEHNtaGQAAAAAAAAAAAAAACRkaW5mAAAAHGRyZWYAAAAAAAAAAQAAAAx1cmwgAAAAAQA' +
+        'AAidzdGJsAAAAZ3N0c2QAAAAAAAAAAQAAAFdtcDRhAAAAAAAAAAEAAAAAAAAAAAACABAAAAAArEQAAAAAADNlc2RzAAAAAAOAgIAiAAIA' +
+        'BICAgBRAFQAAAAADDUAAAAAABYCAgAISEAaAgIABAgAAABhzdHRzAAAAAAAAAAEAAABYAAAEAAAAABxzdHNjAAAAAAAAAAEAAAABAAAAA' +
+        'QAAAAEAAAAUc3RzegAAAAAAAAAGAAAAWAAAAXBzdGNvAAAAAAAAAFgAAAOBAAADhwAAA5oAAAOtAAADswAAA8oAAAPfAAAD5QAAA/gAAA' +
+        'QLAAAEEQAABCgAAAQ9AAAEUAAABFYAAARpAAAEgAAABIYAAASbAAAErgAABLQAAATHAAAE3gAABPMAAAT5AAAFDAAABR8AAAUlAAAFPAA' +
+        'ABVEAAAVXAAAFagAABX0AAAWDAAAFmgAABa8AAAXCAAAFyAAABdsAAAXyAAAF+AAABg0AAAYgAAAGJgAABjkAAAZQAAAGZQAABmsAAAZ+' +
+        'AAAGkQAABpcAAAauAAAGwwAABskAAAbcAAAG7wAABwYAAAcMAAAHIQAABzQAAAc6AAAHTQAAB2QAAAdqAAAHfwAAB5IAAAeYAAAHqwAAB' +
+        '8IAAAfXAAAH3QAAB/AAAAgDAAAICQAACCAAAAg1AAAIOwAACE4AAAhhAAAIeAAACH4AAAiRAAAIpAAACKoAAAiwAAAItgAACLwAAAjCAA' +
+        'AAFnVkdGEAAAAObmFtZVN0ZXJlbwAAAHB1ZHRhAAAAaG1ldGEAAAAAAAAAIWhkbHIAAAAAAAAAAG1kaXJhcHBsAAAAAAAAAAAAAAAAO2l' +
+        'sc3QAAAAzqXRvbwAAACtkYXRhAAAAAQAAAABIYW5kQnJha2UgMC4xMC4yIDIwMTUwNjExMDA=';
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    var NoSleep = (function () {
+        function NoSleep() {
+        }
+        NoSleep.enable = function () {
+            NoSleep.initVideo();
+            if (zanejs.isOldIOS) {
+                NoSleep.disable();
+                NoSleep.timer = window.setInterval(function () {
+                    window.location.href = '/';
+                    window.setTimeout(window.stop, 0);
+                }, 15000);
+            }
+            else {
+                NoSleep.video.play();
+            }
+        };
+        NoSleep.disable = function () {
+            NoSleep.initVideo();
+            if (zanejs.isOldIOS) {
+                if (NoSleep.timer) {
+                    window.clearInterval(NoSleep.timer);
+                    NoSleep.timer = null;
+                }
+            }
+            else {
+                NoSleep.video.pause();
+            }
+        };
+        NoSleep.initVideo = function () {
+            if (!NoSleep.video) {
+                var video_1 = document.createElement('video');
+                video_1.setAttribute('playsinline', 'true');
+                video_1.setAttribute('type', 'video/mp4');
+                video_1.setAttribute('x5-video-player-type', 'h5');
+                video_1.setAttribute('src', zanejs.emptyVideoData);
+                video_1.addEventListener('timeupdate', function () {
+                    if (video_1.currentTime > 0.5) {
+                        video_1.currentTime = Math.random();
+                    }
+                });
+                NoSleep.video = video_1;
+            }
+        };
+        return NoSleep;
+    }());
+    zanejs.NoSleep = NoSleep;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function buildBridgedWorker(workerFunction, workerExportNames, mainExportNames, mainExportHandles) {
+        var baseWorkerStr = workerFunction.toString().match(/^\s*function\s*\(\s*\)\s*\{(([\s\S](?!\}$))*[\s\S])/)[1];
+        var extraWorkerStr = [];
+        extraWorkerStr.push('var main = {};\n');
+        for (var i = 0; i < mainExportNames.length; i++) {
+            var name_1 = mainExportNames[i];
+            if (name_1.charAt(name_1.length - 1) === '*') {
+                name_1 = name_1.substr(0, name_1.length - 1);
+                mainExportNames[i] = name_1;
+                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
+                    'var args = Array.prototype.slice.call(arguments); ' +
+                    'var buffers = args.pop(); \n ' +
+                    'self.postMessage({foo:\'' + name_1 + '\', args:args}, buffers)\n' +
+                    '}; \n');
+            }
+            else {
+                extraWorkerStr.push('main.' + name_1 + ' = function(/* arguments */){\n ' +
+                    'var args = Array.prototype.slice.call(arguments); \n ' +
+                    'self.postMessage({foo:\'' + name_1 + '\', args:args})\n' +
+                    '}; \n');
+            }
+        }
+        var tmpStr = [];
+        for (var i = 0; i < workerExportNames.length; i++) {
+            var name_2 = workerExportNames[i];
+            name_2 = name_2.charAt(name_2.length - 1) === '*'
+                ? name_2.substr(0, name_2.length - 1)
+                : name_2;
+            tmpStr.push(name_2 + ': ' + name_2);
+        }
+        extraWorkerStr.push('var foos={' + tmpStr.join(',') + '};\n');
+        extraWorkerStr.push('self.onmessage = function(e){\n');
+        extraWorkerStr.push('if(e.data.foo in foos) \n  ' +
+            'foos[e.data.foo].apply(null, e.data.args); \n ' +
+            'else \n ' +
+            'throw(new Error(\'Main thread requested function \' + e.data.foo + \'. But it is not available.\'));\n');
+        extraWorkerStr.push('\n};\n');
+        var fullWorkerStr = baseWorkerStr +
+            '\n\n/*==== STUFF ADDED BY BuildBridgeWorker ==== */\n\n' + extraWorkerStr.join('');
+        var url = window.URL.createObjectURL(new Blob([fullWorkerStr], { type: 'text/javascript' }));
+        var theWorker = new Worker(url);
+        theWorker.onmessage = function (e) {
+            var fooInd = mainExportNames.indexOf(e.data.foo);
+            if (fooInd !== -1) {
+                mainExportHandles[fooInd].apply(null, e.data.args);
+            }
+            else {
+                throw (new Error('Worker requested function ' + e.data.foo + '. But it is not available.'));
+            }
+        };
+        var ret = { blobURL: url };
+        var makePostMessageForFunction = function (name, hasBuffers) {
+            if (hasBuffers) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments);
+                    var buffers = args.pop();
+                    theWorker.postMessage({ foo: name, args: args }, buffers);
+                };
+            }
+            else {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments);
+                    theWorker.postMessage({ foo: name, args: args });
+                };
+            }
+        };
+        for (var i = 0; i < workerExportNames.length; i++) {
+            var name_3 = workerExportNames[i];
+            if (name_3.charAt(name_3.length - 1) === '*') {
+                name_3 = name_3.substr(0, name_3.length - 1);
+                ret[name_3] = makePostMessageForFunction(name_3, true);
+            }
+            else {
+                ret[name_3] = makePostMessageForFunction(name_3, false);
+            }
+        }
+        return ret;
+    }
+    zanejs.buildBridgedWorker = buildBridgedWorker;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function call_user_func(cb, parameters) {
+        parameters = Array.prototype.slice.call(arguments, 1);
+        return zanejs.call_user_func_array(cb, parameters);
+    }
+    zanejs.call_user_func = call_user_func;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function call_user_func_array(cb, parameters) {
+        var func;
+        var scope = null;
+        var validJSFunctionNamePattern = /^[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*$/;
+        if (typeof cb === 'string') {
+            if (typeof window[cb] === 'function') {
+                func = window[cb];
+            }
+            else if (cb.match(validJSFunctionNamePattern)) {
+                func = (new Function(null, 'return ' + cb)());
+            }
+        }
+        else if (Object.prototype.toString.call(cb) === '[object Array]') {
+            if (typeof cb[0] === 'string') {
+                if (cb[0].match(validJSFunctionNamePattern)) {
+                    func = eval(cb[0] + '[\'' + cb[1] + '\']');
+                }
+            }
+            else {
+                func = cb[0][cb[1]];
+            }
+            if (typeof cb[0] === 'string') {
+                if (typeof window[cb[0]] === 'function') {
+                    scope = window[cb[0]];
+                }
+                else if (cb[0].match(validJSFunctionNamePattern)) {
+                    scope = eval(cb[0]);
+                }
+            }
+            else if (typeof cb[0] === 'object') {
+                scope = cb[0];
+            }
+        }
+        else if (typeof cb === 'function') {
+            func = cb;
+        }
+        if (typeof func !== 'function') {
+            throw new Error(func + ' is not a valid function');
+        }
+        return func.apply(scope, parameters);
+    }
+    zanejs.call_user_func_array = call_user_func_array;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function cancelRequestAnimationFrame() {
+        var w = window;
+        return w.cancelAnimationFrame ||
+            w.webkitCancelAnimationFrame ||
+            w.webkitCancelRequestAnimationFrame ||
+            w.mozCancelAnimationFrame ||
+            w.mozCancelRequestAnimationFrame ||
+            w.oCancelRequestAnimationFrame ||
+            w.msCancelRequestAnimationFrame ||
+            function (timeoutId) {
+                return window.clearTimeout(timeoutId);
+            };
+    }
+    zanejs.cancelRequestAnimationFrame = cancelRequestAnimationFrame;
+})(zanejs || (zanejs = {}));
+
 (function (zanejs) {
     function cookie(name, value, options) {
         if (value === void 0) { value = void 0; }
@@ -7308,7 +7214,482 @@ var zanejs;
     }
     zanejs.cookie = cookie;
 })(zanejs || (zanejs = {}));
-var zanejs;
+
+(function (zanejs) {
+    function createInstance(clazz, args, props) {
+        if (args === void 0) { args = []; }
+        if (props === void 0) { props = null; }
+        if (!clazz)
+            return null;
+        if (!zanejs.is_array(args)) {
+            args = [args];
+        }
+        var instance;
+        if (args) {
+            switch (args.length) {
+                case 0:
+                    instance = new clazz();
+                    break;
+                case 1:
+                    instance = new clazz(args[0]);
+                    break;
+                case 2:
+                    instance = new clazz(args[0], args[1]);
+                    break;
+                case 3:
+                    instance = new clazz(args[0], args[1], args[2]);
+                    break;
+                case 4:
+                    instance = new clazz(args[0], args[1], args[2], args[3]);
+                    break;
+                case 5:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4]);
+                    break;
+                case 6:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5]);
+                    break;
+                case 7:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                    break;
+                case 8:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                    break;
+                case 9:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                    break;
+                case 10:
+                    instance = new clazz(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+                    break;
+                default:
+                    return null;
+            }
+        }
+        else {
+            instance = new clazz();
+        }
+        if (props) {
+            Object.keys(props).map(function (key) {
+                if (instance.hasOwnProperty(key)) {
+                    instance[key] = props[key];
+                }
+            });
+        }
+        return instance;
+    }
+    zanejs.createInstance = createInstance;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    zanejs.emptyImageData = '' +
+        'data:image/png;base64,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';
+    zanejs.emptyImageElement = document.createElement('img');
+    if (zanejs.emptyImageElement && zanejs.emptyImageElement.setAttribute) {
+        zanejs.emptyImageElement.setAttribute('src', zanejs.emptyImageData);
+    }
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    var fn = (function () {
+        var val;
+        var fnMap = [
+            [
+                'requestFullscreen', 'exitFullscreen', 'fullscreenElement',
+                'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'
+            ],
+            [
+                'webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement',
+                'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'
+            ],
+            [
+                'webkitRequestFullScreen', 'webkitCancelFullScreen', 'webkitCurrentFullScreenElement',
+                'webkitCancelFullScreen', 'webkitfullscreenchange', 'webkitfullscreenerror'
+            ],
+            [
+                'mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement',
+                'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'
+            ],
+            [
+                'msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement',
+                'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError'
+            ]
+        ];
+        var ret = {};
+        for (var i = 0, l = fnMap.length; i < l; i++) {
+            val = fnMap[i];
+            if (val && val[1] in document) {
+                for (i = 0; i < val.length; i++) {
+                    ret[fnMap[0][i]] = val[i];
+                }
+                return ret;
+            }
+        }
+        return false;
+    })();
+    var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+    function requestFullscreen(elem) {
+        if (elem === void 0) { elem = null; }
+        var request = fn.requestFullscreen;
+        elem = elem || document.documentElement;
+        if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
+            elem[request]();
+        }
+        else {
+            var el = Element;
+            elem[request](keyboardAllowed && el.ALLOW_KEYBOARD_INPUT);
+        }
+    }
+    zanejs.requestFullscreen = requestFullscreen;
+    function exitFullscreen() {
+        document[fn.exitFullscreen]();
+    }
+    zanejs.exitFullscreen = exitFullscreen;
+    function isFullscreen() {
+        return Boolean(document[fn.fullscreenElement]);
+    }
+    zanejs.isFullscreen = isFullscreen;
+    function toggleFullscreen(elem) {
+        if (elem === void 0) { elem = null; }
+        if (isFullscreen()) {
+            this.exitFullscreen();
+        }
+        else {
+            this.requestFullscreen(elem);
+        }
+    }
+    zanejs.toggleFullscreen = toggleFullscreen;
+    function onFullscreenChange(callback) {
+        document.addEventListener(fn.fullscreenchange, callback, false);
+    }
+    zanejs.onFullscreenChange = onFullscreenChange;
+    function onFullscreenError(callback) {
+        document.addEventListener(fn.fullscreenerror, callback, false);
+    }
+    zanejs.onFullscreenError = onFullscreenError;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function getOrientation() {
+        if (typeof window.orientation === 'undefined') {
+            var w = zanejs.innerWidth();
+            var h = zanejs.innerHeight();
+            return w > h ? 1 : 2;
+        }
+        else {
+            if (window.orientation === 180 || window.orientation === 0) {
+                return 2;
+            }
+            else if (window.orientation === 90 || window.orientation === -90) {
+                return 1;
+            }
+            return 0;
+        }
+    }
+    zanejs.getOrientation = getOrientation;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function getParams() {
+        return zanejs.getUrlParams(document.location.href);
+    }
+    zanejs.getParams = getParams;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function getUrlParams(url) {
+        url = url.split('?')[1];
+        var pl = /\+/g;
+        var search = /([^&=]+)=?([^&]*)/g;
+        var decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); };
+        var urlParams = {};
+        var match;
+        while (match = search.exec(url)) {
+            urlParams[decode(match[1])] = decode(match[2]);
+        }
+        return urlParams;
+    }
+    zanejs.getUrlParams = getUrlParams;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _iOSVersion() {
+        if (/iP(hone|od|ad)/.test(navigator.platform)) {
+            var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+            return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || '0', 10)];
+        }
+        return [0, 0, 0];
+    }
+    zanejs.iOSVersion = _iOSVersion();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function innerHeight() {
+        var _height;
+        if (window.innerHeight) {
+            _height = window.innerHeight;
+        }
+        else {
+            if (document.compatMode === 'CSS1Compat') {
+                _height = document.documentElement.clientHeight;
+            }
+            else {
+                _height = document.body.clientHeight;
+            }
+        }
+        return _height;
+    }
+    zanejs.innerHeight = innerHeight;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function innerWidth() {
+        var _width;
+        if (window.innerWidth) {
+            _width = window.innerWidth;
+        }
+        else {
+            if (document.compatMode === 'CSS1Compat') {
+                _width = document.documentElement.clientWidth;
+            }
+            else {
+                _width = document.body.clientWidth;
+            }
+        }
+        return _width;
+    }
+    zanejs.innerWidth = innerWidth;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    zanejs.ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+    function _isIE() {
+        return zanejs.ua.match(/msie/i) != null;
+    }
+    zanejs.isIE = _isIE();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isAndroid() {
+        return zanejs.ua.match(/android/i) != null;
+    }
+    zanejs.isAndroid = _isAndroid();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isChrome() {
+        return zanejs.ua.match(/chrome/i) != null;
+    }
+    zanejs.isChrome = _isChrome();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isIOS() {
+        return zanejs.ua.match(/(ipad|iphone|ipod)/i) != null;
+    }
+    zanejs.isIOS = _isIOS();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isOpera() {
+        return zanejs.ua.match(/opera/i) != null;
+    }
+    zanejs.isOpera = _isOpera();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isQQBrowser() {
+        return zanejs.ua.match(/MQQBrowser/i) != null;
+    }
+    zanejs.isQQBrowser = _isQQBrowser();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isSafari() {
+        return (zanejs.ua.toLowerCase().indexOf('safari') !== -1);
+    }
+    zanejs.isSafari = _isSafari();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isWebkit() {
+        return zanejs.ua.match(/webkit/i) != null;
+    }
+    zanejs.isWebkit = _isWebkit();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _isWeiXin() {
+        return zanejs.ua.match(/MicroMessenger/i) != null;
+    }
+    zanejs.isWeiXin = _isWeiXin();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function magical(Class) {
+        return function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            return new window.Proxy(new (Class.bind.apply(Class, [void 0].concat(args)))(), {
+                get: function (target, key, receiver) {
+                    if (typeof target[key] !== 'undefined') {
+                        return target[key];
+                    }
+                    if (typeof target.__get === 'function') {
+                        return target.__get(key);
+                    }
+                    else if (typeof target.__call === 'function') {
+                        return function () {
+                            var $args = [];
+                            for (var _i = 0; _i < arguments.length; _i++) {
+                                $args[_i] = arguments[_i];
+                            }
+                            target.__call.apply(this, [key].concat($args));
+                        };
+                    }
+                },
+                set: function (target, key, value, receiver) {
+                    if (typeof target[key] !== 'undefined') {
+                        target[key] = value;
+                        return;
+                    }
+                    if (typeof target.__set === 'function') {
+                        target.__set(key, value);
+                        return;
+                    }
+                }
+            });
+        };
+    }
+    zanejs.magical = magical;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function _mobileHTML5() {
+        return (zanejs.ua.match(/(mobile|pre\/|xoom)/i) != null || zanejs.isIOS || zanejs.isAndroid);
+    }
+    zanejs.mobileHTML5 = _mobileHTML5();
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function onVisibilityChange(callback) {
+        var state, visibilityChange, doc = document;
+        if (typeof doc.hidden !== 'undefined') {
+            visibilityChange = 'visibilitychange';
+            state = 'visibilityState';
+        }
+        else if (typeof doc.mozHidden !== 'undefined') {
+            visibilityChange = 'mozvisibilitychange';
+            state = 'mozVisibilityState';
+        }
+        else if (typeof doc.msHidden !== 'undefined') {
+            visibilityChange = 'msvisibilitychange';
+            state = 'msVisibilityState';
+        }
+        else if (typeof doc.webkitHidden !== 'undefined') {
+            visibilityChange = 'webkitvisibilitychange';
+            state = 'webkitVisibilityState';
+        }
+        doc.addEventListener(visibilityChange, function () {
+            if (callback) {
+                callback(document[state]);
+            }
+        }, false);
+    }
+    zanejs.onVisibilityChange = onVisibilityChange;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function openWindow(anchor, options) {
+        var args = '';
+        if (typeof (options) === 'undefined') {
+            options = {};
+        }
+        if (typeof (options.name) === 'undefined') {
+            options.name = 'win' + Math.round(Math.random() * 100000);
+        }
+        if (typeof (options.height) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
+            args += 'height=' + options.height + ',';
+        }
+        if (typeof (options.width) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
+            args += 'width=' + options.width + ',';
+        }
+        if (typeof (options.fullscreen) !== 'undefined') {
+            args += 'width=' + screen.availWidth + ',';
+            args += 'height=' + screen.availHeight + ',';
+        }
+        if (typeof (options.center) === 'undefined') {
+            options.x = 0;
+            options.y = 0;
+            args += 'screenx=' + options.x + ',';
+            args += 'screeny=' + options.y + ',';
+            args += 'left=' + options.x + ',';
+            args += 'top=' + options.y + ',';
+        }
+        if (typeof (options.center) !== 'undefined' && typeof (options.fullscreen) === 'undefined') {
+            options.y = Math.floor((screen.availHeight - (options.height || screen.height)) / 2)
+                - (screen.height - screen.availHeight);
+            options.x = Math.floor((screen.availWidth - (options.width || screen.width)) / 2)
+                - (screen.width - screen.availWidth);
+            args += 'screenx=' + options.x + ',';
+            args += 'screeny=' + options.y + ',';
+            args += 'left=' + options.x + ',';
+            args += 'top=' + options.y + ',';
+        }
+        if (typeof (options.scrollbars) !== 'undefined') {
+            args += 'scrollbars=1,';
+        }
+        if (typeof (options.menubar) !== 'undefined') {
+            args += 'menubar=1,';
+        }
+        if (typeof (options.locationbar) !== 'undefined') {
+            args += 'location=1,';
+        }
+        if (typeof (options.resizable) !== 'undefined') {
+            args += 'resizable=1,';
+        }
+        var win = window.open(anchor, options.name, args);
+        return false;
+    }
+    zanejs.openWindow = openWindow;
+})(zanejs || (zanejs = {}));
+
 (function (zanejs) {
     function parseUri(str, component, mode) {
         if (mode === void 0) { mode = 'php'; }
@@ -7376,4 +7757,272 @@ var zanejs;
     }
     zanejs.parseUri = parseUri;
 })(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function requestAnimationFrame() {
+        var w = window;
+        return w.requestAnimationFrame ||
+            w.webkitAnimationFrame ||
+            w.webkitRequestAnimationFrame ||
+            w.mozRequestAnimationFrame ||
+            w.oRequestAnimationFrame ||
+            w.msRequestAnimationFrame ||
+            function (callback, element) {
+                return window.setTimeout(callback, 1000 / 60);
+            };
+    }
+    zanejs.requestAnimationFrame = requestAnimationFrame;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function touchSupported() {
+        var win = window;
+        var doc = document;
+        return (('ontouchstart' in win) ||
+            ('undefined' !== typeof win.TouchEvent) ||
+            ('undefined' !== typeof doc.createTouch));
+    }
+    zanejs.touchSupported = touchSupported;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function create3DContext(canvas, webGLSettings) {
+        var names = ['webgl', 'experimental-webgl', 'webkit-3d', 'moz-webgl'];
+        var context = null;
+        for (var ii = 0; ii < names.length; ++ii) {
+            try {
+                context = canvas.getContext(names[ii], webGLSettings);
+            }
+            catch (e) {
+            }
+            if (context) {
+                break;
+            }
+        }
+        return context;
+    }
+    zanejs.create3DContext = create3DContext;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function isWebGLSupported() {
+        var contextOptions = { stencil: true, failIfMajorPerformanceCaveat: true };
+        try {
+            var win = window;
+            if (!win.WebGLRenderingContext) {
+                return false;
+            }
+            var canvas = document.createElement('canvas');
+            var gl = zanejs.create3DContext(canvas, contextOptions);
+            var success = !!(gl && gl.getContextAttributes().stencil);
+            if (gl) {
+                var loseContext = gl.getExtension('WEBGL_lose_context');
+                if (loseContext) {
+                    loseContext.loseContext();
+                }
+            }
+            gl = null;
+            return success;
+        }
+        catch (e) {
+            return false;
+        }
+    }
+    zanejs.isWebGLSupported = isWebGLSupported;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    function stringToXMLDom(str) {
+        var xmlDoc = null;
+        if (window.DOMParser) {
+            var parser = new DOMParser();
+            xmlDoc = parser.parseFromString(str, 'text/xml');
+        }
+        else {
+            var ActiveXObject = window.ActiveXObject;
+            xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
+            xmlDoc.async = 'false';
+            xmlDoc.loadXML(str);
+        }
+        return xmlDoc;
+    }
+    zanejs.stringToXMLDom = stringToXMLDom;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    var WS = (function () {
+        function WS(url, protocols, options) {
+            if (protocols === void 0) { protocols = []; }
+            if (options === void 0) { options = {}; }
+            var _this = this;
+            this._url = url;
+            this._protocols = protocols;
+            this._websocket = null;
+            this._binaryType = 'blob';
+            this._reconnectLock = false;
+            this._heartBeatTime = 60000;
+            this._heartBeatHandler = null;
+            this._timeout = 10000;
+            this._heartBeatTimer = null;
+            this._closeTimer = null;
+            this._header = null;
+            this._onclose = null;
+            this._onerror = null;
+            this._onopen = null;
+            this._onmessage = null;
+            this._autoReconnect = true;
+            Object.keys(options).forEach(function (key) {
+                var _key = '_' + key;
+                if (_this.hasOwnProperty(_key)) {
+                    _this[_key] = options[key];
+                }
+            });
+            this.initWebsocket();
+        }
+        WS.prototype.send = function (data) {
+            var $ws = window.wx;
+            if ($ws) {
+                this._websocket.send({
+                    data: data
+                });
+            }
+            else {
+                this._websocket.send(data);
+            }
+        };
+        WS.prototype.close = function (code, reason) {
+            var $ws = window.wx;
+            if ($ws) {
+                this._websocket.close({
+                    code: code,
+                    reason: reason
+                });
+            }
+            else {
+                this._websocket.close(code, reason);
+            }
+        };
+        WS.prototype.reconnect = function () {
+            var _this = this;
+            if (this._reconnectLock)
+                return;
+            this._reconnectLock = true;
+            setTimeout(function () {
+                _this.initWebsocket();
+                _this._reconnectLock = false;
+            }, this._timeout);
+        };
+        WS.prototype.initWebsocket = function () {
+            var _this = this;
+            try {
+                var $ws = window.wx;
+                if ($ws) {
+                    this._websocket = $ws.connectSocket({
+                        url: this._url,
+                        protocols: this._protocols,
+                        header: this._header
+                    });
+                    this._websocket.onClose = function () {
+                        if (_this._onclose)
+                            _this._onclose();
+                        if (_this._autoReconnect)
+                            _this.reconnect();
+                    };
+                    this._websocket.onError = function (errMsg) {
+                        if (_this._onerror)
+                            _this._onerror(errMsg);
+                        if (_this._autoReconnect)
+                            _this.reconnect();
+                    };
+                    this._websocket.onOpen = function (header) {
+                        if (_this._onopen)
+                            _this._onopen(header);
+                        _this.heartCheck();
+                    };
+                    this._websocket.onMessage = function (data) {
+                        if (_this._onmessage)
+                            _this._onmessage(data);
+                        _this.heartCheck();
+                    };
+                }
+                else {
+                    this._websocket = new WebSocket(this._url, this._protocols);
+                    this._websocket.binaryType = this._binaryType;
+                    this._websocket.onclose = function (evt) {
+                        if (_this._onclose)
+                            _this._onclose(evt);
+                        if (_this._autoReconnect)
+                            _this.reconnect();
+                    };
+                    this._websocket.onerror = function (evt) {
+                        if (_this._onerror)
+                            _this._onerror(evt);
+                        if (_this._autoReconnect)
+                            _this.reconnect();
+                    };
+                    this._websocket.onopen = function (evt) {
+                        if (_this._onopen)
+                            _this._onopen(evt);
+                        _this.heartCheck();
+                    };
+                    this._websocket.onmessage = function (evt) {
+                        if (_this._onmessage)
+                            _this._onmessage(evt.data);
+                        _this.heartCheck();
+                    };
+                }
+            }
+            catch (e) {
+                if (this._autoReconnect)
+                    this.reconnect();
+            }
+        };
+        WS.prototype.heartCheck = function () {
+            var _this = this;
+            clearTimeout(this._closeTimer);
+            clearTimeout(this._heartBeatTimer);
+            this._heartBeatTimer = setTimeout(function () {
+                if (_this._heartBeatHandler) {
+                    _this._heartBeatHandler();
+                }
+                _this._closeTimer = setTimeout(function () {
+                    _this._websocket.close();
+                    _this._websocket = null;
+                }, _this._heartBeatTime);
+            }, this._heartBeatTime);
+        };
+        return WS;
+    }());
+    zanejs.WS = WS;
+})(zanejs || (zanejs = {}));
+
+(function (zanejs) {
+    var WSManager = (function () {
+        function WSManager() {
+            throw new Error('This is a STATIC CLASS and should not be instantiated.');
+        }
+        WSManager.subscribe = function (url, protocols, options) {
+            if (protocols === void 0) { protocols = []; }
+            if (options === void 0) { options = {}; }
+            if (!WSManager.connections[url]) {
+                WSManager.connections[url] = new zanejs.WS(url, protocols, options);
+            }
+            return WSManager.connections[url];
+        };
+        WSManager.unSubscribe = function (url, code, reason) {
+            var ws = WSManager.connections[url];
+            if (ws) {
+                ws.close(code, reason);
+            }
+        };
+        WSManager.getConnectionsFrom = function (url) {
+            return WSManager.connections[url];
+        };
+        WSManager.connections = {};
+        return WSManager;
+    }());
+    zanejs.WSManager = WSManager;
+})(zanejs || (zanejs = {}));
 //# sourceMappingURL=zanejs.js.map
+	return zanejs;
+});

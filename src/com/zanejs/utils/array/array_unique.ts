@@ -15,11 +15,13 @@ module zanejs {
     export function array_unique(inputArr: any) {
         let tmpArr2 = {};
         let _arraySearch = function (needle: any, haystack: any) {
-            Object.keys(haystack).map(key => {
+            let keys = Object.keys(haystack);
+            for (let i = 0; i < keys.length; ++i) {
+                let key = keys[i];
                 if ((haystack[key] + '') === (needle + '')) {
                     return key;
                 }
-            });
+            }
             return false;
         };
 
