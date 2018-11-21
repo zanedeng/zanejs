@@ -556,6 +556,9 @@ declare module zanejs {
     function htmlColorToUint(htmlColorName: string): number;
 }
 declare module zanejs {
+    function lightenDarkenColor(col: string, amt: number): string;
+}
+declare module zanejs {
     function percToUint(perc: string): number;
 }
 declare module zanejs {
