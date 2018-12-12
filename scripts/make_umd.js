@@ -19,7 +19,7 @@ const umdCode = `
 		exports["${pkg.name}"] = factory();
 	else
 		root["${pkg.name}"] = factory();
-})(window, function() {
+})(this, function() {
 	var zanejs = {};
 	${fileContent}
 	return zanejs;

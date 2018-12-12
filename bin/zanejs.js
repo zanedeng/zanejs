@@ -323,6 +323,7 @@ var zanejs;
             }
         });
     }
+    zanejs.paserFui = paserFui;
     function base64ToImage(data, onCompleteFunc, onCompleteArgArray, onCompleteThisArg) {
         if (onCompleteArgArray === void 0) { onCompleteArgArray = null; }
         if (onCompleteThisArg === void 0) { onCompleteThisArg = null; }
@@ -336,6 +337,7 @@ var zanejs;
         };
         return img;
     }
+    zanejs.base64ToImage = base64ToImage;
     function paserImage(file, relativePath, callback) {
         var baseName = file.name.substring(file.name.lastIndexOf('/') + 1, file.name.lastIndexOf('.'));
         file.async('base64').then(function (content) {
@@ -353,6 +355,7 @@ var zanejs;
             });
         });
     }
+    zanejs.paserImage = paserImage;
     function paserZipMiddleware(resource, next) {
         if (resource.extension === 'zip') {
             var zip = new JSZip();
@@ -5265,6 +5268,46 @@ var zanejs;
         return false;
     }
     zanejs.object_change_key_case = object_change_key_case;
+})(zanejs || (zanejs = {}));
+var zanejs;
+(function (zanejs) {
+    function sizeof(object) {
+        var objects = [object];
+        var size = 0;
+        for (var index = 0; index < objects.length; index++) {
+            switch (typeof objects[index]) {
+                case 'boolean':
+                    size += 4;
+                    break;
+                case 'number':
+                    size += 8;
+                    break;
+                case 'string':
+                    size += 2 * objects[index].length;
+                    break;
+                case 'object':
+                    if (Object.prototype.toString.call(objects[index]) !== '[object Array]') {
+                        for (var key in objects[index])
+                            size += 2 * key.length;
+                    }
+                    Object.keys(objects[index]).map(function (key) {
+                        var processed = false;
+                        for (var search = 0; search < objects.length; search++) {
+                            if (objects[search] === objects[index][key]) {
+                                processed = true;
+                                break;
+                            }
+                        }
+                        if (!processed)
+                            objects.push(objects[index][key]);
+                    });
+                    break;
+                default:
+            }
+        }
+        return size;
+    }
+    zanejs.sizeof = sizeof;
 })(zanejs || (zanejs = {}));
 var zanejs;
 (function (zanejs) {

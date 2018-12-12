@@ -125,6 +125,7 @@ module zanejs {
             }
             // 创建对象。
             xhr = getXHR();
+            // "arraybuffer", "blob", "document", "json", "text"
             xhr.responseType = dataType;
             xhr.open(type, url, async);
             // 设置请求头

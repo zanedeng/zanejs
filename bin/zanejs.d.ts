@@ -72,6 +72,9 @@ declare module zanejs {
     }
 }
 declare module zanejs {
+    function paserFui(file: any, relativePath: string, callback: Function): void;
+    function base64ToImage(data: string, onCompleteFunc: Function, onCompleteArgArray?: any[], onCompleteThisArg?: any): HTMLImageElement;
+    function paserImage(file: any, relativePath: string, callback: Function): void;
     function paserZipMiddleware(resource: any, next: any): void;
 }
 declare module zanejs {
@@ -806,6 +809,9 @@ declare module zanejs {
 }
 declare module zanejs {
     function object_change_key_case(obj: any, cs?: string): any;
+}
+declare module zanejs {
+    function sizeof(object: any): number;
 }
 declare module zanejs {
     function toObject(objString: string): any;
