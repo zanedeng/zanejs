@@ -1,34 +1,40 @@
-import { BaseObject } from "./BaseObject";
-import { Controller } from "./Controller";
-import { Model, IModelType } from "./Model";
+import { BaseObject } from './BaseObject';
+import { Controller } from './Controller';
+import { Model, IModelType } from './Model';
 
 export type IViewType = {
-    new (viewComponent: Object): View;
-}
+    new (viewComponent: unknown): View;
+};
 
 /**
  * @class View
  */
-export class View extends BaseObject {
-
+export class View extends BaseObject
+{
     public static viewMap: Map<string, View> = new Map();
     public static viewWeakMap: WeakMap<IViewType, string> = new WeakMap();
 
-    public viewComponent: View;
+    public viewComponent: unknown;
 
     public eventList: string[] = [];
 
     private _name: string;
 
-    public static retrieveView(clazz: IViewType): View {
+    public static retrieveView(clazz: IViewType): View
+    {
         return View.viewMap.get(View.viewWeakMap.get(clazz));
     }
 
-    public static removeView(clazz: IViewType): void {
+    public static removeView(clazz: IViewType): void
+    {
         const viewKey = View.viewWeakMap.get(clazz);
-        if (viewKey) {
+
+        if (viewKey)
+        {
             const view: View = View.viewMap.get(viewKey);
-            if (view) {
+
+            if (view)
+            {
                 View.viewWeakMap.delete(clazz);
                 View.viewMap.delete(viewKey);
                 view.onRemove();
@@ -38,67 +44,83 @@ export class View extends BaseObject {
         }
     }
 
-    public static removeViews(...args: IViewType[]): void {
-        args.map(clazz => View.removeView(clazz));
+    public static removeViews(...args: IViewType[]): void
+    {
+        args.map((clazz) => View.removeView(clazz));
     }
 
-    public static notifyViews(cmd: string, data: any = null, sponsor: any = null): void {
-        let notifyList: View[] = [];
-        View.viewMap.forEach(view => {
-            if (view.eventList.indexOf(cmd) !== -1) {
+    public static notifyViews(cmd: string, data: any = null, sponsor: any = null): void
+    {
+        const notifyList: View[] = [];
+
+        View.viewMap.forEach((view) =>
+        {
+            if (view.eventList.indexOf(cmd) !== -1)
+            {
                 notifyList.push(view);
             }
         });
-        notifyList.map(view => view.handleEvent(cmd, data, sponsor));
+        notifyList.map((view) => view.handleEvent(cmd, data, sponsor));
     }
 
-    constructor(viewComponent: any) {
+    constructor(viewComponent: unknown)
+    {
         super();
-        if (View.viewWeakMap.has(this.constructor as IViewType)) {
-            throw new Error('View[' + this.constructor.name + '] instance already constructed !');
+        if (View.viewWeakMap.has(this.constructor as IViewType))
+        {
+            throw new Error(`View[${this.constructor.name}] instance already constructed !`);
         }
         this.viewComponent = viewComponent;
         this.eventList = this.listEventInterests();
 
-        this._name = 'view_' + this.hashCode;
+        this._name = `view_${this.hashCode}`;
         View.viewWeakMap.set(this.constructor as IViewType, this._name);
         View.viewMap.set(this._name, this);
         this.onRegister();
     }
 
-    public onRegister(): void {
+    public onRegister(): void
+    {
         // overwrite
     }
 
-    public onRemove(): void {
+    public onRemove(): void
+    {
         // overwrite
 
     }
 
-    public listEventInterests(): string[] {
+    public listEventInterests(): string[]
+    {
         return [];
     }
 
-    public handleEvent(_type: string, _data: any = null, _sponsor: any = null): void {
+    public handleEvent(_type: string, _data: any = null, _sponsor: any = null): void
+    {
         // overwrite
     }
 
-    public sendEvent(type: string, data: any = null, strict: boolean = false): void {
-        if (!strict) {
+    public sendEvent(type: string, data: any = null, strict = false): void
+    {
+        if (!strict)
+        {
             Controller.notifyControllers(type, data, this);
         }
         View.notifyViews(type, data, this);
     }
 
-    public registerView(clazz: IViewType, viewComponent: any): View {
-        return new clazz(viewComponent);
+    public registerView(Clazz: IViewType, viewComponent: unknown): View
+    {
+        return new Clazz(viewComponent);
     }
 
-    public retrieveView(clazz: IViewType): View {
-        return View.retrieveView(clazz);
+    public retrieveView(Clazz: IViewType): View
+    {
+        return View.retrieveView(Clazz);
     }
 
-    public retrieveModel(clazz: IModelType): Model {
-        return Model.retrieveModel(clazz);
+    public retrieveModel(Clazz: IModelType): Model
+    {
+        return Model.retrieveModel(Clazz);
     }
 }

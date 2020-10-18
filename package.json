@@ -14,7 +14,7 @@
     "coverage": "npm run pretest && nyc floss --path=tests && nyc report --reporter=html",
     "coverage:ci": "npm run pretest && nyc floss --path=tests && nyc report --reporter=text-lcov > coverage.lcov",
     "docs": "mkdirp dist && webdoc -R README.md",
-    "lint": "eslint --ext .js --ext .ts tests bundles packages tools --ignore-path .gitignore --max-warnings 0",
+    "lint": "eslint --ext .js --ext .ts tests bundles packages --ignore-path .gitignore --max-warnings 0",
     "lintfix": "npm run lint -- --fix",
     "prebuild": "npm run clean:build",
     "build": "npm run build:dev",
