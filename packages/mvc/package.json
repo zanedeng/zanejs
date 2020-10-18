@@ -1,0 +1,31 @@
+{
+  "name": "@zanejs/mvc",
+  "version": "0.0.5",
+  "main": "lib/mvc.js",
+  "module": "lib/mvc.es.js",
+  "bundle": "dist/mvc.js",
+  "namespace": "zanejs.mvc",
+  "description": "",
+  "author": "zane.deng",
+  "contributors": [
+    "zane.deng <zane.deng@foxmail.com>"
+  ],
+  "homepage": "http://zanejs.com/",
+  "bugs": "https://github.com/zanedeng/zanejs/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanedeng/zanejs.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib",
+    "dist",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "eventemitter3": "^3.1.0"
+  }
+}

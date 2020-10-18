@@ -1,0 +1,8 @@
+{
+    "lerna": "3.8.5",
+    "packages": [
+      "bundles/*",
+      "packages/*"
+    ],
+    "version": "0.0.2"
+  }
