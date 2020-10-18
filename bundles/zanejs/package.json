@@ -1,6 +1,6 @@
 {
   "name": "zanejs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "author": "zane.deng",
   "contributors": [
@@ -30,6 +30,6 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "@zanejs/mvc": "0.0.3"
+    "@zanejs/mvc": "0.0.4"
   }
 }
