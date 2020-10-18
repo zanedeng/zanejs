@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/mvc",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "lib/mvc.js",
   "module": "lib/mvc.es.js",
   "bundle": "dist/mvc.js",

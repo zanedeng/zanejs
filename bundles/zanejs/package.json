@@ -1,6 +1,6 @@
 {
   "name": "zanejs",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "author": "zane.deng",
   "contributors": [
@@ -30,7 +30,7 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "@zanejs/mvc": "0.0.8"
+    "@zanejs/mvc": "0.0.9"
   },
   "gitHead": "45026f104402b42741d7fe58366ee63147698105"
 }
