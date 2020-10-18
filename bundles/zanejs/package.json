@@ -31,5 +31,6 @@
   ],
   "dependencies": {
     "@zanejs/mvc": "0.0.5"
-  }
+  },
+  "gitHead": "e4e302a566d0de2f3ef8f257e6d7c7fe315ba1f6"
 }

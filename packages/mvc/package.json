@@ -18,8 +18,10 @@
     "url": "https://github.com/zanedeng/zanejs.git"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
+
   "files": [
     "lib",
     "dist",
@@ -27,5 +29,6 @@
   ],
   "dependencies": {
     "eventemitter3": "^3.1.0"
-  }
+  },
+  "gitHead": "e4e302a566d0de2f3ef8f257e6d7c7fe315ba1f6"
 }
