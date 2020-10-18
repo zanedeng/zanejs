@@ -1,4 +1,5 @@
 # package.lock
+package-lock.json
 packages/**/package-lock.json
 
 # sublime text files
