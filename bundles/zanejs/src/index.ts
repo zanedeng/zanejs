@@ -12,3 +12,4 @@ export const VERSION = '__VERSION__';
 /**
  * @namespace zanejs
  */
+export * from "@zanejs/mvc";

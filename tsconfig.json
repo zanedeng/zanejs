@@ -34,6 +34,6 @@
         "**/scripts/**",
         "**/types/**",
         "bundles/**/*.d.ts",
-        "webpack.config.js"
+        "rollup.config.js"
     ]
 }
