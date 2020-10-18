@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/mvc",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "lib/mvc.js",
   "module": "lib/mvc.es.js",
   "bundle": "dist/mvc.js",
@@ -21,7 +21,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-
   "files": [
     "lib",
     "dist",
