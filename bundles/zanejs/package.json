@@ -1,35 +1,35 @@
 {
-    "name": "zanejs",
-    "version": "0.0.1",
-    "description": "",
-    "author": "zane.deng",
-    "contributors": [
-      "zane.deng <zane.deng@foxmail.com>"
-    ],
-    "standalone": true,
-    "main": "lib/zanejs.js",
-    "module": "lib/zanejs.es.js",
-    "bundle": "dist/zanejs.js",
-    "bundleModule": "dist/zanejs.mjs",
-    "bundleOutput": {
-      "name": "zanejs"
-    },
-    "homepage": "http://www.zanejs.com/",
-    "bugs": "https://github.com/zanedeng/zanejs/issues",
-    "license": "MIT",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/zanedeng/zanejs.git"
-    },
-    "scripts": {
-      "test": "floss --path test"
-    },
-    "files": [
-      "lib/",
-      "dist/",
-      "index.d.ts"
-    ],
-    "dependencies": {
-      "@zanejs/mvc": "0.0.5"
-    }
+  "name": "zanejs",
+  "version": "0.0.3",
+  "description": "",
+  "author": "zane.deng",
+  "contributors": [
+    "zane.deng <zane.deng@foxmail.com>"
+  ],
+  "standalone": true,
+  "main": "lib/zanejs.js",
+  "module": "lib/zanejs.es.js",
+  "bundle": "dist/zanejs.js",
+  "bundleModule": "dist/zanejs.mjs",
+  "bundleOutput": {
+    "name": "zanejs"
+  },
+  "homepage": "http://www.zanejs.com/",
+  "bugs": "https://github.com/zanedeng/zanejs/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanedeng/zanejs.git"
+  },
+  "scripts": {
+    "test": "floss --path test"
+  },
+  "files": [
+    "lib/",
+    "dist/",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "@zanejs/mvc": "0.0.3"
   }
+}
