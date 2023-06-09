@@ -1,0 +1,13 @@
+import { luminanace } from './luminanace'
+
+/**
+ * Calculates contrast between two rgb colors
+ * @param {string} rgb1 rgb color 1
+ * @param {string} rgb2 rgb color 2
+ */
+export function contrast(rgb1: string[], rgb2: number[]) {
+  return (
+    (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) /
+    (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
+  )
+}
