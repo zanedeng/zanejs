@@ -54,7 +54,7 @@
     "esbuild-sass-plugin": "^2.4.0",
     "postcss": "^8.4.19",
     "postcss-preset-env": "^7.8.2",
-    "sass": "^1.56.1",
+    "sass": "^1.63.4",
     "tsup": "^6.4.0"
   },
   "engines": {

@@ -68,7 +68,7 @@
     "vue": "2.6.11"
   },
   "devDependencies": {
-    "sass": "^1.56.1",
+    "sass": "^1.63.4",
     "terser": "5.4.0",
     "typescript": "^4.8.4",
     "vite": "^4.0.1",
