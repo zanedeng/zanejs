@@ -51,7 +51,7 @@
     "consola": "^2.15.3",
     "esbuild": "0.15.13",
     "esbuild-plugin-copy": "1.6.0",
-    "esbuild-sass-plugin": "^2.4.0",
+    "esbuild-sass-plugin": "^2.10.0",
     "postcss": "^8.4.19",
     "postcss-preset-env": "^7.8.2",
     "sass": "^1.56.1",
