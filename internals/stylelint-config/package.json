@@ -18,16 +18,16 @@
     "stylelint",
     "stylelint-config"
   ],
-  "homepage": "https://github.com/zanedeng/zanedeng.github.io/blob/master/internals/eslint-config#readme",
+  "homepage": "https://github.com/zanedeng/zanejs/blob/master/internals/eslint-config#readme",
   "bugs": {
-    "url": "https://github.com/zanedeng/zanedeng.github.io/issues"
+    "url": "https://github.com/zanedeng/zanejs/issues"
   },
   "license": "MIT",
   "author": "zanedeng <zane.deng@live.com> (https://github.com/zanedeng)",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zanedeng/zanedeng.github.io.git",
+    "url": "https://github.com/zanedeng/zanejs.git",
     "directory": "internals/stylelint-config"
   },
   "scripts": {

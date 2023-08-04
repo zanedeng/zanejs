@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "zanedeng/zanedeng.github.io"
+      "repo": "zanedeng/zanejs"
     }
   ],
   "commit": false,

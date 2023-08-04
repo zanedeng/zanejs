@@ -1,19 +1,6 @@
-import GoogleTranslateSelect from '@google-translate-select/react'
-
 function App() {
-  const handleGoogleTranslateSelect = (language: any) => {
-    console.log('select', language)
-  }
-
   return (
     <div className="react-container">
-      <GoogleTranslateSelect
-        defaultLanguageCode="en"
-        defaultPageLanguageCode="zh-CN"
-        fetchBrowserLanguage={false}
-        select={handleGoogleTranslateSelect}
-        className="demo"
-      />
       <div className="test">
         <h4>
           &nbsp; ①一个前端的自我修养

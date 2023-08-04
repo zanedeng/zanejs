@@ -1,20 +1,20 @@
 {
-  "name": "@zanejs/playground-react",
-  "version": "0.0.0",
-  "private": true,
-  "description": "🚀 The package offer react playground for @zanejs!",
+  "name": "@zanejs/mvc",
+  "version": "0.0.1",
+  "description": "🚀 The package mvc for @zanejs!",
   "keywords": [
     "zanejs",
+    "Vue3",
+    "Vue2",
+    "Vue",
+    "vue zanejs",
     "react",
-    "React",
-    "react google translate",
-    "react google translate select",
+    "react zanejs",
     "monorepo",
     "pnpm",
     "turborepo",
     "changesets",
-    "vite",
-    "playground"
+    "mvc"
   ],
   "homepage": "https://github.com/zanedeng/zanejs/blob/master/internals/commitlint-config#readme",
   "bugs": {
@@ -22,33 +22,42 @@
   },
   "license": "MIT",
   "author": "zanedeng <zane.deng@live.com> (https://github.com/zanedeng)",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*"
+  },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/zanedeng/zanejs.git",
-    "directory": "apps/playground/react"
+    "directory": "packages/utils"
   },
   "scripts": {
+    "build": "rimraf dist && tsup --config ./build.config.ts",
     "lint": "run-s lint:**",
     "lint:eslint": "TIMING=1 eslint \"*.{js,jsx,ts,tsx,md,json}\" --fix",
     "lint:prettier": "prettier --write \"*.{js,ts,jsx,tsx,md,json}\"",
     "clean": "run-p clean:**",
     "clean:cache": "rimraf .turbo && rimraf dist",
-    "clean:deps": "rimraf node_modules",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "clean:deps": "rimraf node_modules"
   },
   "dependencies": {
-    "@zanejs/react": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@zanejs/constants": "workspace:*",
+    "eventemitter3": "5.0.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "@vitejs/plugin-react": "^3.0.0",
-    "sass": "^1.56.1",
-    "typescript": "^4.8.4",
-    "vite": "^4.0.1"
+    "tsup": "^6.4.0",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
