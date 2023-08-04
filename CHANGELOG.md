@@ -7,3 +7,36 @@ section: 'introduction'
 The Changelog gives an overview of the changes we've made to @zanejs
 
 <!-- CHANGELOG:INSERT -->
+
+## 04-08-2023
+
+**@zanejs/vue3** `v1.0.0`
+
+- 初始化
+
+**@zanejs/vue2** `v1.0.0`
+
+- 初始化
+
+**@zanejs/theme-chalk** `v1.0.0`
+
+- 初始化
+
+**@zanejs/react** `v1.0.0`
+
+- 初始化
+
+**@zanejs/mvc** `v0.1.0`
+
+- 加入一个 mvc 包
+
+**@zanejs/utils** `v1.0.0`
+
+- 加入一个 mvc 包
+- 初始化
+
+**@zanejs/constants** `v1.0.0`
+
+- 加入一个 mvc 包
+- 初始化
+
