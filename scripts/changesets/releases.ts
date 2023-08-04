@@ -69,6 +69,8 @@ const getReleasedPackages = async (csOutput: string, pkgs: Package[]) => {
 
 async function main() {
   const env = process.env
+
+  console.log(env)
   const octokit = new Octokit({
     auth: `token ${env.GITHUB_TOKEN}`,
   })
