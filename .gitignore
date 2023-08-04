@@ -10,6 +10,7 @@
 .eslintcache
 .shadowenv.d
 .cache
+.env
 
 # Package Manager
 node_modules
