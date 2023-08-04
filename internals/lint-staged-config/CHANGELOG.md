@@ -1,4 +1,4 @@
-# @zanejs/theme-chalk
+# @zanejs/lint-staged-config
 
 ## 1.0.0
 

@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/commitlint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "🚀 The package offer commitlint for @zanejs!",
   "keywords": [

@@ -1,4 +1,4 @@
-# @zanejs/theme-chalk
+# @zanejs/eslint-config
 
 ## 1.0.0
 

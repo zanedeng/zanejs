@@ -1,4 +1,4 @@
-# @zanejs/theme-chalk
+# @zanejs/stylelint-config
 
 ## 1.0.0
 

@@ -1,4 +1,4 @@
-# @zanejs/theme-chalk
+# @zanejs/ts-config
 
 ## 1.0.0
 
