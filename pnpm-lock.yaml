@@ -320,7 +320,7 @@ importers:
       '@types/postcss-preset-env': ^7.7.0
       autoprefixer: ^10.4.13
       chalk: ^5.1.2
-      clean-css: ^5.3.1
+      clean-css: ^5.3.2
       consola: ^2.15.3
       esbuild: 0.15.13
       esbuild-plugin-copy: 1.6.0
@@ -335,7 +335,7 @@ importers:
       '@types/postcss-preset-env': registry.npmmirror.com/@types/postcss-preset-env/7.7.0
       autoprefixer: registry.npmmirror.com/autoprefixer/10.4.13_postcss@8.4.20
       chalk: registry.npmmirror.com/chalk/5.2.0
-      clean-css: registry.npmmirror.com/clean-css/5.3.1
+      clean-css: 5.3.2
       consola: registry.npmmirror.com/consola/2.15.3
       esbuild: registry.npmmirror.com/esbuild/0.15.13
       esbuild-plugin-copy: registry.npmmirror.com/esbuild-plugin-copy/1.6.0_esbuild@0.15.13
@@ -655,6 +655,13 @@ packages:
     deprecated: This is a stub types definition. prettier provides its own type definitions, so you do not need this installed.
     dependencies:
       prettier: 3.0.1
+    dev: true
+
+  /clean-css/5.3.2:
+    resolution: {integrity: sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww==}
+    engines: {node: '>= 10.0'}
+    dependencies:
+      source-map: 0.6.1
     dev: true
 
   /commander/9.4.1:
@@ -1050,8 +1057,6 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
     requiresBuild: true
-    dev: true
-    optional: true
 
   /turbo-darwin-64/1.6.3:
     resolution: {integrity: sha512-QmDIX0Yh1wYQl0bUS0gGWwNxpJwrzZU2GIAYt3aOKoirWA2ecnyb3R6ludcS1znfNV2MfunP+l8E3ncxUHwtjA==}
@@ -2814,7 +2819,7 @@ packages:
       lodash: registry.npmmirror.com/lodash/4.17.21
       resolve: registry.npmmirror.com/resolve/1.17.0
       semver: registry.npmmirror.com/semver/7.3.8
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
       typescript: registry.npmmirror.com/typescript/4.8.4
     dev: true
 
@@ -4001,7 +4006,7 @@ packages:
       '@babel/parser': registry.npmmirror.com/@babel/parser/7.20.7
       '@vue/shared': registry.npmmirror.com/@vue/shared/3.2.45
       estree-walker: registry.npmmirror.com/estree-walker/2.0.2
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
 
   registry.npmmirror.com/@vue/compiler-dom/3.2.45:
     resolution: {integrity: sha512-tyYeUEuKqqZO137WrZkpwfPCdiiIeXYCcJ8L4gWz9vqaxzIQRccTSwSWZ/Axx5YR2z+LvpUbmPNXxuBU45lyRw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-dom/-/compiler-dom-3.2.45.tgz}
@@ -4025,7 +4030,7 @@ packages:
       estree-walker: registry.npmmirror.com/estree-walker/2.0.2
       magic-string: registry.npmmirror.com/magic-string/0.25.9
       postcss: registry.npmmirror.com/postcss/8.4.20
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
 
   registry.npmmirror.com/@vue/compiler-ssr/3.2.45:
     resolution: {integrity: sha512-6BRaggEGqhWht3lt24CrIbQSRD5O07MTmd+LjAn5fJj568+R9eUD2F7wMQJjX859seSlrYog7sUtrZSd7feqrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-ssr/-/compiler-ssr-3.2.45.tgz}
@@ -4046,7 +4051,7 @@ packages:
       merge-source-map: registry.npmmirror.com/merge-source-map/1.1.0
       postcss: registry.npmmirror.com/postcss/7.0.39
       postcss-selector-parser: registry.npmmirror.com/postcss-selector-parser/6.0.11
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
       vue-template-es2015-compiler: registry.npmmirror.com/vue-template-es2015-compiler/1.9.1
     optionalDependencies:
       prettier: 2.8.1
@@ -4808,15 +4813,6 @@ packages:
     name: classnames
     version: 2.3.2
     dev: false
-
-  registry.npmmirror.com/clean-css/5.3.1:
-    resolution: {integrity: sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clean-css/-/clean-css-5.3.1.tgz}
-    name: clean-css
-    version: 5.3.1
-    engines: {node: '>= 10.0'}
-    dependencies:
-      source-map: registry.npmmirror.com/source-map/0.6.1
-    dev: true
 
   registry.npmmirror.com/clean-stack/2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clean-stack/-/clean-stack-2.2.0.tgz}
@@ -8122,7 +8118,7 @@ packages:
     name: merge-source-map
     version: 1.1.0
     dependencies:
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
     dev: true
 
   registry.npmmirror.com/merge-stream/2.0.0:
@@ -9326,7 +9322,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       picocolors: registry.npmmirror.com/picocolors/0.2.1
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
     dev: true
 
   registry.npmmirror.com/postcss/8.4.20:
@@ -9954,7 +9950,7 @@ packages:
     version: 0.5.21
     dependencies:
       buffer-from: registry.npmmirror.com/buffer-from/1.1.2
-      source-map: registry.npmmirror.com/source-map/0.6.1
+      source-map: 0.6.1
     dev: true
 
   registry.npmmirror.com/source-map/0.6.1:
@@ -9962,6 +9958,7 @@ packages:
     name: source-map
     version: 0.6.1
     engines: {node: '>=0.10.0'}
+    dev: true
 
   registry.npmmirror.com/source-map/0.7.4:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.7.4.tgz}
