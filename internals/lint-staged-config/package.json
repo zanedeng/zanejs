@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/lint-staged-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "🚀 The package offer lint-staged for @zanejs!",
   "keywords": [

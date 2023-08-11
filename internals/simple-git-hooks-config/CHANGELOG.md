@@ -1,4 +1,4 @@
-# @zanejs/theme-chalk
+# @zanejs/simple-git-hooks-config
 
 ## 1.0.0
 

@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/theme-chalk",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "🚀 The package offer theme-chalk for @zanejs!",
   "type": "module",
   "keywords": [

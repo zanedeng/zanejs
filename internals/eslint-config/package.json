@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/eslint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "🚀 The package offer eslint for @zanejs!",
   "keywords": [
@@ -49,7 +49,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
     "jsonc-eslint-parser": "^2.1.0",
-    "prettier": "^2.7.1",
+    "prettier": "^3.0.1",
     "yaml-eslint-parser": "^1.1.0"
   },
   "devDependencies": {

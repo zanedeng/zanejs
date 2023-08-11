@@ -1,6 +1,6 @@
 {
   "name": "@zanejs/simple-git-hooks-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "🚀 The package offer simple-git-hooks for @zanejs!",
   "keywords": [
