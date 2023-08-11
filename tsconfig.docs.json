@@ -3,5 +3,8 @@
   "compilerOptions": {
     "composite": true
   },
-  "include": ["apps/docs", "apps/docs/.vitepress"]
+  "include": [
+    "apps/docs", 
+    "apps/docs/.vitepress"
+  ]
 }

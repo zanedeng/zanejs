@@ -457,7 +457,7 @@ module.exports = {
     ],
 
     // scss
-    'scss/operator-no-newline-after': null,
+    // 'scss/operator-no-newline-after': null,
     'block-closing-brace-newline-after': null,
     'at-rule-empty-line-before': null,
     'function-name-case': null,

@@ -1,166 +1,197 @@
-import type IController from './IController'
+import View from './View'
+import Model from './Model'
 
-export default class Controller implements IController {
+/**
+ * 控制器字典，用于存储已注册的控制器实例。
+ * @type {Map<string, Controller>}
+ */
+const controllerDict = new Map<string, Controller>()
+
+/**
+ * @class Controller
+ * @classdesc Controller类用于管理视图和模型组件之间的交互。
+ */
+export default class Controller {
   /**
-   * 控制器字典，保存所有控制器的实例
+   * 控制器的类型。
+   * @type {string}
    */
-  private static controllers = new Map<string, Controller>()
+  public type: string
 
   /**
-   * 控制器所监听的指令名
+   * 创建控制器的实例。
+   * @param {string} type - 控制器的类型。
    */
-  public readonly command: string
-
-  /**
-   * 构造函数
-   *
-   * @param command 控制器所监听的指令名
-   */
-  constructor(command: string) {
-    if (Controller.controllers.has(command)) {
-      throw new Error(`指令名为 [${command}] 的控制器已经存在!`)
+  constructor(type: string) {
+    if (controllerDict.has(type)) {
+      throw new Error(`类型名为 [${type}] 的控制器已经存在!`)
     }
-    this.command = command
-    Controller.controllers.set(command, this)
+    this.type = type
+    controllerDict.set(type, this)
     this.onRegister()
   }
 
   /**
-   * 控制器注册时会调用该方法
+   * 当控制器注册时调用的函数。
+   * @type {function}
    */
-  protected onRegister(): void {
-    // overwrite
+  onRegister(): void {
+    // do nothing.
   }
 
   /**
-   * 控制器移除时会调用该方法
+   * 当控制器移除时调用的函数。
+   * @type {function}
    */
-  protected onRemove(): void {
-    // overwrite
+  onRemove(): void {
+    // do nothing.
   }
 
   /**
-   * 控制器执行指令时会调用该方法
-   *
-   * @param data 发送给该控制器的数据
-   * @param sponsor 派发该事件的源对象
+   * 执行控制器的逻辑。
+   * @param {Record<string, unknown> | null} [_data] - 执行时的可选数据。
+   * @param {*} [_sponsor] - 执行的可选发起者。
    */
-  public execute(data: any = null, sponsor: any = null): void {
-    // overwrite
+  execute(_data: Record<string, unknown> | null, _sponsor: any): void {
+    // do nothing.
   }
 
   /**
-   * 向视图或者控制器发送事件
-   *
-   * @param command 指令名
-   * @param data 需要发送的数据
-   * @param strict 是否只向视图派发该事件
+   * 向视图和其他控制器发送事件。
+   * @param {string} type - 事件的类型。
+   * @param {*} [data] - 附带的可选数据。
+   * @param {boolean} [strict=false] - 指示是否严格发送事件给视图。
    */
-  public sendEvent(command: string, data: any = null, strict = false): void {
+  sendEvent(
+    type: string,
+    data: Record<string, unknown> | null = null,
+    strict = false
+  ): void {
     if (!strict) {
-      View.notifyViews(command, data, this)
+      View.notifyViews(type, data, this)
     }
-    Controller.notifyControllers(command, data, this)
+    Controller.notifyControllers(type, data, this)
   }
 
   /**
-   * 注册视图实例
-   *
-   * @param clazz 视图类构造函数
-   * @param viewComponent 视图组件实例
-   * @returns 注册得到的视图实例
+   * 注册视图组件。
+   * @param {new (viewComponent: any) => View} clazz - 视图组件的类。
+   * @param {*} viewComponent - 视图组件的实例。
    */
-  protected registerView(clazz: IView, viewComponent: unknown): View {
+  registerView(
+    clazz: new (viewComponent: any) => View,
+    viewComponent: any
+  ): View {
     return new clazz(viewComponent)
   }
 
   /**
-   * 获取已经注册的视图实例
-   *
-   * @param clazz 视图类构造函数
-   * @returns 视图实例
+   * 检索已注册的视图组件。
+   * @param {typeof View} clazz - 视图组件的类。
+   * @returns {*} 已注册视图组件的实例。
    */
-  protected retrieveView(clazz: IView): View {
+  retrieveView(clazz: new (viewComponent: any) => View): View | undefined {
     return View.retrieveView(clazz)
   }
 
   /**
-   * 移除指定的视图实例
-   *
-   * @param clazz 视图类构造函数
+   * 移除已注册的视图组件。
+   * @param {new (viewComponent: any) => View} clazz - 视图组件的类。
    */
-  protected removeView(clazz: IView): void {
+  removeView(clazz: new (viewComponent: any) => View): void {
     View.removeView(clazz)
   }
 
   /**
-   * 注册模型实例
-   *
-   * @param clazz 模型类构造函数
-   * @param data 模型初始化数据
-   * @returns 注册得到的模型实例
+   * 注册新的控制器。
+   * @param {string} type - 控制器的类型。
+   * @param {Function} clazz - 控制器的类。
    */
-  protected registerModel(clazz: IModel, data: any = null): Model {
-    return new clazz(data)
+  registerController(
+    type: string,
+    clazz: new (type: string) => Controller
+  ): Controller {
+    return new clazz(type)
   }
 
   /**
-   * 获取已经注册的模型实例
-   *
-   * @param clazz 模型类构造函数
-   * @returns 模型实例
+   * 移除已注册的控制器。
+   * @param {string} type - 控制器的类型。
    */
-  protected retrieveModel(clazz: IModel): Model {
-    return Model.retrieveModel(clazz)
-  }
-
-  /**
-   * 移除指定的模型实例
-   *
-   * @param clazz 模型类构造函数
-   */
-  protected removeModel(clazz: IModel): void {
-    Model.removeModel(clazz)
-  }
-
-  /**
-   * 静态方法：向指定的控制器发送事件
-   *
-   * @param command 指令名
-   * @param data 发送给该控制器的数据
-   * @param sponsor 派发该事件的源对象
-   */
-  public static notifyControllers(
-    command: string,
-    data: any = null,
-    sponsor: any = null
-  ): void {
-    const controller = Controller.controllers.get(command)
-
-    if (controller) {
-      controller.execute(data, sponsor)
+  removeController(type: string): void {
+    const control = controllerDict.get(type)
+    if (control) {
+      control.onRemove()
+      controllerDict.delete(type)
     }
   }
 
   /**
-   * 静态方法：判断指定的指令名是否存在对应的控制器
-   *
-   * @param command 指令名
-   * @returns 是否存在
+   * 注册新的模型。
+   * @param {Function} clazz - 模型的类。
+   * @param {*} [data] - 模型的可选数据。
    */
-  public static hasController(command: string): boolean {
-    return Controller.controllers.has(command)
+  registerModel(
+    clazz: new (data: Record<string, unknown> | null) => Model,
+    data: any = null
+  ): Model {
+    return new clazz(data)
   }
 
   /**
-   * 静态方法：移除指定的控制器实例
-   * @param command 指令名
+   * 检索已注册的模型。
+   * @param {Function} clazz - 模型的类。
+   * @returns {*} 已注册模型的实例。
    */
-  public static removeController(command: string): void {
-    const controller = Controller.controllers.get(command)
-    if (controller) {
-      controller.onRemove()
-      Controller.controllers.delete(command)
+  retrieveModel(
+    clazz: new (data: Record<string, unknown> | null) => Model
+  ): Model | undefined {
+    return Model.retrieveModel(clazz)
+  }
+
+  /**
+   * 移除已注册的模型。
+   * @param {new (data: Record<string, unknown> | null) => Model} clazz - 模型的类。
+   */
+  removeModel(clazz: new (data: Record<string, unknown> | null) => Model) {
+    Model.removeModel(clazz)
+  }
+
+  /**
+   * 通知特定类型的控制器关于事件的信息。
+   * @param {string} type - 要通知的控制器的类型。
+   * @param {Record<string, unknown> | null} [data] - 附带的可选数据。
+   * @param {*} [sponsor] - 事件的可选发起者。
+   */
+  static notifyControllers(
+    type: string,
+    data: Record<string, unknown> | null = null,
+    sponsor: any = null
+  ): void {
+    const control = controllerDict.get(type)
+    if (control) {
+      control.execute(data, sponsor)
+    }
+  }
+
+  /**
+   * 检查特定类型的控制器是否存在。
+   * @param {string} type - 控制器的类型。
+   * @returns {boolean} 如果控制器存在则为true，否则为false。
+   */
+  static hasController(type: string): boolean {
+    return controllerDict.has(type)
+  }
+
+  /**
+   * 移除已注册的控制器实例。
+   * @param {string} type - 控制器的类型。
+   */
+  static removeController(type: string): void {
+    const control = controllerDict.get(type)
+    if (control) {
+      control.onRemove()
+      controllerDict.delete(type)
     }
   }
 }

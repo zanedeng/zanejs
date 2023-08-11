@@ -1,12 +1,15 @@
 {
   "extends": "@zanejs/ts-config/web.json",
   "compilerOptions": {
-    "composite": true
+    "composite": true,
   },
   "include": [
     "packages/*/src/**/*",
+    "packages/*/src/**/*.ts",
+    "packages/*/src/**/src/**/*.vue",
     "packages/*/package.json",
     "packages/*/typings/**/*",
+    "packages/vue3/typings/*.d.ts",
     "typings/env.d.ts"
   ],
   "exclude": [

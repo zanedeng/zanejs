@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@zanejs/constants": "workspace:*",
-    "eventemitter3": "5.0.1"
+    "@zanejs/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^6.4.0",
