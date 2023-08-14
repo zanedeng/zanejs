@@ -62,7 +62,7 @@
     "vue": "^3.2.41"
   },
   "dependencies": {
-    "@coinbase/wallet-sdk": "3.3.0",
+    "@coinbase/wallet-sdk": "3.7.1",
     "@element-plus/icons-vue": "2.1.0",
     "@metamask/detect-provider": "2.0.0",
     "@zanejs/constants": "workspace:*",
