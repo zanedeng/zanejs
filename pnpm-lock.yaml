@@ -6,7 +6,7 @@ importers:
 
   .:
     specifiers:
-      '@changesets/assemble-release-plan': 5.2.2
+      '@changesets/assemble-release-plan': 5.2.4
       '@changesets/changelog-github': 0.4.7
       '@changesets/cli': ^2.25.2
       '@changesets/config': 2.2.0
@@ -39,7 +39,7 @@ importers:
       typescript: ^4.8.4
       vitest: ^0.25.1
     devDependencies:
-      '@changesets/assemble-release-plan': 5.2.2
+      '@changesets/assemble-release-plan': 5.2.4
       '@changesets/changelog-github': 0.4.7
       '@changesets/cli': 2.26.2
       '@changesets/config': 2.2.0
@@ -1075,17 +1075,6 @@ packages:
       prettier: 2.8.8
       resolve-from: 5.0.0
       semver: 7.5.4
-    dev: true
-
-  /@changesets/assemble-release-plan/5.2.2:
-    resolution: {integrity: sha512-B1qxErQd85AeZgZFZw2bDKyOfdXHhG+X5S+W3Da2yCem8l/pRy4G/S7iOpEcMwg6lH8q2ZhgbZZwZ817D+aLuQ==}
-    dependencies:
-      '@babel/runtime': 7.22.10
-      '@changesets/errors': 0.1.4
-      '@changesets/get-dependents-graph': 1.3.6
-      '@changesets/types': 5.2.0
-      '@manypkg/get-packages': 1.1.3
-      semver: 5.7.2
     dev: true
 
   /@changesets/assemble-release-plan/5.2.4:
