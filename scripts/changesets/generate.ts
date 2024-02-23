@@ -5,8 +5,9 @@ import { read } from '@changesets/config'
 import { readPreState } from '@changesets/pre'
 import readChangesets from '@changesets/read'
 import { getPackages } from '@manypkg/get-packages'
-import { PKG_PREFIX } from '@google-translate-select/constants'
 import type { ComprehensiveRelease, NewChangeset } from '@changesets/types'
+
+const PKG_PREFIX = '@zanejs'
 
 const cwd = process.cwd()
 // App packages

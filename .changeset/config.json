@@ -10,10 +10,7 @@
   "fixed": [],
   "linked": [],
   "ignore": [
-    "@zanejs/docs",
-    "@zanejs/playground-react",
-    "@zanejs/playground-vue2",
-    "@zanejs/playground-vue3"
+    "@zanejs/docs"
   ],
   "access": "public",
   "baseBranch": "master",

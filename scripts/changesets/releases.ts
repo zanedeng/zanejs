@@ -4,12 +4,11 @@ import childProcess from 'child_process'
 import { Octokit } from 'octokit'
 import semver from 'semver'
 import { getPackages } from '@manypkg/get-packages'
-import {
-  PKG_PREFIX,
-  REPO_NAME,
-  REPO_OWNER,
-} from '@google-translate-select/constants'
 import type { Package } from '@manypkg/get-packages'
+
+const REPO_OWNER = 'zanejs'
+const REPO_NAME = 'zanejs'
+const PKG_PREFIX = '@zanejs'
 
 const cwd = process.cwd()
 
