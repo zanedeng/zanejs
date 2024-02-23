@@ -1,0 +1,62 @@
+{
+  "name": "@zanejs/core",
+  "version": "0.0.1",
+  "description": "🚀 The package core for @zanejs!",
+  "keywords": [
+    "zanejs",
+    "Vue3",
+    "Vue2",
+    "Vue",
+    "vue zanejs",
+    "react",
+    "react zanejs",
+    "monorepo",
+    "pnpm",
+    "turborepo",
+    "changesets",
+    "mvc"
+  ],
+  "homepage": "https://github.com/zanedeng/zanejs/blob/master/packages/core#readme",
+  "bugs": {
+    "url": "https://github.com/zanedeng/zanejs/issues"
+  },
+  "license": "MIT",
+  "author": "zanedeng <zane.deng@live.com> (https://github.com/zanedeng)",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "dev": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanedeng/zanejs.git",
+    "directory": "packages/utils"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup --config ./build.config.ts",
+    "lint": "run-s lint:**",
+    "lint:eslint": "TIMING=1 eslint \"*.{js,jsx,ts,tsx,md,json}\" --fix",
+    "lint:prettier": "prettier --write \"*.{js,ts,jsx,tsx,md,json}\"",
+    "clean": "run-p clean:**",
+    "clean:cache": "rimraf .turbo && rimraf dist",
+    "clean:deps": "rimraf node_modules"
+  },
+  "dependencies": {
+    "eventemitter3": "5.0.1"
+  },
+  "devDependencies": {
+    "tsup": "^6.4.0",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

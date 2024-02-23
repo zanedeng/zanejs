@@ -40,8 +40,6 @@
   },
   "dependencies": {
     "@docsearch/js": "3.3.0",
-    "@zanejs/constants": "workspace:*",
-    "@zanejs/theme-chalk": "workspace:*",
     "@zanejs/utils": "workspace:*",
     "clipboard-copy": "4.0.1",
     "markdown-it": "13.0.1",
