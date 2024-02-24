@@ -1,7 +1,7 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 packageExtensionsChecksum: cf5845c61d8a4620d7dc9dead7ef46a1
@@ -129,7 +129,7 @@ importers:
         version: 0.2.4
       vue:
         specifier: ^3.2.41
-        version: 3.4.19(typescript@4.9.5)
+        version: 3.4.19
     devDependencies:
       '@docsearch/react':
         specifier: 3.3.0
@@ -142,7 +142,7 @@ importers:
         version: 3.0.0
       vitepress:
         specifier: 1.0.0-alpha.29
-        version: 1.0.0-alpha.29(@types/node@20.11.20)(typescript@4.9.5)
+        version: 1.0.0-alpha.29
 
   internals/commitlint-config:
     dependencies:
@@ -2080,8 +2080,8 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.8(@types/node@20.11.20)
-      vue: 3.4.19(typescript@4.9.5)
+      vite: 3.2.8
+      vue: 3.4.19
     dev: true
 
   /@vitest/ui@0.25.8:
@@ -2153,7 +2153,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.19
       '@vue/shared': 3.4.19
-      vue: 3.4.19(typescript@4.9.5)
+      vue: 3.4.19
 
   /@vue/shared@3.4.19:
     resolution: {integrity: sha512-/KliRRHMF6LoiThEy+4c1Z4KB/gbPrGjWwJR+crg2otgrf/egKzRaCPvJ51S5oetgsgXLfc4Rm5ZgrKHZrtMSw==}
@@ -6848,7 +6848,7 @@ packages:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  /vite@3.2.8(@types/node@20.11.20):
+  /vite@3.2.8:
     resolution: {integrity: sha512-EtQU16PLIJpAZol2cTLttNP1mX6L0SyI0pgQB1VOoWeQnMSvtiwovV3D6NcjN8CZQWWyESD2v5NGnpz5RvgOZA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -6873,7 +6873,6 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.11.20
       esbuild: 0.15.18
       postcss: 8.4.35
       resolve: 1.22.8
@@ -6918,7 +6917,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-alpha.29(@types/node@20.11.20)(typescript@4.9.5):
+  /vitepress@1.0.0-alpha.29:
     resolution: {integrity: sha512-oaRaeMLcN9M3Bxz97fFVF6Gzm3Aqtb0CijTt5TOW0XPzNPuKA0YpFnsmS97gdKmA+VztM6itRJ8K7JJuU0VS3g==}
     hasBin: true
     dependencies:
@@ -6929,8 +6928,8 @@ packages:
       '@vueuse/core': 9.13.0(vue@3.4.19)
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.11.1
-      vite: 3.2.8(@types/node@20.11.20)
-      vue: 3.4.19(typescript@4.9.5)
+      vite: 3.2.8
+      vue: 3.4.19
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -7014,7 +7013,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.4.19(typescript@4.9.5)
+      vue: 3.4.19
     dev: true
 
   /vue-eslint-parser@9.4.2(eslint@8.56.0):
@@ -7035,7 +7034,7 @@ packages:
       - supports-color
     dev: false
 
-  /vue@3.4.19(typescript@4.9.5):
+  /vue@3.4.19:
     resolution: {integrity: sha512-W/7Fc9KUkajFU8dBeDluM4sRGc/aa4YJnOYck8dkjgZoXtVsn3OeTGni66FV1l3+nvPA7VBFYtPioaGKUmEADw==}
     peerDependencies:
       typescript: '*'
@@ -7048,7 +7047,6 @@ packages:
       '@vue/runtime-dom': 3.4.19
       '@vue/server-renderer': 3.4.19(vue@3.4.19)
       '@vue/shared': 3.4.19
-      typescript: 4.9.5
 
   /w3c-xmlserializer@4.0.0:
     resolution: {integrity: sha512-d+BFHzbiCx6zGfz0HyQ6Rg69w9k19nviJspaj4yNscGjrHu94sVP+aRm75yEbCh+r2/yR+7q6hux9LVtbuTGBw==}
