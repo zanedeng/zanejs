@@ -6,7 +6,7 @@ import semver from 'semver'
 import { getPackages } from '@manypkg/get-packages'
 import type { Package } from '@manypkg/get-packages'
 
-const REPO_OWNER = 'zanejs'
+const REPO_OWNER = 'zanedeng'
 const REPO_NAME = 'zanejs'
 const PKG_PREFIX = '@zanejs'
 
