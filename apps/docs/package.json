@@ -39,7 +39,7 @@
     "vue": "^3.2.41"
   },
   "dependencies": {
-    "@docsearch/js": "3.3.0",
+    "@docsearch/js": "3.5.2",
     "@zanejs/utils": "workspace:*",
     "clipboard-copy": "4.0.1",
     "markdown-it": "13.0.1",
