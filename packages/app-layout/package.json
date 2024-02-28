@@ -1,7 +1,7 @@
 {
   "name": "@zanejs/app-layout",
   "version": "0.0.2",
-  "description": "🚀 The package offer appLayout library for @zanejs!",
+  "description": "🚀 The package offer app-layout library for @zanejs!",
   "keywords": [
     
   ],
@@ -34,7 +34,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/zanedeng/zanejs.git",
-    "directory": "packages/appLayout"
+    "directory": "packages/app-layout"
   },
   "types": "./dist/es/index.d.ts",
   "scripts": {

@@ -1,6 +1,6 @@
-# @zanejs/appLayout
+# @zanejs/app-layout
 
-🚀 The package offer appLayout library for @zanejs!
+🚀 The package offer app-layout library for @zanejs!
 
 ## Build
 

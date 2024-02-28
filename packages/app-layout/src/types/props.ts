@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 
 export const appLayoutProps = {} as const
 
