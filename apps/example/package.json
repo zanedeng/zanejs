@@ -1,0 +1,43 @@
+{
+  "name": "@zanejs/example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "🚀 The package offer vue3 example for @zanejs!",
+  "keywords": [
+  ],
+  "homepage": "https://github.com/zanedeng/zanejs/blob/master/packages/core#readme",
+  "bugs": {
+    "url": "https://github.com/zanedeng/zanejs/issues"
+  },
+  "license": "MIT",
+  "author": "zanedeng <zane.deng@live.com> (https://github.com/zanedeng)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zanedeng/zanejs.git",
+    "directory": "apps/example"
+  },
+  "scripts": {
+    "lint": "run-s lint:**",
+    "lint:eslint": "TIMING=1 eslint \"*.{js,jsx,ts,tsx,md,json}\" --fix",
+    "lint:prettier": "prettier --write \"*.{js,ts,jsx,tsx,md,json}\"",
+    "clean": "run-p clean:**",
+    "clean:cache": "rimraf .turbo && rimraf dist",
+    "clean:deps": "rimraf node_modules",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@zanejs/utils": "workspace:*",
+    "@zanejs/appLayout": "workspace:*",
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "typescript": "^4.8.4",
+    "vite": "^4.0.1"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
