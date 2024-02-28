@@ -2,11 +2,6 @@ import { resolve } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 // import Dts from 'vite-plugin-dts'
-import CssInjected from 'vite-plugin-css-injected-by-js'
-import {
-  PKG_CAMELCASE_NAME,
-  PKG_NAME,
-} from '@google-translate-select/constants'
 import type { UserConfigExport } from 'vite'
 
 export default (): UserConfigExport => {
@@ -26,9 +21,6 @@ export default (): UserConfigExport => {
       //   include: [packageDir],
       //   entryRoot: packageDir,
       // }),
-      CssInjected({
-        styleId: `${PKG_NAME}-theme-chalk`,
-      }),
     ],
     build: {
       // target: 'modules',
@@ -38,7 +30,7 @@ export default (): UserConfigExport => {
       emptyOutDir: false,
       outDir,
       lib: {
-        name: PKG_CAMELCASE_NAME,
+        name: 'zanejs',
         entry,
         formats: ['umd'],
         fileName: (target): string => {

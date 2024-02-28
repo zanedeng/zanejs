@@ -1,6 +1,6 @@
-# @google-translate-select/vue3
+# @zanejs/appLayout
 
-🚀 The package offer vue3 library for @google-translate-select!
+🚀 The package offer appLayout library for @zanejs!
 
 ## Build
 

@@ -1,5 +1,3 @@
-import { noop } from '@google-translate-select/utils'
-
 import type { App, AppContext, Directive, Plugin } from 'vue'
 
 export type SFCWithInstall<T> = T & Plugin
@@ -47,7 +45,8 @@ export const withInstallDirective = <T extends Directive>(
 }
 
 export const withNoopInstall = <T>(component: T) => {
-  ;(component as SFCWithInstall<T>).install = noop
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ;(component as SFCWithInstall<T>).install = () => {}
 
   return component as SFCWithInstall<T>
 }
