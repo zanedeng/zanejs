@@ -3,13 +3,24 @@
   "version": "0.0.2",
   "description": "🚀 The package offer app-layout library for @zanejs!",
   "keywords": [
-    
+    "zanejs",
+    "Vue3",
+    "Vue2",
+    "Vue",
+    "vue zanejs",
+    "react",
+    "react zanejs",
+    "monorepo",
+    "pnpm",
+    "turborepo",
+    "changesets",
+    "mvc"
   ],
-  "license": "MIT",
   "homepage": "https://github.com/zanedeng/zanejs/blob/master/packages/app-layout#readme",
   "bugs": {
     "url": "https://github.com/zanedeng/zanejs/issues"
   },
+  "license": "MIT",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/es/index.mjs",
   "exports": {
@@ -55,6 +66,7 @@
   },
   "dependencies": {
     "@zanejs/utils": "workspace:*",
+    "golden-layout": "2.6.0",
     "vue": "^3.2.41"
   },
   "devDependencies": {

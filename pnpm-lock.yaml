@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: false
+  autoInstallPeers: true
   excludeLinksFromLockfile: false
 
 packageExtensionsChecksum: cf5845c61d8a4620d7dc9dead7ef46a1
@@ -129,7 +129,7 @@ importers:
         version: 0.2.4
       vue:
         specifier: ^3.2.41
-        version: 3.4.19
+        version: 3.4.19(typescript@4.9.5)
     devDependencies:
       '@docsearch/react':
         specifier: 3.3.0
@@ -142,7 +142,7 @@ importers:
         version: 3.0.0
       vitepress:
         specifier: 1.0.0-alpha.29
-        version: 1.0.0-alpha.29
+        version: 1.0.0-alpha.29(@types/node@20.11.20)(typescript@4.9.5)
 
   apps/example:
     dependencies:
@@ -164,7 +164,7 @@ importers:
         version: 4.9.5
       vite:
         specifier: ^4.0.1
-        version: 4.5.2
+        version: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
 
   internals/commitlint-config:
     dependencies:
@@ -286,6 +286,9 @@ importers:
       '@zanejs/utils':
         specifier: workspace:*
         version: link:../utils
+      golden-layout:
+        specifier: 2.6.0
+        version: 2.6.0
       vue:
         specifier: ^3.2.41
         version: 3.4.19(typescript@4.9.5)
@@ -307,13 +310,13 @@ importers:
         version: 4.9.5
       vite:
         specifier: ^4.0.1
-        version: 4.5.2(sass@1.56.1)
+        version: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
       vite-plugin-css-injected-by-js:
         specifier: 2.1.1
         version: 2.1.1(vite@4.5.2)
       vite-plugin-dts:
         specifier: ^1.7.0
-        version: 1.7.0(vite@4.5.2)
+        version: 1.7.0(@types/node@20.11.20)(vite@4.5.2)
 
   packages/core:
     dependencies:
@@ -1808,27 +1811,27 @@ packages:
       read-yaml-file: 1.1.0
     dev: true
 
-  /@microsoft/api-extractor-model@7.28.13:
+  /@microsoft/api-extractor-model@7.28.13(@types/node@20.11.20):
     resolution: {integrity: sha512-39v/JyldX4MS9uzHcdfmjjfS6cYGAoXV+io8B5a338pkHiSt+gy2eXQ0Q7cGFJ7quSa1VqqlMdlPrB6sLR/cAw==}
     dependencies:
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
-      '@rushstack/node-core-library': 4.0.2
+      '@rushstack/node-core-library': 4.0.2(@types/node@20.11.20)
     transitivePeerDependencies:
       - '@types/node'
     dev: true
 
-  /@microsoft/api-extractor@7.41.0:
+  /@microsoft/api-extractor@7.41.0(@types/node@20.11.20):
     resolution: {integrity: sha512-Wk4fcSqO1i32FspStEm4ak+cfdo2xGsWk/K9uZoYIRQxjQH/roLU78waP+g+GhoAg5OxH63BfY37h6ISkNfQEQ==}
     hasBin: true
     dependencies:
-      '@microsoft/api-extractor-model': 7.28.13
+      '@microsoft/api-extractor-model': 7.28.13(@types/node@20.11.20)
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
-      '@rushstack/node-core-library': 4.0.2
+      '@rushstack/node-core-library': 4.0.2(@types/node@20.11.20)
       '@rushstack/rig-package': 0.5.2
-      '@rushstack/terminal': 0.10.0
-      '@rushstack/ts-command-line': 4.17.4
+      '@rushstack/terminal': 0.10.0(@types/node@20.11.20)
+      '@rushstack/ts-command-line': 4.17.4(@types/node@20.11.20)
       lodash: 4.17.21
       resolve: 1.22.8
       semver: 7.5.4
@@ -2146,7 +2149,7 @@ packages:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: true
 
-  /@rushstack/node-core-library@3.66.1:
+  /@rushstack/node-core-library@3.66.1(@types/node@20.11.20):
     resolution: {integrity: sha512-ker69cVKAoar7MMtDFZC4CzcDxjwqIhFzqEnYI5NRN/8M3om6saWCVx/A7vL2t/jFCJsnzQplRDqA7c78pytng==}
     peerDependencies:
       '@types/node': '*'
@@ -2154,6 +2157,7 @@ packages:
       '@types/node':
         optional: true
     dependencies:
+      '@types/node': 20.11.20
       colors: 1.2.5
       fs-extra: 7.0.1
       import-lazy: 4.0.0
@@ -2163,7 +2167,7 @@ packages:
       z-schema: 5.0.5
     dev: true
 
-  /@rushstack/node-core-library@4.0.2:
+  /@rushstack/node-core-library@4.0.2(@types/node@20.11.20):
     resolution: {integrity: sha512-hyES82QVpkfQMeBMteQUnrhASL/KHPhd7iJ8euduwNJG4mu2GSOKybf0rOEjOm1Wz7CwJEUm9y0yD7jg2C1bfg==}
     peerDependencies:
       '@types/node': '*'
@@ -2171,6 +2175,7 @@ packages:
       '@types/node':
         optional: true
     dependencies:
+      '@types/node': 20.11.20
       fs-extra: 7.0.1
       import-lazy: 4.0.0
       jju: 1.4.0
@@ -2186,7 +2191,7 @@ packages:
       strip-json-comments: 3.1.1
     dev: true
 
-  /@rushstack/terminal@0.10.0:
+  /@rushstack/terminal@0.10.0(@types/node@20.11.20):
     resolution: {integrity: sha512-UbELbXnUdc7EKwfH2sb8ChqNgapUOdqcCIdQP4NGxBpTZV2sQyeekuK3zmfQSa/MN+/7b4kBogl2wq0vpkpYGw==}
     peerDependencies:
       '@types/node': '*'
@@ -2194,14 +2199,15 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@rushstack/node-core-library': 4.0.2
+      '@rushstack/node-core-library': 4.0.2(@types/node@20.11.20)
+      '@types/node': 20.11.20
       supports-color: 8.1.1
     dev: true
 
-  /@rushstack/ts-command-line@4.17.4:
+  /@rushstack/ts-command-line@4.17.4(@types/node@20.11.20):
     resolution: {integrity: sha512-XPQQDaxgFqRHFRgt7jjCKnr0vrC75s/+ISU6kGhWpDlGzWl4vig6ZfZTs3HgM6Kh1Bb3wUKSyKQOV+G36cyZfg==}
     dependencies:
-      '@rushstack/terminal': 0.10.0
+      '@rushstack/terminal': 0.10.0(@types/node@20.11.20)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -2509,7 +2515,7 @@ packages:
       '@babel/core': 7.24.0
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.24.0)
       '@vue/babel-plugin-jsx': 1.2.1(@babel/core@7.24.0)
-      vite: 4.5.2(sass@1.56.1)
+      vite: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
       vue: 3.4.19(typescript@4.9.5)
     transitivePeerDependencies:
       - supports-color
@@ -2522,8 +2528,8 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.8
-      vue: 3.4.19
+      vite: 3.2.8(@types/node@20.11.20)
+      vue: 3.4.19(typescript@4.9.5)
     dev: true
 
   /@vitejs/plugin-vue@4.0.0(vite@4.5.2)(vue@3.4.19):
@@ -2533,7 +2539,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.5.2
+      vite: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
       vue: 3.4.19(typescript@4.9.5)
     dev: true
 
@@ -4678,6 +4684,10 @@ packages:
 
   /globjoin@0.1.4:
     resolution: {integrity: sha512-xYfnw62CKG8nLkZBfWbhWwDw02CHty86jfPcc2cr3ZfeuK9ysoVPPEUxf21bAD/rWAgk52SuBrLJlefNy8mvFg==}
+
+  /golden-layout@2.6.0:
+    resolution: {integrity: sha512-sIVQCiRWOymHbVD1Aw/T9/ijbPYAVGBlgGYd1N9MRKfcyBNSpjr87Vg9nSHm+RCT8ELrvK8IJYJV0QRJuVUkCQ==}
+    dev: false
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -7525,29 +7535,29 @@ packages:
     peerDependencies:
       vite: '>2.0.0-0'
     dependencies:
-      vite: 4.5.2(sass@1.56.1)
+      vite: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
     dev: true
 
-  /vite-plugin-dts@1.7.0(vite@4.5.2):
+  /vite-plugin-dts@1.7.0(@types/node@20.11.20)(vite@4.5.2):
     resolution: {integrity: sha512-SG1JRPFrrw8bseWXvKQJwcaZIoOcCsQjJub1h8hfywegdxJTT3hBDoKQyzT6Wi8wiTH3GidDWC2wxqiUS3gy5g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: '>=2.9.0'
     dependencies:
-      '@microsoft/api-extractor': 7.41.0
-      '@rushstack/node-core-library': 3.66.1
+      '@microsoft/api-extractor': 7.41.0(@types/node@20.11.20)
+      '@rushstack/node-core-library': 3.66.1(@types/node@20.11.20)
       debug: 4.3.4
       fast-glob: 3.3.2
       fs-extra: 10.1.0
       kolorist: 1.8.0
       ts-morph: 16.0.0
-      vite: 4.5.2(sass@1.56.1)
+      vite: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
     dev: true
 
-  /vite@3.2.8:
+  /vite@3.2.8(@types/node@20.11.20):
     resolution: {integrity: sha512-EtQU16PLIJpAZol2cTLttNP1mX6L0SyI0pgQB1VOoWeQnMSvtiwovV3D6NcjN8CZQWWyESD2v5NGnpz5RvgOZA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -7572,6 +7582,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.11.20
       esbuild: 0.15.18
       postcss: 8.4.35
       resolve: 1.22.8
@@ -7580,42 +7591,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vite@4.5.2:
-    resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.18.20
-      postcss: 8.4.35
-      rollup: 3.29.4
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
-  /vite@4.5.2(@types/node@20.11.20):
+  /vite@4.5.2(@types/node@20.11.20)(sass@1.56.1):
     resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -7647,47 +7623,12 @@ packages:
       esbuild: 0.18.20
       postcss: 8.4.35
       rollup: 3.29.4
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
-  /vite@4.5.2(sass@1.56.1):
-    resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.18.20
-      postcss: 8.4.35
-      rollup: 3.29.4
       sass: 1.56.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-alpha.29:
+  /vitepress@1.0.0-alpha.29(@types/node@20.11.20)(typescript@4.9.5):
     resolution: {integrity: sha512-oaRaeMLcN9M3Bxz97fFVF6Gzm3Aqtb0CijTt5TOW0XPzNPuKA0YpFnsmS97gdKmA+VztM6itRJ8K7JJuU0VS3g==}
     hasBin: true
     dependencies:
@@ -7698,8 +7639,8 @@ packages:
       '@vueuse/core': 9.13.0(vue@3.4.19)
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.11.1
-      vite: 3.2.8
-      vue: 3.4.19
+      vite: 3.2.8(@types/node@20.11.20)
+      vue: 3.4.19(typescript@4.9.5)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -7752,7 +7693,7 @@ packages:
       tinybench: 2.6.0
       tinypool: 0.3.1
       tinyspy: 1.1.1
-      vite: 4.5.2(@types/node@20.11.20)
+      vite: 4.5.2(@types/node@20.11.20)(sass@1.56.1)
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -7783,7 +7724,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.4.19
+      vue: 3.4.19(typescript@4.9.5)
     dev: true
 
   /vue-eslint-parser@9.4.2(eslint@8.56.0):
@@ -7803,20 +7744,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
-
-  /vue@3.4.19:
-    resolution: {integrity: sha512-W/7Fc9KUkajFU8dBeDluM4sRGc/aa4YJnOYck8dkjgZoXtVsn3OeTGni66FV1l3+nvPA7VBFYtPioaGKUmEADw==}
-    peerDependencies:
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/compiler-dom': 3.4.19
-      '@vue/compiler-sfc': 3.4.19
-      '@vue/runtime-dom': 3.4.19
-      '@vue/server-renderer': 3.4.19(vue@3.4.19)
-      '@vue/shared': 3.4.19
 
   /vue@3.4.19(typescript@4.9.5):
     resolution: {integrity: sha512-W/7Fc9KUkajFU8dBeDluM4sRGc/aa4YJnOYck8dkjgZoXtVsn3OeTGni66FV1l3+nvPA7VBFYtPioaGKUmEADw==}
