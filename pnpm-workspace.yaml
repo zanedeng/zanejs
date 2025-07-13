@@ -1,6 +1,8 @@
 packages:
   - apps/*
   - packages/*
+  - internal/*
+  - internal/lint-configs/*
 
 catalog:
   prettier: ^3.6.2
