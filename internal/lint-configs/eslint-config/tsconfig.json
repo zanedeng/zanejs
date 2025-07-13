@@ -1,6 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@zanejs/tsconfig/node.json",
+  "compilerOptions": {
+    "paths": {
+      "eslint-plugin-command/config": [
+        "node_modules/eslint-plugin-command/dist/config.d.mts"
+      ]
+    }
+  },
   "include": ["src"],
   "exclude": ["node_modules"]
 }

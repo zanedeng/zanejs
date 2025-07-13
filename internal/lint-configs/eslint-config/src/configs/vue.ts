@@ -46,9 +46,9 @@ export async function vue(): Promise<Linter.Config[]> {
       processor: pluginVue.processors['.vue'],
       rules: {
         ...pluginVue.configs.base.rules,
-        ...pluginVue.configs['vue3-essential'].rules,
-        ...pluginVue.configs['vue3-strongly-recommended'].rules,
-        ...pluginVue.configs['vue3-recommended'].rules,
+        ...pluginVue.configs['vue2-essential'].rules,
+        ...pluginVue.configs['vue2-strongly-recommended'].rules,
+        ...pluginVue.configs['vue2-recommended'].rules,
 
         'vue/attribute-hyphenation': [
           'error',

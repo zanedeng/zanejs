@@ -1,4 +1,3 @@
-
 export interface ZaneAppConfigRaw {
   VITE_GLOB_API_URL: string;
 }
