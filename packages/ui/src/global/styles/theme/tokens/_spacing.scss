@@ -1,0 +1,41 @@
+@use 'sass:map';
+
+$base-space: 0.125;
+
+$spacing: (
+  '01': $base-space,
+  '02': 2 * $base-space,
+  '03': 4 * $base-space,
+  '04': 6 * $base-space,
+  '05': 8 * $base-space,
+  '06': 12 * $base-space,
+  '07': 16 * $base-space,
+  '08': 20 * $base-space,
+  '09': 24 * $base-space,
+  '10': 32 * $base-space,
+  '11': 40 * $base-space,
+  '12': 48 * $base-space,
+  '13': 80 * $base-space,
+);
+
+$container-sizing: (
+  sm: 320,
+  md: 672,
+  lg: 1056,
+  xl: 1312,
+  max: 1584,
+);
+
+$spacing-css-variables: ();
+
+@each $key, $value in $spacing {
+  $map: ();
+  $map: map.merge($map, (--spacing-#{$key}: #{$value}rem));
+  $spacing-css-variables: map.merge($spacing-css-variables, $map);
+}
+
+@each $key, $value in $container-sizing {
+  $map: ();
+  $map: map.merge($map, (--container-#{$key}: #{$value}px));
+  $spacing-css-variables: map.merge($spacing-css-variables, $map);
+}

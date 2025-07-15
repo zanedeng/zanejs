@@ -1,0 +1,10 @@
+@use '../../../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+.sidenav {
+  width: 16rem;
+  background: var(--background);
+}

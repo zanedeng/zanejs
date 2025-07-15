@@ -1,0 +1,17 @@
+@use '../../../global/styles/commons';
+
+:host {
+  --dropdown-height: inherit;
+
+  display: inline-block;
+  height: var(--dropdown-height);
+}
+
+.dropdown {
+  display: inline-block;
+  height: var(--dropdown-height);
+
+  zane-menu {
+    --zane-menu-shadow: none;
+  }
+}

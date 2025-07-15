@@ -1,0 +1,2 @@
+import{l as t}from"./p-BTbln26t.js";function n(n,o,e){const r=n._original||n;const c=t.debounce(r.emit.bind(r),o,e);const s=new Proxy(r,{get(t,n){if(n==="emit"){return c}const o=Reflect.get(t,n);return typeof o==="function"?o.bind(t):o}});s._original=r;return s}export{n as d};
+//# sourceMappingURL=p-BGVvnNZ-.js.map

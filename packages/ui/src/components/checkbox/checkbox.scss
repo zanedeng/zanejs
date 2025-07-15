@@ -1,0 +1,207 @@
+@use '../../global/styles/commons';
+
+:host {
+  --checkbox-size: 1rem;
+
+  display: inline-block;
+  color: commons.v(--text-primary);
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  @include commons.font-style(body-compact-01);
+
+  &.has-content {
+    gap: commons.v(--spacing-03);
+  }
+
+  .input-native {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--input-background-color, var(--field));
+    border: 1px solid commons.v(--icon-primary);
+    border-radius: 2px;
+
+    &::before {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      content: '';
+      border: 1px solid transparent;
+      border-radius: 2px;
+    }
+  }
+
+  &.rounded {
+    .box {
+      border-radius: 50%;
+
+      &::before {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .tick {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  &.has-focus:not(.active) {
+    .box {
+      border-color: transparent;
+
+      @include commons.focus-ring;
+    }
+
+    &:not(.state-checked) .box::before {
+      border-color: commons.v(--icon-01);
+    }
+  }
+
+  .label {
+    color: commons.v(--text-primary);
+  }
+}
+
+.checkbox.state-checked {
+  .box {
+    background: commons.v(--icon-primary);
+    border-color: transparent;
+  }
+
+  .tick {
+    top: -15%;
+    left: 15%;
+    width: 33%;
+    height: 67%;
+    border-right: 2px solid commons.v(--icon-inverse);
+    border-bottom: 2px solid commons.v(--icon-inverse);
+    transform: rotate(45deg);
+    transform-origin: 0 100%;
+  }
+
+  &.active .box {
+    border-color: commons.v(--color-white);
+  }
+
+  &.has-focus:not(.active) {
+    .box {
+      border-color: commons.v(--color-white);
+
+      @include commons.focus-ring;
+    }
+  }
+}
+
+.checkbox.state-intermediate {
+  .box {
+    background: commons.v(--icon-primary);
+    border-color: transparent;
+  }
+
+  .tick {
+    width: 67%;
+    height: 0;
+    margin: auto;
+    border-right: 2px solid commons.v(--icon-inverse);
+    border-bottom: 2px solid commons.v(--icon-inverse);
+    transform-origin: 0 100%;
+  }
+
+  &.active .box {
+    border-color: commons.v(--color-white);
+  }
+
+  &.has-focus:not(.active) {
+    .box {
+      border-color: commons.v(--color-white);
+
+      @include commons.focus-ring;
+    }
+  }
+}
+
+/**
+ * SIZES
+ */
+.checkbox.size-md {
+  .box {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+  }
+}
+
+.checkbox.size-lg {
+  .box {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/**
+ * States
+ */
+@each $state in [success, warning, error] {
+  :host-context(.input-state-#{$state}) {
+    .checkbox .box {
+      border-color: commons.v(--color-#{$state});
+    }
+  }
+}
+
+.checkbox.readonly {
+  color: commons.v(--text-primary) !important;
+  cursor: default;
+  border-color: commons.v(--text-disabled) !important;
+
+  &.state-checked .box {
+    background: var(--text-disabled) !important;
+  }
+
+  .box {
+    border: 1px solid var(--text-disabled) !important;
+  }
+
+  .tick {
+    border-color: var(--disabled-01) !important;
+  }
+}
+
+.checkbox.disabled {
+  color: var(--text-disabled) !important;
+  cursor: not-allowed;
+  border-color: var(--text-disabled) !important;
+
+  &.state-checked .box {
+    background: var(--text-disabled) !important;
+  }
+
+  .box {
+    border: 1px solid var(--text-disabled) !important;
+  }
+
+  .tick {
+    border-color: var(--disabled-01) !important;
+  }
+}

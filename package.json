@@ -11,7 +11,7 @@
     "check:type": "turbo run typecheck",
     "clean": "node ./scripts/clean.mjs",
     "commit": "czg",
-    "dev": "turbo-run dev",
+    "dev": "turbo dev",
     "dev:docs": "pnpm -F @zanejs/docs run dev",
     "format": "node ./scripts/lint.mjs --format",
     "lint": "node ./scripts/lint.mjs",
@@ -20,14 +20,19 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "is-ci || husky",
     "preview": "turbo-run preview",
-    "reinstall": "pnpm clean --del-lock && pnpm install"
+    "reinstall": "pnpm clean --del-lock && pnpm install",
+    "test:unit": "vitest run --dom",
+    "test:e2e": "turbo run test:e2e",
+    "update:deps": "npx taze -r -w"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
     "@types/node": "catalog:",
+    "@vite-pwa/vitepress": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vueuse/core": "catalog:",
     "@zanejs/commitlint-config": "workspace:*",
     "@zanejs/eslint-config": "workspace:*",
     "@zanejs/node-utils": "workspace:*",
@@ -44,15 +49,19 @@
     "prettier": "catalog:",
     "prettier-plugin-tailwindcss": "catalog:",
     "stylelint": "catalog:",
+    "terser": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
+    "unocss": "catalog:",
+    "unplugin-vue-components": "catalog:",
     "vite": "catalog:",
+    "vitepress": "catalog:",
     "vitest": "catalog:"
   },
   "engines": {
     "node": ">=20.10.0",
     "pnpm": ">=10.12.4"
   },
-  "packageManager": "pnpm@10.12.4"
+  "packageManager": "pnpm@10.13.0"
 }

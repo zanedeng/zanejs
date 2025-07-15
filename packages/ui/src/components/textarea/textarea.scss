@@ -1,0 +1,33 @@
+@use '../../global/styles/common-input';
+
+:host {
+  --zane-textarea-height: 2.5rem;
+}
+
+.textarea {
+  position: relative;
+  align-items: flex-start;
+  height: 100%;
+
+  .input-native {
+    height: 100%;
+    min-height: var(--zane-textarea-height);
+    padding: v(--spacing-05);
+    resize: vertical;
+  }
+}
+
+.actions-container {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+
+  zane-button {
+    --zane-button-height: 2rem;
+  }
+}
+
+:host([size='md']) .input-container {
+  height: 100%;
+  min-height: var(--zane-textarea-height);
+}

@@ -1,0 +1,54 @@
+@use '../../global/styles/commons';
+
+:host {
+  display: block;
+  padding-bottom: commons.v(--spacing-03);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: commons.v(--background);
+  border: 1px solid commons.v(--border-subtle);
+  border-radius: commons.v(--border-radius);
+}
+
+:host([shadow-level='xxl']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+:host([shadow-level='xl']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+:host([shadow-level='lg']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+:host([shadow-level='md']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+:host([shadow-level='sm']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+:host([shadow-level='xs']) .card {
+  box-shadow: commons.v(--shadow-xl);
+}
+
+slot::slotted(zane-card-content) {
+  display: block;
+  padding: 1rem;
+  border-bottom: 1px solid commons.v(--border-subtle);
+}
+
+slot::slotted(zane-card-content.no-padding) {
+  padding: 0;
+}
+
+slot::slotted(zane-card-content:last-child) {
+  flex: 1;
+  border-bottom: none;
+}

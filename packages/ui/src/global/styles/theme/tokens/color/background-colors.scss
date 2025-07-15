@@ -1,0 +1,33 @@
+@use 'base';
+
+/*
+ * Default page background;
+ * UI Shell base color
+ */
+@include base.defineThemeVariable(
+  --background,
+  base.getColor(white, 0),
+  base.getColor(gray, 10),
+  base.getColor(gray, 90),
+  base.getColor(gray, 100)
+);
+@include base.defineVariableDeprecated(
+  --background-hover,
+  base.getColor(gray, 50, 0.12),
+  base.getColor(gray, 50, 0.16)
+);
+@include base.defineVariableDeprecated(
+  --background-active,
+  base.getColor(gray, 50, 0.5),
+  base.getColor(gray, 50, 0.4)
+);
+@include base.defineVariableDeprecated(
+  --border-inverse,
+  base.getColor(gray, 100),
+  base.getColor(gray, 10)
+);
+@include base.defineVariableDeprecated(
+  --background-inverse,
+  base.getColor(gray, 80),
+  base.getColor(gray, 10)
+);

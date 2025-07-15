@@ -1,0 +1,17 @@
+@use '../../../../global/styles/commons';
+
+:host {
+  --list-border-radius: var(--border-radius);
+  --zane-menu-max-height: inherit;
+
+  display: inline-block;
+}
+
+.menu {
+  box-sizing: border-box;
+  padding: var(--spacing-02) 0;
+  background-color: var(--field-02);
+  border: 1px solid commons.v(--color-neutral-200);
+  border-radius: var(--list-border-radius);
+  box-shadow: var(--shadow-sm);
+}

@@ -1,0 +1,86 @@
+@use '../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+.container-wrapper {
+  container: containerwrapper / inline-size;
+
+  &.size-max .container {
+    max-width: commons.v(--container-max);
+  }
+
+  &.size-xl .container {
+    max-width: commons.v(--container-xl);
+  }
+
+  &.size-sm .container {
+    max-width: commons.v(--container-sm);
+  }
+
+  &.size-md .container {
+    max-width: commons.v(--container-md);
+  }
+
+  &.size-lg .container {
+    max-width: commons.v(--container-lg);
+  }
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+
+  .content {
+    padding: commons.v(--spacing-05);
+  }
+}
+
+:host(.debug) {
+  background: var(--color-error-10);
+  border: 1px solid red;
+  border-width: 0 1px;
+
+  .container {
+    background: var(--color-blue-10);
+    border: 1px solid blue;
+    border-width: 0 1px;
+
+    .content {
+      background: var(--color-green-10);
+      border: 1px solid green;
+      border-width: 0 1px;
+    }
+  }
+}
+
+@container containerwrapper (max-width: 671px) {
+  .content {
+    margin-inline: 0;
+  }
+}
+
+@container containerwrapper (min-width: 672px) {
+  .content {
+    margin-inline: var(--spacing-05);
+  }
+}
+
+@container containerwrapper (min-width: 1056px) {
+  .content {
+    margin-inline: var(--spacing-05);
+  }
+}
+
+@container containerwrapper (min-width: 1312px) {
+  .content {
+    margin-inline: var(--spacing-05);
+  }
+}
+
+@container containerwrapper (min-width: 1584px) {
+  .content {
+    margin-inline: var(--spacing-06);
+  }
+}

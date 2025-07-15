@@ -1,0 +1,206 @@
+@use '../../global/styles/common-input';
+
+.dropdown {
+  position: relative;
+
+  .dropdown-content {
+    position: absolute;
+    z-index: common-input.v(--z-index-dropdown-content);
+    width: max-content;
+    max-height: 300px;
+    line-height: 0;
+    transform: scale(0);
+    transition: transform 0.1s ease-out 0s;
+  }
+
+  .chevron-down {
+    padding: 0 0.625rem;
+    cursor: pointer;
+    transition: transform 0.1s ease-out 0s;
+  }
+
+  .loader {
+    padding: 0 0.625rem;
+  }
+
+  &.open {
+    .dropdown-content {
+      transform: scale(1);
+    }
+
+    .chevron-down {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.bottom-right .dropdown-content {
+    top: calc(100% + #{common-input.v(--spacing-02)});
+    left: 0;
+    transform-origin: top;
+  }
+
+  &.bottom-left .dropdown-content {
+    top: calc(100% + #{common-input.v(--spacing-02)});
+    right: 0;
+    transform-origin: top;
+  }
+
+  &.top-right .dropdown-content {
+    bottom: calc(100% + #{common-input.v(--spacing-02)});
+    left: 0;
+    transform-origin: bottom;
+  }
+
+  &.top-left .dropdown-content {
+    right: 0;
+    bottom: calc(100% + #{common-input.v(--spacing-02)});
+    transform-origin: bottom;
+  }
+
+  &.search-none.center .dropdown-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100%;
+    padding: 0 1rem;
+    pointer-events: none;
+    background: rgb(0 0 0 / 50%);
+    transform-origin: center;
+  }
+}
+
+.select {
+  .input-container {
+    .value-container {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+      column-gap: common-input.v(--spacing-03);
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .input-container.start-slot-has-content {
+    .value-container {
+      padding-inline-start: 0.5rem;
+
+      .input {
+        padding-inline-start: 0;
+      }
+    }
+  }
+
+  .dropdown-content {
+    width: 100%;
+    min-width: 10rem;
+  }
+
+  .selected-items {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: common-input.v(--background);
+    border: 1px solid var(--border-strong);
+    border-radius: common-input.v(--border-radius);
+    box-shadow: common-input.v(--shadow-sm);
+  }
+
+  .menu {
+    --zane-menu-max-height: 20rem;
+
+    width: 100%;
+
+    .slot-container-start {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+
+  .display-value {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-inline: common-input.v(--spacing-05);
+    color: common-input.v(--text-placeholder);
+    cursor: pointer;
+  }
+
+  .display-value-container {
+    display: flex;
+    gap: common-input.v(--spacing-02);
+    align-items: center;
+
+    .item-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &:not(.multiple) .input-container.has-value {
+    .display-value {
+      color: common-input.v(--text-primary);
+    }
+  }
+
+  .start-search {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-03);
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .toggle-icon {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+  }
+
+  &.multiple {
+    padding: 0.5rem 0;
+
+    .value-container {
+      padding-inline: var(--spacing-05);
+    }
+
+    .input {
+      padding-block: var(--spacing-03);
+      padding-inline: 0;
+    }
+
+    .input-native {
+      min-width: 6rem;
+    }
+
+    .multi-select-value {
+      padding-block: var(--spacing-03);
+    }
+  }
+}
+
+:host([size='sm']) .multiple :is(.input-container, .input-container-skeleton) {
+  height: auto;
+  min-height: var(--input-height, 2rem);
+}
+
+:host([size='md']) .multiple :is(.input-container, .input-container-skeleton) {
+  height: auto;
+  min-height: var(--input-height, 2.5rem);
+}
+
+:host([size='lg']) .multiple :is(.input-container, .input-container-skeleton) {
+  height: auto;
+  min-height: var(--input-height, 3rem);
+}

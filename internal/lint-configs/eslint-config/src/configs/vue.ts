@@ -131,7 +131,6 @@ export async function vue(): Promise<Linter.Config[]> {
         'vue/require-default-prop': 'error',
         'vue/require-explicit-emits': 'error',
         'vue/require-prop-types': 'off',
-        'vue/script-setup-uses-vars': 'error',
         'vue/singleline-html-element-content-newline': 'off',
         'vue/space-infix-ops': 'error',
         'vue/space-unary-ops': ['error', { nonwords: false, words: true }],

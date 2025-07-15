@@ -1,0 +1,119 @@
+@use '../../../global/styles/commons';
+
+:host {
+  /**
+   * @prop --zane-accordion-item-heading-background - Background color of the accordion item header
+   */
+  --zane-accordion-item-heading-background: transparent;
+
+  /**
+   * @prop --zane-accordion-item-heading-background-hover - Background color of the accordion item header on hover
+   */
+  --zane-accordion-item-heading-background-hover: var(--layer-hover);
+
+  /**
+   * @prop --zane-accordion-item-title-align - Alignment of the accordion title
+   */
+  --zane-accordion-item-title-align: start;
+
+  display: block;
+}
+
+.accordion-item {
+  .accordion-heading {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 v(--spacing-05);
+    color: v(--text-primary);
+    cursor: pointer;
+    background: var(--zane-accordion-item-heading-background);
+    border: 0;
+    border-radius: 0;
+
+    @include commons.font-style(body);
+
+    .accordion-title {
+      width: 100%;
+      text-align: var(--zane-accordion-item-title-align);
+    }
+
+    svg {
+      flex: 0 0 1rem;
+    }
+
+    &:hover {
+      background: var(--zane-accordion-item-heading-background-hover);
+    }
+
+    &.has-focus {
+      @include commons.focus-ring;
+    }
+  }
+
+  .item-section {
+    height: 0;
+    text-align: start;
+    pointer-events: none;
+    background: var(--zane-accordion-item-heading-background);
+    opacity: 0;
+    transition: all 0.1s linear;
+  }
+
+  .accordion-icon {
+    transition: transform 0.1s linear;
+  }
+
+  &.open {
+    .item-section {
+      height: 100%;
+      padding: var(--spacing-03) var(--spacing-10) var(--spacing-06)
+        var(--spacing-05);
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .accordion-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.disabled {
+    .accordion-heading {
+      color: var(--text-disabled);
+      cursor: not-allowed;
+
+      .accordion-icon {
+        color: var(--text-disabled);
+      }
+    }
+  }
+}
+
+:host-context([size='sm']) {
+  .accordion-item {
+    .accordion-heading {
+      height: 2rem;
+    }
+  }
+}
+
+:host-context([size='lg']) {
+  .accordion-item {
+    .accordion-heading {
+      height: 3rem;
+    }
+  }
+}
+
+:host-context(zane-accordion[align='start']) {
+  .accordion-item {
+    .accordion-heading {
+      flex-direction: row;
+    }
+  }
+}

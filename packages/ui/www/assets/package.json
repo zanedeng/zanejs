@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@carbon/icons": "11.62.0",
+    "d3": "7.9.0",
+    "monaco-editor": "0.52.2",
+    "prismjs": "1.30.0"
+  }
+}

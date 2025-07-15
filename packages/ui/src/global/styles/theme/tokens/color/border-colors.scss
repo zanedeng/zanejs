@@ -1,0 +1,79 @@
+@use 'base';
+
+/*
+Subtle borders paired with $background
+ */
+@include base.defineVariableDeprecated(
+  --border-interactive,
+  base.getColor(blue, 60),
+  base.getColor(blue, 50)
+);
+
+/*
+Subtle borders paired with $background
+ */
+@include base.defineVariableDeprecated(
+  --border-subtle-00,
+  base.getColor(gray, 20),
+  base.getColor(gray, 80)
+);
+
+/*
+Subtle borders paired with $layer-01
+ */
+@include base.defineVariableDeprecated(
+  --border-subtle-01,
+  base.getColor(gray, 20),
+  base.getColor(gray, 80)
+);
+
+/*
+Subtle borders paired with $layer-02
+ */
+@include base.defineVariableDeprecated(
+  --border-subtle-02,
+  base.getColor(gray, 20),
+  base.getColor(gray, 70)
+);
+
+/*
+Subtle borders paired with $layer-03
+ */
+@include base.defineVariableDeprecated(
+  --border-subtle-03,
+  base.getColor(gray, 20),
+  base.getColor(gray, 60)
+);
+
+/*
+Medium contrast border;
+Border-bottom paired with $field-01;
+3:1 AA non-text contrast
+ */
+@include base.defineVariableDeprecated(
+  --border-strong-01,
+  base.getColor(gray, 50),
+  base.getColor(gray, 60)
+);
+
+/*
+Medium contrast border;
+Border-bottom paired with $field-02;
+3:1 AA non-text contrast
+ */
+@include base.defineVariableDeprecated(
+  --border-strong-02,
+  base.getColor(gray, 50),
+  base.getColor(gray, 50)
+);
+
+/*
+Medium contrast border;
+Border-bottom paired with $field-03;
+3:1 AA non-text contrast
+ */
+@include base.defineVariableDeprecated(
+  --border-strong-03,
+  base.getColor(gray, 50),
+  base.getColor(gray, 40)
+);

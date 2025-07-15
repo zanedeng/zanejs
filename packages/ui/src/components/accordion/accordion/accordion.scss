@@ -1,0 +1,13 @@
+@use '../../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+slot::slotted(zane-accordion-item) {
+  border-top: 1px solid var(--border-subtle);
+}
+
+slot::slotted(zane-accordion-item:last-child) {
+  border-bottom: 1px solid var(--border-subtle);
+}

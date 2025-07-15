@@ -1,0 +1,2 @@
+function n(n){if(!n||!n.getBoundingClientRect){return false}const o=n.getBoundingClientRect();const t=window.innerHeight||document.documentElement.clientHeight;const c=window.innerWidth||document.documentElement.clientWidth;return o.top<t&&o.bottom>0&&o.left<c&&o.right>0}export{n as i};
+//# sourceMappingURL=p-WqrX42U5.js.map

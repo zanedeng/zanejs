@@ -1,0 +1,32 @@
+@use '../../../global/styles/commons';
+
+$border-width: 0.0625rem;
+
+:host .button-group {
+  display: flex;
+
+  slot::slotted(zane-button) {
+    --zane-button-border-width: #{$border-width} 0 #{$border-width}
+      #{$border-width};
+    --zane-button-border-radius: 0;
+
+    display: block;
+    margin: 0;
+  }
+
+  slot::slotted(zane-button:first-child) {
+    --zane-button-border-radius: #{commons.v(--border-radius)} 0 0
+      #{commons.v(--border-radius)};
+  }
+
+  slot::slotted(zane-button:last-child) {
+    --zane-button-border-width: #{$border-width};
+    --zane-button-border-radius: 0 #{commons.v(--border-radius)}
+      #{commons.v(--border-radius)} 0;
+  }
+
+  slot::slotted(zane-button:only-child) {
+    --zane-button-border-radius: #{commons.v(--border-radius)};
+    --zane-button-border-width: #{$border-width};
+  }
+}

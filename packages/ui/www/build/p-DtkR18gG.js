@@ -1,0 +1,2 @@
+function e(e){const r=Number.parseFloat(getComputedStyle(document.documentElement).fontSize);if(typeof e==="number"){return e*r}else if(typeof e==="string"&&e.endsWith("rem")){return Number.parseFloat(e)*r}return undefined}export{e as r};
+//# sourceMappingURL=p-DtkR18gG.js.map

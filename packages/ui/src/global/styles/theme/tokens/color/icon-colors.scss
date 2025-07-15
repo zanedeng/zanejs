@@ -1,0 +1,29 @@
+@use 'base';
+
+/*
+Primary icons
+ */
+@include base.defineThemeVariable(
+  --icon-primary,
+  base.getColor(gray, 100),
+  base.getColor(gray, 100),
+  base.getColor(gray, 10),
+  base.getColor(gray, 10)
+);
+
+/*
+
+Inverse icon color
+ */
+@include base.defineVariableDeprecated(
+  --icon-inverse,
+  base.getColor(white, 0),
+  base.getColor(gray, 100)
+);
+@include base.defineThemeVariable(
+  --icon-secondary,
+  base.getColor(gray, 70),
+  base.getColor(gray, 70),
+  base.getColor(gray, 30),
+  base.getColor(gray, 30)
+);

@@ -1,0 +1,64 @@
+@use '../../global/styles/commons';
+
+:host {
+  /**
+   * @prop --zane-divider-color: Color of the divider
+   */
+  --zane-divider-color: #{commons.v(--border-strong-01)};
+
+  /**
+   * @prop --zane-divider-padding: Padding of the divider
+   */
+  --zane-divider-padding: #{commons.v(--spacing-05)};
+
+  display: block;
+  color: var(--text-secondary);
+}
+
+.divider {
+  display: flex;
+  margin: 0;
+
+  @include commons.font-style(body-compact-01);
+
+  &:not(.vertical) {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--zane-divider-padding) 0;
+
+    .line {
+      width: 100%;
+      border-top: 1px solid var(--zane-divider-color);
+    }
+
+    &.has-content .slot-container {
+      padding: 0 var(--spacing-04);
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 var(--zane-divider-padding);
+
+    .line {
+      height: 100%;
+      border-right: 1px solid var(--zane-divider-color);
+    }
+
+    &.has-content .slot-container {
+      padding: var(--spacing-03) 0;
+    }
+  }
+}
+
+:host(:not([vertical])) {
+  width: auto;
+}
+
+:host([vertical]) {
+  height: auto;
+}

@@ -69,12 +69,16 @@ export default {
         ],
       },
     ],
+    'block-no-empty': null,
+    'custom-property-pattern': null,
     'font-family-no-missing-generic-family-keyword': null,
     'function-no-unknown': null,
     'import-notation': null,
+    'keyframes-name-pattern': null,
     'media-feature-range-notation': null,
     'named-grid-areas-no-invalid': null,
     'no-descending-specificity': null,
+    'no-duplicate-selectors': null,
     'no-empty-source': null,
     'order/order': [
       [

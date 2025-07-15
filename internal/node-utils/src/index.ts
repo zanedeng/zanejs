@@ -8,7 +8,7 @@ export * from './monorepo';
 export { toPosixPath } from './path';
 export { prettierFormat } from './prettier';
 export * from './spinner';
-export type { Package } from '@manypkg/get-packages';
+export type { Package } from '@manypkg/get-packages/dist/manypkg-get-packages';
 export { default as colors } from 'chalk';
 export { consola } from 'consola';
 export * from 'execa';

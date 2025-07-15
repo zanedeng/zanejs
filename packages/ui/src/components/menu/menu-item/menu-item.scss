@@ -1,0 +1,133 @@
+@use '../../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+$border-width: 2px;
+
+.menu-item {
+  box-sizing: border-box;
+  display: flex;
+  gap: commons.v(--spacing-02);
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: calc(#{commons.v(--spacing-05)} - #{$border-width});
+  color: commons.v(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  border: $border-width solid transparent;
+
+  @include commons.font-style(body-compact-01);
+
+  .item-section {
+    display: flex;
+    align-items: center;
+
+    &.start {
+      width: 1.5rem;
+    }
+  }
+
+  .slot-main {
+    display: block;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .slot-end {
+    color: commons.v(--text-helper);
+  }
+}
+
+:host-context([size='sm']) {
+  .menu-item {
+    min-height: 2rem;
+  }
+}
+
+:host-context([size='md']) {
+  .menu-item {
+    min-height: 2.5rem;
+  }
+}
+
+:host-context([size='lg']) {
+  .menu-item {
+    min-height: 3rem;
+  }
+}
+
+.menu-item {
+  &:hover {
+    color: commons.v(--text-primary);
+    background: commons.v(--layer-hover);
+
+    .slot-end {
+      color: commons.v(--icon-01);
+    }
+  }
+
+  &.active {
+    background: var(--selected-ui);
+  }
+}
+
+@each $color in [primary, secondary, success, info, warning, error, white,
+  black]
+{
+  .menu-item#{'.color-' + $color} {
+    &:hover,
+    &.has-focus:not(.active) {
+      color: white;
+      background: commons.v(--color-#{$color});
+
+      .slot-end {
+        color: white;
+      }
+    }
+  }
+}
+
+.menu-item.color-danger {
+  &:hover,
+  &.has-focus:not(.active) {
+    color: white;
+    background: commons.v(--color-error);
+
+    .slot-end {
+      color: white;
+    }
+  }
+}
+
+.menu-item.has-focus:not(.active) {
+  outline: none;
+  border-color: commons.v(--color-primary);
+}
+
+.menu-item.disabled {
+  color: commons.v(--text-disabled) !important;
+  cursor: not-allowed;
+  background-color: commons.v(--disabled-01) !important;
+
+  &:hover,
+  &.has-focus:not(.active) {
+    color: commons.v(--text-disabled) !important;
+    background-color: commons.v(--disabled-01) !important;
+  }
+
+  &.active,
+  &.selected {
+    color: commons.v(--text-disabled) !important;
+    background-color: var(--disabled-01) !important;
+  }
+}
+
+.menu-item:not(.end-slot-has-content) {
+  .slot-end {
+    display: none;
+  }
+}

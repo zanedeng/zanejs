@@ -1,0 +1,36 @@
+@use '../../../global/styles/commons';
+
+:host {
+  /**
+    * @prop --zane-menu-background: Background color of the menu
+   */
+  --zane-menu-background: var(--layer);
+
+  /**
+    * @prop --zane-menu-max-height: Maximum height of the menu
+   */
+  --zane-menu-max-height: 100%;
+
+  /**
+    * @prop --zane-menu-shadow: Shadow of the menu
+   */
+  --zane-menu-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
+
+  display: inline-block;
+  min-width: 10rem;
+}
+
+.menu {
+  box-sizing: border-box;
+  max-height: var(--zane-menu-max-height);
+  padding-block: commons.v(--spacing-02);
+  overflow-x: auto;
+  background: var(--zane-menu-background);
+  border: 1px solid #{commons.v(--border-subtle)};
+  box-shadow: var(--zane-menu-shadow);
+}
+
+:host(.no-border) .menu {
+  border: none;
+  box-shadow: none;
+}

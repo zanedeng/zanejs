@@ -1,0 +1,61 @@
+@use '../../../global/styles/commons';
+
+:host {
+  /**
+   * @prop --popover-content-background: Background color of the popover content
+   */
+  --popover-content-background: var(--layer);
+
+  /**
+   * @prop --popover-padding: Padding of the popover content
+   */
+  --popover-content-padding: #{commons.v(--spacing-05)};
+
+  /**
+   * @prop --popover-content-border-radius: Border radius of the popover content
+   */
+  --popover-content-border-radius: 2px;
+
+  /**
+    * @prop --zane-menu-shadow: Shadow of popover content
+   */
+  --popover-content-shadow: none;
+  --popover-content-caret-size: 0.75rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: commons.v(--z-index-popover);
+  display: inline-block;
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform 0.1s ease-out 0s;
+}
+
+:host-context(zane-popover[open]) {
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+:host-context(zane-popover[tip='caret']) {
+  .arrow {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+.popover-content {
+  position: relative;
+  padding: var(--popover-content-padding);
+  background: var(--popover-content-background);
+  border-radius: var(--popover-content-border-radius);
+  filter: var(--popover-content-shadow, none);
+
+  .arrow {
+    position: absolute;
+    z-index: -1;
+    width: var(--popover-content-caret-size);
+    height: var(--popover-content-caret-size);
+    background: var(--popover-content-background);
+    transform: rotate(45deg) scale(0);
+  }
+}

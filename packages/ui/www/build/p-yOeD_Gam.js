@@ -1,0 +1,2 @@
+const r=(r,o)=>{if(o){return r.querySelector(`:scope > [slot="${o}"]`)!==null}const t=Array.from(r.childNodes);return t.some((r=>{var o;if(r.nodeType===Node.TEXT_NODE){return((o=r.textContent)===null||o===void 0?void 0:o.trim())!==""}if(r.nodeType===Node.ELEMENT_NODE){const o=r;return!o.hasAttribute("slot")}return false}))};export{r as h};
+//# sourceMappingURL=p-yOeD_Gam.js.map

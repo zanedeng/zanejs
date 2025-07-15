@@ -1,0 +1,7 @@
+@use '../../global/styles/common-input';
+
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  appearance: none;
+}

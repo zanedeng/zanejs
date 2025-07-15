@@ -1,0 +1,23 @@
+@use '../../../global/styles/commons';
+
+:host {
+  --zane-popover-tiptab-padding: 0.5rem;
+  --zane-popover-height: inherit;
+
+  display: inline-block;
+  height: var(--zane-popover-height);
+}
+
+.popover {
+  height: var(--zane-popover-height);
+
+  &.tip-tab {
+    padding: var(--zane-popover-tiptab-padding);
+    line-height: 0;
+    transition: background 0.1s ease-out 0s;
+
+    &.open {
+      background: var(--layer);
+    }
+  }
+}

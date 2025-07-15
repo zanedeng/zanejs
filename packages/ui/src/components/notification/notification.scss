@@ -1,0 +1,161 @@
+@use '../../global/styles/commons';
+
+:host {
+  display: block;
+  margin-bottom: commons.v(--spacing-03);
+}
+
+:host(:not([inline])) {
+  width: 18rem;
+}
+
+.notification {
+  display: flex;
+  border-color: transparent;
+  border-style: solid;
+
+  .state-icon {
+    padding: 0.875rem commons.v(--spacing-04);
+    line-height: 0;
+  }
+
+  .content {
+    flex: 1;
+    padding-block: commons.v(--spacing-04);
+
+    .title {
+      word-break: break-all;
+
+      @include commons.font-style(heading-compact-01);
+    }
+
+    .subtitle {
+      word-break: break-all;
+
+      @include commons.font-style(body-compact-01);
+    }
+
+    .actions {
+      display: flex;
+      gap: var(--spacing-04);
+      align-items: center;
+      padding-top: 1.5rem;
+
+      .action {
+        --zane-button-border-radius: none;
+      }
+    }
+  }
+
+  &.inline .content {
+    display: flex;
+    padding-block: 0;
+
+    .content-text {
+      flex: 1;
+      padding-block: commons.v(--spacing-04);
+
+      .title,
+      .subtitle {
+        display: inline;
+        padding-inline-end: 0.25rem;
+      }
+
+      .title slot::slotted(*),
+      .subtitle slot::slotted(*) {
+        display: inline;
+      }
+    }
+
+    .actions {
+      padding-inline-end: commons.v(--spacing-03);
+      padding-top: 0;
+    }
+  }
+
+  .close-button {
+    --zane-button-padding: 0.75rem;
+    --zane-button-height: 3rem;
+    --zane-button-border-radius: none;
+
+    margin: 0;
+  }
+}
+
+:host(:not([dismissible])) .content {
+  padding-inline-end: commons.v(--spacing-04);
+}
+
+@mixin alertState($color, $dark) {
+  @if $dark {
+    .alert {
+      background-color: commons.v(--color-#{$color});
+
+      .content {
+        .message {
+          --link-color: white;
+
+          color: white;
+        }
+
+        .description {
+          color: commons.v(--text-primary);
+        }
+      }
+    }
+  } @else {
+    .alert {
+      background-color: commons.v(--color-#{$color}-20);
+
+      .content {
+        .message {
+          --link-color: #{commons.v(--color-#{$color}-70)};
+
+          color: commons.v(--color-#{$color}-70);
+        }
+
+        .description {
+          color: commons.v(--text-secondary);
+        }
+      }
+    }
+  }
+}
+
+@each $state in [info, success, warning, error] {
+  .notification.state-#{$state} {
+    &.high-contrast {
+      color: commons.v(--text-inverse);
+      background: commons.v(--background-inverse);
+      border-width: 0 0 0 3px;
+      border-left-color: commons.v(--support-#{$state}-inverse);
+
+      .close-button {
+        .icon {
+          color: commons.v(--text-inverse);
+        }
+      }
+
+      .state-icon {
+        color: commons.v(--support-#{$state}-inverse);
+      }
+    }
+
+    &:not(.high-contrast) {
+      color: commons.v(--color-neutral-100);
+      background: commons.v(--color-#{$state}-10);
+      border-color: commons.v(--support-#{$state});
+      border-width: 1px 1px 1px 3px;
+
+      .close-button {
+        .icon {
+          --icon-color: commons.v(--color-neutral-100);
+        }
+      }
+
+      .state-icon {
+        color: commons.v(--support-#{$state});
+      }
+    }
+  }
+}

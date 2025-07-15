@@ -40,7 +40,7 @@ async function getPackages() {
  */
 async function getPackage(pkgName: string) {
   const { packages } = await getPackages();
-  return packages.find((pkg) => pkg.packageJson.name === pkgName);
+  return packages.find((pkg: any) => pkg.packageJson.name === pkgName);
 }
 
 export { findMonorepoRoot, getPackage, getPackages, getPackagesSync };

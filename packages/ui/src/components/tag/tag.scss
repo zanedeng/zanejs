@@ -1,0 +1,92 @@
+@use '../../global/styles/commons';
+
+$tag-background-color: var(--tag-background-color, var(--tag-background-gray));
+$tag-color: var(--tag-color, var(--tag-color-gray));
+$tag-hover-color: var(--tag-hover-color, var(--tag-hover-gray));
+
+:host {
+  display: inline-block;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: $tag-color;
+  background: $tag-background-color;
+
+  @include commons.font-style(label-01);
+
+  .tag-image {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: $tag-hover-color;
+    border-radius: 100%;
+  }
+
+  .tag-content {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &.dismissible .tag-content {
+    padding-inline-end: 0.25rem;
+  }
+
+  &.selected {
+    color: var(--background);
+    background: $tag-hover-color;
+
+    .close-btn-icon {
+      color: var(--background);
+    }
+  }
+}
+
+.close-btn {
+  padding: 0;
+  margin: 0;
+  margin-inline-end: var(--spacing-01);
+  line-height: 0;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+
+  &:hover {
+    background: $tag-hover-color;
+
+    .close-btn-icon {
+      color: var(--background);
+    }
+  }
+}
+
+/**
+ * Sizes
+ */
+.tag.size-md {
+  height: 1.5rem;
+  border-radius: 12px;
+}
+
+.tag.size-sm {
+  height: 1.125rem;
+  border-radius: 9px;
+}
+
+@each $color in [ 'gray', 'blue', 'green', 'red', 'yellow', 'primary',
+  'success', 'info', 'warning', 'error']
+{
+  .tag#{'.color-' + $color} {
+    --tag-background-color: var(--tag-background-#{$color});
+    --tag-color: var(--tag-color-#{$color});
+    --tag-hover-color: var(--tag-hover-#{$color});
+  }
+}

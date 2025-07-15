@@ -1,0 +1,22 @@
+@use '../../../../global/styles/commons';
+
+:host {
+  display: block;
+  height: var(--zane-header-height);
+}
+
+.header-action {
+  --zane-button-padding: 0.75rem;
+  --zane-button-height: 100%;
+  --zane-button-border-radius: 0;
+
+  margin-inline-end: 0.5rem;
+}
+
+:host-context(zane-header[float]) {
+  height: calc(var(--zane-header-height) - 2px);
+}
+
+:host-context(:not(zane-header[float])) .header-action {
+  margin-inline-end: 0;
+}

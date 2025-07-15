@@ -1,0 +1,35 @@
+@use '../../../global/styles/commons';
+
+:host {
+  --popover-content-shadow: none;
+
+  /**
+  * @prop --zane-dropdown-menu-max-height: Maximum height of the menu
+ */
+  --zane-dropdown-menu-max-height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: v(--z-index-popover);
+  display: inline-block;
+  min-width: 10rem;
+  line-height: 0;
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform 0.1s ease-out 0s;
+}
+
+:host-context(zane-dropdown[open]) {
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.dropdown-content {
+  --zane-menu-max-height: var(--zane-dropdown-menu-max-height);
+  --zane-menu-shadow: none;
+
+  position: relative;
+  width: 100%;
+  filter: var(--popover-content-shadow, none);
+}

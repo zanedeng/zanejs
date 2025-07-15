@@ -1,0 +1,24 @@
+@use '../../global/styles/commons';
+
+:host {
+  --zane-tooltip-height: inherit;
+
+  display: inline-block;
+  height: var(--zane-tooltip-height);
+}
+
+.popover {
+  --zane-popover-height: var(--zane-tooltip-height);
+}
+
+.tooltip-content {
+  --popover-content-background: var(--background-inverse);
+  --popover-content-padding: var(--spacing-03) var(--spacing-05);
+  --popover-content-border-radius: 0;
+  --popover-content-caret-size: 0.5rem;
+
+  max-width: 18rem;
+  color: var(--text-inverse);
+
+  @include commons.font-style(label-01);
+}

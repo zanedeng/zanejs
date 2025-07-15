@@ -1,0 +1,9 @@
+@use '../../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+.tree-view {
+  background-color: var(--layer);
+}

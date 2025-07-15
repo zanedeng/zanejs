@@ -1,0 +1,26 @@
+@use '../../../global/styles/commons';
+
+.tabs-list {
+  position: relative;
+  display: flex;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    content: '';
+  }
+
+  .tabs-container {
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.tabs-list.type-default {
+  &::before {
+    border-bottom: 2px solid commons.v(--border-subtle);
+  }
+}

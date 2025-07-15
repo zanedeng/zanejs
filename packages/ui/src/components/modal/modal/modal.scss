@@ -1,0 +1,206 @@
+@use '../../../global/styles/commons';
+
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-index-modal);
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+:host([open]) {
+  display: block;
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  .modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: var(--overlay);
+  }
+
+  .modal--wrapper {
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    padding: 10% 0 var(--spacing-09) 0;
+    overflow: auto;
+  }
+}
+
+.modal {
+  width: 100%;
+  margin: auto;
+  background: var(--layer-01);
+
+  .modal__content {
+    padding: 0 0 var(--spacing-09);
+  }
+
+  .modal-header {
+    display: flex;
+
+    .modal-heading-section {
+      flex: 1;
+      padding: 1rem 0 0 1rem;
+      margin-bottom: 1rem;
+
+      .modal-heading {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .action-container {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .close-icon {
+      --zane-button-height: 3rem;
+      --zane-button-border-radius: 0;
+    }
+  }
+
+  /*
+   * Loader styles
+   */
+  &.show-loader {
+    position: relative;
+  }
+
+  .modal__loading {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .modal__loading-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background: var(--overlay);
+    }
+  }
+}
+
+/**
+  * SIZES
+  */
+
+:host([size='xs']) {
+  @include commons.for-phone-only {
+    .modal {
+      width: 100%;
+    }
+  }
+
+  @include commons.for-tablet-portrait-up {
+    .modal {
+      width: 48%;
+    }
+  }
+
+  @include commons.for-tablet-landscape-up {
+    .modal {
+      width: 32%;
+    }
+  }
+
+  @include commons.for-desktop-up {
+    .modal {
+      width: 24%;
+    }
+  }
+}
+
+:host([size='sm']) {
+  @include commons.for-phone-only {
+    .modal {
+      width: 100%;
+    }
+  }
+
+  @include commons.for-tablet-portrait-up {
+    .modal {
+      width: 60%;
+    }
+  }
+
+  @include commons.for-tablet-landscape-up {
+    .modal {
+      width: 42%;
+    }
+  }
+
+  @include commons.for-desktop-up {
+    .modal {
+      width: 36%;
+    }
+  }
+}
+
+:host([size='md']) {
+  @include commons.for-phone-only {
+    .modal {
+      width: 100%;
+    }
+  }
+
+  @include commons.for-tablet-portrait-up {
+    .modal {
+      width: 84%;
+    }
+  }
+
+  @include commons.for-tablet-landscape-up {
+    .modal {
+      width: 60%;
+    }
+  }
+
+  @include commons.for-desktop-up {
+    .modal {
+      width: 48%;
+    }
+  }
+}
+
+:host([size='lg']) {
+  @include commons.for-phone-only {
+    .modal {
+      width: 100%;
+    }
+  }
+
+  @include commons.for-tablet-portrait-up {
+    .modal {
+      width: 96%;
+    }
+  }
+
+  @include commons.for-tablet-landscape-up {
+    .modal {
+      width: 84%;
+    }
+  }
+
+  @include commons.for-desktop-up {
+    .modal {
+      width: 72%;
+    }
+  }
+}

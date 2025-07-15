@@ -1,0 +1,70 @@
+@use 'base';
+
+/**
+Primary text;
+Body copy;
+Headers;
+Hover text color for --text-secondary
+ */
+@include base.defineVariableDeprecated(
+  --text-primary,
+  base.getColor(gray, 100),
+  base.getColor(gray, 10)
+);
+
+/**
+ * Secondary text;
+ * Input labels
+ */
+@include base.defineVariableDeprecated(
+  --text-secondary,
+  base.getColor(gray, 70),
+  base.getColor(gray, 30)
+);
+
+/**
+ * Placeholder text
+ */
+@include base.defineVariableDeprecated(
+  --text-placeholder,
+  base.getColor(gray, 40),
+  base.getColor(gray, 60)
+);
+
+/**
+Text on interactive colors;
+Text on button colors
+ */
+@include base.defineVariableDeprecated(
+  --text-on-color,
+  base.getColor(white, 0),
+  base.getColor(white, 0)
+);
+
+/**
+Tertiary text;
+Help text
+ */
+@include base.defineVariableDeprecated(
+  --text-helper,
+  base.getColor(gray, 60),
+  base.getColor(gray, 50)
+);
+
+/**
+Error message text
+ */
+@include base.defineVariableDeprecated(
+  --text-error,
+  base.getColor(red, 60),
+  base.getColor(red, 40)
+);
+
+/**
+Inverse text color
+ */
+@include base.defineVariableDeprecated(
+  --text-inverse,
+  base.getColor(white, 0),
+  base.getColor(gray, 100)
+);

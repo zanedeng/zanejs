@@ -1,0 +1,23 @@
+@use 'base';
+
+/*
+ * Skeleton color for text and UI elements
+ */
+@include base.defineThemeVariable(
+  --skeleton-element,
+  base.getColor(gray, 30),
+  base.getColor(gray, 30),
+  base.getColor(gray, 70),
+  base.getColor(gray, 70)
+);
+
+/*
+ * Skeleton color for containers
+ */
+@include base.defineThemeVariable(
+  --skeleton-background,
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 80),
+  base.getColor(gray-hover, 80)
+);

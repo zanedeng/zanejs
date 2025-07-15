@@ -1,0 +1,5 @@
+@use '../../global/styles/common-input';
+
+:host(.form-field) {
+  margin-bottom: common-input.v(--spacing-07);
+}

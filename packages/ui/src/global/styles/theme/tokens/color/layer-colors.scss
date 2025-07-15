@@ -1,0 +1,118 @@
+@use 'base';
+
+/*
+ * Container color on $background;
+ * Secondary page background
+ */
+@include base.defineThemeVariable(
+  --layer-01,
+  base.getColor(gray, 10),
+  base.getColor(white, 0),
+  base.getColor(gray, 80),
+  base.getColor(gray, 90)
+);
+@include base.defineThemeVariable(
+  --layer-hover-01,
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 80),
+  base.getColor(gray-hover, 90)
+);
+@include base.defineVariableDeprecated(
+  --layer-active-01,
+  base.getColor(gray, 30),
+  base.getColor(gray, 70)
+);
+@include base.defineVariableDeprecated(
+  --layer-accent-hover-01,
+  base.getColor(gray, 20),
+  base.getColor(gray, 80)
+);
+@include base.defineVariableDeprecated(
+  --layer-accent-active-01,
+  base.getColor(gray, 40),
+  base.getColor(gray, 70)
+);
+@include base.defineThemeVariable(
+  --layer-accent-01,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 70),
+  base.getColor(gray, 80)
+);
+
+/*
+Container color on $layer-01
+ */
+@include base.defineVariableDeprecated(
+  --layer-02,
+  base.getColor(white, 0),
+  base.getColor(gray, 80)
+);
+@include base.defineVariableDeprecated(--layer-hover-02, #e8e8e8, #333333);
+@include base.defineThemeVariable(
+  --layer-accent-02,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 60),
+  base.getColor(gray, 70)
+);
+
+/*
+Container color on $layer-02
+ */
+@include base.defineVariableDeprecated(
+  --layer-03,
+  base.getColor(gray, 10),
+  base.getColor(gray, 70)
+);
+@include base.defineVariableDeprecated(--layer-hover-03, #e8e8e8, #333333);
+@include base.defineThemeVariable(
+  --layer-accent-03,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 50),
+  base.getColor(gray, 60)
+);
+@include base.defineThemeVariable(
+  --layer-selected-01,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 70),
+  base.getColor(gray, 80)
+);
+@include base.defineThemeVariable(
+  --layer-selected-hover-01,
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 70),
+  base.getColor(gray-hover, 80)
+);
+@include base.defineThemeVariable(
+  --layer-selected-02,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 60),
+  base.getColor(gray, 70)
+);
+@include base.defineThemeVariable(
+  --layer-selected-hover-02,
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 60),
+  base.getColor(gray-hover, 70)
+);
+@include base.defineThemeVariable(
+  --layer-selected-03,
+  base.getColor(gray, 20),
+  base.getColor(gray, 20),
+  base.getColor(gray, 70),
+  base.getColor(gray, 60)
+);
+@include base.defineThemeVariable(
+  --layer-selected-hover-03,
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 20),
+  base.getColor(gray-hover, 70),
+  base.getColor(gray-hover, 60)
+);

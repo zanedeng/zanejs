@@ -29,6 +29,7 @@ export async function unicorn(): Promise<Linter.Config[]> {
         'unicorn/prefer-dom-node-text-content': 'off',
         'unicorn/prefer-export-from': ['error', { ignoreUsedVariables: true }],
         'unicorn/prefer-global-this': 'off',
+        'unicorn/prefer-spread': 'off',
         'unicorn/prefer-top-level-await': 'off',
         'unicorn/prevent-abbreviations': 'off',
       },

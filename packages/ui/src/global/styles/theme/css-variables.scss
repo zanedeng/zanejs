@@ -1,0 +1,17 @@
+@forward 'tokens/color';
+
+@use 'tokens/color';
+@use 'tokens/spacing';
+@use 'tokens/shadow';
+@use 'tokens/typography';
+@use 'tokens/common';
+@use 'tokens/breakpoints';
+@use 'sass:map';
+
+$css-variables: ();
+
+$css-variables: map.merge($css-variables, color.$color-css-variables);
+$css-variables: map.merge($css-variables, typography.$typography-css-variables);
+$css-variables: map.merge($css-variables, spacing.$spacing-css-variables);
+$css-variables: map.merge($css-variables, shadow.$shadows-css-variables);
+$css-variables: map.merge($css-variables, common.$common-css-variables);

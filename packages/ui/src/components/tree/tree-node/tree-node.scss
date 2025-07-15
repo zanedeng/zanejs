@@ -1,0 +1,107 @@
+@use '../../../global/styles/commons';
+
+:host {
+  display: block;
+}
+
+.tree-node-content {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding-inline-end: calc(commons.v(--spacing-05) - 0.125rem);
+  cursor: pointer;
+  outline: none;
+  border: 0.125rem solid transparent;
+
+  .tree-node-label {
+    flex: 1;
+    padding-left: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: commons.v(--text-secondary);
+    white-space: nowrap;
+
+    @include commons.font-style(body-compact-01);
+  }
+
+  .expand-icon {
+    transform: rotate(0deg);
+    transition: all 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+  }
+
+  .expand-icon.expanded {
+    transform: rotate(+90deg);
+  }
+
+  .icon-space {
+    width: commons.v(--spacing-05);
+  }
+
+  .icon {
+    padding-inline-start: 0.5rem;
+  }
+}
+
+.node-slot {
+  display: none;
+}
+
+.node-slot.expanded {
+  display: block;
+}
+
+.tree-node-content {
+  text-decoration: none !important;
+
+  &:hover {
+    background: commons.v(--layer-hover);
+
+    &.selected {
+      background: var(--layer-selected-hover);
+    }
+  }
+
+  &.has-focus:not(.selected) {
+    color: var(--text-primary);
+    border-color: commons.v(--color-primary);
+
+    .slot-end {
+      color: var(--icon-01);
+    }
+  }
+
+  &.selected {
+    font-weight: var(--font-weight-semi-bold);
+    background: var(--layer-selected);
+    border-left: 0.125rem solid transparent;
+  }
+
+  &.selected::before {
+    position: absolute;
+    top: -0.125rem;
+    left: -0.125rem;
+    display: block;
+    height: calc(100% + 0.25rem);
+    content: ' ';
+    border-left: 0.25rem solid var(--color-primary, commons.v(--color-blue-60)) !important;
+  }
+}
+
+.tree-node-content.disabled {
+  color: var(--text-disabled) !important;
+  cursor: not-allowed;
+  background-color: var(--disabled-01) !important;
+
+  &:hover,
+  &.has-focus:not(.selected) {
+    color: var(--text-disabled) !important;
+    background-color: var(--disabled-01) !important;
+  }
+
+  &.selected {
+    color: var(--text-disabled) !important;
+    background-color: var(--disabled-01) !important;
+  }
+}

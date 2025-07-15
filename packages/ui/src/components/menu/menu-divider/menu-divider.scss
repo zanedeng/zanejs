@@ -1,0 +1,11 @@
+@use '../../../global/styles/commons';
+
+:host {
+  display: block;
+  width: 100%;
+  padding: commons.v(--spacing-02) 0;
+}
+
+.divider {
+  border-top: 1px solid commons.v(--border-subtle);
+}

@@ -1,0 +1,60 @@
+@use 'base';
+
+/*
+Default input fields;
+Fields on $backgrounds
+ */
+@include base.defineThemeVariable(
+  --field-01,
+  base.getColor(gray, 10),
+  base.getColor(white, 0),
+  base.getColor(gray, 80),
+  base.getColor(gray, 90)
+);
+
+/*
+Secondary input fields;
+Fields on $layer-01
+ */
+@include base.defineVariableDeprecated(
+  --field-02,
+  base.getColor(white, 0),
+  base.getColor(gray, 80)
+);
+
+/*
+Secondary input fields;
+Fields on $layer-02
+ */
+@include base.defineVariableDeprecated(
+  --field-03,
+  base.getColor(gray, 10),
+  base.getColor(gray, 70)
+);
+
+/*
+Hover color for $field-01
+ */
+@include base.defineVariableDeprecated(
+  --field-hover-01,
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 90)
+);
+
+/*
+Hover color for $field-02
+ */
+@include base.defineVariableDeprecated(
+  --field-hover-02,
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 80)
+);
+
+/*
+Hover color for $field-03
+ */
+@include base.defineVariableDeprecated(
+  --field-hover-03,
+  base.getColor(gray-hover, 10),
+  base.getColor(gray-hover, 70)
+);

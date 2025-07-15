@@ -1,0 +1,240 @@
+@forward 'base';
+
+@use 'base';
+@use 'background-colors';
+@use 'layer-colors';
+@use 'icon-colors';
+@use 'text-colors';
+@use 'field-colors';
+@use 'skeleton-colors';
+@use 'border-colors';
+
+@include base.defineVariableDeprecated(--color-white, base.getColor(white, 0));
+@include base.defineVariableDeprecated(
+  --color-black,
+  base.getColor(black, 100)
+);
+@include base.defineVariableDeprecated(
+  --color-dark,
+  base.getColor(black, 100),
+  base.getColor(white, 0)
+);
+@include base.defineVariableDeprecated(
+  --color-light,
+  base.getColor(white, 0),
+  base.getColor(black, 100)
+);
+@include base.defineVariableDeprecated(--border-color, base.getColor(gray, 50));
+
+/*
+Selected UI elements
+ */
+@include base.defineVariableDeprecated(
+  --selected-ui,
+  base.getColor(gray, 20),
+  base.getColor(gray, 80)
+);
+
+/**
+* Disabled fields;
+* Disabled backgrounds;
+* Disabled border
+*/
+@include base.defineVariableDeprecated(
+  --disabled-01,
+  base.getColor(gray, 10),
+  base.getColor(gray, 90)
+);
+
+/**
+* Disabled elements on $disabled-01;
+* Disabled label;
+* Disabled text on $disabled-01;
+* Disabled icons;
+* Disabled border
+*/
+@include base.defineVariableDeprecated(
+  --text-disabled,
+  base.getColor(gray, 100, 0.25),
+  base.getColor(gray, 10, 0.25)
+);
+@include base.defineVariableDeprecated(
+  --border-disabled,
+  base.getColor(gray, 30),
+  base.getColor(gray, 70)
+);
+
+/**
+* Disabled text on $disabled-02;
+* Disabled icons on $disabled-02
+*/
+@include base.defineVariableDeprecated(
+  --disabled-03,
+  base.getColor(gray, 50),
+  base.getColor(gray, 60)
+);
+
+/**
+* Primary links;
+* Ghost button
+*/
+@include base.defineVariableDeprecated(--link-01, base.getColor(primary, 60));
+
+/**
+Secondary link color for lower contrast backgrounds
+ */
+@include base.defineVariableDeprecated(--link-02, base.getColor(primary, 60));
+@include base.defineVariableDeprecated(
+  --hover-primary,
+  base.getColor(primary, 60)
+);
+@include base.defineVariableDeprecated(
+  --hover-primary-text,
+  base.getColor(primary, 70)
+);
+@include base.defineVariableDeprecated(
+  --visited-link,
+  base.getColor(purple, 60),
+  base.getColor(purple, 40)
+);
+
+/**
+* Secondary link color for lower contrast backgrounds
+*/
+@include base.defineVariableDeprecated(--link-02, base.getColor(primary, 40));
+@include base.defineVariableDeprecated(
+  --icon-01,
+  base.getColor(gray, 100),
+  base.getColor(gray, 10)
+);
+@include base.defineVariableDeprecated(
+  --icon-02,
+  base.getColor(gray, 70),
+  base.getColor(gray, 30)
+);
+@include base.defineVariableDeprecated(
+  --hover-ui,
+  base.getColor(gray, 10),
+  base.getColor(gray, 90)
+);
+@include base.defineVariableDeprecated(
+  --active-ui,
+  base.getColor(gray, 30),
+  base.getColor(gray, 30)
+);
+@include base.defineVariableDeprecated(
+  --border-subtle-selected-01,
+  base.getColor(gray, 30),
+  base.getColor(gray, 70)
+);
+@include base.defineVariableDeprecated(--danger-01, base.getColor(red, 60));
+@include base.defineVariableDeprecated(
+  --danger-02,
+  base.getColor(red, 60),
+  base.getColor(red, 50)
+);
+@include base.defineVariableDeprecated(
+  --support-error,
+  base.getColor(error, 60),
+  base.getColor(error, 50)
+);
+@include base.defineVariableDeprecated(
+  --support-success,
+  base.getColor(success, 60),
+  base.getColor(success, 40)
+);
+@include base.defineVariableDeprecated(
+  --support-warning,
+  base.getColor(warning, 30),
+  base.getColor(warning, 30)
+);
+@include base.defineVariableDeprecated(
+  --support-info,
+  base.getColor(info, 70),
+  base.getColor(info, 50)
+);
+@include base.defineVariableDeprecated(
+  --support-error-inverse,
+  base.getColor(error, 50),
+  base.getColor(error, 60)
+);
+@include base.defineVariableDeprecated(
+  --support-success-inverse,
+  base.getColor(success, 40),
+  base.getColor(success, 50)
+);
+@include base.defineVariableDeprecated(
+  --support-warning-inverse,
+  base.getColor(warning, 30),
+  base.getColor(warning, 30)
+);
+@include base.defineVariableDeprecated(
+  --support-info-inverse,
+  base.getColor(info, 50),
+  base.getColor(info, 70)
+);
+@include base.defineVariableDeprecated(
+  --toggle-off,
+  base.getColor(gray, 50),
+  base.getColor(gray, 60)
+);
+@include base.defineVariableDeprecated(
+  --button-disabled,
+  base.getColor(gray, 30),
+  base.getColor(gray, 70)
+);
+@include base.defineVariableDeprecated(
+  --icon-on-color-disabled,
+  base.getColor(gray, 50),
+  base.getColor(white, 0)
+);
+@include base.defineVariableDeprecated(
+  --button-secondary,
+  base.getColor(gray, 80),
+  base.getColor(gray, 60)
+);
+@include base.defineVariableDeprecated(
+  --button-secondary-hover,
+  base.getColor(gray-hover, 80),
+  base.getColor(gray-hover, 60)
+);
+@include base.defineVariableDeprecated(
+  --button-secondary-active,
+  base.getColor(gray, 60),
+  base.getColor(gray, 80)
+);
+@include base.defineVariableDeprecated(
+  --overlay,
+  base.getColor(gray, 100, 0.5),
+  base.getColor(gray, 100, 0.7)
+);
+@include base.defineVariableDeprecated(
+  --code-bg-primary,
+  base.getColor(purple, 10),
+  base.getColor(purple, 100)
+);
+@include base.defineVariableDeprecated(
+  --code-editor-bg-primary,
+  base.getColor(red, 10),
+  base.getColor(purple, 100)
+);
+
+@each $color in [gray, blue, green, red, yellow, primary, success, info,
+  warning, error]
+{
+  @include base.defineVariableDeprecated(
+    --tag-background-#{$color},
+    base.getColor($color, 20),
+    base.getColor($color, 80)
+  );
+  @include base.defineVariableDeprecated(
+    --tag-hover-#{$color},
+    base.getColor($color, 30),
+    base.getColor($color, 70)
+  );
+  @include base.defineVariableDeprecated(
+    --tag-color-#{$color},
+    base.getColor($color, 80),
+    base.getColor($color, 30)
+  );
+}
