@@ -20,7 +20,7 @@ catalog:
   '@jspm/generator': ^2.6.2
   '@manypkg/get-packages': ^3.0.0
   '@pnpm/workspace.read-manifest': ^1000.2.0
-  '@stencil/angular-output-target': ^0.8.4
+  '@stencil/angular-output-target': ^1.1.0
   '@stencil/core': ^4.19.2
   '@stencil/react-output-target': ^0.5.3
   '@stencil/sass': ^3.0.12
