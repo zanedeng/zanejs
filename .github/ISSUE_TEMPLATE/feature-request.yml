@@ -1,5 +1,5 @@
 name: ✨ New Feature Proposal
-description: Propose a new feature to be added to Vben Admin
+description: Propose a new feature to be added to ZaneJS
 title: 'FEATURE: '
 labels: ['enhancement: pending triage']
 body:
@@ -13,8 +13,7 @@ body:
       label: Version
       description: What version of our software are you running?
       options:
-        - Vben Admin V5
-        - Vben Admin V2
+        - ZaneJS V1
       default: 0
     validations:
       required: true
