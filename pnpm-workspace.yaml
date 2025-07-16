@@ -87,7 +87,7 @@ catalog:
   husky: ^9.1.7
   is-ci: ^4.1.0
   jest: ^27.5.1
-  jest-cli: ^27.5.1
+  jest-cli: ^30.0.4
   js-beautify: ^1.15.4
   jsonc-eslint-parser: ^2.4.0
   lint-staged: ^16.1.2
