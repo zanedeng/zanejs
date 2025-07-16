@@ -1,17 +1,103 @@
-version: 2
-updates:
+# 自动依赖更新功能。
+version: 2                              # 使用 Dependabot v2 配置格式
+updates:                                # 定义依赖更新配置
+  # 主工作区根目录的依赖
+  - package-ecosystem: npm              # 第一个更新配置：npm 包
+    directory: '/'                      # 监控根目录
+    schedule:
+      interval: daily                   # 每天检查一次
+    groups:
+      non-breaking-changes:             # 分组配置
+        update-types: [minor, patch]    # 只更新次要版本和补丁版本
+    package-manager: "pnpm"
+
+  # 内部配置区目录的依赖
   - package-ecosystem: npm
-    directory: '/'
+    directory: '/internal/lint-configs/commitlint-config'
     schedule:
       interval: daily
     groups:
       non-breaking-changes:
         update-types: [minor, patch]
+    package-manager: "pnpm"
 
-  - package-ecosystem: github-actions
-    directory: '/'
+  - package-ecosystem: npm
+    directory: '/internal/lint-configs/eslint-config'
     schedule:
-      interval: weekly
+      interval: daily
     groups:
       non-breaking-changes:
         update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/internal/lint-configs/prettier-config'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/internal/lint-configs/stylelint-config'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/internal/node-utils'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/internal/tsconfig'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/internal/vite-config'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/docs'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  - package-ecosystem: npm
+    directory: '/packages/ui'
+    schedule:
+      interval: daily
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]
+    package-manager: "pnpm"
+
+  # GitHub Actions 的依赖
+  - package-ecosystem: github-actions   # 第二个更新配置：GitHub Actions
+    directory: '/'                      # 监控根目录
+    schedule:
+      interval: weekly                  # 每周检查一次
+    groups:
+      non-breaking-changes:
+        update-types: [minor, patch]    # 只更新次要版本和补丁版本

@@ -80,28 +80,6 @@ export default {
     'no-descending-specificity': null,
     'no-duplicate-selectors': null,
     'no-empty-source': null,
-    'order/order': [
-      [
-        'dollar-variables',
-        'custom-properties',
-        'at-rules',
-        'declarations',
-        {
-          name: 'supports',
-          type: 'at-rule',
-        },
-        {
-          name: 'media',
-          type: 'at-rule',
-        },
-        {
-          name: 'include',
-          type: 'at-rule',
-        },
-        'rules',
-      ],
-      { severity: 'error' },
-    ],
     'prettier/prettier': true,
     'rule-empty-line-before': [
       'always',

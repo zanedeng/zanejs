@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
+    "build:ui": "pnpm -F @zanejs/ui run build",
     "changeset": "pnpm exec changeset",
     "check": "pnpm run check:circular && pnpm run check:dep && pnpm run check:type && pnpm check:cspell",
     "check:circular": "node ./scripts/check-circular.mjs",
@@ -57,7 +58,9 @@
     "unplugin-vue-components": "catalog:",
     "vite": "catalog:",
     "vitepress": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@vitepress-code-preview/container": "catalog:",
+    "@vitepress-code-preview/plugin": "catalog:"
   },
   "engines": {
     "node": ">=20.10.0",

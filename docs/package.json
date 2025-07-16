@@ -16,10 +16,14 @@
   "devDependencies": {
     "@iconify-json/tabler": "catalog:",
     "@vite-pwa/vitepress": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vitepress-code-preview/container": "catalog:",
+    "@vitepress-code-preview/plugin": "catalog:",
+    "@zanejs/ui": "workspace:*",
     "@zanejs/vite-config": "workspace:*",
+    "medium-zoom": "catalog:",
     "unocss": "catalog:",
     "vitepress": "catalog:",
-    "medium-zoom": "catalog:",
     "vitepress-plugin-group-icons": "catalog:",
     "vue": "catalog:"
   }

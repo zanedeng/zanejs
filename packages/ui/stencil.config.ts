@@ -5,6 +5,9 @@ import { vueOutputTarget } from '@stencil/vue-output-target';
 import dotEnvPlugin from 'rollup-plugin-dotenv';
 
 export const config: Config = {
+  devServer: {
+    openBrowser: false,
+  },
   namespace: 'zaneui',
   outputTargets: [
     {
@@ -23,6 +26,7 @@ export const config: Config = {
       proxiesFile: 'dist/generated/zaneui-vue/index.ts',
     }),
     {
+      customElementsExportBehavior: 'auto-define-custom-elements',
       externalRuntime: false,
       type: 'dist-custom-elements',
     },

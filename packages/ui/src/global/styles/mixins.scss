@@ -1,19 +1,22 @@
 @use 'sass:map';
-@use 'functions';
+@use 'functions' as func;
 
 @mixin font-style($type, $var: null) {
   @if not $var {
-    font-family: var(--#{$var}-font-family, v(--#{$type}-font-family));
-    font-size: var(--#{$var}-font-size, v(--#{$type}-font-size));
-    font-weight: var(--#{$var}-font-weight, v(--#{$type}-font-weight));
-    line-height: var(--#{$var}-line-height, v(--#{$type}-line-height));
-    letter-spacing: var(--#{$var}-letter-spacing, v(--#{$type}-letter-spacing));
+    font-family: var(--#{$var}-font-family, func.v(--#{$type}-font-family));
+    font-size: var(--#{$var}-font-size, func.v(--#{$type}-font-size));
+    font-weight: var(--#{$var}-font-weight, func.v(--#{$type}-font-weight));
+    line-height: var(--#{$var}-line-height, func.v(--#{$type}-line-height));
+    letter-spacing: var(
+      --#{$var}-letter-spacing,
+      func.v(--#{$type}-letter-spacing)
+    );
   } @else {
-    font-family: v(--#{$type}-font-family);
-    font-size: v(--#{$type}-font-size);
-    font-weight: v(--#{$type}-font-weight);
-    line-height: v(--#{$type}-line-height);
-    letter-spacing: v(--#{$type}-letter-spacing);
+    font-family: func.v(--#{$type}-font-family);
+    font-size: func.v(--#{$type}-font-size);
+    font-weight: func.v(--#{$type}-font-weight);
+    line-height: func.v(--#{$type}-line-height);
+    letter-spacing: func.v(--#{$type}-letter-spacing);
   }
 }
 

@@ -34,6 +34,18 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/zaneui/zaneui.esm.js",
+      "require": "./dist/zaneui/zaneui.cjs.js"
+    },
+    "./loader": {
+      "types": "./loader/index.d.ts",
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs"
+    },
+    "./dist/theme.css": "./dist/zaneui/assets/styles/theme.css"
+  },
   "publishConfig": {
     "access": "public"
   },

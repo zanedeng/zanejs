@@ -2,6 +2,8 @@ import type { Theme } from 'vitepress';
 
 import { h, watch } from 'vue';
 
+import DemoPreview, { useComponents } from '@vitepress-code-preview/container';
+import { defineCustomElements } from '@zanejs/ui/loader';
 import DefaultTheme from 'vitepress/theme';
 
 import RainbowAnimationSwitcher from './components/rainbow-animation-switcher.vue';
@@ -9,6 +11,8 @@ import SiteLayout from './components/site-layout.vue';
 
 import './styles';
 
+import '@zanejs/ui/dist/theme.css';
+import '@vitepress-code-preview/container/dist/style.css';
 import 'uno.css';
 import 'virtual:group-icons.css';
 
@@ -17,6 +21,10 @@ let homePageStyle: HTMLStyleElement | undefined;
 export default {
   enhanceApp({ app, router }) {
     app.component('RainbowAnimationSwitcher', RainbowAnimationSwitcher);
+
+    useComponents(app, DemoPreview);
+
+    defineCustomElements();
 
     if (typeof window === 'undefined') return;
 

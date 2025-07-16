@@ -1,5 +1,11 @@
 import type { HeadConfig } from 'vitepress';
 
+import { fileURLToPath } from 'node:url';
+
+import {
+  demoPreviewPlugin,
+  viteDemoPreviewPlugin,
+} from '@vitepress-code-preview/plugin';
 import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vitepress';
 import {
@@ -57,6 +63,8 @@ export const shared = defineConfig({
       // }),
     ],
     config(md) {
+      const docRoot = fileURLToPath(new URL('../../src/', import.meta.url));
+      md.use(demoPreviewPlugin, { docRoot });
       md.use(groupIconMdPlugin);
     },
     theme: {
@@ -83,6 +91,13 @@ export const shared = defineConfig({
   },
   title,
   titleTemplate: title,
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: tag => tag.startsWith('zane-')
+      }
+    }
+  },
   vite: {
     build: {
       chunkSizeWarningLimit: Infinity,
@@ -95,6 +110,7 @@ export const shared = defineConfig({
         },
       }),
       UnoCSS(),
+      viteDemoPreviewPlugin() as any,
     ],
   },
 });

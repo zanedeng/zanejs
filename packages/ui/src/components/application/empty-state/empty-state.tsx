@@ -9,7 +9,7 @@ import {
   Prop,
   State,
 } from '@stencil/core';
-import * as DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 
 /**
  * @name Empty State

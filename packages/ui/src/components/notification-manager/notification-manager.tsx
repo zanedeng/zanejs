@@ -8,7 +8,7 @@ import {
   Prop,
   State,
 } from '@stencil/core';
-import * as DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 
 import { getComponentIndex, isDarkMode, observeThemeChange } from '../../utils';
 

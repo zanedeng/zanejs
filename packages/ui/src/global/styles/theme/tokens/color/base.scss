@@ -321,13 +321,6 @@ $dark-color-css-variables: ();
 @mixin referColor($to, $from) {
   $toMap: ();
 
-  $colors: map.merge(
-    $colors,
-    (
-      $to: $toMap,
-    )
-  ) !global;
-
   @for $i from 1 through 10 {
     $toMap: map.merge(
       $toMap,
@@ -336,6 +329,13 @@ $dark-color-css-variables: ();
       )
     );
   }
+
+  $colors: map.merge(
+    $colors,
+    (
+      $to: $toMap,
+    )
+  ) !global;
 }
 
 /*
@@ -365,11 +365,11 @@ $dark-color-css-variables: ();
   @each $weight, $value in $colorMap {
     $map: ();
     $map: map.merge($map, (--color-#{$colorName}-#{$weight}: $value));
-    $color-css-variables: map.merge($color-css-variables, $map);
 
     @if $weight == 60 {
       $map: map.merge($map, (--color-#{$colorName}: $value));
     }
+    $color-css-variables: map.merge($color-css-variables, $map);
   }
 }
 
