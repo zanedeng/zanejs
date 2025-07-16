@@ -1,0 +1,56 @@
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 或者你的默认分支名称
+    paths:
+      - 'docs/**' # 只有 docs 目录下的更改会触发部署
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 需要获取所有历史记录以便获取 last_commit 信息
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm' # 如果你使用 pnpm，或者改为 'yarn' 或 'npm'
+
+      - name: Install dependencies
+        working-directory: docs
+        run: pnpm install # 根据你的包管理器调整
+
+      - name: Build VitePress
+        working-directory: docs
+        run: pnpm run build # 确保你的 docs/package.json 中有 build 脚本
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'docs/.vitepress/dist'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+      - name: Deploy to zanedeng.github.io
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /.vitepress/dist
+          external_repository: zanedeng/zanedeng.github.io
+          publish_branch: main # 或者 master，取决于你的目标仓库
+          keep_files: false # 设置为 true 如果你想要保留旧文件
