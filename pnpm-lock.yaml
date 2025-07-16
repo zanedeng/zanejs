@@ -43,8 +43,8 @@ catalogs:
       specifier: ^1000.2.0
       version: 1000.2.0
     '@stencil/angular-output-target':
-      specifier: ^0.8.4
-      version: 0.8.4
+      specifier: ^1.1.0
+      version: 1.1.0
     '@stencil/core':
       specifier: ^4.19.2
       version: 4.35.3
@@ -801,7 +801,7 @@ importers:
         version: 1.7.2
       '@stencil/angular-output-target':
         specifier: 'catalog:'
-        version: 0.8.4(@stencil/core@4.35.3)
+        version: 1.1.0(@stencil/core@4.35.3)
       '@stencil/core':
         specifier: 'catalog:'
         version: 4.35.3
@@ -3406,8 +3406,8 @@ packages:
   '@speed-highlight/core@1.2.7':
     resolution: {integrity: sha512-0dxmVj4gxg3Jg879kvFS/msl4s9F3T9UXC1InxgOf7t5NvcPD97u/WTA5vL/IxWHMn7qSxBozqrnnE2wvl1m8g==}
 
-  '@stencil/angular-output-target@0.8.4':
-    resolution: {integrity: sha512-QvmHTueXXs5vB9W2L12uEzFmAuR8sqATJV2b+SCFmYsjJSaymiSqR3dKo2wnr0tZiTgU1t16BWaUKiSh3wPXpw==}
+  '@stencil/angular-output-target@1.1.0':
+    resolution: {integrity: sha512-V1tlX2LgtioTHa6+W2enk+GNDyV0BhC5iH3fY5fc30l8MNNWiLm8yP7EfN3DbT8L7DHxrQeYkrvJJeG8IX7NSA==}
     peerDependencies:
       '@stencil/core': '>=2.0.0 || >=3 || >= 4.0.0-beta.0 || >= 4.0.0'
 
@@ -13277,7 +13277,7 @@ snapshots:
 
   '@speed-highlight/core@1.2.7': {}
 
-  '@stencil/angular-output-target@0.8.4(@stencil/core@4.35.3)':
+  '@stencil/angular-output-target@1.1.0(@stencil/core@4.35.3)':
     dependencies:
       '@stencil/core': 4.35.3
 
