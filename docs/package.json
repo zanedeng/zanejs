@@ -19,6 +19,8 @@
     "@vitejs/plugin-vue-jsx": "catalog:",
     "@vitepress-code-preview/container": "catalog:",
     "@vitepress-code-preview/plugin": "catalog:",
+    "@vueuse/core": "catalog:",
+    "@vueuse/shared": "catalog:",
     "@zanejs/ui": "workspace:*",
     "@zanejs/vite-config": "workspace:*",
     "medium-zoom": "catalog:",

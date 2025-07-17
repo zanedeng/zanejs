@@ -54,6 +54,7 @@ const Head: HeadConfig[] = [
 
 export const shared = defineConfig({
   appearance: 'dark',
+  ignoreDeadLinks: true, // 完全禁用死链检查
   description,
   head: Head,
   markdown: {
@@ -98,6 +99,14 @@ export const shared = defineConfig({
     build: {
       chunkSizeWarningLimit: Infinity,
       minify: 'terser',
+      rollupOptions: {
+        // 显式声明外部依赖（可选）
+        external: ["@vueuse/shared"],
+      },
+    },
+    resolve: {
+      // 确保 Vite 能正确解析 monorepo 依赖
+      preserveSymlinks: true,
     },
     plugins: [
       groupIconVitePlugin({

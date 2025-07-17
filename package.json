@@ -58,9 +58,7 @@
     "unplugin-vue-components": "catalog:",
     "vite": "catalog:",
     "vitepress": "catalog:",
-    "vitest": "catalog:",
-    "@vitepress-code-preview/container": "catalog:",
-    "@vitepress-code-preview/plugin": "catalog:"
+    "vitest": "catalog:"
   },
   "engines": {
     "node": ">=20.10.0",

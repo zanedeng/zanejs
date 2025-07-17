@@ -8,6 +8,7 @@
     "web components"
   ],
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "node env.mjs REMOTE && pnpm run build:theme && pnpm run build:stencil",
     "build:local": "node env.js LOCAL && pnpm run build:theme && pnpm run build:3d-party && pnpm run build:stencil",
@@ -44,7 +45,10 @@
       "import": "./loader/index.js",
       "require": "./loader/index.cjs"
     },
-    "./dist/theme.css": "./dist/zaneui/assets/styles/theme.css"
+    "./dist/theme.css": {
+      "import": "./dist/zaneui/assets/styles/theme.css",
+      "require": "./dist/zaneui/assets/styles/theme.css"
+    }
   },
   "publishConfig": {
     "access": "public"
