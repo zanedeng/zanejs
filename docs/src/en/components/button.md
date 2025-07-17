@@ -48,6 +48,10 @@ Fancy larger or smaller buttons? Add size attribute for additional sizes.
 
 :::demo src=examples/button/button-8.vue :::
 
+### Button Group
+
+:::demo src=examples/button/button-9.vue :::
+
 ## API
 
 ### Properties

@@ -48,6 +48,10 @@
 
 :::demo src=examples/button/button-8.vue :::
 
+### 按钮组
+
+:::demo src=examples/button/button-9.vue :::
+
 ## API
 
 ### 属性
