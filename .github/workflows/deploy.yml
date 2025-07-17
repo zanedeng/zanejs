@@ -25,7 +25,7 @@ jobs:
       - name: Deploy to zanedeng.github.io
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: /
           external_repository: zanedeng/zanedeng.github.io
           publish_branch: main # 或者 master，取决于你的目标仓库
