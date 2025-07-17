@@ -4,8 +4,15 @@ on:
   push:
     branches:
       - main # 或者你的默认分支名称
-    paths:
-      - 'docs/**' # 只有 docs 目录下的更改会触发部署
+    # paths:
+    #  - 'docs/**' # 只有 docs 目录下的更改会触发部署
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+  TZ: Asia/Shanghai
 
 jobs:
   deploy:
@@ -21,14 +28,8 @@ jobs:
         with:
           fetch-depth: 0 # 需要获取所有历史记录以便获取 last_commit 信息
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install PNPM
-        run: npm i -g pnpm
+      - name: Setup Node
+        uses: ./.github/actions/setup-node
 
       - name: Install dependencies
         working-directory: docs
