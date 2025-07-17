@@ -4,6 +4,7 @@
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
     "build:ui": "pnpm -F @zanejs/ui run build",
+    "build:docs": "pnpm -F @zanejs/docs run build",
     "changeset": "pnpm exec changeset",
     "check": "pnpm run check:circular && pnpm run check:dep && pnpm run check:type && pnpm check:cspell",
     "check:circular": "node ./scripts/check-circular.mjs",
@@ -13,6 +14,7 @@
     "clean": "node ./scripts/clean.mjs",
     "commit": "czg",
     "dev": "turbo dev",
+    "dev:ui": "pnpm -F @zanejs/ui run dev",
     "dev:docs": "pnpm -F @zanejs/docs run dev",
     "format": "node ./scripts/lint.mjs --format",
     "lint": "node ./scripts/lint.mjs",

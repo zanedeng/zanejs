@@ -31,13 +31,8 @@ jobs:
       - name: Setup Node
         uses: ./.github/actions/setup-node
 
-      - name: Install dependencies
-        working-directory: docs
-        run: pnpm install # 根据你的包管理器调整
-
-      - name: Build VitePress
-        working-directory: docs
-        run: pnpm run build # 确保你的 docs/package.json 中有 build 脚本
+      - name: Build
+        run: pnpm build:docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
