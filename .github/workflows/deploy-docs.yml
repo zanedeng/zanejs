@@ -27,6 +27,9 @@ jobs:
           node-version: 20
           cache: 'pnpm' # 如果你使用 pnpm，或者改为 'yarn' 或 'npm'
 
+      - name: Install PNPM
+        run: npm i -g pnpm
+
       - name: Install dependencies
         working-directory: docs
         run: pnpm install # 根据你的包管理器调整
