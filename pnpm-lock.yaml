@@ -79,8 +79,8 @@ catalogs:
       specifier: ^2.11.3
       version: 2.26.1
     '@tiptap/extension-underline':
-      specifier: ^2.11.3
-      version: 2.26.1
+      specifier: ^3.0.7
+      version: 3.0.7
     '@tiptap/pm':
       specifier: ^3.0.5
       version: 3.0.7
@@ -858,7 +858,7 @@ importers:
         version: 2.26.1(@tiptap/core@2.26.1(@tiptap/pm@3.0.7))
       '@tiptap/extension-underline':
         specifier: 'catalog:'
-        version: 2.26.1(@tiptap/core@2.26.1(@tiptap/pm@3.0.7))
+        version: 3.0.7(@tiptap/core@2.26.1(@tiptap/pm@3.0.7))
       '@tiptap/pm':
         specifier: 'catalog:'
         version: 3.0.7
@@ -3592,10 +3592,10 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
-  '@tiptap/extension-underline@2.26.1':
-    resolution: {integrity: sha512-/fufv41WDMdf0a4xmFAxONoAz08TonJXX6NEoSJmuGKO59M/Y0Pz8DTK1g32Wk44kn7dyScDiPlvvndl+UOv0A==}
+  '@tiptap/extension-underline@3.0.7':
+    resolution: {integrity: sha512-pw2v5kbkovaWaC1G2IxP7g94vmUMlRBzZlCnLEyfFxtGa9LVAsUFlFFWaYJEmq7ZPG/tblWCnFfEZuQqFVd8Sg==}
     peerDependencies:
-      '@tiptap/core': ^2.7.0
+      '@tiptap/core': ^3.0.7
 
   '@tiptap/pm@2.26.1':
     resolution: {integrity: sha512-8aF+mY/vSHbGFqyG663ds84b+vca5Lge3tHdTMTKazxCnhXR9dn2oQJMnZ78YZvdRbkPkMJJHti9h3K7u2UQvw==}
@@ -13622,7 +13622,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.26.1(@tiptap/pm@3.0.7)
 
-  '@tiptap/extension-underline@2.26.1(@tiptap/core@2.26.1(@tiptap/pm@3.0.7))':
+  '@tiptap/extension-underline@3.0.7(@tiptap/core@2.26.1(@tiptap/pm@3.0.7))':
     dependencies:
       '@tiptap/core': 2.26.1(@tiptap/pm@3.0.7)
 
