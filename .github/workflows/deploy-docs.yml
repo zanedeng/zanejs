@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm' # 如果你使用 pnpm，或者改为 'yarn' 或 'npm'
+          cache: 'npm'
 
       - name: Install PNPM
         run: npm i -g pnpm
