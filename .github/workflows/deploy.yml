@@ -1,32 +1,20 @@
-name: Deploy Docs to GitHub Pages
+name: Deploy Website on push
 
 on:
   push:
     branches:
-      - main # 或者你的默认分支名称
-    # paths:
-    #  - 'docs/**' # 只有 docs 目录下的更改会触发部署
-
-permissions:
-  contents: read
-
-env:
-  CI: true
-  TZ: Asia/Shanghai
+      - main
 
 jobs:
-  deploy:
+  deploy-docs-ftp:
+    name: Deploy Docs to GitHub Pages
+    if: github.actor != 'dependabot[bot]' && !contains(github.event.head_commit.message, '[skip ci]') && github.repository == 'zanedeng/zanejs'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 需要获取所有历史记录以便获取 last_commit 信息
+          fetch-depth: 0
 
       - name: Setup Node
         uses: ./.github/actions/setup-node
@@ -49,7 +37,9 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /.vitepress/dist
+          publish_dir: /
           external_repository: zanedeng/zanedeng.github.io
           publish_branch: main # 或者 master，取决于你的目标仓库
           keep_files: false # 设置为 true 如果你想要保留旧文件
+
+
