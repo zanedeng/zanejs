@@ -82,7 +82,7 @@ catalogs:
       specifier: ^2.11.3
       version: 2.26.1
     '@tiptap/pm':
-      specifier: ^3.0.5
+      specifier: ^3.0.7
       version: 3.0.7
     '@tiptap/starter-kit':
       specifier: ^2.11.3
