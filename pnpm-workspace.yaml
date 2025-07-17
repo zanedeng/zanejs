@@ -149,3 +149,4 @@ ignoredBuiltDependencies:
 onlyBuiltDependencies:
   - esbuild
   - puppeteer
+  - vue-demi
