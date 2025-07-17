@@ -57,11 +57,7 @@ export const shared = defineConfig({
   description,
   head: Head,
   markdown: {
-    codeTransformers: [
-      // transformerTwoslash({
-      //   processHoverInfo: info => info.replace(/_unocss_core\./g, ''),
-      // }),
-    ],
+    codeTransformers: [],
     config(md) {
       const docRoot = fileURLToPath(new URL('../../src/', import.meta.url));
       md.use(demoPreviewPlugin, { docRoot });

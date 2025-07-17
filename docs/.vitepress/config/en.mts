@@ -117,6 +117,7 @@ export const en = defineConfig({
     nav,
     outline: {
       label: 'Navigate',
+      level: [2, 3],
     },
     returnToTopLabel: 'Back to top',
     sidebar: {
