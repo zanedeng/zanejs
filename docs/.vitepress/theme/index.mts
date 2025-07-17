@@ -11,10 +11,10 @@ import SiteLayout from './components/site-layout.vue';
 
 import './styles';
 
-import '@zanejs/ui/dist/theme.css';
 import '@vitepress-code-preview/container/dist/style.css';
 import 'uno.css';
 import 'virtual:group-icons.css';
+import '@zanejs/ui/dist/theme.css';
 
 let homePageStyle: HTMLStyleElement | undefined;
 

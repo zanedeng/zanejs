@@ -407,7 +407,7 @@ export class Button implements ComponentInterface {
   }
 
   #computeColorLightOrDark() {
-    if (this.buttonElm === null) return;
+    if (!this.buttonElm) return;
     let color = getComputedStyle(this.buttonElm).getPropertyValue(
       `--internal-button-color`,
     );

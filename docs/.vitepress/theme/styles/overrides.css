@@ -22,9 +22,13 @@
   background-color: rgb(144 147 153 / 80%);
 }
 
-table {
+.vp-doc table {
   display: table;
   width: 100% !important;
+}
+
+.vp-doc table tr:hover {
+  background-color: transparent !important;
 }
 
 .custom-block.tip .custom-block-title {

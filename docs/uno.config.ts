@@ -22,8 +22,7 @@ export default defineConfig({
   },
   presets: [
     presetWind4(),
-    presetIcons(),
-    presetAttributify(),
+    presetIcons()
   ],
   transformers: [
     transformerDirectives(),

@@ -119,7 +119,7 @@
     .slot-container {
       display: flex;
       flex: 1;
-      padding-right: 2rem;
+      padding-right: 0;
     }
   }
 
@@ -130,7 +130,7 @@
     }
 
     .slot-container {
-      padding-right: 0;
+      padding-right: 2rem;
     }
   }
 }
