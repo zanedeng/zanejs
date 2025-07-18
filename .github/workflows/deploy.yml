@@ -22,26 +22,37 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Pushes to another repository
+      - name: Clone destination repository
+        run: |
+          git clone https://zanedeng:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanedeng/zanejs.git destination_repo
+
+      - name: Backup all files in the repository
+        run: |
+         mkdir -p dist/backup  // 创建备份文件
+         cp -r destination_repo/* dist/backup/
+
+      - name: Remove all files from the repository
+        run: |
+          cd destination_repo
+          git rm -r *
+
+      - name: Commit and push changes
+        run: |
+          cd destination_repo
+          git config --local user.email ${{ secrets.USER_EMAIL }}
+          git config --local user.name ${{ secrets.USER_NAME }}
+          git commit -m "Remove all files"
+          git push origin main
+
+      - name: Push to
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@target-branch
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.DEPLOY_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: ./docs/.vitepress/dist
           destination-github-username: 'zanedeng'
           destination-repository-name: 'zanedeng.github.io'
-          user-email: zane.deng@foxmail.com
+          user-email: ${{ secrets.USER_EMAIL }}
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: main
-
-      # - name: Deploy to zanedeng.github.io
-      #   uses: peaceiris/actions-gh-pages@v4
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: /
-      #     external_repository: zanedeng/zanedeng.github.io
-      #     publish_branch: main # 或者 master，取决于你的目标仓库
-      #     keep_files: false # 设置为 true 如果你想要保留旧文件
-
-
