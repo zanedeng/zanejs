@@ -28,7 +28,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         with:
-          source-directory: .
+          source-directory: ./docs/.vitepress/dist
           destination-github-username: 'zanedeng'
           destination-repository-name: 'zanedeng.github.io'
           user-email: zane.deng@foxmail.com
