@@ -30,7 +30,7 @@ jobs:
         with:
           source-directory: .
           destination-github-username: 'zanedeng'
-          destination-repository-name: 'zaenjs'
+          destination-repository-name: 'zanedeng.github.io'
           user-email: zane.deng@foxmail.com
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: main
