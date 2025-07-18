@@ -22,13 +22,26 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Deploy to zanedeng.github.io
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@target-branch
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /
-          external_repository: zanedeng/zanedeng.github.io
-          publish_branch: main # 或者 master，取决于你的目标仓库
-          keep_files: false # 设置为 true 如果你想要保留旧文件
+          source-directory: .
+          destination-github-username: 'zanedeng'
+          destination-repository-name: 'zaenjs'
+          user-email: zane.deng@foxmail.com
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: main
+
+      # - name: Deploy to zanedeng.github.io
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: /
+      #     external_repository: zanedeng/zanedeng.github.io
+      #     publish_branch: main # 或者 master，取决于你的目标仓库
+      #     keep_files: false # 设置为 true 如果你想要保留旧文件
 
 
