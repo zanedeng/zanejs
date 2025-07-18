@@ -25,9 +25,10 @@ jobs:
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@target-branch
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        # env:
+        #   API_TOKEN_GITHUB: ${{ secrets.DEPLOY_TOKEN }}
         with:
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
           source-directory: ./docs/.vitepress/dist
           destination-github-username: 'zanedeng'
           destination-repository-name: 'zanedeng.github.io'
