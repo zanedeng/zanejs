@@ -28,7 +28,7 @@ jobs:
 
       - name: Backup all files in the repository
         run: |
-         mkdir -p dist/backup  // 创建备份文件
+         mkdir -p dist/backup
          cp -r destination_repo/* dist/backup/
 
       - name: Remove all files from the repository
