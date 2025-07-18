@@ -22,9 +22,9 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Clone destination repository
+      - name: Clone zanedeng.github.io repository
         run: |
-          git clone https://zanedeng:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanedeng/zanejs.git destination_repo
+          git clone https://zanedeng:${{ secrets.API_TOKEN_GITHUB }}@github.com/zanedeng/zanedeng.github.io.git destination_repo
 
       - name: Backup all files in the repository
         run: |
@@ -44,7 +44,7 @@ jobs:
           git commit -m "Remove all files"
           git push origin main
 
-      - name: Push to
+      - name: Push to zanedeng.github.io
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@target-branch
         env:
