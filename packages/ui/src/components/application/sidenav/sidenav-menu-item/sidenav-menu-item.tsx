@@ -13,40 +13,85 @@ import {
 
 import { getComponentIndex } from '../../../../utils';
 
+/**
+ * 侧边导航菜单项组件
+ *
+ * @Component 装饰器定义组件元数据
+ * @shadow 启用Shadow DOM封装
+ * @styleUrl 指定组件样式文件
+ * @tag 定义组件在HTML中的标签名
+ */
 @Component({
   shadow: true,
   styleUrl: 'sidenav-menu-item.scss',
   tag: 'zane-sidenav-menu-item',
 })
 export class SidenavMenuItem {
+
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 是否禁用菜单项
+   * @type {boolean}
+   * @default false
+   * @reflect 属性值会反射到DOM属性
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  /**
+   * 获取组件宿主元素引用
+   * @type {HTMLElement}
+   */
   @Element() elm!: HTMLElement;
 
+  /**
+   * 右侧插槽是否有内容
+   * @type {boolean}
+   * @State 内部状态变化会触发重新渲染
+   */
   @State() endSlotHasContent = false;
 
+  /**
+   * 组件唯一标识符
+   * @type {string}
+   */
   gid: string = getComponentIndex();
 
+  /**
+   * 是否获得焦点状态
+   * @type {boolean}
+   */
   @State() hasFocus = false;
 
+  /**
+   * 激活状态(鼠标/键盘交互时)
+   * @type {boolean}
+   */
   @State() isActive = false;
 
   /**
-   * Menu item selection state.
+   * 选中状态
+   * @type {boolean}
+   * @default false
+   * @reflect 属性值会反射到DOM属性
    */
   @Prop({ reflect: true }) selected: boolean = false;
 
-  @State() startSlotHasContent = false;
   /**
-   * The menu item value.
+   * 左侧插槽是否有内容
+   * @type {boolean}
+   */
+  @State() startSlotHasContent = false;
+
+  /**
+   * 菜单项值，支持null/数字/字符串类型
+   * @type {null|number|string}
+   * @mutable 可变的
    */
   @Prop({ mutable: true }) value?: null | number | string;
 
   /**
-   * Emitted when the menu item is clicked.
+   * 菜单项点击事件
+   * @type {EventEmitter}
+   * @event zane:sidenav-menu-item-click
    */
   @Event({ eventName: 'zane:sidenav-menu-item-click' })
   zaneMenuItemClick: EventEmitter;
@@ -55,10 +100,11 @@ export class SidenavMenuItem {
 
   private tabindex?: number | string = 1;
 
+  /**
+   * 组件加载前生命周期
+   * 初始化tabindex和插槽状态
+   */
   componentWillLoad() {
-    // If the ion-input has a tabindex attribute we get the value
-    // and pass it down to the native input, then remove it from the
-    // zane-input to avoid causing tabbing twice on the same element
     if (this.elm.hasAttribute('tabindex')) {
       const tabindex = this.elm.getAttribute('tabindex');
       this.tabindex = tabindex === null ? undefined : tabindex;
@@ -68,6 +114,10 @@ export class SidenavMenuItem {
     this.endSlotHasContent = !!this.elm.querySelector('[slot="end"]');
   }
 
+  /**
+   * 渲染组件
+   * @returns {JSX.Element} 组件JSX结构
+   */
   render = () => {
     return (
       <Host active={this.isActive} has-focus={this.hasFocus}>
@@ -105,9 +155,11 @@ export class SidenavMenuItem {
       </Host>
     );
   };
+
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 移除焦点
+   * @Method 装饰器定义公共API方法
+   * @returns {Promise<void>}
    */
   @Method()
   async setBlur() {
@@ -115,9 +167,11 @@ export class SidenavMenuItem {
       this.nativeElement.blur();
     }
   }
+
   /**
-   * Sets focus on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 设置焦点
+   * @Method 装饰器定义公共API方法
+   * @returns {Promise<void>}
    */
   @Method()
   async setFocus() {
@@ -126,11 +180,18 @@ export class SidenavMenuItem {
     }
   }
 
+  /**
+   * 监听全局键盘释放事件
+   * @param {KeyboardEvent} evt 键盘事件对象
+   */
   @Listen('keyup', { target: 'window' })
   windowKeyUp(evt) {
     if (this.isActive && evt.key === ' ') this.isActive = false;
   }
 
+  /**
+   * 监听全局鼠标释放事件
+   */
   @Listen('mouseup', { target: 'window' })
   windowMouseUp() {
     if (this.isActive) this.isActive = false;

@@ -2,30 +2,34 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+菜单项组件 (zane-menu-item)
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `color` | `color` |  | `"black" \| "danger" \| "default" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `'default'` |
-| `disabled` | `disabled` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
-| `href` | `href` | Hyperlink to navigate to on click. | `string` | `undefined` |
-| `layer` | `layer` |  | `"01" \| "02" \| "background"` | `undefined` |
-| `selectable` | `selectable` |  | `boolean` | `false` |
-| `selected` | `selected` | Menu item selection state. | `boolean` | `false` |
-| `target` | `target` | Sets or retrieves the window or frame at which to target content. | `string` | `'_self'` |
-| `value` | `value` | The menu item value. | `number \| string` | `undefined` |
+| `color` | `color` | 菜单项色彩主题 | `"black" \| "danger" \| "default" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `'default'` |
+| `disabled` | `disabled` | 禁用状态开关 | `boolean` | `false` |
+| `href` | `href` | 链接目标地址 | `string` | `undefined` |
+| `layer` | `layer` | 视觉层级 | `"01" \| "02" \| "background"` | `undefined` |
+| `selectable` | `selectable` | 可选状态开关 | `boolean` | `false` |
+| `selected` | `selected` | 选中状态 | `boolean` | `false` |
+| `target` | `target` | 链接打开方式 | `string` | `'_self'` |
+| `value` | `value` | 菜单项值 | `number \| string` | `undefined` |
 
 ## Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `zane-menu-item--click` | Emitted when the menu item is clicked. | `CustomEvent<any>` |
+| Event                   | Description    | Type               |
+| ----------------------- | -------------- | ------------------ |
+| `zane-menu-item--click` | 菜单项点击事件 | `CustomEvent<any>` |
 
 ## Methods
 
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+移除焦点方法
 
 #### Returns
 
@@ -33,11 +37,18 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+获取焦点方法
 
 #### Returns
 
 Type: `Promise<void>`
+
+## Slots
+
+| Slot    | Description                     |
+| ------- | ------------------------------- |
+|         | 主内容区域（必填）              |
+| `"end"` | 右侧附加内容区域（如图标/徽章） |
 
 ## Dependencies
 

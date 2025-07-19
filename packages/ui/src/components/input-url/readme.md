@@ -2,38 +2,44 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+双模式URL输入组件
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `debounce` | `debounce` | Set the amount of time, in milliseconds, to wait to trigger the `valueChange` event after each keystroke. | `number` | `300` |
-| `disabled` | `disabled` | If true, the user cannot interact with the input. Defaults to `false`. | `boolean` | `false` |
-| `editing` | `editing` |  | `boolean` | `false` |
-| `name` | `name` | The input field name. | `string` | `` `zane-input-url-${this.gid}` `` |
-| `placeholder` | `placeholder` | The input field placeholder. | `string` | `undefined` |
-| `size` | `size` | The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`. | `"lg" \| "md" \| "sm"` | `'md'` |
-| `value` | `value` | The input field value. | `string` | `undefined` |
+| `debounce` | `debounce` | 值变化事件的防抖时间（毫秒） | `number` | `300` |
+| `disabled` | `disabled` | 禁用状态 | `boolean` | `false` |
+| `editing` | `editing` | 编辑模式状态 | `boolean` | `false` |
+| `name` | `name` | 输入框名称属性 | `string` | `` `zane-input-url-${this.gid}` `` |
+| `placeholder` | `placeholder` | 输入框占位文本 | `string` | `undefined` |
+| `size` | `size` | 组件尺寸规格 | `"lg" \| "md" \| "sm"` | `'md'` |
+| `value` | `value` | 输入值 | `string` | `undefined` |
 
 ## Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `inputInvalid` | Emitted when the URL input is invalid. | `CustomEvent<boolean>` |
-| `valueChange` | Emitted when a keyboard input occurred. | `CustomEvent<string>` |
+| Event          | Description  | Type                   |
+| -------------- | ------------ | ---------------------- |
+| `inputInvalid` | 输入无效事件 | `CustomEvent<boolean>` |
+| `valueChange`  | 值变化事件   | `CustomEvent<string>`  |
 
 ## Methods
 
 ### `getComponentId() => Promise<string>`
 
-Get the component's unique ID
+获取组件唯一标识符
 
 #### Returns
 
 Type: `Promise<string>`
 
+组件全局唯一ID
+
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `input`. Use this method instead of the global `input.blur()`.
+移除输入框焦点
 
 #### Returns
 
@@ -41,7 +47,7 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `input`. Use this method instead of the global `input.focus()`.
+设置输入框焦点
 
 #### Returns
 

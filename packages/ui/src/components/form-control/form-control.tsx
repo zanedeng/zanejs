@@ -8,13 +8,11 @@ import {
 } from '@stencil/core';
 
 /**
- * @name Form Control
- * @description The Form Control component adds a label and caption for its child control.
- * @category Form Inputs
- * @tags form
- * @example <zane-form-control label='Full Name' required>
- *   <zane-input type='text'></zane-input>
- * </zane-form-control>
+ * 表单控件容器组件
+ * @Component 装饰器定义组件元数据
+ * @shadow 启用Shadow DOM封装
+ * @styleUrl 组件样式表路径
+ * @tag 组件自定义标签名称
  */
 @Component({
   shadow: true,
@@ -22,29 +20,73 @@ import {
   tag: 'zane-form-control',
 })
 export class FormControl implements ComponentInterface {
+  /**
+   * 宿主元素引用
+   * @Element 装饰器获取宿主元素
+   */
   @Element() elm!: HTMLElement;
 
+  /**
+   * 辅助文本
+   * 显示在表单控件下方的帮助信息
+   * @Prop
+   */
   @Prop() helperText: string;
 
+  /**
+   * 是否为内联布局
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
+   * 默认值为false
+   */
   @Prop({ reflect: true }) inline: boolean = false;
 
+  /**
+   * 是否为无效状态
+   * @Prop
+   */
   @Prop() invalid: boolean = false;
 
+  /**
+   * 无效状态提示文本
+   * @Prop
+   */
   @Prop() invalidText: string;
 
+  /**
+   * 标签文本
+   * @Prop
+   */
   @Prop() label: string;
 
   /**
-   * Whether the form control is required.
+   * 是否为必填项
+   * @Prop
    */
   @Prop() required: boolean = false;
 
+  /**
+   * 是否显示骨架屏
+   * 用于加载状态
+   * @Prop
+   */
   @Prop() skeleton: boolean = false;
 
+  /**
+   * 是否为警告状态
+   * @Prop
+   */
   @Prop() warn: boolean = false;
 
+  /**
+   * 警告状态提示文本
+   * @Prop
+   */
   @Prop() warnText: string;
 
+  /**
+   * 组件加载完成生命周期钩子
+   * 设置ARIA角色并传递属性到内部表单控件
+   */
   componentDidLoad() {
     this.elm.setAttribute('role', 'group');
     const controlElm = this.getInputElement();
@@ -52,6 +94,10 @@ export class FormControl implements ComponentInterface {
     this.passLabelToField(controlElm, this.label);
   }
 
+  /**
+   * 组件是否应该更新的生命周期钩子
+   * 用于在特定属性变化时更新内部表单控件
+   */
   componentShouldUpdate(newVal: any, _oldVal, propName: string) {
     if (propName === 'required') {
       this.passRequiredToField(this.getInputElement(), newVal);
@@ -60,6 +106,11 @@ export class FormControl implements ComponentInterface {
     }
   }
 
+  /**
+   * 获取内部表单控件元素
+   * 支持多种表单控件类型
+   * @returns 找到的表单控件元素或undefined
+   */
   getInputElement() {
     for (const compName of [
       'zane-input',
@@ -74,6 +125,11 @@ export class FormControl implements ComponentInterface {
     }
   }
 
+  /**
+   * 渲染标签
+   * 根据skeleton状态决定渲染真实标签还是骨架屏
+   * @returns 标签的虚拟DOM
+   */
   getLabel() {
     return this.skeleton ? (
       <div class="label skeleton" />
@@ -85,6 +141,11 @@ export class FormControl implements ComponentInterface {
     );
   }
 
+  /**
+   * 传递label属性到内部表单控件
+   * @param controlElm 表单控件元素
+   * @param label 标签文本
+   */
   passLabelToField(controlElm: Element, label: string) {
     if (controlElm) {
       const el = controlElm as any;
@@ -96,6 +157,11 @@ export class FormControl implements ComponentInterface {
     }
   }
 
+  /**
+   * 传递required属性到内部表单控件
+   * @param controlElm 表单控件元素
+   * @param required 是否必填
+   */
   passRequiredToField(controlElm: Element, required: boolean) {
     if (controlElm) {
       const el = controlElm as any;
@@ -103,6 +169,10 @@ export class FormControl implements ComponentInterface {
     }
   }
 
+  /**
+   * 渲染组件
+   * @returns 组件虚拟DOM
+   */
   render() {
     return (
       <Host invalid={this.invalid} warn={this.warn}>
@@ -117,6 +187,11 @@ export class FormControl implements ComponentInterface {
     );
   }
 
+  /**
+   * 渲染辅助信息
+   * 根据状态显示不同的辅助文本
+   * @returns 辅助信息的虚拟DOM
+   */
   renderHelper() {
     if (this.invalid)
       return <div class="helper invalid">{this.invalidText}</div>;

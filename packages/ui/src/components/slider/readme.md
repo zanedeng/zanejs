@@ -2,41 +2,51 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+滑动选择器组件
+
+提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `configAria` | `config-aria` |  | `any` | `{}` |
-| `debounce` | `debounce` | Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke. | `number` | `300` |
-| `disabled` | `disabled` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
-| `formatter` | `formatter` | function to format the value of the input | `(value: string \| number) => string` | `undefined` |
-| `max` | `max` |  | `number` | `100` |
-| `min` | `min` |  | `number` | `0` |
-| `name` | `name` | The input field name. | `string` | `` `zane-input-${this.gid}` `` |
-| `readonly` | `readonly` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
-| `required` | `required` | If true, required icon is show. Defaults to `false`. | `boolean` | `false` |
-| `showOnlySlider` | `show-only-slider` |  | `boolean` | `false` |
-| `step` | `step` |  | `number` | `1` |
-| `value` | `value` | The input field value. | `number` | `0` |
+| `configAria` | `config-aria` | ARIA 属性配置对象 | `any` | `{}` |
+| `debounce` | `debounce` | 值变更事件的防抖时间（毫秒） | `number` | `300` |
+| `disabled` | `disabled` | 禁用状态开关 | `boolean` | `false` |
+| `formatter` | `formatter` | 数值格式化函数 | `(value: string \| number) => string` | `undefined` |
+| `max` | `max` | 滑块最大值 | `number` | `100` |
+| `min` | `min` | 滑块最小值 | `number` | `0` |
+| `name` | `name` | 表单字段名称 | `string` | `` `zane-input-${this.gid}` `` |
+| `readonly` | `readonly` | 只读状态开关 | `boolean` | `false` |
+| `required` | `required` | 必填状态 | `boolean` | `false` |
+| `showOnlySlider` | `show-only-slider` | 是否仅显示滑块（隐藏数值输入框） | `boolean` | `false` |
+| `step` | `step` | 步进值 | `number` | `1` |
+| `value` | `value` | 当前滑块值 | `number` | `0` |
 
 ## Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `zane-slider--change` | Emitted when the value has changed. | `CustomEvent<any>` |
-| `zane-slider--input` | Emitted when a keyboard input occurred. | `CustomEvent<any>` |
+| Event                 | Description          | Type               |
+| --------------------- | -------------------- | ------------------ |
+| `zane-slider--change` | 值变更事件（带防抖） | `CustomEvent<any>` |
+| `zane-slider--input`  | 输入实时事件         | `CustomEvent<any>` |
 
 ## Methods
 
 ### `getComponentId() => Promise<string>`
 
+获取组件唯一ID
+
 #### Returns
 
 Type: `Promise<string>`
 
+组件唯一标识符
+
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+移除组件焦点
 
 #### Returns
 
@@ -44,7 +54,7 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `input` in `ion-input`. Use this method instead of the global `input.focus()`.
+设置组件焦点
 
 #### Returns
 

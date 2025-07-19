@@ -22,28 +22,54 @@ import {
   observeThemeChange,
 } from '../../../utils';
 
+/**
+ * 预定义的按钮颜色集合
+ * @type {Set<string>}
+ */
 const PREDEFINED_BUTTON_COLORS = new Set([
-  'black',
-  'danger',
-  'error',
-  'info',
-  'primary',
-  'secondary',
-  'success',
-  'warning',
-  'white',
+  'black',    // 黑色
+  'danger',   // 危险操作(红色)
+  'error',    // 错误状态
+  'info',     // 信息提示
+  'primary',  // 主品牌色
+  'secondary',// 次要品牌色
+  'success',  // 成功状态(绿色)
+  'warning',  // 警告状态(黄色)
+  'white',    // 白色
 ]);
 
 /**
- * @name Button
- * @description Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
- * @overview
- *  <p>Buttons are clickable elements that are used to trigger actions. They communicate calls to action to the user and allow users to interact with pages in a variety of ways. Button labels express what action will occur when the user interacts with it.</p>
- * @category General
- * @tags controls
- * @example <zane-button>
- *   Button CTA
- *   </zane-button>
+ * 多功能按钮组件
+ *
+ * 提供丰富的交互样式和状态管理，支持：
+ * - 多种视觉变体(variant)
+ * - 完整的大小(size)控制
+ * - 主题颜色(color)系统
+ * - 暗黑模式适配
+ * - 完善的ARIA可访问性
+ * - 图标集成
+ * - 加载状态
+ *
+ * @example 基础使用
+ * ```html
+ * <zane-button>普通按钮</zane-button>
+ * <zane-button variant="outline">轮廓按钮</zane-button>
+ * <zane-button icon="settings" iconAlign="start">带图标按钮</zane-button>
+ * ```
+ *
+ * @example 高级使用
+ * ```html
+ * <zane-button
+ *   color="danger"
+ *   darkModeColor="warning"
+ *   variant="ghost.simple"
+ *   size="xl"
+ *   disabled
+ *   disabledReason="权限不足"
+ * >
+ *   危险操作
+ * </zane-button>
+ * ```
  */
 @Component({
   shadow: true,
@@ -51,19 +77,40 @@ const PREDEFINED_BUTTON_COLORS = new Set([
   tag: 'zane-button',
 })
 export class Button implements ComponentInterface {
+
   /**
-   * The `appendData` property allows you to attach additional data to the button component. This data can be of any type, making it versatile for various use cases. It's particularly useful for passing extra context or information that can be accessed in event handlers or other component logic.
+   * 附加数据对象
+   *
+   * 会在点击事件中回传，用于携带上下文数据
+   * @type {any}
    */
   @Prop() appendData: any;
 
   /**
-   * Triggered when the button is clicked.
+   * 按钮点击事件
+   *
+   * 触发时会返回包含appendData的事件对象
+   * @event zane-button--click
+   * @type {EventEmitter<{ appendData: any }>}
    */
   @Event({ eventName: 'zane-button--click' }) clickEvent: EventEmitter<{
     appendData: any;
   }>;
+
   /**
-   * Defines the primary color of the button. This can be set to predefined color names to apply specific color themes.
+   * 按钮主题色
+   *
+   * 支持预设颜色或自定义颜色名称(需在CSS中定义对应变量)
+   * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
+   * @default 'primary'
+   *
+   * @example 预设颜色
+   * - 'primary': 品牌主色
+   * - 'danger': 危险操作红色
+   * - 'success': 成功操作绿色
+   *
+   * @example 自定义颜色
+   * 需在CSS中定义: --color-custom和--color-custom-10等变量
    */
   @Prop({ reflect: true }) color:
     | 'black'
@@ -74,9 +121,20 @@ export class Button implements ComponentInterface {
     | 'warning'
     | 'white' = 'primary';
   @State() computedColor: string;
-  @Prop({ mutable: true, reflect: true }) configAria: any = {};
+
   /**
-   * Color variant for dark mode, applicable when [data-theme="dark"] is set.
+   * ARIA 可访问性配置
+   * 可动态修改并反映到DOM属性
+   * @type {Object}
+   * @default {}
+   */
+  @Prop({ mutable: true, reflect: true }) configAria: any = {};
+
+  /**
+   * 暗黑模式下的替代颜色
+   *
+   * 当检测到暗黑模式时自动切换为此颜色
+   * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
    */
   @Prop({ reflect: true }) darkModeColor?:
     | 'black'
@@ -88,98 +146,169 @@ export class Button implements ComponentInterface {
     | 'white';
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 按钮禁用状态
+   * @type {boolean}
+   * @default false
+   * @reflectToAttr
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
   /**
-   * If button is disabled, the reason why it is disabled.
+   * 禁用原因说明
+   *
+   * 会以ARIA方式提供给辅助技术，提升可访问性
+   * @type {string}
+   * @default ''
    */
   @Prop() disabledReason: string = '';
 
   /**
-   * States
+   * 是否获得焦点状态
+   * @internal
    */
   @State() hasFocus = false;
 
+  /**
+   * 鼠标悬停状态
+   * @internal
+   */
   @State() hasHover = false;
 
+  /**
+   * 宿主元素引用
+   * @internal
+   */
   @Element() host!: HTMLElement;
 
   /**
-   * Hyperlink to navigate to on click.
+   * 链接地址（使按钮表现为链接）
+   * 设置后按钮渲染为 <a> 标签
    */
   @Prop({ reflect: true }) href: string;
 
   /**
-   * Icon which will displayed on button.
-   * Possible values are icon names.
+   * 图标名称
+   *
+   * 指定要显示的图标，需要配合zane-icon组件使用
+   * @type {string}
    */
   @Prop() icon?: string;
 
   /**
-   * Icon alignment.
-   * Possible values are `"start"`, `"end"`. Defaults to `"end"`.
+   * 图标对齐方式
+   *
+   * 控制图标相对于文本的位置
+   * @type {'end' | 'start'}
+   * @default 'end'
+   *
+   * @description
+   * - 'start': 图标在文本左侧
+   * - 'end': 图标在文本右侧
    */
   @Prop() iconAlign: 'end' | 'start' = 'end';
 
+  /**
+   * 激活状态（按下状态）
+   * @internal
+   */
   @State() isActive = false;
 
   /**
-   * Button selection state.
+   * 按钮选中状态
+   *
+   * 常用于按钮组或切换场景
+   * @type {boolean}
+   * @default false
+   * @reflectToAttr
    */
   @Prop({ reflect: true }) selected: boolean = false;
 
   /**
-   * If true, a loader will be displayed on button.
+   * 显示加载指示器
+   *
+   * 设置为true时会显示旋转加载图标并禁用交互
+   * @type {boolean}
+   * @default false
    */
   @Prop() showLoader: boolean = false;
 
   /**
-   * Button size.
-   * Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"2xl"`, `"full"`. Defaults to `"md"`.
+   * 按钮尺寸
+   *
+   * 支持从xs到2xl共6种预设尺寸
+   * @type {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'}
+   * @default 'md'
+   * @reflectToAttr
+   *
+   * @description
+   * - xs: 超小尺寸(24px)
+   * - sm: 小尺寸(32px)
+   * - md: 中尺寸(40px)
+   * - lg: 大尺寸(48px)
+   * - xl: 超大尺寸(56px)
+   * - 2xl: 特大尺寸(64px)
    */
   @Prop({ reflect: true }) size: '2xl' | 'lg' | 'md' | 'sm' | 'xl' | 'xs' =
     'md';
 
+  /**
+   * 插槽是否有内容
+   * @internal
+   */
   @State() slotHasContent = false;
 
   /**
-   * Sets or retrieves the window or frame at which to target content.
+   * 链接打开目标（当href存在时有效）
+   * @default '_self'
    */
   @Prop() target: string = '_self';
 
   /**
-   * Sets the delay for throttle in milliseconds. Defaults to 200 milliseconds.
+   * 点击事件节流延迟(ms)
+   * @default 200
    */
   @Prop() throttleDelay = 200;
 
   /**
-   * If true, the button will be in a toggled state.
+   * 是否为切换型按钮
+   * 启用时点击会保持激活状态
+   * @default false
    */
   @Prop() toggle: boolean = false;
 
   /**
-   *  Button type based on which actions are performed when the button is clicked.
+   * 按钮类型（当作为表单按钮时）
+   * - 'button': 普通按钮
+   * - 'reset': 表单重置按钮
+   * - 'submit': 表单提交按钮
+   * @default 'button'
    */
   @Prop() type: 'button' | 'reset' | 'submit' = 'button';
 
+
   /**
-   * The visual style of the button.
+   * 按钮视觉变体
    *
-   *  Possible variant values:
-   * `"default"` is a filled button.
-   * `"outline"` is an outlined button.
-   * `"ghost"` is a transparent button.
-   * `"light"` is a light color button.
+   * 支持基础变体和带.simple后缀的简化变体
+   * @type {
+   *   'default' | 'default.simple'  |
+   *   'ghost' | 'ghost.simple'  |
+   *   'light' | 'light.simple'  |
+   *   'link' | 'link.simple'  |
+   *   'neo' | 'neo.simple'  |
+   *   'outline' | 'outline.simple'
+   * }
+   * @default 'default'
+   * @reflectToAttr
    *
-   * Possible sub-variant values:
-   * `"simple"` is a simple button without default padding at end.
-   * `"block"` is a full-width button that spans the full width of its container.
-   *
-   *
-   *  Mix and match the `variant` and `sub-variant` to create a variety of buttons.
-   *  `"default.simple"`, `"outline.block"` etc.
+   * @description
+   * - default: 实心填充按钮
+   * - ghost: 透明背景按钮
+   * - light: 浅色背景按钮
+   * - link: 链接样式按钮
+   * - neo: 新拟态风格按钮
+   * - outline: 边框轮廓按钮
+   * - .simple: 简化版变体(减少视觉效果)
    */
   @Prop({ reflect: true }) variant:
     | 'default'
@@ -203,11 +332,21 @@ export class Button implements ComponentInterface {
 
   private nativeElement: HTMLButtonElement;
   private tabindex?: number | string;
+
+  /**
+   * 监听颜色变化
+   * @internal
+   */
   @Watch('color')
   @Watch('darkModeColor')
   colorChanged() {
     this.#computedColor();
   }
+
+  /**
+   * 组件渲染完成后
+   * 根据颜色亮度设置对比度变量
+   */
   componentDidRender() {
     if (this.#computeColorLightOrDark() === 'dark') {
       this.buttonElm.style.setProperty(
@@ -221,6 +360,11 @@ export class Button implements ComponentInterface {
       );
     }
   }
+
+  /**
+   * 组件加载前
+   * 初始化属性/状态/事件监听
+   */
   componentWillLoad() {
     // If the zane-button has a tabindex attribute we get the value
     // and pass it down to the native input, then remove it from the
@@ -244,6 +388,10 @@ export class Button implements ComponentInterface {
     });
   }
 
+  /**
+   * 组件连接后
+   * 初始化节流函数
+   */
   connectedCallback() {
     this.handleClickWithThrottle = throttle(
       this.handleClick,
@@ -251,12 +399,20 @@ export class Button implements ComponentInterface {
     );
   }
 
+  /**
+   * 点击事件处理器
+   * 触发zane-button--click事件
+   */
   handleClick = () => {
     this.clickEvent.emit({
       appendData: this.appendData,
     });
   };
 
+  /**
+   * 主渲染函数
+   * @returns {JSX.Element} 组件虚拟DOM树
+   */
   render() {
     const NativeElementTag = this.#getNativeElementTagName();
 
@@ -368,8 +524,10 @@ export class Button implements ComponentInterface {
   }
 
   /**
-   * Sets blur on the native `button` in `zane-button`. Use this method instead of the global
-   * `button.blur()`.
+   * 以编程方式使按钮失去焦点
+   * @method
+   * @async
+   * @returns {Promise<void>}
    */
   @Method()
   async setBlur() {
@@ -378,8 +536,10 @@ export class Button implements ComponentInterface {
   }
 
   /**
-   * Sets focus on the native `button` in `zane-button`. Use this method instead of the global
-   * `button.focus()`.
+   * 以编程方式聚焦按钮
+   * @method
+   * @async
+   * @returns {Promise<void>}
    */
   @Method()
   async setFocus() {
@@ -388,8 +548,10 @@ export class Button implements ComponentInterface {
   }
 
   /**
-   * Triggers a click event on the native `button` in `zane-button`. Use this method instead of the global
-   * `button.click()`.
+   * 以编程方式触发按钮点击
+   * @method
+   * @async
+   * @returns {Promise<void>}
    */
   @Method()
   async triggerClick() {
@@ -406,6 +568,12 @@ export class Button implements ComponentInterface {
     if (this.isActive && !this.toggle) this.isActive = false;
   }
 
+  /**
+   * 计算当前颜色的亮度模式
+   *
+   * @private
+   * @returns {'light' | 'dark'} 返回颜色亮度类型
+   */
   #computeColorLightOrDark() {
     if (!this.buttonElm) return;
     let color = getComputedStyle(this.buttonElm).getPropertyValue(
@@ -424,6 +592,12 @@ export class Button implements ComponentInterface {
     return isLightOrDark(color);
   }
 
+  /**
+   * 计算最终使用的颜色
+   *
+   * 考虑暗黑模式自动切换
+   * @private
+   */
   #computedColor() {
     this.computedColor = this.color;
     if (isDarkMode() && this.darkModeColor) {
@@ -508,6 +682,13 @@ export class Button implements ComponentInterface {
       );
   }
 
+  /**
+   * 渲染图标元素
+   *
+   * @private
+   * @param {string} iconName 图标名称
+   * @returns {JSX.Element} 图标组件
+   */
   #renderIcon(iconName: string) {
     return <zane-icon class="icon inherit" name={iconName} />;
   }

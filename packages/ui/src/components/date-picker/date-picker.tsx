@@ -15,10 +15,11 @@ import {
 import { debounceEvent, getComponentIndex } from '../../utils';
 
 /**
- * @name Date Picker
- * @category Form Inputs
- * @description Captures date input.
- * @example <zane-date-picker value='true'></zane-date-picker>
+ * 日期选择器组件
+ * @Component 装饰器定义组件元数据
+ * @shadow 启用Shadow DOM封装
+ * @styleUrl 组件样式表路径
+ * @tag 组件自定义标签名称
  */
 @Component({
   shadow: true,
@@ -26,99 +27,181 @@ import { debounceEvent, getComponentIndex } from '../../utils';
   tag: 'zane-date-picker',
 })
 export class DatePicker implements ComponentInterface {
+  /**
+   * ARIA无障碍属性配置对象
+   * 用于存储所有aria-*属性
+   * @Prop 装饰器表示这是组件的公开属性
+   * @mutable 表示属性可变
+   * @reflect 表示属性值会反映到DOM属性上
+   */
   @Prop({ mutable: true, reflect: true }) configAria: any = {};
 
   /**
-   * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+   * 事件防抖时间(毫秒)
+   * 用于控制change事件的触发频率
+   * @Prop 默认值为300ms
    */
   @Prop() debounce = 300;
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 是否禁用组件
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
+   * 默认值为false
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  /**
+   * 宿主元素引用
+   * @Element 装饰器获取宿主元素
+   */
   @Element() elm!: HTMLElement;
 
+  /**
+   * 组件唯一ID
+   */
   gid: string = getComponentIndex();
 
+  /**
+   * 是否获得焦点状态
+   * @State 装饰器表示这是组件内部状态
+   */
   @State() hasFocus = false;
 
+  /**
+   * 辅助文本
+   * 显示在输入框下方的帮助信息
+   * @Prop
+   */
   @Prop() helperText: string;
 
+  /**
+   * 是否为内联模式
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
+   */
   @Prop({ reflect: true }) inline: boolean = false;
 
+  /**
+   * 是否为无效状态
+   * @Prop
+   */
   @Prop() invalid: boolean = false;
 
+  /**
+   * 无效状态提示文本
+   * @Prop
+   */
   @Prop() invalidText: string;
 
+  /**
+   * 标签文本
+   * @Prop
+   */
   @Prop() label: string;
 
   /**
-   * The input field name.
+   * 输入框name属性
+   * 默认值为"zane-input-{唯一ID}"
+   * @Prop
    */
   @Prop() name: string = `zane-input-${this.gid}`;
 
   /**
-   * The input field placeholder.
+   * 占位符文本
+   * @Prop
    */
   @Prop() placeholder: string;
 
   /**
-   * If true, the user read the value cannot modify it. Defaults to `false`.
+   * 是否为只读状态
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
    */
   @Prop({ reflect: true }) readonly: boolean = false;
 
   /**
-   * If true, required icon is show. Defaults to `false`.
+   * 是否为必填项
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
    */
   @Prop({ reflect: true }) required: boolean = false;
 
   /**
-   * The input field size.
-   * Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+   * 组件尺寸
+   * - 'lg': 大尺寸
+   * - 'md': 中等尺寸(默认)
+   * - 'sm': 小尺寸
+   * @Prop 装饰器，reflect表示会反映到DOM属性上
    */
   @Prop({ reflect: true }) size: 'lg' | 'md' | 'sm' = 'md';
 
   /**
-   * The input field value.
+   * 当前值
+   * 可以是null、number或string类型
+   * @Prop 装饰器，mutable表示属性可变
    */
   @Prop({ mutable: true }) value?: null | number | string = '';
 
+  /**
+   * 是否为警告状态
+   * @Prop
+   */
   @Prop() warn: boolean = false;
 
+  /**
+   * 警告状态提示文本
+   * @Prop
+   */
   @Prop() warnText: string;
 
   /**
-   * Emitted when the input loses focus.
+   * 失去焦点事件
+   * @Event 装饰器定义自定义事件
+   * 事件名称为'zane-date-picker--blur'
    */
   @Event({ eventName: 'zane-date-picker--blur' }) zaneBlur: EventEmitter;
 
   /**
-   * Emitted when the value has changed.
+   * 值变化事件(带防抖)
+   * @Event 装饰器定义自定义事件
+   * 事件名称为'zane-date-picker--change'
    */
   @Event({ eventName: 'zane-date-picker--change' }) zaneChange: EventEmitter;
 
   /**
-   * Emitted when the input has focus.
+   * 获得焦点事件
+   * @Event 装饰器定义自定义事件
+   * 事件名称为'zane-date-picker--focus'
    */
   @Event({ eventName: 'zane-date-picker--focus' }) zaneFocus: EventEmitter;
+
   /**
-   * Emitted when a keyboard input occurred.
+   * 输入事件(实时触发)
+   * @Event 装饰器定义自定义事件
+   * 事件名称为'zane-date-picker--input'
    */
   @Event({ eventName: 'zane-date-picker--input' }) zaneInput: EventEmitter;
+
+  /**
+   * 原生input元素引用
+   */
   private nativeElement?: HTMLInputElement;
+
+  /**
+   * tabindex值
+   * 从宿主元素获取并传递给内部input元素
+   */
   private tabindex?: number | string;
 
+  /**
+   * 组件即将加载生命周期钩子
+   * 处理ARIA属性和tabindex
+   */
   componentWillLoad() {
-    // If the ion-input has a tabindex attribute we get the value
-    // and pass it down to the native input, then remove it from the
-    // zane-input to avoid causing tabbing twice on the same element
+    // 处理tabindex
     if (this.elm.hasAttribute('tabindex')) {
       const tabindex = this.elm.getAttribute('tabindex');
       this.tabindex = tabindex === null ? undefined : tabindex;
       this.elm.removeAttribute('tabindex');
     }
+    // 收集所有aria-*属性
     this.elm.getAttributeNames().forEach((name: string) => {
       if (name.includes('aria-')) {
         this.configAria[name] = this.elm.getAttribute(name);
@@ -127,15 +210,28 @@ export class DatePicker implements ComponentInterface {
     });
   }
 
+  /**
+   * 组件连接到DOM时的生命周期回调
+   * 初始化防抖设置
+   */
   connectedCallback() {
     this.debounceChanged();
   }
 
+  /**
+   * 获取组件ID的公共方法
+   * @Method 装饰器定义公共方法
+   * @returns 组件唯一ID
+   */
   @Method()
   async getComponentId() {
     return this.gid;
   }
 
+  /**
+   * 渲染组件
+   * @returns 组件虚拟DOM
+   */
   render() {
     return (
       <Host has-focus={this.hasFocus} has-value={this.hasValue()}>
@@ -190,6 +286,11 @@ export class DatePicker implements ComponentInterface {
     );
   }
 
+  /**
+   * 渲染辅助信息
+   * 根据状态显示不同的辅助文本
+   * @returns 辅助信息虚拟DOM
+   */
   renderHelper() {
     if (this.invalid)
       return <div class="helper invalid">{this.invalidText}</div>;
@@ -199,8 +300,8 @@ export class DatePicker implements ComponentInterface {
   }
 
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 设置失去焦点的公共方法
+   * @Method 装饰器定义公共方法
    */
   @Method()
   async setBlur() {
@@ -211,8 +312,8 @@ export class DatePicker implements ComponentInterface {
   }
 
   /**
-   * Sets focus on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 设置获得焦点的公共方法
+   * @Method 装饰器定义公共方法
    */
   @Method()
   async setFocus() {
@@ -222,34 +323,63 @@ export class DatePicker implements ComponentInterface {
     }
   }
 
+  /**
+   * 监听debounce属性变化
+   * 更新防抖设置
+   * @Watch 装饰器监听属性变化
+   */
   @Watch('debounce')
   protected debounceChanged() {
     this.zaneChange = debounceEvent(this.zaneChange, this.debounce);
   }
 
+  /**
+   * 失去焦点事件处理
+   * @param ev 焦点事件对象
+   */
   private blurHandler = (ev: FocusEvent) => {
     this.hasFocus = false;
     this.zaneBlur.emit(ev);
   };
 
+  /**
+   * 清空输入值
+   * @param evt 事件对象
+   */
   private clearInput = (evt: Event) => {
     this.nativeElement.value = '';
     this.inputHandler(evt);
   };
 
+  /**
+   * 获得焦点事件处理
+   * @param ev 焦点事件对象
+   */
   private focusHandler = (ev: FocusEvent) => {
     this.hasFocus = true;
     this.zaneFocus.emit(ev);
   };
 
+  /**
+   * 获取当前值的字符串表示
+   * @returns 值的字符串形式
+   */
   private getValue(): string {
     return (this.value || '').toString();
   }
 
+  /**
+   * 检查是否有值
+   * @returns 是否有值的布尔结果
+   */
   private hasValue(): boolean {
     return this.getValue().length > 0;
   }
 
+  /**
+   * 输入事件处理
+   * @param ev 输入事件对象
+   */
   private inputHandler = (ev: Event) => {
     const input = ev.target as HTMLInputElement | null;
     const oldValue = this.value;
@@ -262,6 +392,11 @@ export class DatePicker implements ComponentInterface {
     }
   };
 
+  /**
+   * 键盘按下事件处理
+   * 特别处理ESC键清空输入
+   * @param ev 键盘事件对象
+   */
   private keyDownHandler = (ev: KeyboardEvent) => {
     if (ev.key === 'Escape') {
       this.clearInput(ev);

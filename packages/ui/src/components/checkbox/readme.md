@@ -2,41 +2,51 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+自定义复选框组件
+
+实现可定制的复选框控件，支持选中/未选/中间态三种状态，提供完整的ARIA支持、键盘交互和事件响应机制。
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `configAria` | `config-aria` |  | `any` | `{}` |
-| `disabled` | `disabled` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
-| `intermediate` | `intermediate` |  | `boolean` | `false` |
-| `label` | `label` | The checkbox label. | `string` | `undefined` |
-| `layer` | `layer` |  | `"01" \| "02" \| "background"` | `undefined` |
-| `name` | `name` | The input field name. | `string` | `` `zane-input-${this.gid}` `` |
-| `readonly` | `readonly` |  | `boolean` | `false` |
-| `required` | `required` | If true, required icon is show. Defaults to `false`. | `boolean` | `false` |
-| `rounded` | `rounded` |  | `boolean` | `false` |
-| `size` | `size` | The button size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`. | `"lg" \| "md" \| "sm"` | `'md'` |
-| `value` | `value` | The input field value. | `boolean` | `false` |
+| `configAria` | `config-aria` | ARIA属性配置对象 用于动态设置ARIA属性（如aria-label, aria-describedby等）， 组件会自动收集元素上所有`aria-*`属性到该对象。 | `any` | `{}` |
+| `disabled` | `disabled` | 禁用状态 当设置为`true`时，组件不可交互且视觉上变灰 | `boolean` | `false` |
+| `intermediate` | `intermediate` | 中间态状态 当设置为`true`时显示"-"图标，表示部分选中状态， 与`value`属性互斥（中间态时`value`应为false） | `boolean` | `false` |
+| `label` | `label` | 复选框标签文本 | `string` | `undefined` |
+| `layer` | `layer` | 视觉层级 控制组件在UI中的层级深度，影响阴影和背景色： - `01`: 表层组件（最高层级） - `02`: 中层组件 - `background`: 背景层组件（最低层级） | `"01" \| "02" \| "background"` | `undefined` |
+| `name` | `name` | 表单字段名（自动生成） | `string` | `` `zane-input-${this.gid}` `` |
+| `readonly` | `readonly` | 只读状态 | `boolean` | `false` |
+| `required` | `required` | 必填状态 | `boolean` | `false` |
+| `rounded` | `rounded` | 圆角样式 | `boolean` | `false` |
+| `size` | `size` | 尺寸规格 - `lg`: 大尺寸(48px) - `md`: 中尺寸(40px) - `sm`: 小尺寸(32px) | `"lg" \| "md" \| "sm"` | `'md'` |
+| `value` | `value` | 选中状态 当设置为`true`时显示选中图标， 与`intermediate`属性互斥 | `boolean` | `false` |
 
 ## Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `zane-checkbox--blur` | Emitted when the input loses focus. | `CustomEvent<any>` |
-| `zane-checkbox--change` | On change of input a CustomEvent 'zane-checkbox--change' will be triggered. Event details contains parent event, oldValue, newValue of input. | `CustomEvent<any>` |
-| `zane-checkbox--focus` | Emitted when the input has focus. | `CustomEvent<any>` |
+| Event                   | Description  | Type               |
+| ----------------------- | ------------ | ------------------ |
+| `zane-checkbox--blur`   | 失去焦点事件 | `CustomEvent<any>` |
+| `zane-checkbox--change` | 值变更事件   | `CustomEvent<any>` |
+| `zane-checkbox--focus`  | 获得焦点事件 | `CustomEvent<any>` |
 
 ## Methods
 
 ### `getComponentId() => Promise<string>`
 
+获取组件ID
+
 #### Returns
 
 Type: `Promise<string>`
 
+组件唯一标识符
+
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+移除焦点
 
 #### Returns
 
@@ -44,7 +54,7 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+设置焦点
 
 #### Returns
 

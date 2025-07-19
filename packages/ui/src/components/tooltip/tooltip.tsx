@@ -1,12 +1,11 @@
 import { Component, Element, h, Host, Listen, Prop } from '@stencil/core';
 
 /**
- * @name Tooltip
- * @description The Tooltip component is used to display additional information on hover.
- * @category Informational
- * @tag content
- * @img /assets/img/tooltip.webp
- * @imgDark /assets/img/tooltip-dark.webp
+ * 工具提示组件 (zane-tooltip)
+ *
+ * 该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。
+ * 支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
+ *
  */
 @Component({
   shadow: true,
@@ -14,29 +13,44 @@ import { Component, Element, h, Host, Listen, Prop } from '@stencil/core';
   tag: 'zane-tooltip',
 })
 export class Tooltip {
+
   /**
-   * The content of the tooltip.
+   * 工具提示内容
+   * @prop {string} content - 显示在提示框内的文本内容
+   * @mutable 允许动态更新内容
+   * @default ''
    */
   @Prop({ mutable: true }) content: string = '';
 
+  // 获取宿主元素引用
   @Element() elm!: HTMLElement;
 
   /**
-   * The placement of the popover relative to the trigger element.
-   * Possible values are:
-   * - `"top"`: The popover is placed above the trigger element.
-   * - `"right"`: The popover is placed to the right of the trigger element.
-   * - `"bottom"`: The popover is placed below the trigger element.
-   * - `"left"`: The popover is placed to the left of the trigger element.
+   * 提示框定位方向
+   * @prop {string} placements - 逗号分隔的可用定位方向列表
+   * @description
+   *   支持的定位值：
+   *   - 'top'     : 上方定位
+   *   - 'bottom'  : 下方定位
+   *   - 'right'   : 右侧定位
+   *   - 'left'    : 左侧定位
+   * @default 'top,bottom,right,left' (支持所有方向)
    */
   @Prop() placements: string = 'top,bottom,right,left';
 
+  // 引用内部的zane-popover组件实例
   popoverElm: any;
 
+  // 当前关联的目标元素（触发提示显示的元素）
   targetElm: HTMLElement;
 
   /**
-   * If true, the tooltip will be managed by the parent component.
+   * 触发方式
+   * @prop {'hover' | 'manual'} trigger - 控制提示显示触发的模式
+   *   - 'hover' : 鼠标悬停在目标元素时自动触发（默认）
+   *   - 'manual': 需要通过编程方式触发（如调用show()方法）
+   * @default 'hover'
+   * @reflect 同步到DOM属性
    */
   @Prop({ reflect: true }) trigger: 'hover' | 'manual' = 'hover';
 
@@ -61,6 +75,18 @@ export class Tooltip {
     );
   }
 
+  /**
+   * 全局鼠标悬停事件监听
+   * @listen window:mouseover
+   * @param {MouseEvent} evt - 鼠标事件对象
+   * @description
+   *   实现动态目标绑定机制：
+   *   1. 检测事件路径中的元素
+   *   2. 查找带有[tooltip-target]属性的元素
+   *   3. 当匹配当前组件ID时更新目标元素
+   *   4. 从目标元素获取提示内容
+   *   5. 通过popover组件显示提示
+   */
   @Listen('mouseover', { target: 'window' })
   windowMouseOver(evt) {
     const path = evt.path || evt.composedPath();

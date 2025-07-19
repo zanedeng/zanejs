@@ -2,23 +2,27 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+智能通知系统组件 (zane-notification)
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `action` | `action` | Action to be displayed on the notification | `string` | `undefined` |
-| `dismissible` | `dismissible` | Whether the notification is dismissible | `boolean` | `false` |
-| `highContrast` | `high-contrast` | Whether to use high contrast mode | `boolean` | `false` |
-| `inline` | `inline` | Whether the notification should be displayed inline | `boolean` | `false` |
-| `managed` | `managed` | Whether the notification is managed by the notification manager | `boolean` | `false` |
-| `state` | `state` | The state of the notification. Possible values are: 'success', 'error', 'info', 'warning' | `"error" \| "info" \| "success" \| "warning"` | `'info'` |
+| `action` | `action` | 操作按钮文本 | `string` | `undefined` |
+| `dismissible` | `dismissible` | 可关闭特性 | `boolean` | `false` |
+| `highContrast` | `high-contrast` | 高对比度模式 | `boolean` | `false` |
+| `inline` | `inline` | 内联布局模式 | `boolean` | `false` |
+| `managed` | `managed` | 托管关闭模式 | `boolean` | `false` |
+| `state` | `state` | 通知状态类型 | `"error" \| "info" \| "success" \| "warning"` | `'info'` |
 
 ## Events
 
-| Event | Description | Type |
-| --- | --- | --- |
-| `zane-notification--action-click` |  | `CustomEvent<any>` |
-| `zane-notification--dismiss` | Emitted when the notification is dismissed | `CustomEvent<any>` |
+| Event                             | Description      | Type               |
+| --------------------------------- | ---------------- | ------------------ |
+| `zane-notification--action-click` | 操作按钮点击事件 | `CustomEvent<any>` |
+| `zane-notification--dismiss`      | 通知关闭事件     | `CustomEvent<any>` |
 
 ## Dependencies
 

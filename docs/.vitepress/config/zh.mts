@@ -28,6 +28,10 @@ const nav: DefaultTheme.NavItem[] = [
 
 const SidebarComponents: DefaultTheme.SidebarItem[] = [
   {
+    text: '组件总览',
+    link: '/components/'
+  },
+  {
     text: '通用组件 (9)',
     items: [
       { link: '/components/avatar', text: '头像 Avatar' },

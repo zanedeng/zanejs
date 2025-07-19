@@ -2,39 +2,53 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+多功能按钮组件
+
+提供丰富的交互样式和状态管理，支持：
+
+- 多种视觉变体(variant)
+- 完整的大小(size)控制
+- 主题颜色(color)系统
+- 暗黑模式适配
+- 完善的ARIA可访问性
+- 图标集成
+- 加载状态
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `appendData` | `append-data` | The `appendData` property allows you to attach additional data to the button component. This data can be of any type, making it versatile for various use cases. It's particularly useful for passing extra context or information that can be accessed in event handlers or other component logic. | `any` | `undefined` |
-| `color` | `color` | Defines the primary color of the button. This can be set to predefined color names to apply specific color themes. | `"black" \| "danger" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `'primary'` |
-| `configAria` | `config-aria` |  | `any` | `{}` |
-| `darkModeColor` | `dark-mode-color` | Color variant for dark mode, applicable when [data-theme="dark"] is set. | `"black" \| "danger" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `undefined` |
-| `disabled` | `disabled` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
-| `disabledReason` | `disabled-reason` | If button is disabled, the reason why it is disabled. | `string` | `''` |
-| `href` | `href` | Hyperlink to navigate to on click. | `string` | `undefined` |
-| `icon` | `icon` | Icon which will displayed on button. Possible values are icon names. | `string` | `undefined` |
-| `iconAlign` | `icon-align` | Icon alignment. Possible values are `"start"`, `"end"`. Defaults to `"end"`. | `"end" \| "start"` | `'end'` |
-| `selected` | `selected` | Button selection state. | `boolean` | `false` |
-| `showLoader` | `show-loader` | If true, a loader will be displayed on button. | `boolean` | `false` |
-| `size` | `size` | Button size. Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"2xl"`, `"full"`. Defaults to `"md"`. | `"2xl" \| "lg" \| "md" \| "sm" \| "xl" \| "xs"` | `'md'` |
-| `target` | `target` | Sets or retrieves the window or frame at which to target content. | `string` | `'_self'` |
-| `throttleDelay` | `throttle-delay` | Sets the delay for throttle in milliseconds. Defaults to 200 milliseconds. | `number` | `200` |
-| `toggle` | `toggle` | If true, the button will be in a toggled state. | `boolean` | `false` |
-| `type` | `type` | Button type based on which actions are performed when the button is clicked. | `"button" \| "reset" \| "submit"` | `'button'` |
-| `variant` | `variant` | The visual style of the button. Possible variant values: `"default"` is a filled button. `"outline"` is an outlined button. `"ghost"` is a transparent button. `"light"` is a light color button. Possible sub-variant values: `"simple"` is a simple button without default padding at end. `"block"` is a full-width button that spans the full width of its container. Mix and match the `variant` and `sub-variant` to create a variety of buttons. `"default.simple"`, `"outline.block"` etc. | `"default" \| "default.simple" \| "ghost" \| "ghost.simple" \| "light" \| "light.simple" \| "link" \| "link.simple" \| "neo" \| "neo.simple" \| "outline" \| "outline.simple"` | `'default'` |
+| `appendData` | `append-data` | 附加数据对象 会在点击事件中回传，用于携带上下文数据 | `any` | `undefined` |
+| `color` | `color` | 按钮主题色 支持预设颜色或自定义颜色名称(需在CSS中定义对应变量) | `"black" \| "danger" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `'primary'` |
+| `configAria` | `config-aria` | ARIA 可访问性配置 可动态修改并反映到DOM属性 | `any` | `{}` |
+| `darkModeColor` | `dark-mode-color` | 暗黑模式下的替代颜色 当检测到暗黑模式时自动切换为此颜色 | `"black" \| "danger" \| "primary" \| "secondary" \| "success" \| "warning" \| "white"` | `undefined` |
+| `disabled` | `disabled` | 按钮禁用状态 | `boolean` | `false` |
+| `disabledReason` | `disabled-reason` | 禁用原因说明 会以ARIA方式提供给辅助技术，提升可访问性 | `string` | `''` |
+| `href` | `href` | 链接地址（使按钮表现为链接） 设置后按钮渲染为 <a> 标签 | `string` | `undefined` |
+| `icon` | `icon` | 图标名称 指定要显示的图标，需要配合zane-icon组件使用 | `string` | `undefined` |
+| `iconAlign` | `icon-align` | 图标对齐方式 控制图标相对于文本的位置 | `"end" \| "start"` | `'end'` |
+| `selected` | `selected` | 按钮选中状态 常用于按钮组或切换场景 | `boolean` | `false` |
+| `showLoader` | `show-loader` | 显示加载指示器 设置为true时会显示旋转加载图标并禁用交互 | `boolean` | `false` |
+| `size` | `size` | 按钮尺寸 支持从xs到2xl共6种预设尺寸 | `"2xl" \| "lg" \| "md" \| "sm" \| "xl" \| "xs"` | `'md'` |
+| `target` | `target` | 链接打开目标（当href存在时有效） | `string` | `'_self'` |
+| `throttleDelay` | `throttle-delay` | 点击事件节流延迟(ms) | `number` | `200` |
+| `toggle` | `toggle` | 是否为切换型按钮 启用时点击会保持激活状态 | `boolean` | `false` |
+| `type` | `type` | 按钮类型（当作为表单按钮时） - 'button': 普通按钮 - 'reset': 表单重置按钮 - 'submit': 表单提交按钮 | `"button" \| "reset" \| "submit"` | `'button'` |
+| `variant` | `variant` | 按钮视觉变体 支持基础变体和带.simple后缀的简化变体 | `"default" \| "default.simple" \| "ghost" \| "ghost.simple" \| "light" \| "light.simple" \| "link" \| "link.simple" \| "neo" \| "neo.simple" \| "outline" \| "outline.simple"` | `'default'` |
 
 ## Events
 
 | Event | Description | Type |
 | --- | --- | --- |
-| `zane-button--click` | Triggered when the button is clicked. | `CustomEvent<{ appendData: any; }>` |
+| `zane-button--click` | 按钮点击事件 触发时会返回包含appendData的事件对象 | `CustomEvent<{ appendData: any; }>` |
 
 ## Methods
 
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `button` in `zane-button`. Use this method instead of the global `button.blur()`.
+以编程方式使按钮失去焦点
 
 #### Returns
 
@@ -42,7 +56,7 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `button` in `zane-button`. Use this method instead of the global `button.focus()`.
+以编程方式聚焦按钮
 
 #### Returns
 
@@ -50,7 +64,7 @@ Type: `Promise<void>`
 
 ### `triggerClick() => Promise<void>`
 
-Triggers a click event on the native `button` in `zane-button`. Use this method instead of the global `button.click()`.
+以编程方式触发按钮点击
 
 #### Returns
 

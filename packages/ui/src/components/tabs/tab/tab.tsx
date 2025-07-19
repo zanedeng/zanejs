@@ -14,6 +14,10 @@ import {
 
 import { getComponentIndex } from '../../../utils';
 
+/**
+ * 单个标签页元素，支持多种交互状态和类型
+ *
+ */
 @Component({
   shadow: true,
   styleUrl: 'tab.scss',
@@ -21,61 +25,143 @@ import { getComponentIndex } from '../../../utils';
 })
 export class Tab implements ComponentInterface {
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 是否禁用标签
+   *
+   * @type {boolean}
+   * @prop disabled
+   * @default false
+   * @reflect
    */
+
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  /**
+   * 禁用状态提示信息（支持无障碍访问）
+   *
+   * @type {string}
+   * @prop disabledReason
+   * @default ''
+   */
   @Prop() disabledReason: string = '';
+
+  // 组件唯一标识符
   gid: string = getComponentIndex();
+
+  /**
+   * 焦点状态跟踪
+   *
+   * @type {boolean}
+   * @state hasFocus
+   */
   @State() hasFocus = false;
 
+  // 宿主元素引用
   @Element() host!: HTMLElement;
 
   /**
-   * Hyperlink to navigate to on click.
+   * 链接地址（存在时渲染为<a>标签）
+   *
+   * @type {string}
+   * @prop href
    */
   @Prop({ reflect: true }) href: string;
 
   /**
-   * Icon which will displayed on button.
-   * Possible values are bootstrap icon names.
+   * 图标名称（内置图标库）
+   *
+   * @type {string}
+   * @prop icon
    */
   @Prop() icon: string;
 
+  /**
+   * 激活状态（用于点击效果）
+   *
+   * @type {boolean}
+   * @state isActive
+   */
   @State() isActive = false;
 
+  /**
+   * 标签文本（备用显示内容）
+   *
+   * @type {string}
+   * @prop label
+   */
   @Prop() label: string;
 
   /**
-   * Button selection state.
+   * 选中状态（与父级Tabs组件联动）
+   *
+   * @type {boolean}
+   * @prop selected
+   * @default false
+   * @reflect
    */
   @Prop({ reflect: true }) selected: boolean = false;
 
   /**
-   * Show loader.
+   * 显示加载指示器
+   *
+   * @type {boolean}
+   * @prop showLoader
+   * @default false
    */
   @Prop() showLoader: boolean = false;
 
+  /**
+   * 插槽内容存在状态
+   *
+   * @type {boolean}
+   * @state slotHasContent
+   */
   @State() slotHasContent = false;
 
+  /**
+   * 关联面板标识
+   *
+   * @type {string}
+   * @prop target
+   */
   @Prop() target: string;
 
+  /**
+   * 标签类型（需与父级Tabs组件同步）
+   *
+   * @type {'contained' | 'contained-bottom' | 'default'}
+   * @prop type
+   * @default 'default'
+   * @reflect
+   */
   @Prop({ reflect: true }) type: 'contained' | 'contained-bottom' | 'default' =
     'default';
 
+  /**
+   * 标签值（用于表单场景）
+   *
+   * @type {string}
+   * @prop value
+   */
   @Prop() value: string;
 
   /**
-   * On click of tab, a CustomEvent 'zane-tab-click' will be triggered.
+   * 标签点击事件（冒泡给父级Tabs）
+   *
+   * @event zane-tab--click
+   * @type {EventEmitter<{element: HTMLElement; target: string; value: string}>}
    */
   @Event({ eventName: 'zane-tab--click' }) zaneTabClick: EventEmitter;
+
+  /** 原生元素引用（动态切换button/a） */
   private nativeElement?: HTMLButtonElement;
+
+  /** 原始tabindex缓存  */
   private tabindex?: number | string;
 
+  /**
+   * 组件加载前初始化
+   */
   componentWillLoad() {
-    // If the ion-input has a tabindex attribute we get the value
-    // and pass it down to the native input, then remove it from the
-    // zane-input to avoid causing tabbing twice on the same element
     if (this.host.hasAttribute('tabindex')) {
       const tabindex = this.host.getAttribute('tabindex');
       this.tabindex = tabindex === null ? undefined : tabindex;
@@ -147,6 +233,11 @@ export class Tab implements ComponentInterface {
     );
   }
 
+  /**
+   * 设置焦点（公共方法）
+   *
+   * @method setFocus
+   */
   @Method()
   async setFocus() {
     if (this.nativeElement) {
@@ -154,6 +245,11 @@ export class Tab implements ComponentInterface {
     }
   }
 
+  /**
+   * 触发点击（公共方法）
+   *
+   * @method triggerClick
+   */
   @Method()
   async triggerClick() {
     if (this.nativeElement) {
@@ -161,15 +257,31 @@ export class Tab implements ComponentInterface {
     }
   }
 
+  /**
+   * 全局空格键释放监听（用于取消激活状态）
+   * @listens window:keyup
+   * @param {KeyboardEvent} evt - 键盘事件对象
+   */
   @Listen('keyup', { target: 'window' })
   windowKeyUp(evt) {
     if (this.isActive && evt.key === ' ') this.isActive = false;
   }
+
+  /**
+   * 全局鼠标释放监听（用于取消激活状态）
+   * @listens window:mouseup
+   */
   @Listen('mouseup', { target: 'window' })
   windowMouseUp() {
     if (this.isActive) this.isActive = false;
   }
 
+  /**
+   * 点击事件核心处理器（私有方法）
+   * 触发条件：非禁用状态、非加载中、非外链场景
+   * @emits zane-tab--click
+   * @private
+   */
   #clickHandler = () => {
     if (!this.disabled && !this.showLoader && !this.href) {
       this.zaneTabClick.emit({
@@ -180,10 +292,20 @@ export class Tab implements ComponentInterface {
     }
   };
 
+  /**
+   * 动态获取原生标签类型（私有方法）
+   * @returns {'a' | 'button'} 根据href存在性决定渲染元素
+   * @private
+   */
   #getNativeElementTagName() {
     return this.href ? 'a' : 'button';
   }
 
+  /**
+   * 键盘交互处理器（私有方法）
+   * @param {KeyboardEvent} evt - 键盘事件对象
+   * @private
+   */
   #keyDownHandler(evt: KeyboardEvent) {
     if (!this.disabled && !this.showLoader) {
       if (!this.href && evt.key === 'Enter') {
@@ -211,6 +333,11 @@ export class Tab implements ComponentInterface {
     this.isActive = true;
   };
 
+  /**
+   * 渲染无障碍提示信息
+   * @returns {JSX.Element | null} 隐藏式提示元素
+   * @private
+   */
   private renderDisabledReason() {
     if (this.disabled && this.disabledReason)
       return (

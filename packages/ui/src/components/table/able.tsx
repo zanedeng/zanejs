@@ -12,7 +12,16 @@ import { throttle } from 'lodash';
 
 import { getNextLayer } from '../../utils';
 
-const DEFAULT_CELL_WIDTH = 16; // in rem
+/**
+ * 默认单元格宽度（单位：rem）
+ * @constant {number} DEFAULT_CELL_WIDTH
+ */
+const DEFAULT_CELL_WIDTH = 16;
+
+/**
+ * 支持的分页尺寸配置
+ * @constant {Array<{label: number, value: number}>} SUPPORTED_PAGE_SIZES
+ */
 const SUPPORTED_PAGE_SIZES = [
   {
     label: 10,
@@ -32,13 +41,6 @@ const SUPPORTED_PAGE_SIZES = [
   },
 ];
 
-/**
- * @name Table
- * @description A configurable component for displaying tabular data.
- * @category Data Display
- * @img /assets/img/table.webp
- * @imgDark /assets/img/table-dark.webp
- */
 @Component({
   shadow: true,
   styleUrl: 'table.scss',
@@ -46,89 +48,188 @@ const SUPPORTED_PAGE_SIZES = [
 })
 export class Table {
   /**
-   * Grid columns configuration.
+   * 表格列配置数组
+   * @prop {Array<Object>} columns
+   * @example
    * [
-   * {
-   *   "name":"name",
-   *   "label":"Name",
-   *   "width":300,
-   *   "fixed":true,
-   *   "template": function(row, column) { return row[column.name];}
-   *  },
-   * {
-   *   "name":"age",
-   *   "label":"Age"
-   * }
+   *   {
+   *     name: "name",         // 数据字段名
+   *     label: "Name",        // 列标题显示文本
+   *     width: 300,           // 列宽度（像素或rem）
+   *     fixed: true,          // 是否固定列（左侧固定）
+   *     template: (row, column) => `<b>${row[column.name]}</b>` // 自定义渲染模板
+   *   },
+   *   {
+   *     name: "age",
+   *     label: "Age"
+   *   }
    * ]
    */
   @Prop() columns: any[] = [];
 
   /**
-   * Grid data to display on table
+   * 表格数据源
+   * @prop {Array<Object>} data
+   * @example
    * [{
-   *  'id': '5e7118ddce4b3d577956457f',
-   *  'age': 21,
-   *  'name': 'John',
-   *  'company': 'India',
-   *  'email': 'john@example.com',
-   *  'phone': '+1 (839) 560-3581',
-   *  'address': '326 Irving Street, Grimsley, Texas, 4048'
-   *  }]
+   *   id: '5e7118ddce4b3d577956457f',
+   *   age: 21,
+   *   name: 'John'
+   * }]
    */
   @Prop() data: any[] = [];
 
   @Element() elm!: HTMLElement;
 
+  /**
+   * 空状态描述文本
+   * @prop {string} emptyStateDescription
+   * @default 'There are no items to display'
+   */
   @Prop({ mutable: true }) emptyStateDescription: string =
     'There are no items to display';
 
+  /**
+   * 空状态标题文本
+   * @prop {string} emptyStateHeadline
+   * @default 'No items'
+   */
   @Prop({ mutable: true }) emptyStateHeadline: string = 'No items';
 
+  /**
+   * 行数据唯一标识字段名
+   * @prop {string} keyField
+   * @default 'id'
+   */
   @Prop() keyField: string = 'id';
 
+  /**
+   * 组件视觉层级（影响阴影和z-index）
+   * @prop {'01' | '02' | 'background'} [layer]
+   * - '01': 基础层级（默认）
+   * - '02': 中层（用于悬浮元素）
+   * - 'background': 底层（无阴影）
+   */
   @Prop({ reflect: true }) layer?: '01' | '02' | 'background';
 
+  /**
+   * 是否为托管模式（外部控制分页/排序）
+   * @prop {boolean} managed
+   * @default false
+   * @desc
+   * true: 外部控制数据（需监听事件处理分页/排序）
+   * false: 组件内部处理分页/排序
+   */
   @Prop() managed: boolean = false;
 
   @State() private hoveredCell: any = {};
 
+  // 节流处理的单元格悬停事件
   onCellMouseOver = throttle((row: any, column: any) => {
     this.hoveredCell = { column, row };
   }, 30);
 
+  /**
+   * 当前页码
+   * @prop {number} page
+   * @default 1
+   */
   @Prop() page: number = 1;
 
+  /**
+   * 每页显示条数
+   * @prop {number} pageSize
+   * @default 10
+   */
   @Prop() pageSize: number = 10;
 
+  /**
+   * 是否启用分页
+   * @prop {boolean} paginate
+   * @default true
+   */
   @Prop() paginate: boolean = true;
 
+  /**
+   * 已选中的行key数组
+   * @prop {string[]} selectedRowKeys
+   */
   @Prop({ mutable: true }) selectedRowKeys: string[] = [];
 
+  /**
+   * 行选择类型
+   * @prop {'checkbox' | undefined} [selectionType]
+   * - 'checkbox': 显示多选框列
+   * - undefined: 无选择功能
+   */
   @Prop() selectionType: 'checkbox' | undefined;
 
+  /**
+   * 是否启用排序
+   * @prop {boolean} sortable
+   * @default true
+   */
   @Prop() sortable: boolean = true;
 
+  /**
+   * 当前排序字段
+   * @prop {string} [sortBy]
+   */
   @Prop({ mutable: true }) sortBy: string;
 
-  @Prop({ mutable: true }) sortOrder: 'asc' | 'desc' = 'asc';
-  @Prop({ mutable: true }) totalItems;
   /**
-   * Emitted when a table cell is clicked.
+   * 排序方向
+   * @prop {'asc' | 'desc'} [sortOrder]
+   * - 'asc': 升序（A-Z/0-9）
+   * - 'desc': 降序（Z-A/9-0）
+   * @default 'asc'
+   */
+  @Prop({ mutable: true }) sortOrder: 'asc' | 'desc' = 'asc';
+
+  /**
+   * 数据总条数（托管模式下必传）
+   * @prop {number} [totalItems]
+   */
+  @Prop({ mutable: true }) totalItems;
+
+  /**
+   * 单元格点击事件
+   * @event zane-table--cell-click
+   * @param {Object} detail - 事件详情
+   * @param {boolean} detail.altKey  - 是否按下Alt键
+   * @param {Object} detail.column  - 列配置对象
+   * @param {boolean} detail.ctrlKey  - 是否按下Ctrl键
+   * @param {boolean} detail.metaKey  - 是否按下Meta键
+   * @param {Object} detail.record  - 行数据对象
+   * @param {boolean} detail.shiftKey  - 是否按下Shift键
    */
   @Event({ eventName: 'zane-table--cell-click' }) zaneCellClick: EventEmitter;
+
   /**
-   * Emitted when the page changes.
+   * 分页变更事件
+   * @event zane-table--page
+   * @param {Object} detail - 事件详情
+   * @param {number} detail.page  - 新页码
+   * @param {number} detail.pageSize  - 新每页条数
    */
   @Event({ eventName: 'zane-table--page' }) zanePage: EventEmitter;
 
   /**
-   * Emitted when the selection changes.
+   * 选择变更事件
+   * @event zane-table--selection-change
+   * @param {Object} detail - 事件详情
+   * @param {boolean} detail.isSelectAll  - 是否全选
+   * @param {string[]} detail.value  - 选中行key数组
    */
   @Event({ eventName: 'zane-table--selection-change' })
   zaneSelectChange: EventEmitter;
 
   /**
-   * Emitted when the table is sorted.
+   * 排序事件
+   * @event zane-table--sort
+   * @param {Object} detail - 事件详情
+   * @param {string} detail.sortBy  - 排序字段
+   * @param {'asc' | 'desc'} detail.sortOrder  - 排序方向
    */
   @Event({ eventName: 'zane-table--sort' }) zaneSort: EventEmitter;
 
@@ -138,12 +239,19 @@ export class Table {
 
   @State() private isSelectAllIntermediate: boolean = false;
 
+  // 获取数据总数（区分托管/非托管模式）
   getTotalItems() {
     let totalItems = this.totalItems;
     if (this.paginate && !this.managed) totalItems = this.data.length;
     return totalItems;
   }
 
+  /**
+   * 单元格点击事件处理
+   * @param {Object} row - 行数据对象
+   * @param {Object} col - 列配置对象
+   * @param {MouseEvent} evt - 鼠标事件对象
+   */
   onCellClick(row: any, col: any, evt: MouseEvent) {
     this.zaneCellClick.emit({
       altKey: evt.altKey,
@@ -155,6 +263,11 @@ export class Table {
     });
   }
 
+  /**
+   * 行选择点击处理
+   * @param {Object} row - 行数据对象
+   * @desc 切换当前行的选中状态并触发选择变更事件
+   */
   onRowSelectClick = (row) => {
     let selectedRowKeys = [...this.selectedRowKeys];
     if (selectedRowKeys.includes(row[this.keyField])) {
@@ -168,6 +281,10 @@ export class Table {
     this.onSelectChange(selectedRowKeys);
   };
 
+  /**
+   * 全选/取消全选处理
+   * @desc 切换当前页全选状态并触发选择变更事件
+   */
   onSelectAllClick = () => {
     let selectedRowKeys = [];
     this.isSelectAll = !this.isSelectAll;
@@ -178,6 +295,10 @@ export class Table {
     this.onSelectChange(selectedRowKeys);
   };
 
+  /**
+   * 选择状态变更处理
+   * @param {string[]} selectedRowKeys - 新的选中行key数组
+   */
   onSelectChange(selectedRowKeys: any) {
     this.selectedRowKeys = selectedRowKeys;
     this.zaneSelectChange.emit({
@@ -186,6 +307,10 @@ export class Table {
     });
   }
 
+  /**
+   * 主渲染方法
+   * @returns {JSX.Element} 组件JSX结构
+   */
   render() {
     return (
       <Host>
@@ -212,6 +337,11 @@ export class Table {
     );
   }
 
+  /**
+   * 渲染表格主体
+   * @returns {JSX.Element} 表格行JSX结构
+   * @desc 处理排序/分页逻辑，区分固定列和滚动列
+   */
   renderBody() {
     const rows = [];
 
@@ -311,6 +441,11 @@ export class Table {
     return <div class="body">{rows}</div>;
   }
 
+  /**
+   * 渲染表头
+   * @returns {JSX.Element} 表头JSX结构
+   * @desc 生成带排序按钮的表头列
+   */
   renderHeader() {
     const fixedCols = [];
     const scrollCols = [];
@@ -387,6 +522,11 @@ export class Table {
     );
   }
 
+  /**
+   * 渲染分页组件
+   * @returns {JSX.Element | undefined} 分页器JSX结构
+   * @desc 包含页大小选择器和页码导航
+   */
   renderPagination() {
     if (this.paginate)
       return (
@@ -456,6 +596,10 @@ export class Table {
       );
   }
 
+  /**
+   * 渲染空状态
+   * @returns {JSX.Element} 空状态JSX结构
+   */
   private renderEmptyState() {
     return (
       <div class="empty-table">

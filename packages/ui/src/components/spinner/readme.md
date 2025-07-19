@@ -2,13 +2,17 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+加载指示器组件 (zane-spinner)
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `description` | `description` |  | `string` | `'Loading...'` |
-| `hideBackground` | `hide-background` |  | `boolean` | `false` |
-| `size` | `size` | The Icon size. Possible values are: `"sm"`, `"md"`, `"lg"` and size in pixel. Defaults to `"md"`. | `string` | `'md'` |
+| `description` | `description` | 辅助文本描述 | `string` | `'Loading...'` |
+| `hideBackground` | `hide-background` | 是否隐藏背景圆环 | `boolean` | `false` |
+| `size` | `size` | 加载指示器尺寸 | `string` | `'md'` |
 
 ## Dependencies
 

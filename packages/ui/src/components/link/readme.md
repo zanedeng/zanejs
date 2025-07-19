@@ -2,16 +2,22 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+智能链接组件
+
 ## Properties
 
-| Property | Attribute | Description | Type | Default |
-| --- | --- | --- | --- | --- |
-| `href` | `href` | Hyperlink to navigate to on click. | `string` | `undefined` |
-| `target` | `target` | Sets or retrieves the window or frame at which to target content. | `string` | `undefined` |
+| Property | Attribute | Description  | Type     | Default     |
+| -------- | --------- | ------------ | -------- | ----------- |
+| `href`   | `href`    | 链接目标地址 | `string` | `undefined` |
+| `target` | `target`  | 链接打开方式 | `string` | `undefined` |
 
 ## Methods
 
 ### `triggerClick() => Promise<void>`
+
+触发链接点击
 
 #### Returns
 

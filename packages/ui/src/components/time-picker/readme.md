@@ -2,39 +2,47 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+时间选择器组件
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `configAria` | `config-aria` |  | `any` | `{}` |
-| `disabled` | `disabled` | If true, the user cannot interact with the button. Defaults to `false`. | `boolean` | `false` |
+| `configAria` | `config-aria` | 动态收集的ARIA属性配置对象 | `any` | `{}` |
+| `disabled` | `disabled` | 禁用状态标志（会反映到DOM属性） | `boolean` | `false` |
 | `inline` | `inline` |  | `boolean` | `false` |
-| `name` | `name` | The input field name. | `string` | `` `zane-input-${this.gid}` `` |
-| `placeholder` | `placeholder` | The input field placeholder. | `string` | `undefined` |
-| `readonly` | `readonly` | If true, the user read the value cannot modify it. Defaults to `false`. | `boolean` | `false` |
-| `size` | `size` | The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`. | `"lg" \| "md" \| "sm"` | `'md'` |
-| `value` | `value` | The input field value. | `number \| string` | `''` |
+| `name` | `name` | 自动生成的表单字段名称 | `string` | `` `zane-input-${this.gid}` `` |
+| `placeholder` | `placeholder` |  | `string` | `undefined` |
+| `readonly` | `readonly` |  | `boolean` | `false` |
+| `size` | `size` |  | `"lg" \| "md" \| "sm"` | `'md'` |
+| `value` | `value` | 时间值绑定 | `number \| string` | `''` |
 
 ## Events
 
 | Event | Description | Type |
 | --- | --- | --- |
-| `zane-time-picker--blur` | Emitted when the input loses focus. | `CustomEvent<any>` |
-| `zane-time-picker--change` | Emitted when the value has changed. | `CustomEvent<any>` |
-| `zane-time-picker--focus` | Emitted when the input has focus. | `CustomEvent<any>` |
-| `zane-time-picker--input` | Emitted when a keyboard input occurred. | `CustomEvent<any>` |
+| `zane-time-picker--blur` | 当时间选择器失去焦点时触发 | `CustomEvent<any>` |
+| `zane-time-picker--change` | 当时间选择器的值发生改变时触发（仅当值实际变化） | `CustomEvent<any>` |
+| `zane-time-picker--focus` | 当时间选择器获得焦点时触发 | `CustomEvent<any>` |
+| `zane-time-picker--input` | 当时间选择器输入时触发（每次输入都会触发） | `CustomEvent<any>` |
 
 ## Methods
 
 ### `getComponentId() => Promise<string>`
 
+获取组件实例的唯一标识符
+
 #### Returns
 
 Type: `Promise<string>`
 
+组件实例ID
+
 ### `setBlur() => Promise<void>`
 
-Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+主动使时间选择器失去焦点
 
 #### Returns
 
@@ -42,7 +50,7 @@ Type: `Promise<void>`
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+主动使时间选择器获得焦点
 
 #### Returns
 

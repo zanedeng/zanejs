@@ -17,11 +17,11 @@ import {
 import { getComponentIndex } from '../../utils';
 
 /**
- * @name Toggle
- * @description Captures boolean input with an optional indeterminate mode.
- * @category Form Inputs
- * @tags input, form
- * @example <zane-toggle value='true'>Want ice cream?</zane-toggle>
+ * 开关组件
+ *
+ * 该组件实现了可定制的开关切换控件，支持多种交互状态和样式配置，
+ * 符合WAI-ARIA无障碍规范，可无缝集成到表单中使用。
+ *
  */
 @Component({
   shadow: true,
@@ -29,65 +29,117 @@ import { getComponentIndex } from '../../utils';
   tag: 'zane-toggle',
 })
 export class Toggle implements ComponentInterface, InputComponentInterface {
+  /**
+   * ARIA属性配置对象
+   * @prop {Object} configAria - 动态收集的ARIA属性键值对
+   * @mutable 允许组件内部修改
+   * @reflect 属性值变化时同步到DOM属性
+   */
   @Prop({ mutable: true, reflect: true }) configAria: any = {};
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 禁用状态
+   * @prop {boolean} disabled - 是否禁用开关交互
+   * @default false
+   * @reflect 同步到DOM属性
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  // 获取宿主元素引用
   @Element() elm!: HTMLElement;
 
+  // 组件唯一标识符
   gid: string = getComponentIndex();
 
+  /**
+   * 焦点状态
+   * @state {boolean} hasFocus - 指示组件是否获得焦点
+   */
   @State() hasFocus = false;
 
+  /**
+   * 激活状态（鼠标/键盘按下时）
+   * @state {boolean} isActive - 指示组件是否处于激活状态
+   */
   @State() isActive = false;
 
   /**
-   * The checkbox label.
+   * 开关标签文本
+   * @prop {string} label - 显示在开关旁的文本内容
    */
   @Prop() label: string;
 
   /**
-   * The input field name.
+   * 表单字段名称
+   * @prop {string} name - 关联input元素的name属性
+   * @default `zane-input-${this.gid}`
    */
   @Prop() name: string = `zane-input-${this.gid}`;
 
+  /**
+   * 只读状态
+   * @prop {boolean} readonly - 是否只读（可聚焦但不可修改）
+   * @default false
+   * @reflect 同步到DOM属性
+   */
   @Prop({ reflect: true }) readonly: boolean = false;
 
   /**
-   * If true, required icon is show. Defaults to `false`.
+   * 必填状态
+   * @prop {boolean} required - 是否必填项
+   * @default false
+   * @reflect 同步到DOM属性
    */
   @Prop({ reflect: true }) required: boolean = false;
 
+  /**
+   * 圆角样式
+   * @prop {boolean} rounded - 是否显示为圆形开关
+   * @default true
+   */
   @Prop() rounded: boolean = true;
 
   /**
-   * The button size.
-   * Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+   * 开关尺寸
+   * @prop {'lg' | 'md'} size - 控制开关尺寸的枚举值
+   *   - 'lg': 大尺寸 (large)
+   *   - 'md': 中尺寸 (medium)
+   * @default 'md'
    */
   @Prop() size: 'lg' | 'md' = 'md';
 
+  /**
+   * 插槽内容状态
+   * @state {boolean} slotHasContent - 检测是否存在slot内容
+   */
   @State() slotHasContent = false;
 
   /**
-   * The input field value.
+   * 开关值
+   * @prop {boolean} value - 开关当前状态（开/关）
+   * @mutable 允许双向绑定
+   * @default false
    */
   @Prop({ mutable: true }) value: boolean = false;
 
   /**
-   * Emitted when the input loses focus.
+   * 失去焦点事件
+   * @event zane-toggle--blur
+   * @emits {FocusEvent} 原生焦点事件对象
    */
   @Event({ eventName: 'zane-toggle--blur' }) zaneBlur: EventEmitter;
 
   /**
-   * On change of input a CustomEvent 'zane-change' will be triggered. Event details contains parent event, oldValue, newValue of input.
+   * 值变更事件
+   * @event zane-toggle--change
+   * @emits {UIEvent} 原生UI事件对象
    */
   @Event({ eventName: 'zane-toggle--change' }) zaneChange: EventEmitter;
 
   /**
-   * Emitted when the input has focus.
+   * 获得焦点事件
+   * @event zane-toggle--focus
+   * @emits {FocusEvent} 原生焦点事件对象
    */
   @Event({ eventName: 'zane-toggle--focus' }) zaneFocus: EventEmitter;
 
@@ -114,6 +166,12 @@ export class Toggle implements ComponentInterface, InputComponentInterface {
     });
     this.slotHasContent = this.elm.hasChildNodes();
   }
+
+  /**
+   * 获取组件唯一ID
+   * @method getComponentId
+   * @returns {Promise<string>} 组件ID
+   */
   @Method()
   async getComponentId() {
     return this.gid;
@@ -183,9 +241,10 @@ export class Toggle implements ComponentInterface, InputComponentInterface {
       </Host>
     );
   }
+
   /**
-   * Sets blur on the native `input` in `zane-toggle`. Use this method instead of the global
-   * `input.blur()`.
+   * 移除焦点
+   * @method setBlur
    */
   @Method()
   async setBlur() {
@@ -193,9 +252,10 @@ export class Toggle implements ComponentInterface, InputComponentInterface {
       this.nativeElement.blur();
     }
   }
+
   /**
-   * Sets focus on the native `input` in `zane-toggle`. Use this method instead of the global
-   * `input.focus()`.
+   * 设置焦点
+   * @method setFocus
    */
   @Method()
   async setFocus() {
@@ -204,11 +264,20 @@ export class Toggle implements ComponentInterface, InputComponentInterface {
     }
   }
 
+  /**
+   * 监听全局键盘释放事件（处理空格键激活状态）
+   * @listen window:keyup
+   * @param {KeyboardEvent} evt - 键盘事件对象
+   */
   @Listen('keyup', { target: 'window' })
   windowKeyUp(evt) {
     if (this.isActive && evt.key === ' ') this.isActive = false;
   }
 
+  /**
+   * 监听全局鼠标释放事件（清除激活状态）
+   * @listen window:mouseup
+   */
   @Listen('mouseup', { target: 'window' })
   windowMouseUp() {
     if (this.isActive) this.isActive = false;

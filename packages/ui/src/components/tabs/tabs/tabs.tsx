@@ -11,16 +11,8 @@ import {
 import { getComponentIndex } from '../../../utils';
 
 /**
- * @name Tabs
- * @description The tabs component is used to display multiple panels of content in a container.
- * @category Navigation
- * @tags navigation
- * @example <zane-tabs>
- *   <zane-tabs-list>
- *    <zane-tab selected >Tab 1</zane-tab>
- *    <zane-tab>Tab 2</zane-tab>
- *   </zane-tabs-list>
- * </zane-tabs>
+ * 标签页容器组件，用于管理和切换多个标签页
+ *
  */
 @Component({
   shadow: true,
@@ -28,14 +20,53 @@ import { getComponentIndex } from '../../../utils';
   tag: 'zane-tabs',
 })
 export class Tabs implements ComponentInterface {
+  /**
+   * 组件宿主元素引用
+   *
+   * @type {HTMLElement}
+   * @memberof Tabs
+   */
   @Element() elm!: HTMLElement;
+
+  /**
+   * 组件唯一标识符，用于区分多个实例
+   *
+   * @type {string}
+   * @memberof Tabs
+   */
   gid: string = getComponentIndex();
 
+  /**
+   * 组件层级设置，影响样式和视觉层次
+   *
+   * @type {'01' | '02' | 'background'}
+   * @prop layer
+   * @memberof Tabs
+   *
+   * - `'01'`: 第一层级（最高层级，用于凸出显示）
+   * - `'02'`: 第二层级（中等层级，常规内容）
+   * - `'background'`: 背景层级（最低层级，用于背景元素）
+   */
   @Prop({ reflect: true }) layer?: '01' | '02' | 'background';
 
+  /**
+   * 标签页类型，决定标签页的视觉样式
+   *
+   * @type {'contained' | 'contained-bottom' | 'default'}
+   * @prop type
+   * @default 'default'
+   * @memberof Tabs
+   *
+   * - `'contained'`: 包含式标签（标签与内容区域视觉统一）
+   * - `'contained-bottom'`: 底部包含式标签（标签位于内容底部）
+   * - `'default'`: 默认样式（标准分隔式标签）
+   */
   @Prop({ reflect: true }) type: 'contained' | 'contained-bottom' | 'default' =
     'default';
 
+  /**
+   * 组件加载完成后初始化标签页
+   */
   componentDidLoad() {
     if (this.tabsHaveTarget()) {
       const selectedTab = this.elm.querySelector('zane-tab[selected]');
@@ -58,18 +89,42 @@ export class Tabs implements ComponentInterface {
     }
   }
 
+  /**
+   * 获取标签列表组件实例
+   *
+   * @return {HTMLElement} 标签列表元素
+   * @memberof Tabs
+   */
   getTabList() {
     return this.elm.querySelector(':scope > zane-tabs-list');
   }
 
+  /**
+   * 获取所有标签面板元素
+   *
+   * @return {NodeListOf<Element>} 标签面板元素列表
+   * @memberof Tabs
+   */
   getTabPanels() {
     return this.elm.querySelectorAll(':scope > zane-tab-panel');
   }
 
+  /**
+   * 获取所有标签页元素
+   *
+   * @return {NodeListOf<HTMLZaneTabElement>} 标签页元素列表
+   * @memberof Tabs
+   */
   getTabs() {
     return this.elm.querySelectorAll(':scope > zane-tabs-list zane-tab');
   }
 
+  /**
+   * 渲染组件宿主容器
+   *
+   * @return {JSX.Element} 组件JSX结构
+   * @memberof Tabs
+   */
   render() {
     return (
       <Host>
@@ -78,6 +133,12 @@ export class Tabs implements ComponentInterface {
     );
   }
 
+  /**
+   * 选中指定目标标签页
+   *
+   * @param {string} target 要选中的标签页目标标识
+   * @memberof Tabs
+   */
   selectTab(target) {
     const tabs = this.getTabs();
     // eslint-disable-next-line unicorn/no-for-loop
@@ -107,6 +168,13 @@ export class Tabs implements ComponentInterface {
     }
   }
 
+  /**
+   * 监听标签点击事件
+   *
+   * @param {CustomEvent} evt 标签点击事件对象
+   * @listens zane-tab--click
+   * @memberof Tabs
+   */
   @Listen('zane-tab--click')
   tabClick(evt: CustomEvent<any>) {
     evt.stopPropagation();
@@ -115,6 +183,12 @@ export class Tabs implements ComponentInterface {
     }
   }
 
+  /**
+   * 检查标签页是否已有预定义目标
+   *
+   * @return {boolean} 是否存在带target属性的标签页
+   * @memberof Tabs
+   */
   tabsHaveTarget() {
     return this.elm.querySelector(':scope > zane-tabs-list zane-tab[target]');
   }

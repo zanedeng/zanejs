@@ -2,25 +2,33 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+树形结构可视化组件
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `empty` | `empty` |  | `boolean` | `false` |
-| `emptyState` | `empty-state` |  | `string` | `` `{     "headline": "No items",     "description": "There are no items to display"   }` `` |
-| `selectedNode` | `selected-node` |  | `string` | `undefined` |
+| `empty` | `empty` | 空状态显示开关 | `boolean` | `false` |
+| `emptyState` | `empty-state` | 空状态配置（JSON 字符串或对象） | `string` | `` `{     "headline": "No items",     "description": "There are no items to display"   }` `` |
+| `selectedNode` | `selected-node` | 当前选中节点标识 | `string` | `undefined` |
 
 ## Methods
 
 ### `getSelectedNode() => Promise<string>`
 
+获取当前选中节点
+
 #### Returns
 
 Type: `Promise<string>`
 
+当前选中节点的value值
+
 ### `setFocus() => Promise<void>`
 
-Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+设置初始焦点
 
 #### Returns
 
@@ -28,11 +36,13 @@ Type: `Promise<void>`
 
 ### `subscribeToSelect(cb: any) => Promise<void>`
 
+订阅节点选择事件
+
 #### Parameters
 
-| Name | Type  | Description |
-| ---- | ----- | ----------- |
-| `cb` | `any` |             |
+| Name | Type  | Description        |
+| ---- | ----- | ------------------ |
+| `cb` | `any` | - 选择事件回调函数 |
 
 #### Returns
 

@@ -2,20 +2,24 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+侧边导航菜单组件
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `empty` | `empty` |  | `boolean` | `false` |
-| `emptyState` | `empty-state` |  | `any` | `` `{     "headline": "No items",     "description": "There are no items to display"   }` `` |
-| `showLoader` | `show-loader` |  | `boolean` | `false` |
-| `value` | `value` |  | `number \| string` | `undefined` |
+| `empty` | `empty` | 是否显示空状态 | `boolean` | `false` |
+| `emptyState` | `empty-state` | 空状态配置(JSON字符串格式) | `any` | `` `{     "headline": "No items",     "description": "There are no items to display"   }` `` |
+| `showLoader` | `show-loader` | 是否显示加载指示器 | `boolean` | `false` |
+| `value` | `value` | 组件值，可以是数字或字符串 | `number \| string` | `undefined` |
 
 ## Methods
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+公开方法：设置焦点到第一个菜单项
 
 #### Returns
 

@@ -2,11 +2,15 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+下拉菜单内容组件（需与zane-dropdown配合使用）
+
 ## Methods
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+设置焦点的公共方法将焦点设置到菜单组件
 
 #### Returns
 

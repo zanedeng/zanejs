@@ -1,14 +1,7 @@
 import { Component, ComponentInterface, h, Host } from '@stencil/core';
 
 /**
- * @name Button Group
- * @description Group a series of buttons together on a single line with the button group, and super-power.
- * @category General
- * @tags controls
- * @example <zane-button-group>
- *   <zane-button block icon="home"></zane-button>
- *   <zane-button block icon="alarm"></zane-button>
- *   </zane-button-group>
+ * 按钮组容器组件
  */
 @Component({
   shadow: true,
@@ -16,6 +9,10 @@ import { Component, ComponentInterface, h, Host } from '@stencil/core';
   tag: 'zane-button-group',
 })
 export class ButtonGroup implements ComponentInterface {
+  /**
+   * 渲染组件
+   * @returns {JSX.Element} 组件JSX结构
+   */
   render() {
     return (
       <Host>

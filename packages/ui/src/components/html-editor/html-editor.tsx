@@ -25,13 +25,16 @@ import * as beautify from 'js-beautify/js';
 import { debounceEvent, getComponentIndex } from '../../utils';
 
 const win = window as any;
+
 /**
- * @name HTML Editor
- * @description HTML Editor component is a WYSIWYG editor that allows users to edit HTML content.
- * @category Up coming
- * @tags input, form
- * @img /assets/img/html-editor.webp
- * @imgDark /assets/img/html-editor-dark.webp
+ * 基于 Tiptap 的富文本编辑器组件，支持：
+ * - HTML 源码编辑
+ * - Mention（@提及）自动补全功能
+ * - 内置工具条（加粗、斜体、列表等）
+ * - 主题切换（vs-dark / vs-light）
+ * - 可视化编辑与 HTML 源码切换
+ * - 与表单集成（name、required、readonly 等属性）
+ *
  */
 @Component({
   shadow: true,
@@ -42,59 +45,108 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
   copiedContent: any = '';
 
   /**
-   * Set the amount of time, in milliseconds, to wait to trigger the `onChange` event after each keystroke.
+   * 设置事件触发的防抖时间（毫秒），用于优化 `zaneChange` 事件的触发频率。
+   * 默认值：250。
    */
   @Prop() debounce = 250;
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 控制编辑器是否禁用。
+   * - `true`：编辑器不可编辑。
+   * - `false`：编辑器可编辑（默认）。
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
   dropdownContent: HTMLZaneMenuElement;
 
+  /**
+   * 编辑器实例对象，用于调用 Tiptap 提供的 API 方法。
+   */
   @State()
   editorInstance: any;
 
+  /**
+   * 当前 Mention 下拉菜单中过滤后的提及值列表。
+   */
   @State()
   filteredMentionValues: string[] = [];
 
   gid: string = getComponentIndex();
 
+  /**
+   * 编辑器是否获得焦点。
+   * - `true`：有焦点
+   * - `false`：无焦点
+   */
   @State() hasFocus = false;
 
+  /**
+   * 设置组件的层级样式类，用于区分不同视觉层级的组件。
+   * 可选值：
+   * - '01'：主层级，视觉权重最高（如模态框）
+   * - '02'：次级层级，用于普通组件
+   * - 'background'：背景层级，通常用于遮罩、背景等
+   */
   @Prop({ reflect: true }) layer?: '01' | '02' | 'background';
 
+  /**
+   * 设置是否在代码编辑器中显示行号。
+   * - 'on'：显示行号（默认）
+   * - 'off'：不显示行号
+   */
   @Prop() lineNumbers: 'off' | 'on' = 'on';
 
   mentionProps: any;
 
   @Prop({ mutable: true }) mentions: { label: string; value: string }[] = [];
 
+  /**
+   * 配置 Mention 提及功能的搜索方式。
+   * - 'contains'：使用本地数组进行模糊匹配（适合静态数据）
+   * - 'managed'：通过事件 `zane-html-editor--search` 获取动态数据（适合异步搜索）
+   */
   @Prop() mentionsSearch: 'contains' | 'managed' = 'contains';
 
   /**
-   * The input field name.
+   * 表单字段名称，用于提交或获取数据。
+   * 默认值：`zane-input-<index>`，其中 `<index>` 为组件唯一标识符。
    */
   @Prop() name: string = `zane-input-${this.gid}`;
 
   /**
-   * The input field placeholder.
+   * 编辑器的占位文本（未输入内容时显示的提示文本）。
    */
   @Prop() placeholder: string;
 
   queryRange: any;
 
+  /**
+   * 设置编辑器是否为只读模式。
+   * - `true`：用户不能修改内容
+   * - `false`：用户可编辑（默认）
+   */
   @Prop({ reflect: true }) readonly: boolean = false;
 
   /**
-   * If true, required icon is show. Defaults to `false`.
+   * 设置是否为必填字段，通常用于表单验证。
+   * - `true`：必须输入
+   * - `false`：非必填（默认）
    */
   @Prop({ reflect: true }) required: boolean = false;
 
+  /**
+   * 控制 Mention 下拉菜单是否显示。
+   * - `true`：显示下拉菜单
+   * - `false`：隐藏下拉菜单
+   */
   @State()
   showDropdown: boolean = false;
 
+  /**
+   * 控制是否显示 HTML 源码编辑器。
+   * - `true`：显示源码编辑器
+   * - `false`：显示富文本编辑器
+   */
   @State()
   showHtml: boolean = false;
 
@@ -104,20 +156,28 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
 
   @Prop({ reflect: true }) suggestionCharacter = '@';
 
+  /**
+   * 设置编辑器的外观主题。
+   * - 'vs-dark'：深色主题
+   * - 'vs-light'：浅色主题（默认）
+   */
   @Prop() theme: 'vs-dark' | 'vs-light' = 'vs-light';
 
   /**
-   * The input field value.
+   * 设置或获取富文本编辑器的当前内容值（HTML 字符串）。
    */
   @Prop({ mutable: true }) value: string;
 
   /**
-   * Emitted when the value has changed..
+   * 当编辑器内容发生变化时触发该事件。
+   * 事件参数格式：`{ value: string }`，其中 `value` 为当前 HTML 内容。
    */
   @Event({ eventName: 'zane-html-editor--change' }) zaneChange: EventEmitter;
 
   /**
-   * Emitted when a keyboard input occurred.
+   * 当 Mention 提及功能需要异步搜索时触发该事件。
+   * 事件参数格式：`{ query: string, callback: (mentions: { label: string; value: string }[]) => void }`。
+   * 开发者需通过 `callback` 返回匹配的 Mention 数据。
    */
   @Event({ eventName: 'zane-html-editor--search' }) zaneSearch: EventEmitter;
 
@@ -131,11 +191,18 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
     this.debounceChanged();
   }
 
+  /**
+   * 监听 `disabled` 属性变化，同步更新编辑器的可编辑状态。
+   */
   @Watch('disabled')
   disabledWatcher(newValue: boolean) {
     this.editorInstance.setEditable(!newValue && !this.readonly);
   }
 
+  /**
+   * 获取组件的唯一标识符（GID）。
+   * 用于生成唯一 name 属性或用于调试。
+   */
   @Method()
   async getComponentId() {
     return this.gid;
@@ -145,6 +212,9 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
     return this.mentions.find((item) => item.value === value);
   }
 
+  /**
+   * 监听 `readonly` 属性变化，同步更新编辑器的可编辑状态。
+   */
   @Watch('readonly')
   readonlyWatcher(newValue: string) {
     this.editorInstance.setEditable(!newValue && !this.disabled);
@@ -304,83 +374,12 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
             </div>
           );
         })}
-
-        {/* <div class={'action-group'}>
-              <zane-button
-                icon="cut"
-                variant="light"
-                color="secondary"
-                onZane:click={() => {
-                  const from = this.editorInstance.state.selection.from;
-                  const to = this.editorInstance.state.selection.to;
-                  this.copiedContent =
-                    this.editorInstance.state.doc.textBetween(from, to);
-                  document.execCommand('cut');
-                }}
-              ></zane-button>
-
-              <zane-button
-                icon="copy"
-                variant="light"
-                color="secondary"
-                onZane:click={() => {
-                  const from = this.editorInstance.state.selection.from;
-                  const to = this.editorInstance.state.selection.to;
-                  this.copiedContent =
-                    this.editorInstance.state.doc.textBetween(from, to);
-                  document.execCommand('copy');
-                }}
-              ></zane-button>
-
-              <zane-button
-                icon="paste"
-                variant="light"
-                color="secondary"
-                onZane:click={() => {
-                  this.editorInstance.chain().focus().run();
-                  this.editorInstance.commands.insertContent(
-                    this.copiedContent,
-                  );
-                }}
-              ></zane-button>
-            </div>*/}
-
-        {/* <zane-button
-                icon="text--align--left"
-                variant="outline"
-                color="secondary"
-                size={'sm'}
-                onZane:click={() => {
-                  // this.editorInstance.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
-                }}
-              ></zane-button>
-
-              <zane-button
-                icon="text--align--center"
-                variant="outline"
-                color="secondary"
-                size={'sm'}
-                onZane:click={() => {
-                  // this.editorInstance.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
-                }}
-              ></zane-button>
-
-              <zane-button
-                icon="text--align--right"
-                variant="outline"
-                color="secondary"
-                size={'sm'}
-                onZane:click={() => {
-                  //.editorInstance.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
-                }}
-              ></zane-button> */}
       </div>
     );
   }
 
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 手动设置编辑器失去焦点。
    */
   @Method()
   async setBlur() {
@@ -390,8 +389,7 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
   }
 
   /**
-   * Sets focus on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 手动设置编辑器获得焦点。
    */
   @Method()
   async setFocus() {
@@ -400,11 +398,17 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
     }
   }
 
+  /**
+   * 监听 `theme` 属性变化，同步更新 Monaco 编辑器的主题。
+   */
   @Watch('theme')
   themeWatcher(newValue: string) {
     win.monaco.editor.setTheme(newValue);
   }
 
+  /**
+   * 监听 `value` 属性变化，同步更新编辑器的内容。
+   */
   @Watch('value')
   valueWatcher(newValue: string) {
     if (
@@ -415,18 +419,19 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
       this.editorInstance.commands.setContent(newValue);
     }
   }
+
+  /**
+   * 监听 `debounce` 属性变化，更新 `zaneChange` 事件的防抖机制。
+   */
   @Watch('debounce')
   protected debounceChanged() {
     this.zaneChange = debounceEvent(this.zaneChange, this.debounce);
   }
   private initializeEditor() {
-    // eslint-disable-next-line unicorn/no-this-assignment, @typescript-eslint/no-this-alias
     const that = this;
 
     this.editorElement.innerHTML = '';
 
-    // This sample still does not showcase all CKEditor 5 features (!)
-    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
     this.editorInstance = new Editor({
       content: this.value,
       element: this.editorElement,
@@ -436,16 +441,7 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
         TextStyle,
         FontFamily,
         Placeholder.configure({
-          // Use a placeholder:
           placeholder: that.placeholder,
-          // Use different placeholders depending on the node type:
-          // placeholder: ({ node }) => {
-          //   if (node.type.name === 'heading') {
-          //     return 'What’s the title?'
-          //   }
-
-          //   return 'Can you add some further context?'
-          // },
         }),
         Mention.configure({
           HTMLAttributes: {
@@ -487,8 +483,6 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
                   that.showDropdown = true;
                   that.filteredMentionValues = props.items;
                   computePosition(props.decorationNode, that.dropdownContent, {
-                    // Try removing the middleware. The dropdown will
-                    // overflow the boundary's edge and get clipped!
                     middleware: [offset(10)],
                     placement: 'bottom-start',
                   }).then(({ x, y }) => {
@@ -502,8 +496,6 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
                   that.filteredMentionValues = props.items;
                   that.queryRange = props.range;
                   computePosition(props.decorationNode, that.dropdownContent, {
-                    // Try removing the middleware. The dropdown will
-                    // overflow the boundary's edge and get clipped!
                     middleware: [offset(10)],
                     placement: 'bottom-start',
                   }).then(({ x, y }) => {
@@ -551,7 +543,6 @@ export class HtmlEditor implements ComponentInterface, InputComponentInterface {
     });
 
     this.editorElement.addEventListener('click', (e) => {
-      // Focus the editor when the user clicks anywhere on the editor
       if (this.editorElement === e.target)
         this.editorInstance.commands.focus('end');
     });

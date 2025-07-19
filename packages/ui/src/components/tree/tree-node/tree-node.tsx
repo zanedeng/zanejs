@@ -14,13 +14,9 @@ import {
 import { getComponentIndex } from '../../../utils';
 
 /**
- * @name TreeNode
- * @description A tree node is a hierarchical structure that provides nested levels of navigation.
- * @category Navigation
- * @subcategory Tree View
- * @childComponent true
- * @img /assets/img/tree-view.webp
- * @imgDark /assets/img/tree-view-dark.webp
+ * 树形结构节点组件
+ *
+ * @slot - 子节点插槽，用于嵌套树节点
  */
 @Component({
   shadow: true,
@@ -28,67 +24,129 @@ import { getComponentIndex } from '../../../utils';
   tag: 'zane-tree-node',
 })
 export class TreeNode {
+
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 禁用节点交互
+   * @prop {boolean} [disabled=false]
+   * @reflect 属性值会同步到 DOM 属性
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  /**
+   * 组件宿主元素引用
+   * @element
+   */
   @Element() elm!: HTMLElement;
 
+  /**
+   * 控制子节点展开状态
+   * @prop {boolean} [expanded=true]
+   * @mutable 允许组件内部修改
+   * @reflect 属性值会同步到 DOM 属性
+   */
   @Prop({ mutable: true, reflect: true }) expanded: boolean = true;
 
+  /**
+   * 组件全局唯一标识符
+   * @internal
+   */
   gid: string = getComponentIndex();
 
+  /**
+   * 是否存在子节点
+   * @state
+   */
   @State() hasChildNodes = false;
 
+  /**
+   * 焦点状态标记
+   * @state
+   */
   @State() hasFocus = false;
 
   /**
-   * Hyperlink to navigate to on click.
+   * 链接地址（存在时节点渲染为<a>标签）
+   * @prop {string} href
+   * @reflect 属性值会同步到 DOM 属性
    */
   @Prop({ reflect: true }) href: string;
 
   /**
-   * Icon which will displayed on button.
-   * Possible values are icon names.
+   * 节点图标名称（需配合图标库使用）
+   * @prop {string} icon
    */
   @Prop() icon: string;
 
+  /**
+   * 激活状态标记（鼠标/键盘按下时）
+   * @state
+   */
   @State() isActive = false;
 
+  /**
+   * 节点显示文本
+   * @prop {string} [label='']
+   * @mutable 允许组件内部修改
+   */
   @Prop({ mutable: true }) label: string = '';
 
+  /**
+   * 节点层级（从父节点自动计算）
+   * @prop {number} [level=0]
+   * @reflect 属性值会同步到 DOM 属性
+   */
   @Prop({ reflect: true }) level: number = 0;
 
   /**
-   * Menu item selection state.
+   * 当前选中节点标识符
+   * @prop {string} selectedNode
+   * @mutable 允许组件内部修改
+   * @reflect 属性值会同步到 DOM 属性
    */
   @Prop({ mutable: true, reflect: true }) selectedNode: string;
 
   /**
-   * Sets or retrieves the window or frame at which to target content.
+   * 链接打开方式（仅在设置 href 时生效）
+   * @prop {('_self'|'_blank'|'_parent'|'_top')} [target='_self']
+   * @defaultValue '_self'
    */
   @Prop() target: string = '_self';
 
   /**
-   * The menu item value.
+   * 节点唯一标识符（优先级高于 label）
+   * @prop {(null|number|string)} [value]
+   * @mutable 允许组件内部修改
    */
   @Prop({ mutable: true }) value?: null | number | string;
 
   /**
-   * Emitted when the menu item is clicked.
+   * 节点点击事件
+   * @event zane-tree-node--click
+   * @property {boolean} expand - 当前展开状态
+   * @property {string} id - 组件全局 ID
+   * @property {string} value - 节点标识值（优先取 value，否则使用 label）
    */
   @Event({ eventName: 'zane-tree-node--click' })
   zaneTreeNodeClick: EventEmitter;
 
+  /**
+   * 原生元素引用（动态生成 a/div 标签）
+   * @private
+   */
   private nativeElement?: HTMLElement;
 
+  /**
+   * 标签页导航顺序
+   * @private
+   * @defaultValue 1
+   */
   private tabindex?: number | string = 1;
 
+  /**
+   * 组件加载前逻辑
+   * @lifecycle
+   */
   componentWillLoad() {
-    // If the ion-input has a tabindex attribute we get the value
-    // and pass it down to the native input, then remove it from the
-    // zane-input to avoid causing tabbing twice on the same element
     if (this.elm.hasAttribute('tabindex')) {
       const tabindex = this.elm.getAttribute('tabindex');
       this.tabindex = tabindex === null ? undefined : tabindex;
@@ -112,6 +170,10 @@ export class TreeNode {
     });
   }
 
+  /**
+   * 触发点击事件
+   * @private
+   */
   handleClick = () => {
     this.zaneTreeNodeClick.emit({
       expand: this.expanded,
@@ -119,11 +181,21 @@ export class TreeNode {
       value: this.value || this.label,
     });
   };
+
+  /**
+   * 判断当前节点是否被选中
+   * @returns {boolean} 选中状态
+   */
   isSelected() {
     if (this.value === undefined && this.label === undefined) return false;
     else if (this.value === undefined) return this.selectedNode === this.label;
     else return this.selectedNode === this.value;
   }
+
+  /**
+   * 渲染函数
+   * @returns {JSX.Element} 组件结构
+   */
   render = () => {
     const NativeElementTag = this.#getNativeElementTagName();
     const styles = {
@@ -184,8 +256,9 @@ export class TreeNode {
   };
 
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 移除元素焦点
+   * @method
+   * @async
    */
   @Method()
   async setBlur() {
@@ -195,8 +268,9 @@ export class TreeNode {
   }
 
   /**
-   * Sets focus on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 设置元素焦点
+   * @method
+   * @async
    */
   @Method()
   async setFocus() {
@@ -205,16 +279,30 @@ export class TreeNode {
     }
   }
 
+  /**
+   * 全局键盘释放监听
+   * @listens window:keyup
+   * @param {KeyboardEvent} evt - 键盘事件对象
+   */
   @Listen('keyup', { target: 'window' })
   windowKeyUp(evt) {
     if (this.isActive && evt.key === ' ') this.isActive = false;
   }
 
+  /**
+   * 全局鼠标释放监听
+   * @listens window:mouseup
+   */
   @Listen('mouseup', { target: 'window' })
   windowMouseUp() {
     if (this.isActive) this.isActive = false;
   }
 
+  /**
+   * 动态获取元素标签类型
+   * @private
+   * @returns {'a'|'div'} 标签类型
+   */
   #getNativeElementTagName() {
     return this.href ? 'a' : 'div';
   }

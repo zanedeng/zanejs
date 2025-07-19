@@ -2,13 +2,17 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+头部组件，提供可定制的页面顶部导航栏
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `color` | `color` | Defines the primary color of the header. This can be set to predefined color names to apply specific color themes. | `string` | `'black'` |
-| `darkModeColor` | `dark-mode-color` | Color variant for dark mode, applicable when [data-theme="dark"] is set. | `string` | `undefined` |
-| `float` | `float` |  | `boolean` | `false` |
+| `color` | `color` | 头部组件的颜色主题 | `string` | `'black'` |
+| `darkModeColor` | `dark-mode-color` | 暗黑模式下的颜色主题 | `string` | `undefined` |
+| `float` | `float` | 是否启用浮动模式 | `boolean` | `false` |
 
 ## CSS Custom Properties
 

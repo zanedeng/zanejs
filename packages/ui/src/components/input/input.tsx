@@ -17,11 +17,15 @@ import {
 import { debounceEvent, getComponentIndex } from '../../utils';
 
 /**
- * @name Input
- * @description Enables native inputs to be used within a Form field.
- * @category Form Inputs
- * @tags input, form
- * @example <zane-input placeholder="Enter your name"></zane-input>
+ * 自定义输入框组件 zane-input
+ *
+ * 实现功能：
+ * 1. 支持多种输入类型（文本、密码、邮箱等）及尺寸控制
+ * 2. 包含表单验证状态（错误/警告）及辅助文本展示
+ * 3. 提供前后插槽(start/end)扩展能力
+ * 4. 支持防抖事件处理与无障碍访问
+ * 5. 集成密码可见性切换功能
+ *
  */
 @Component({
   shadow: true,
@@ -29,111 +33,197 @@ import { debounceEvent, getComponentIndex } from '../../utils';
   tag: 'zane-input',
 })
 export class Input implements ComponentInterface, InputComponentInterface {
+
   /**
-   * Indicates whether the value of the control can be automatically completed by the browser.
+   * 自动填充控制
+   * - `on`: 允许浏览器自动填充
+   * - `off`: 禁用自动填充
+   * @default 'off'
    */
   @Prop() autocomplete: 'off' | 'on' = 'off';
 
+  /**
+   * 动态ARIA属性配置对象
+   * - 收集宿主元素上所有`aria-*`属性并转移到内部input元素
+   * - 需通过mutable允许组件内修改
+   */
   @Prop({ mutable: true, reflect: true }) configAria: any = {};
 
   /**
-   * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+   * 输入内容变化事件(zane-input--change)的防抖延迟(ms)
+   * @default 300
    */
   @Prop() debounce = 300;
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 禁用状态
+   * - 设置后阻止用户交互
+   * @attr
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
   @Element() elm!: HTMLElement;
 
-  @State() endSlotHasContent = false;
-
   gid: string = getComponentIndex();
 
-  @State() hasFocus = false;
-
+  /**
+   * 辅助说明文本
+   * - 在非错误/警告状态下显示
+   */
   @Prop() helperText: string;
 
+  /**
+   * 行内布局模式
+   * - 设置后标签与输入框水平排列
+   * @attr
+   */
   @Prop({ reflect: true }) inline: boolean = false;
 
+  /**
+   * 验证失败状态
+   * - 激活时会显示invalidText并应用错误样式
+   */
   @Prop() invalid: boolean = false;
 
+  /**
+   * 验证失败提示文本
+   * - 当invalid=true时显示
+   */
   @Prop() invalidText: string;
 
+  /**
+   * 输入框标签文本
+   * - 显示在输入区域上方
+   */
   @Prop() label: string;
 
   /**
-   * The input field name.
+   * 输入框名称
+   * - 用于表单提交时识别字段
+   * - 默认生成唯一ID: zane-input-{gid}
    */
   @Prop() name: string = `zane-input-${this.gid}`;
 
-  @State() passwordVisible = false;
-
   /**
-   * The input field placeholder.
+   * 占位提示文本
    */
   @Prop() placeholder: string;
 
   /**
-   * If true, the user read the value cannot modify it. Defaults to `false`.
+   * 只读状态
+   * - 允许查看但禁止修改内容
+   * @attr
    */
   @Prop({ reflect: true }) readonly: boolean = false;
 
   /**
-   * If true, required icon is show. Defaults to `false`.
+   * 必填标识
+   * - 显示红色星号(*)并触发浏览器原生验证
+   * @attr
    */
   @Prop({ reflect: true }) required: boolean = false;
 
   /**
-   * The input field size.
-   * Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+   * 尺寸控制
+   * - `sm`: 小尺寸(高度32px)
+   * - `md`: 中尺寸(高度40px)
+   * - `lg`: 大尺寸(高度48px)
+   * @default 'md'
+   * @attr
    */
   @Prop({ reflect: true }) size: 'lg' | 'md' | 'sm' = 'md';
 
+  /**
+   * 骨架屏模式
+   * - 加载状态时显示灰色占位块
+   */
   @Prop() skeleton: boolean = false;
 
-  @State() startSlotHasContent = false;
-
   /**
-   * The type of control to display.
-   * Possible values are: `"text"`, `"password"`, `"email"`, `"tel"`. Defaults to `"text"`.
+   * 输入类型
+   * - `text`: 普通文本
+   * - `password`: 密码(带可见切换按钮)
+   * - `email`: 邮箱格式验证
+   * - `tel`: 电话号码输入
+   * @default 'text'
    */
   @Prop() type: 'email' | 'password' | 'tel' | 'text' = 'text';
 
   /**
-   * The input field value.
+   * 输入框值
+   * - 使用双向数据绑定
    */
   @Prop({ mutable: true }) value: string;
 
+  /**
+   * 警告状态
+   * - 非致命性错误提示，显示warnText
+   */
   @Prop() warn: boolean = false;
 
-  @Prop() warnText: string;
   /**
-   * Emitted when the input loses focus.
+   * 警告提示文本
+   * - 当warn=true时显示
+   */
+  @Prop() warnText: string;
+
+  /**
+   * 输入框聚焦状态
+   * - 控制宿主元素has-focus属性
+   */
+  @State() hasFocus = false;
+
+  /**
+   * 密码可见性状态
+   * - 仅当type=password时生效
+   * - true: 显示明文
+   * - false: 显示掩码
+   */
+  @State() passwordVisible = false;
+
+  /**
+   * 检测start插槽是否有内容
+   * - 用于动态调整输入框内边距
+   */
+  @State() startSlotHasContent = false;
+
+  /**
+   * 检测end插槽是否有内容
+   * - 用于动态调整输入框内边距
+   */
+  @State() endSlotHasContent = false;
+
+  /**
+   * 失去焦点事件
+   * @event zane-input--blur
+   * @param {FocusEvent} ev - 原生焦点事件对象
    */
   @Event({ eventName: 'zane-input--blur' }) zaneBlur: EventEmitter;
+
   /**
-   * Emitted when the value has changed.
+   * 防抖后的值变更事件
+   * @event zane-input--change
+   * @param {KeyboardEvent} ev - 键盘事件对象(防抖处理)
    */
   @Event({ eventName: 'zane-input--change' }) zaneChange: EventEmitter;
 
   /**
-   * Emitted when the input has focus.
+   * 获得焦点事件
+   * @event zane-input--focus
+   * @param {FocusEvent} ev - 原生焦点事件对象
    */
   @Event({ eventName: 'zane-input--focus' }) zaneFocus: EventEmitter;
+
   /**
-   * Emitted when a keyboard input occurred.
+   * 实时输入事件
+   * @event zane-input--input
+   * @param {KeyboardEvent} ev - 每次按键触发的键盘事件
    */
   @Event({ eventName: 'zane-input--input' }) zaneInput: EventEmitter;
   private nativeElement?: HTMLInputElement;
   private tabindex?: number | string;
 
   componentWillLoad() {
-    // If the ion-input has a tabindex attribute we get the value
-    // and pass it down to the native input, then remove it from the
-    // zane-input to avoid causing tabbing twice on the same element
     if (this.elm.hasAttribute('tabindex')) {
       const tabindex = this.elm.getAttribute('tabindex');
       this.tabindex = tabindex === null ? undefined : tabindex;
@@ -153,6 +243,10 @@ export class Input implements ComponentInterface, InputComponentInterface {
     this.debounceChanged();
   }
 
+  /**
+   * 获取组件唯一ID
+   * @returns {string} 组件全局唯一标识(gid)
+   */
   @Method()
   async getComponentId() {
     return this.gid;
@@ -260,8 +354,8 @@ export class Input implements ComponentInterface, InputComponentInterface {
   }
 
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 移除输入框焦点
+   * - 同时更新hasFocus状态
    */
   @Method()
   async setBlur() {
@@ -272,8 +366,8 @@ export class Input implements ComponentInterface, InputComponentInterface {
   }
 
   /**
-   * Sets focus on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 激活输入框焦点
+   * - 同时更新hasFocus状态
    */
   @Method()
   async setFocus() {
@@ -283,29 +377,42 @@ export class Input implements ComponentInterface, InputComponentInterface {
     }
   }
 
+  /**
+   * 防抖配置变更监听
+   * - 当debounce属性变化时更新事件防抖设置
+   */
   @Watch('debounce')
   protected debounceChanged() {
     this.zaneChange = debounceEvent(this.zaneChange, this.debounce);
   }
 
+  /** 输入框失焦处理函数 */
   private blurHandler = (ev: FocusEvent) => {
     this.hasFocus = false;
     this.zaneBlur.emit(ev);
   };
 
+  /** 输入框聚焦处理函数 */
   private focusHandler = (ev: FocusEvent) => {
     this.hasFocus = true;
     this.zaneFocus.emit(ev);
   };
 
+  /** 获取当前输入值的字符串表示 */
   private getValue(): string {
     return (this.value || '').toString();
   }
 
+  /** 检测输入值是否非空 */
   private hasValue(): boolean {
     return this.getValue().length > 0;
   }
 
+  /**
+   * 输入事件处理
+   * - 更新value值
+   * - 触发zaneInput/zaneChange事件
+   */
   private inputHandler = (ev: Event) => {
     const input = ev.target as HTMLInputElement | null;
     const oldValue = this.value;

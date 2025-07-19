@@ -2,13 +2,19 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+工具提示组件 (zane-tooltip)
+
+该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `content` | `content` | The content of the tooltip. | `string` | `''` |
-| `placements` | `placements` | The placement of the popover relative to the trigger element. Possible values are: - `"top"`: The popover is placed above the trigger element. - `"right"`: The popover is placed to the right of the trigger element. - `"bottom"`: The popover is placed below the trigger element. - `"left"`: The popover is placed to the left of the trigger element. | `string` | `'top,bottom,right,left'` |
-| `trigger` | `trigger` | If true, the tooltip will be managed by the parent component. | `"hover" \| "manual"` | `'hover'` |
+| `content` | `content` | 工具提示内容 | `string` | `''` |
+| `placements` | `placements` | 提示框定位方向 | `string` | `'top,bottom,right,left'` |
+| `trigger` | `trigger` | 触发方式 | `"hover" \| "manual"` | `'hover'` |
 
 ## Dependencies
 

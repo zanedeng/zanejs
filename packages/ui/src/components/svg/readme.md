@@ -2,12 +2,16 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+SVG 动态加载组件 (zane-svg)
+
 ## Properties
 
-| Property | Attribute | Description    | Type     | Default     |
-| -------- | --------- | -------------- | -------- | ----------- |
-| `size`   | `size`    | The Icon size. | `string` | `undefined` |
-| `src`    | `src`     |                | `string` | `''`        |
+| Property | Attribute | Description  | Type     | Default     |
+| -------- | --------- | ------------ | -------- | ----------- |
+| `size`   | `size`    | 图标尺寸配置 | `string` | `undefined` |
+| `src`    | `src`     | SVG 资源路径 | `string` | `''`        |
 
 ## Dependencies
 

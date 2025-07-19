@@ -2,23 +2,27 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+多功能菜单容器组件
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `empty` | `empty` |  | `boolean` | `false` |
-| `emptyStateDescription` | `empty-state-description` |  | `string` | `'There are no items to display'` |
-| `emptyStateHeadline` | `empty-state-headline` |  | `string` | `'No items'` |
-| `layer` | `layer` |  | `"01" \| "02" \| "background"` | `undefined` |
-| `showLoader` | `show-loader` |  | `boolean` | `false` |
-| `size` | `size` | The menu item size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`. | `"lg" \| "md" \| "sm"` | `'md'` |
-| `value` | `value` |  | `number \| string` | `undefined` |
+| `empty` | `empty` | 空状态标识 | `boolean` | `false` |
+| `emptyStateDescription` | `empty-state-description` | 空状态描述文本 | `string` | `'There are no items to display'` |
+| `emptyStateHeadline` | `empty-state-headline` | 空状态标题文本 | `string` | `'No items'` |
+| `layer` | `layer` | UI层级样式 | `"01" \| "02" \| "background"` | `undefined` |
+| `showLoader` | `show-loader` | 加载状态标识 | `boolean` | `false` |
+| `size` | `size` | 菜单尺寸 | `"lg" \| "md" \| "sm"` | `'md'` |
+| `value` | `value` | 当前选中值 | `number \| string` | `undefined` |
 
 ## Methods
 
 ### `setFocus() => Promise<void>`
 
-Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+设置初始焦点
 
 #### Returns
 

@@ -2,12 +2,16 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+智能通知管理系统组件 (zane-notification-manager)
+
 ## Properties
 
 | Property | Attribute | Description | Type | Default |
 | --- | --- | --- | --- | --- |
-| `name` | `name` |  | `string` | `'global'` |
-| `position` | `position` |  | `"bottom-left" \| "bottom-right" \| "top-left" \| "top-right"` | `'bottom-right'` |
+| `name` | `name` | 管理器命名空间 | `string` | `'global'` |
+| `position` | `position` | 通知定位策略 | `"bottom-left" \| "bottom-right" \| "top-left" \| "top-right"` | `'bottom-right'` |
 
 ## Dependencies
 

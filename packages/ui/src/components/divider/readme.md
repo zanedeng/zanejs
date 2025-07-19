@@ -2,11 +2,15 @@
 
 <!-- Auto Generated Below -->
 
+## Overview
+
+分割线组件
+
 ## Properties
 
-| Property   | Attribute  | Description | Type      | Default |
-| ---------- | ---------- | ----------- | --------- | ------- |
-| `vertical` | `vertical` |             | `boolean` | `false` |
+| Property   | Attribute  | Description    | Type      | Default |
+| ---------- | ---------- | -------------- | --------- | ------- |
+| `vertical` | `vertical` | 是否为垂直方向 | `boolean` | `false` |
 
 ## CSS Custom Properties
 

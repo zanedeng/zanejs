@@ -9,138 +9,219 @@ import { Language } from "./constants";
 export { Language } from "./constants";
 export namespace Components {
     /**
-     * @name Accordion
-     * @description An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
-     * @overview  <p>The accordion component delivers large amounts of content in a small space through progressive disclosure. The header title give the user a high level overview of the content allowing the user to decide which sections to read.</p>
-     *  <p>Accordions can make information processing and discovering more effective. However, it does hide content from users and it’s important to account for a user not noticing or reading all of the included content. If a user is likely to read all of the content then don’t use an accordion as it adds the burden of an extra click; instead use a full scrolling page with normal headers.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @tags display
-     * @img /assets/img/accordion.webp
-     * @imgDark /assets/img/accordion-dark.webp
+     * 可折叠面板(Accordion)容器组件
+     * 提供可折叠内容区域的容器组件，管理多个折叠项的状态和交互。
+     * 支持单开/多开模式、多种尺寸和图标位置配置。
      */
     interface ZaneAccordion {
         /**
-          * Accordion item dropdown alignment.
+          * 控制折叠指示图标的位置  1. `end`: 图标显示在面板标题的末尾(右侧)(默认值) 2. `start`: 图标显示在面板标题的开头(左侧)
+          * @type {'end' | 'start'}
           * @default 'end'
+          * @reflectToAttr 属性值会同步到DOM元素上
+          * @example <zane-accordion align="start"></zane-accordion>
          */
         "align": 'end' | 'start';
         /**
+          * 是否允许多个面板同时展开  - true: 允许多个面板同时保持展开状态 - false: 同一时间只能展开一个面板(默认值)
+          * @type {boolean}
           * @default false
+          * @example <zane-accordion multiple></zane-accordion>
          */
         "multiple": boolean;
         /**
-          * The According size.
+          * 控制折叠面板的尺寸变体  - 'lg': 大尺寸，适合需要突出显示的内容 - 'md': 中等尺寸(默认值)，通用尺寸 - 'sm': 小尺寸，适合紧凑布局
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflectToAttr 属性值会同步到DOM元素上
+          * @example <zane-accordion size="lg"></zane-accordion>
          */
         "size": 'lg' | 'md' | 'sm';
     }
     /**
-     * @name Accordion Item
-     * @description An accordion item is single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user.
-     * @overview  <p>The accordion item component is a single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user. The accordion item can be used in conjunction with the accordion component to create a list of expandable items.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @childComponent true
+     * 可折叠面板项(Accordion Item)组件
+     * 作为zane-accordion的子组件使用，实现单个可折叠面板项的功能
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface ZaneAccordionItem {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态控制  - true: 禁用该折叠项，不可交互 - false: 正常状态(默认)
+          * @type {boolean}
           * @default false
          */
         "disabled": boolean;
         /**
-          * The menu item value.
+          * 面板标题文本  当heading插槽无内容时显示此文本
+          * @type {string}
          */
         "heading": string;
         /**
-          * Menu item selection state.
+          * 面板展开状态  - true: 面板已展开 - false: 面板已折叠(默认)
+          * @type {boolean}
           * @default false
+          * @mutable 允许组件内部修改
+          * @reflectToAttr 同步到DOM属性
          */
         "open": boolean;
     }
     /**
-     * @name Avatar
-     * @description The Avatar component is used to represent user, and displays the profile picture, initials or fallback icon.
-     * @category Data Display
-     * @tags display
-     * @example <zane-avatar size="5rem" name="Shivaji Varma" src="/assets/img/avatar.webp"></zane-avatar>
+     * 头像组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneAvatar {
         /**
+          * 用户姓名（用于生成首字母头像）
+          * @type {string}
           * @default ''
          */
         "name": string;
         /**
-          * Avatar size.
+          * 头像尺寸（支持CSS单位）
+          * @type {string}
           * @default '2rem'
          */
         "size": string;
         /**
+          * 头像图片URL（优先级高于name）
+          * @type {string}
           * @default ''
          */
         "src": string;
     }
     /**
-     * @name Badge
-     * @description The badge component is used to display a small amount of information to the user.
-     * @category Informational
-     * @tag content
-     * @example <zane-badge content="5"> <zane-icon name="notification" size="2rem"></zane-icon></zane-badge>
+     * 徽章组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneBadge {
         /**
+          * 徽章颜色主题
+          * @type {'error'|'primary'|'secondary'|'success'|'warning'}
           * @default 'error'
+          * @reflect 属性值会反射到DOM属性  枚举说明： - error: 错误状态（红色系） - primary: 主要状态（品牌主色系） - secondary: 次要状态（中性色系） - success: 成功状态（绿色系） - warning: 警告状态（黄色系）
          */
         "color": | 'error'
     | 'primary'
     | 'secondary'
     | 'success'
     | 'warning';
+        /**
+          * 徽章显示内容
+          * @type {string}
+         */
         "content": string;
     }
     /**
-     * @name Breadcrumb
-     * @description A breadcrumb is a secondary navigation scheme that reveals the user's location in a website or web application.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-breadcrumb><zane-breadcrumb-item href="#">Home</zane-breadcrumb-item><zane-breadcrumb-item href="#" active>Page</zane-breadcrumb-item></zane-breadcrumb>
+     * 面包屑导航组件
+     * 用于显示当前页面在网站层次结构中的位置，并提供快速导航功能。
+     * @example ```html
+     * <zane-breadcrumb>
+     *   <zane-breadcrumb-item href="/home">首页</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item href="/products">产品</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item>当前页面</zane-breadcrumb-item>
+     * </zane-breadcrumb>
+     * ```
+     * @Component 装饰器定义了组件的元数据
+     * @property {boolean} shadow - 启用 Shadow DOM 封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 组件的自定义元素标签名
      */
     interface ZaneBreadcrumb {
     }
+    /**
+     * 面包屑导航项组件
+     * 作为面包屑导航系统的单个项使用，必须作为`zane-breadcrumb`的子元素使用。
+     * 支持链接导航、活动状态指示和Schema.org 结构化数据。
+     * @example ```html
+     * <!-- 活动状态项(当前页面) -->
+     * <zane-breadcrumb-item active>
+     *   当前页面
+     * </zane-breadcrumb-item>
+     * <!-- 可点击链接项 -->
+     * <zane-breadcrumb-item href="/products" position="2">
+     *   产品列表
+     * </zane-breadcrumb-item>
+     * ```
+     * @Component 配置项说明：
+     * @property {boolean} shadow - 启用Shadow DOM封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 自定义元素标签名
+     */
     interface ZaneBreadcrumbItem {
         /**
+          * 活动状态标识  表示当前面包屑项是否为活动状态(通常是当前页面)。 当设置为true时，该项会以非链接形式呈现。
+          * @type {boolean}
           * @default false
+          * @memberof BreadcrumbItem
          */
         "active": boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址  指定面包屑项的跳转链接。未设置时表示该项不可点击。 当active为true时，此属性会被忽略。
+          * @type {string}
+          * @memberof BreadcrumbItem
          */
         "href": string;
+        /**
+          * 项在列表中的位置  表示该项在面包屑导航中的序号位置(从1开始)。 用于Schema.org 微数据和样式控制。
+          * @type {string}
+          * @memberof BreadcrumbItem
+         */
         "position": string;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式  指定链接的打开方式，等同于HTML的target属性。 常用值: '_blank'|'_self'|'_parent'|'_top'
+          * @type {string}
+          * @memberof BreadcrumbItem
          */
         "target": string;
     }
     /**
-     * @name Button
-     * @description Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
-     * @overview  <p>Buttons are clickable elements that are used to trigger actions. They communicate calls to action to the user and allow users to interact with pages in a variety of ways. Button labels express what action will occur when the user interacts with it.</p>
-     * @category General
-     * @tags controls
-     * @example <zane-button>
-     * Button CTA
+     * 多功能按钮组件
+     * 提供丰富的交互样式和状态管理，支持：
+     * - 多种视觉变体(variant)
+     * - 完整的大小(size)控制
+     * - 主题颜色(color)系统
+     * - 暗黑模式适配
+     * - 完善的ARIA可访问性
+     * - 图标集成
+     * - 加载状态
+     * @example 基础使用
+     * ```html
+     * <zane-button>普通按钮</zane-button>
+     * <zane-button variant="outline">轮廓按钮</zane-button>
+     * <zane-button icon="settings" iconAlign="start">带图标按钮</zane-button>
+     * ```
+     * @example 高级使用
+     * ```html
+     * <zane-button
+     * color="danger"
+     * darkModeColor="warning"
+     * variant="ghost.simple"
+     * size="xl"
+     * disabled
+     * disabledReason="权限不足"
+     * >
+     * 危险操作
      * </zane-button>
+     * ```
      */
     interface ZaneButton {
         /**
-          * The `appendData` property allows you to attach additional data to the button component. This data can be of any type, making it versatile for various use cases. It's particularly useful for passing extra context or information that can be accessed in event handlers or other component logic.
+          * 附加数据对象  会在点击事件中回传，用于携带上下文数据
+          * @type {any}
          */
         "appendData": any;
         /**
-          * Defines the primary color of the button. This can be set to predefined color names to apply specific color themes.
+          * 按钮主题色  支持预设颜色或自定义颜色名称(需在CSS中定义对应变量)
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
           * @default 'primary'
+          * @example 预设颜色 - 'primary': 品牌主色 - 'danger': 危险操作红色 - 'success': 成功操作绿色
+          * @example 自定义颜色 需在CSS中定义: --color-custom和--color-custom-10等变量
          */
         "color": | 'black'
     | 'danger'
@@ -150,11 +231,14 @@ export namespace Components {
     | 'warning'
     | 'white';
         /**
+          * ARIA 可访问性配置 可动态修改并反映到DOM属性
+          * @type {Object}
           * @default {}
          */
         "configAria": any;
         /**
-          * Color variant for dark mode, applicable when [data-theme="dark"] is set.
+          * 暗黑模式下的替代颜色  当检测到暗黑模式时自动切换为此颜色
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
          */
         "darkModeColor"?: | 'black'
     | 'danger'
@@ -164,78 +248,102 @@ export namespace Components {
     | 'warning'
     | 'white';
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 按钮禁用状态
+          * @type {boolean}
           * @default false
+          * @reflectToAttr
          */
         "disabled": boolean;
         /**
-          * If button is disabled, the reason why it is disabled.
+          * 禁用原因说明  会以ARIA方式提供给辅助技术，提升可访问性
+          * @type {string}
           * @default ''
          */
         "disabledReason": string;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（使按钮表现为链接） 设置后按钮渲染为 <a> 标签
          */
         "href": string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 图标名称  指定要显示的图标，需要配合zane-icon组件使用
+          * @type {string}
          */
         "icon"?: string;
         /**
-          * Icon alignment. Possible values are `"start"`, `"end"`. Defaults to `"end"`.
+          * 图标对齐方式  控制图标相对于文本的位置
+          * @type {'end' | 'start'}
           * @default 'end'
+          * @description - 'start': 图标在文本左侧 - 'end': 图标在文本右侧
          */
         "iconAlign": 'end' | 'start';
         /**
-          * Button selection state.
+          * 按钮选中状态  常用于按钮组或切换场景
+          * @type {boolean}
           * @default false
+          * @reflectToAttr
          */
         "selected": boolean;
         /**
-          * Sets blur on the native `button` in `zane-button`. Use this method instead of the global `button.blur()`.
+          * 以编程方式使按钮失去焦点
+          * @method 
+          * @async 
+          * @returns
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `button` in `zane-button`. Use this method instead of the global `button.focus()`.
+          * 以编程方式聚焦按钮
+          * @method 
+          * @async 
+          * @returns
          */
         "setFocus": () => Promise<void>;
         /**
-          * If true, a loader will be displayed on button.
+          * 显示加载指示器  设置为true时会显示旋转加载图标并禁用交互
+          * @type {boolean}
           * @default false
          */
         "showLoader": boolean;
         /**
-          * Button size. Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"2xl"`, `"full"`. Defaults to `"md"`.
+          * 按钮尺寸  支持从xs到2xl共6种预设尺寸
+          * @type {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'}
           * @default 'md'
+          * @reflectToAttr 
+          * @description - xs: 超小尺寸(24px) - sm: 小尺寸(32px) - md: 中尺寸(40px) - lg: 大尺寸(48px) - xl: 超大尺寸(56px) - 2xl: 特大尺寸(64px)
          */
         "size": '2xl' | 'lg' | 'md' | 'sm' | 'xl' | 'xs';
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开目标（当href存在时有效）
           * @default '_self'
          */
         "target": string;
         /**
-          * Sets the delay for throttle in milliseconds. Defaults to 200 milliseconds.
+          * 点击事件节流延迟(ms)
           * @default 200
          */
         "throttleDelay": number;
         /**
-          * If true, the button will be in a toggled state.
+          * 是否为切换型按钮 启用时点击会保持激活状态
           * @default false
          */
         "toggle": boolean;
         /**
-          * Triggers a click event on the native `button` in `zane-button`. Use this method instead of the global `button.click()`.
+          * 以编程方式触发按钮点击
+          * @method 
+          * @async 
+          * @returns
          */
         "triggerClick": () => Promise<void>;
         /**
-          * Button type based on which actions are performed when the button is clicked.
+          * 按钮类型（当作为表单按钮时） - 'button': 普通按钮 - 'reset': 表单重置按钮 - 'submit': 表单提交按钮
           * @default 'button'
          */
         "type": 'button' | 'reset' | 'submit';
         /**
-          * The visual style of the button.   Possible variant values: `"default"` is a filled button. `"outline"` is an outlined button. `"ghost"` is a transparent button. `"light"` is a light color button.  Possible sub-variant values: `"simple"` is a simple button without default padding at end. `"block"` is a full-width button that spans the full width of its container.    Mix and match the `variant` and `sub-variant` to create a variety of buttons.  `"default.simple"`, `"outline.block"` etc.
+          * 按钮视觉变体  支持基础变体和带.simple后缀的简化变体
+          * @type {    * 'default' | 'default.simple'  | 'ghost' | 'ghost.simple'  | 'light' | 'light.simple'  | 'link' | 'link.simple'  | 'neo' | 'neo.simple'  | 'outline' | 'outline.simple' }
           * @default 'default'
+          * @reflectToAttr 
+          * @description - default: 实心填充按钮 - ghost: 透明背景按钮 - light: 浅色背景按钮 - link: 链接样式按钮 - neo: 新拟态风格按钮 - outline: 边框轮廓按钮 - .simple: 简化版变体(减少视觉效果)
          */
         "variant": | 'default'
     | 'default.simple'
@@ -251,434 +359,627 @@ export namespace Components {
     | 'outline.simple';
     }
     /**
-     * @name Button Group
-     * @description Group a series of buttons together on a single line with the button group, and super-power.
-     * @category General
-     * @tags controls
-     * @example <zane-button-group>
-     * <zane-button block icon="home"></zane-button>
-     * <zane-button block icon="alarm"></zane-button>
-     * </zane-button-group>
+     * 按钮组容器组件
      */
     interface ZaneButtonGroup {
     }
+    /**
+     * 卡片组件
+     * 提供可自定义阴影级别的卡片容器
+     */
     interface ZaneCard {
+        /**
+          * 卡片阴影级别
+          * @type {'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxl' | undefined} - 'xs': 超小阴影 (extra small) - 'sm': 小阴影 (small) - 'md': 中等阴影 (medium，默认未指定时) - 'lg': 大阴影 (large) - 'xl': 超大阴影 (extra large) - 'xxl': 特大阴影 (extra extra large) - undefined: 无阴影 阴影级别应在card.scss中定义对应的box-shadow值
+         */
         "shadowLevel": 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxl' | undefined;
     }
     /**
-     * @name Checkbox
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-checkbox value='true'>Want ice cream?</zane-checkbox>
+     * 自定义复选框组件
+     * 实现可定制的复选框控件，支持选中/未选/中间态三种状态，
+     * 提供完整的ARIA支持、键盘交互和事件响应机制。
+     * @example ```html
+     * <zane-checkbox
+     *   label="同意协议"
+     *   size="md"
+     *   layer="02"
+     *   rounded
+     *   required
+     * ></zane-checkbox>
+     * ```
      */
     interface ZaneCheckbox {
         /**
-          * @default {}
+          * ARIA属性配置对象  用于动态设置ARIA属性（如aria-label, aria-describedby等）， 组件会自动收集元素上所有`aria-*`属性到该对象。
+          * @defaultValue `{}`
          */
         "configAria": any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
-          * @default false
+          * 禁用状态  当设置为`true`时，组件不可交互且视觉上变灰
+          * @defaultValue `false`
          */
         "disabled": boolean;
+        /**
+          * 获取组件ID
+          * @returns 组件唯一标识符
+         */
         "getComponentId": () => Promise<string>;
         /**
-          * @default false
+          * 中间态状态  当设置为`true`时显示"-"图标，表示部分选中状态， 与`value`属性互斥（中间态时`value`应为false）
+          * @defaultValue `false`
          */
         "intermediate": boolean;
         /**
-          * The checkbox label.
+          * 复选框标签文本
          */
         "label": string;
+        /**
+          * 视觉层级  控制组件在UI中的层级深度，影响阴影和背景色： - `01`: 表层组件（最高层级） - `02`: 中层组件 - `background`: 背景层组件（最低层级）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
-          * The input field name.
+          * 表单字段名（自动生成）
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
+          * 只读状态
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
           * @default false
          */
         "required": boolean;
         /**
+          * 圆角样式
           * @default false
          */
         "rounded": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除焦点
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 设置焦点
          */
         "setFocus": () => Promise<void>;
         /**
-          * The button size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
-          * @default 'md'
+          * 尺寸规格  - `lg`: 大尺寸(48px) - `md`: 中尺寸(40px) - `sm`: 小尺寸(32px)
+          * @defaultValue `'md'`
          */
         "size": 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
-          * @default false
+          * 选中状态  当设置为`true`时显示选中图标， 与`intermediate`属性互斥
+          * @defaultValue `false`
          */
         "value": boolean;
     }
     /**
-     * @name Code Editor
-     * @description A browser based code editor.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/code-editor.webp
-     * @imgDark /assets/img/code-editor-dark.webp
+     * 基于Monaco Editor的代码编辑器组件
+     * 提供语法高亮、智能提示等专业编辑功能，支持暗黑/亮色主题切换，
+     * 内置防抖机制优化高频变更事件，适用于代码片段展示和实时编辑场景。
+     * @example ```html
+     * <zane-code-editor
+     *   language="javascript"
+     *   minimap
+     *   debounce="500"
+     *   value="console.log('Hello  World')"
+     * ></zane-code-editor>
+     * ```
      */
     interface ZaneCodeEditor {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `onChange` event after each keystroke.
-          * @default 250
+          * 变更事件防抖时间（毫秒）  避免高频输入时频繁触发变更事件， 设置为0可禁用防抖
+          * @defaultValue `250`
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
-          * @default false
+          * 禁用状态  禁用时编辑器不可编辑但可滚动查看内容
+          * @defaultValue `false`
          */
         "disabled": boolean;
+        /**
+          * 获取组件ID
+          * @returns 组件唯一标识符
+         */
         "getComponentId": () => Promise<string>;
         /**
-          * @default 'javascript'
+          * 编程语言支持  支持的语法类型： - `html`: HTML/XML标记语言 - `javascript`: JavaScript/TypeScript - `json`: JSON数据格式
+          * @defaultValue `'javascript'`
          */
         "language": 'html' | 'javascript' | 'json';
+        /**
+          * 类型声明库源码  用于提供智能提示的类型定义， 格式应为对应语言的类型声明字符串
+         */
         "libSource": any;
         /**
-          * @default 'on'
+          * 行号显示控制  - `on`: 显示行号 - `off`: 隐藏行号
+          * @defaultValue `'on'`
          */
         "lineNumbers": 'off' | 'on';
         /**
-          * @default false
+          * 缩略图显示  在编辑器右侧显示代码导航缩略图
+          * @defaultValue `false`
          */
         "minimap": boolean;
         /**
-          * The input field name.
+          * 表单字段名（自动生成）
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
-          * @default false
+          * 只读模式  开启后禁止编辑但保留代码高亮
+          * @defaultValue `false`
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
-          * @default false
+          * 必填状态
+          * @defaultValue `false`
          */
         "required": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除编辑器焦点
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 设置编辑器焦点
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field value.
+          * 编辑器内容  双向绑定的代码文本值
          */
         "value": string;
     }
     /**
-     * @name Code Highlighter
-     * @description A browser based code highlighter.
-     * @category Data Display
-     * @tag display, code
-     * @img /assets/img/code-highlighter.webp
-     * @imgDark /assets/img/code-highlighter-dark.webp
+     * 代码高亮组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneCodeHighlighter {
         /**
-          * Format the code snippet.
+          * 是否格式化代码
+          * @Prop 装饰器表示这是组件的公开属性
+          * @mutable 表示属性可变
+          * @reflect 表示属性值会反映到DOM属性上
          */
         "format": boolean;
         /**
-          * Hide the copy button.
+          * 是否隐藏复制按钮
+          * @Prop 默认值为false
           * @default false
          */
         "hideCopy": boolean;
         /**
-          * Display the code snippet inline.
+          * 是否为内联模式（非块级显示）
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "inline": boolean;
         /**
-          * The language of the code snippet.
+          * 代码语言类型
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'javascript'
           * @default 'javascript'
          */
         "language": Language;
         /**
-          * Display line numbers.
+          * 是否显示行号
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "lineNumbers": boolean;
         /**
-          * The code snippet to highlight.
+          * 代码内容
+          * @Prop 装饰器
           * @default ''
          */
         "value": string;
     }
+    /**
+     * 容器布局组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
+     */
     interface ZaneContainer {
         /**
+          * 容器尺寸选项 - 'full': 全宽容器 - 'lg': 大号容器 - 'max': 最大宽度容器 - 'md': 中等容器 (默认值) - 'sm': 小号容器 - 'xl': 超大容器
+          * @Prop 装饰器表示这是组件的公开属性
+          * @reflect 表示属性值会反映到DOM属性上 默认值为 'full'
           * @default 'full'
          */
         "size": 'full' | 'lg' | 'max' | 'md' | 'sm' | 'xl';
     }
     /**
-     * @name Current Time
-     * @description Displays the current time in a given timezone.
-     * @category Others
-     * @example <zane-current-time></zane-current-time>
+     * 当前时间显示组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneCurrentTime {
+        /**
+          * 时区设置 遵循IANA时区数据库的时区字符串格式 例如: "Asia/Shanghai", "America/New_York"
+          * @Prop 装饰器表示这是组件的公开属性 未指定时使用运行环境的默认时区
+         */
         "timezone": string;
     }
     /**
-     * @name Date Picker
-     * @category Form Inputs
-     * @description Captures date input.
-     * @example <zane-date-picker value='true'></zane-date-picker>
+     * 日期选择器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDatePicker {
         /**
+          * ARIA无障碍属性配置对象 用于存储所有aria-*属性
+          * @Prop 装饰器表示这是组件的公开属性
+          * @mutable 表示属性可变
+          * @reflect 表示属性值会反映到DOM属性上
           * @default {}
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 事件防抖时间(毫秒) 用于控制change事件的触发频率
+          * @Prop 默认值为300ms
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用组件
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false
           * @default false
          */
         "disabled": boolean;
+        /**
+          * 获取组件ID的公共方法
+          * @Method 装饰器定义公共方法
+          * @returns 组件唯一ID
+         */
         "getComponentId": () => Promise<string>;
+        /**
+          * 辅助文本 显示在输入框下方的帮助信息
+          * @Prop
+         */
         "helperText": string;
         /**
+          * 是否为内联模式
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "inline": boolean;
         /**
+          * 是否为无效状态
+          * @Prop 
           * @default false
          */
         "invalid": boolean;
+        /**
+          * 无效状态提示文本
+          * @Prop
+         */
         "invalidText": string;
+        /**
+          * 标签文本
+          * @Prop
+         */
         "label": string;
         /**
-          * The input field name.
+          * 输入框name属性 默认值为"zane-input-{唯一ID}"
+          * @Prop 
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
-          * The input field placeholder.
+          * 占位符文本
+          * @Prop
          */
         "placeholder": string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 是否为只读状态
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 是否为必填项
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "required": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 设置失去焦点的公共方法
+          * @Method 装饰器定义公共方法
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 设置获得焦点的公共方法
+          * @Method 装饰器定义公共方法
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸 - 'lg': 大尺寸 - 'md': 中等尺寸(默认) - 'sm': 小尺寸
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default 'md'
          */
         "size": 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 当前值 可以是null、number或string类型
+          * @Prop 装饰器，mutable表示属性可变
           * @default ''
          */
         "value"?: null | number | string;
         /**
+          * 是否为警告状态
+          * @Prop 
           * @default false
          */
         "warn": boolean;
+        /**
+          * 警告状态提示文本
+          * @Prop
+         */
         "warnText": string;
     }
     /**
-     * @name Divider
-     * @description A divider can be used to segment content vertically or horizontally.
-     * @category Layout
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 分割线组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDivider {
         /**
+          * 是否为垂直方向
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false(水平方向)
           * @default false
          */
         "vertical": boolean;
     }
     /**
-     * @name Dropdown
-     * @description Enables native inputs to be used within a Form field.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 下拉菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDropdown {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用下拉菜单
+          * @Prop 默认值为false
           * @default false
          */
         "disabled": boolean;
         /**
+          * 是否为受控模式 在受控模式下，组件的状态完全由外部控制
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "managed": boolean;
         /**
+          * 下拉菜单是否打开
+          * @Prop 装饰器，mutable表示属性可变，reflect表示会反映到DOM属性上
           * @default false
          */
         "open": boolean;
         /**
+          * 下拉菜单位置选项 多个位置用逗号分隔，按优先级排序
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'bottom-start,top-start,bottom-end,top-end'
           * @default 'bottom-start,top-start,bottom-end,top-end'
          */
         "placements": string;
+        /**
+          * 设置焦点的公共方法
+          * @Method 装饰器定义公共方法
+         */
         "setFocus": () => Promise<void>;
         /**
+          * 触发下拉菜单的方式 - 'click': 点击触发 - 'hover': 悬停触发 - 'manual': 手动控制
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'click'
           * @default 'click'
          */
         "trigger": 'click' | 'hover' | 'manual';
     }
     /**
-     * @name Dropdown Menu
-     * @description The Dropdown Menu component is used to display a list of options.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @childComponent true
+     * 下拉菜单内容组件（需与zane-dropdown配合使用）
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDropdownMenu {
         /**
-          * Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+          * 设置焦点的公共方法 将焦点设置到菜单组件
+          * @Method 装饰器定义公共方法
          */
         "setFocus": () => Promise<void>;
     }
     /**
-     * @name Empty State
-     * @description A message that displays when there is no information to display.
-     * @category Data Display
-     * @img /assets/img/empty-state.webp
-     * @imgDark /assets/img/empty-state-dark.webp
+     * 空状态(Empty State)组件
+     * 用于展示无数据时的占位内容，包含插图、标题、描述和操作按钮
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     * @implements ComponentInterface 实现Stencil组件生命周期接口
      */
     interface ZaneEmptyState {
+        /**
+          * 操作按钮文本  当设置此属性时会显示操作按钮
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "action": string;
         /**
+          * 禁用操作按钮  - true: 禁用操作按钮 - false: 启用操作按钮(默认)
+          * @type {boolean}
           * @default false
          */
         "actionDisabled": boolean;
+        /**
+          * 操作按钮跳转链接  设置后会渲染为<a>标签而非<button>
+          * @type {string}
+         */
         "actionUrl": string;
         /**
+          * 操作按钮样式变体  - 'default': 默认填充样式 - 'ghost': 幽灵按钮样式 - 'outline': 描边按钮样式(默认)
+          * @type {'default' | 'ghost' | 'outline'}
           * @default 'default'
          */
         "actionVariant": 'default' | 'ghost' | 'outline';
+        /**
+          * 描述文本  支持HTML内容，会自动进行XSS过滤
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "description": string;
+        /**
+          * 标题文本
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "headline": string;
         /**
+          * 插图名称  对应assets/images/empty-state目录下的SVG文件名
+          * @type {string}
           * @default 'no-document'
+          * @reflectToAttr 同步到DOM属性
          */
         "illustration": string;
     }
     /**
-     * @name Footer
-     * @description The footer component provides a container for displaying additional navigation information about a site.
-     * @overview <p>The footer is one of the most underestimated sections of a website being located at the very bottom of every page, however, it can be used as a way to try to convince users to stay on your website if they haven’t found the information they’ve been looking for inside the main content area.</p>
-     * @category Navigation
-     * @img /assets/img/footer.webp
-     * @imgDark /assets/img/footer-dark.webp
+     * 页脚(Footer)组件
+     * 提供可定制的页脚布局，支持多种变体和插槽内容
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface ZaneFooter {
         /**
+          * 页脚样式变体  通过CSS类名控制不同样式变体 默认值'simple'会生成'variant-simple'类名
+          * @type {string}
           * @default 'simple'
+          * @reflectToAttr 同步到DOM属性
          */
         "variant": string;
         /**
+          * 版权年份  默认为当前年份，可通过属性覆盖
+          * @type {number}
           * @default new Date().getFullYear()
          */
         "year": number;
-    }
-    interface ZaneFooterCopyright {
-        "copyright": string;
-        "copyrightHref": string;
-        /**
-          * @default new Date().getFullYear()
-         */
-        "year": number;
-    }
-    interface ZaneFooterLinks {
-        /**
-          * @default []
-         */
-        "links": { href: string; name: string }[];
     }
     /**
-     * @name Form Control
-     * @description The Form Control component adds a label and caption for its child control.
-     * @category Form Inputs
-     * @tags form
-     * @example <zane-form-control label='Full Name' required>
-     * <zane-input type='text'></zane-input>
-     * </zane-form-control>
+     * 页脚版权(Footer Copyright)组件
+     * 用于展示标准版权声明，包含年份、版权所有者链接和保留权利声明
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
+    interface ZaneFooterCopyright {
+        /**
+          * 版权所有者名称  将显示为可点击链接（当copyrightHref设置时）
+          * @type {string}
+         */
+        "copyright": string;
+        /**
+          * 版权所有者链接  设置后会将版权名称渲染为可点击链接
+          * @type {string}
+         */
+        "copyrightHref": string;
+        /**
+          * 版权年份  默认为当前年份，可通过属性覆盖
+          * @type {number}
+          * @default new Date().getFullYear()
+         */
+        "year": number;
+    }
+    /**
+     * 页脚链接(Footer Links)组件
+     * 用于展示页脚导航链接列表，支持动态链接数据传入
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
+    interface ZaneFooterLinks {
+        /**
+          * 链接数据数组  支持两种格式： 1. 对象数组格式: [{href: string, name: string}] 2. JSON字符串格式: '[{"href":"...","name":"..."}]'
+          * @type {(Array<{href: string, name: string}>|string)}
+          * @default []
+         */
+        "links": { href: string; name: string }[]|string;
+    }
+    /**
+     * 表单控件容器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneFormControl {
+        /**
+          * 辅助文本 显示在表单控件下方的帮助信息
+          * @Prop
+         */
         "helperText": string;
         /**
+          * 是否为内联布局
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false
           * @default false
          */
         "inline": boolean;
         /**
+          * 是否为无效状态
+          * @Prop 
           * @default false
          */
         "invalid": boolean;
+        /**
+          * 无效状态提示文本
+          * @Prop
+         */
         "invalidText": string;
+        /**
+          * 标签文本
+          * @Prop
+         */
         "label": string;
         /**
-          * Whether the form control is required.
+          * 是否为必填项
+          * @Prop 
           * @default false
          */
         "required": boolean;
         /**
+          * 是否显示骨架屏 用于加载状态
+          * @Prop 
           * @default false
          */
         "skeleton": boolean;
         /**
+          * 是否为警告状态
+          * @Prop 
           * @default false
          */
         "warn": boolean;
+        /**
+          * 警告状态提示文本
+          * @Prop
+         */
         "warnText": string;
     }
     /**
-     * @name Header
-     * @description Header component is used to display a header with a brand, navigation, and actions.
-     * @category Navigation
-     * @img /assets/img/header.webp
-     * @imgDark /assets/img/header-dark.webp
+     * 头部组件，提供可定制的页面顶部导航栏
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneHeader {
         /**
-          * Defines the primary color of the header. This can be set to predefined color names to apply specific color themes.
+          * 头部组件的颜色主题
+          * @Prop 可从外部设置的属性
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white' | string} - 'black': 黑色主题 - 'danger': 危险/错误状态颜色 - 'primary': 主品牌色 - 'secondary': 次要颜色 - 'success': 成功状态颜色 - 'warning': 警告状态颜色 - 'white': 白色主题 - string: 自定义颜色值
           * @default 'black'
          */
         "color": | 'black'
@@ -690,7 +991,9 @@ export namespace Components {
     | 'white'
     | string;
         /**
-          * Color variant for dark mode, applicable when [data-theme="dark"] is set.
+          * 暗黑模式下的颜色主题
+          * @Prop 可选属性，暗黑模式下的替代颜色
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white' | string} 枚举值与color属性相同
          */
         "darkModeColor"?: | 'black'
     | 'danger'
@@ -701,76 +1004,138 @@ export namespace Components {
     | 'white'
     | string;
         /**
+          * 是否启用浮动模式
+          * @Prop 控制头部是否浮动在内容上方
           * @default false
          */
         "float": boolean;
     }
+    /**
+     * 头部操作按钮组件，用于在头部导航栏中创建可交互的操作项
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneHeaderAction {
         /**
+          * 徽标内容
+          * @Prop 可从外部设置的属性
           * @default '_self'
          */
         "badge": string;
         /**
+          * ARIA可访问性配置
+          * @Prop 可从外部设置的属性
+          * @mutable 允许组件内部修改
+          * @reflect 将属性值反映到DOM属性
           * @default {}
          */
         "configAria": any;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址
+          * @Prop 可从外部设置的属性
+          * @reflect 将属性值反映到DOM属性
          */
         "href": string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 图标名称
+          * @Prop 可从外部设置的属性
          */
         "icon": string;
         /**
-          * Button selection state.
+          * 是否选中状态
+          * @Prop 可从外部设置的属性
           * @default false
          */
         "selected": boolean;
+        /**
+          * 设置按钮颜色
+          * @Method 暴露给外部调用的方法
+          * @param color 要设置的颜色值
+         */
         "setColor": (color: string) => Promise<void>;
         /**
-          * Button size. Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"xxl"`, `"none"`. Defaults to `"md"`.
+          * 按钮尺寸
+          * @Prop 可从外部设置的属性
+          * @type {'lg' | 'md' | 'none' | 'sm' | 'xl' | 'xxl'} - 'lg': 大尺寸 - 'md': 中等尺寸(默认) - 'none': 无特定尺寸 - 'sm': 小尺寸 - 'xl': 超大尺寸 - 'xxl': 特大尺寸
           * @default 'md'
          */
         "size": 'lg' | 'md' | 'none' | 'sm' | 'xl' | 'xxl';
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @Prop 可从外部设置的属性
           * @default '_self'
          */
         "target": string;
     }
+    /**
+     * 头部品牌标识组件，用于显示网站/应用的品牌标识和名称
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneHeaderBrand {
         /**
-          * @default '#'
+          * 品牌链接地址
+          * @Prop 可从外部设置的属性
+          * @default '#' 默认链接到页面顶部
          */
         "href": string;
+        /**
+          * 品牌logo图片路径
+          * @Prop 可从外部设置的属性 支持SVG和普通图片格式
+         */
         "logo": string;
+        /**
+          * 品牌名称
+          * @Prop 可从外部设置的属性
+         */
         "name": string;
+        /**
+          * 设置品牌颜色
+          * @Method 暴露给外部调用的方法
+          * @param color 要设置的颜色值
+          * @async 异步方法
+         */
         "setColor": (color: string) => Promise<void>;
+        /**
+          * 品牌副标题
+          * @Prop 可从外部设置的属性
+         */
         "subTitle": string;
     }
     /**
-     * @name HTML Editor
-     * @description HTML Editor component is a WYSIWYG editor that allows users to edit HTML content.
-     * @category Up coming
-     * @tags input, form
-     * @img /assets/img/html-editor.webp
-     * @imgDark /assets/img/html-editor-dark.webp
+     * 基于 Tiptap 的富文本编辑器组件，支持：
+     * - HTML 源码编辑
+     * - Mention（@提及）自动补全功能
+     * - 内置工具条（加粗、斜体、列表等）
+     * - 主题切换（vs-dark / vs-light）
+     * - 可视化编辑与 HTML 源码切换
+     * - 与表单集成（name、required、readonly 等属性）
      */
     interface ZaneHtmlEditor {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `onChange` event after each keystroke.
+          * 设置事件触发的防抖时间（毫秒），用于优化 `zaneChange` 事件的触发频率。 默认值：250。
           * @default 250
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 控制编辑器是否禁用。 - `true`：编辑器不可编辑。 - `false`：编辑器可编辑（默认）。
           * @default false
          */
         "disabled": boolean;
+        /**
+          * 获取组件的唯一标识符（GID）。 用于生成唯一 name 属性或用于调试。
+         */
         "getComponentId": () => Promise<string>;
+        /**
+          * 设置组件的层级样式类，用于区分不同视觉层级的组件。 可选值： - '01'：主层级，视觉权重最高（如模态框） - '02'：次级层级，用于普通组件 - 'background'：背景层级，通常用于遮罩、背景等
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 设置是否在代码编辑器中显示行号。 - 'on'：显示行号（默认） - 'off'：不显示行号
           * @default 'on'
          */
         "lineNumbers": 'off' | 'on';
@@ -779,33 +1144,35 @@ export namespace Components {
          */
         "mentions": { label: string; value: string }[];
         /**
+          * 配置 Mention 提及功能的搜索方式。 - 'contains'：使用本地数组进行模糊匹配（适合静态数据） - 'managed'：通过事件 `zane-html-editor--search` 获取动态数据（适合异步搜索）
           * @default 'contains'
          */
         "mentionsSearch": 'contains' | 'managed';
         /**
-          * The input field name.
+          * 表单字段名称，用于提交或获取数据。 默认值：`zane-input-<index>`，其中 `<index>` 为组件唯一标识符。
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
-          * The input field placeholder.
+          * 编辑器的占位文本（未输入内容时显示的提示文本）。
          */
         "placeholder": string;
         /**
+          * 设置编辑器是否为只读模式。 - `true`：用户不能修改内容 - `false`：用户可编辑（默认）
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 设置是否为必填字段，通常用于表单验证。 - `true`：必须输入 - `false`：非必填（默认）
           * @default false
          */
         "required": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 手动设置编辑器失去焦点。
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 手动设置编辑器获得焦点。
          */
         "setFocus": () => Promise<void>;
         /**
@@ -821,252 +1188,451 @@ export namespace Components {
          */
         "suggestionCharacter": string;
         /**
+          * 设置编辑器的外观主题。 - 'vs-dark'：深色主题 - 'vs-light'：浅色主题（默认）
           * @default 'vs-light'
          */
         "theme": 'vs-dark' | 'vs-light';
         /**
-          * The input field value.
+          * 设置或获取富文本编辑器的当前内容值（HTML 字符串）。
          */
         "value": string;
     }
     /**
-     * @name Icon
-     * @description Icons are visual symbols used to represent ideas, objects, or actions.
-     * @overview Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
-     * @category General
-     * @example <zane-icon name="home" size="2rem"></zane-icon>
+     * 图标组件（zane-icon）
+     * 该组件基于 Stencil 构建，用于按需异步加载并渲染 SVG 图标。
+     * 支持通过属性 name 指定图标名称，通过 size 控制图标尺寸。
+     * 组件内部使用 Shadow DOM 实现样式隔离，并暴露 CSS 自定义属性
+     * `--zane-icon-size` 供外部覆盖默认尺寸。
+     * @example <!-- 基础用法 -->
+     * <zane-icon name="home" size="md"></zane-icon>
+     * <!-- 自定义尺寸 -->
+     * <zane-icon name="user" size="32px"></zane-icon>
      */
     interface ZaneIcon {
         /**
-          * The identifier for the icon. This name corresponds to a specific SVG asset in the icon set.
+          * 图标名称，对应图标库中的文件名。 当该值发生变化时，组件会重新异步加载对应 SVG。
+          * @example <zane-icon name="arrow-down"></zane-icon>
          */
         "name": string;
         /**
-          * The size of the icon. This can be specified in pixels (px) or rem units to control the icon's dimensions. If a number is provided, it will be treated as rem units. For example, '16px', '2rem', or 2 would be valid values.
+          * 图标尺寸。 - 可选内置枚举：'xs' | 'sm' | 'md' | 'lg' | 'xl' - 也可传入任意合法的 CSS 长度值（如 "24px"、"1.5rem"）或纯数字字符串（如 "2"）。
+          * @example <zane-icon size="lg"></zane-icon> <zane-icon size="32px"></zane-icon>
          */
         "size": string;
     }
+    /**
+     * 自适应主题图片组件（zane-image）
+     * 该组件能够根据当前系统的明暗主题自动切换显示的图片资源。
+     * 当检测到处于暗色模式时，优先使用 darkSrc 指定的暗色主题图片；
+     * 否则使用 src 指定的默认图片。
+     * 组件内部通过监听主题变化事件实现实时切换，无需手动刷新。
+     * @example <!-- 基础用法 -->
+     * <zane-image
+     *   src="assets/logo-light.svg"
+     *   dark-src="assets/logo-dark.svg"
+     *   image-title="公司 Logo">
+     * </zane-image>
+     */
     interface ZaneImage {
+        /**
+          * 暗色主题下的图片地址。 当系统处于暗色模式且该值存在时，将优先渲染此图片。
+          * @example dark-src="assets/banner-dark.png"
+         */
         "darkSrc": string;
+        /**
+          * 图片的替代文本（alt 属性）。 用于无障碍访问及图片加载失败时的占位说明。
+          * @example image-title="用户头像"
+         */
         "imageTitle": string;
         "src": string;
     }
     /**
-     * @name Input
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-input placeholder="Enter your name"></zane-input>
+     * 自定义输入框组件 zane-input
+     * 实现功能：
+     * 1. 支持多种输入类型（文本、密码、邮箱等）及尺寸控制
+     * 2. 包含表单验证状态（错误/警告）及辅助文本展示
+     * 3. 提供前后插槽(start/end)扩展能力
+     * 4. 支持防抖事件处理与无障碍访问
+     * 5. 集成密码可见性切换功能
      */
     interface ZaneInput {
         /**
-          * Indicates whether the value of the control can be automatically completed by the browser.
+          * 自动填充控制 - `on`: 允许浏览器自动填充 - `off`: 禁用自动填充
           * @default 'off'
          */
         "autocomplete": 'off' | 'on';
         /**
+          * 动态ARIA属性配置对象 - 收集宿主元素上所有`aria-*`属性并转移到内部input元素 - 需通过mutable允许组件内修改
           * @default {}
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 输入内容变化事件(zane-input--change)的防抖延迟(ms)
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态 - 设置后阻止用户交互
+          * @attr 
           * @default false
          */
         "disabled": boolean;
+        /**
+          * 获取组件唯一ID
+          * @returns 组件全局唯一标识(gid)
+         */
         "getComponentId": () => Promise<string>;
+        /**
+          * 辅助说明文本 - 在非错误/警告状态下显示
+         */
         "helperText": string;
         /**
+          * 行内布局模式 - 设置后标签与输入框水平排列
+          * @attr 
           * @default false
          */
         "inline": boolean;
         /**
+          * 验证失败状态 - 激活时会显示invalidText并应用错误样式
           * @default false
          */
         "invalid": boolean;
+        /**
+          * 验证失败提示文本 - 当invalid=true时显示
+         */
         "invalidText": string;
+        /**
+          * 输入框标签文本 - 显示在输入区域上方
+         */
         "label": string;
         /**
-          * The input field name.
+          * 输入框名称 - 用于表单提交时识别字段 - 默认生成唯一ID: zane-input-{gid}
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
-          * The input field placeholder.
+          * 占位提示文本
          */
         "placeholder": string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 只读状态 - 允许查看但禁止修改内容
+          * @attr 
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填标识 - 显示红色星号(*)并触发浏览器原生验证
+          * @attr 
           * @default false
          */
         "required": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除输入框焦点 - 同时更新hasFocus状态
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 激活输入框焦点 - 同时更新hasFocus状态
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸控制 - `sm`: 小尺寸(高度32px) - `md`: 中尺寸(高度40px) - `lg`: 大尺寸(高度48px)
           * @default 'md'
+          * @attr
          */
         "size": 'lg' | 'md' | 'sm';
         /**
+          * 骨架屏模式 - 加载状态时显示灰色占位块
           * @default false
          */
         "skeleton": boolean;
         /**
-          * The type of control to display. Possible values are: `"text"`, `"password"`, `"email"`, `"tel"`. Defaults to `"text"`.
+          * 输入类型 - `text`: 普通文本 - `password`: 密码(带可见切换按钮) - `email`: 邮箱格式验证 - `tel`: 电话号码输入
           * @default 'text'
          */
         "type": 'email' | 'password' | 'tel' | 'text';
         /**
-          * The input field value.
+          * 输入框值 - 使用双向数据绑定
          */
         "value": string;
         /**
+          * 警告状态 - 非致命性错误提示，显示warnText
           * @default false
          */
         "warn": boolean;
+        /**
+          * 警告提示文本 - 当warn=true时显示
+         */
         "warnText": string;
     }
     /**
-     * @name Input URL
-     * @description A specialized input field for URL validation.
-     * @category Up coming
-     * @tags input, form, url
-     * @example <zane-input-url value="https://shivajivarma.com"></zane-input-url>
+     * 双模式URL输入组件
+     * @component zane-input-url
+     * @tags form-control, input, url
+     * @shadow true
+     * @description 提供URL输入与预览双模式交互的输入组件。在展示模式下显示可点击的URL链接，
+     * 在编辑模式下提供带验证功能的输入框。支持防抖值变化事件和实时URL验证。
+     * @example <!-- 基础用法 -->
+     * <zane-input-url
+     *   value="https://example.com"
+     *   placeholder="输入网站地址"
+     * />
+     * <!-- 带尺寸控制 -->
+     * <zane-input-url size="sm" />
      */
     interface ZaneInputUrl {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `valueChange` event after each keystroke.
+          * 值变化事件的防抖时间（毫秒）
+          * @type {number}
           * @default 300
+          * @description 控制`valueChange`事件触发前的延迟时间，用于优化频繁输入时的性能表现。 值越小响应越快，值越大可减少事件触发次数。
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the input. Defaults to `false`.
+          * 禁用状态
+          * @type {boolean}
           * @default false
+          * @reflect 
+          * @description 当设置为true时，组件进入禁用状态： - 输入框不可交互 - 视觉上呈现禁用样式 - 编辑按钮不可点击
          */
         "disabled": boolean;
         /**
+          * 编辑模式状态
+          * @type {boolean}
           * @default false
+          * @mutable 
+          * @reflect 
+          * @description 控制组件当前交互模式： - `false`: 展示模式（显示URL链接） - `true`: 编辑模式（显示输入框）  该属性支持双向绑定，组件内部状态变化时会自动更新。
          */
         "editing": boolean;
         /**
-          * Get the component's unique ID
+          * 获取组件唯一标识符
+          * @method 
+          * @returns 组件全局唯一ID
+          * @description 提供获取组件实例唯一标识符的公共方法。 可用于表单关联或组件间通信。
          */
         "getComponentId": () => Promise<string>;
         /**
-          * The input field name.
-          * @default `zane-input-url-${this.gid}`
+          * 输入框名称属性
+          * @type {string}
+          * @default `zane-input-url-${gid}`
+          * @description 对应原生input元素的`name`属性，用于表单提交。 默认自动生成格式为`zane-input-url-{唯一ID}`的值。
          */
         "name": string;
         /**
-          * The input field placeholder.
+          * 输入框占位文本
+          * @type {string}
+          * @description 编辑模式下输入框显示的提示文本。 当输入值为空时显示。
          */
         "placeholder": string;
         /**
-          * Sets blur on the native `input`. Use this method instead of the global `input.blur()`.
+          * 移除输入框焦点
+          * @method 
+          * @description 公共方法，以编程方式移除输入框焦点： 1. 调用原生input元素的blur() 2. 更新hasFocus状态
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input`. Use this method instead of the global `input.focus()`.
+          * 设置输入框焦点
+          * @method 
+          * @description 公共方法，以编程方式聚焦输入框： 1. 调用原生input元素的focus() 2. 更新hasFocus状态
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸规格
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflect 
+          * @description 控制组件的视觉尺寸，可选值： - `'sm'`: 小尺寸 (适用于紧凑界面) - `'md'`: 中尺寸 (默认标准尺寸) - `'lg'`: 大尺寸 (适用于强调场景)  该属性会反映到宿主元素的HTML属性上，可通过CSS属性选择器进行样式定制。
          */
         "size": 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 输入值
+          * @type {string}
+          * @mutable 
+          * @description 组件的当前URL值，支持双向绑定。 在展示模式下显示为可点击链接，在编辑模式下作为输入框的值。
          */
         "value": string;
     }
     /**
-     * @name Link
-     * @description Links allow users to click their way from page to page.
-     * @category Navigation
-     * @example <zane-link href="#">Link</zane-link>
+     * 智能链接组件
+     * @component zane-link
+     * @tags navigation, link, interactive
+     * @shadow true
+     * @description 增强型可交互链接组件，支持动态状态反馈和键盘导航优化。
+     * 特性包括：
+     * - 视觉状态反馈（聚焦/激活）
+     * - 空格键触发点击
+     * - 跨浏览器兼容的焦点管理
+     * - 无障碍属性支持
+     * @example <!-- 基础链接 -->
+     * <zane-link href="/about">关于我们</zane-link>
+     * <!-- 新窗口打开 -->
+     * <zane-link href="https://external.com"  target="_blank">
+     *   外部链接
+     * </zane-link>
      */
     interface ZaneLink {
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址
+          * @type {string}
+          * @reflect 
+          * @description 对应 HTML anchor 元素的 href 属性： - 支持绝对路径和相对路径 - 支持哈希锚点定位 - 空值时渲染为无跳转功能的伪链接
          */
         "href": string;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @type {string}
+          * @description 对应 HTML anchor 元素的 target 属性： - `_blank`: 新窗口/标签页打开 - `_self`: 当前窗口打开（默认） - `_parent` / `_top`: 框架控制
          */
         "target": string;
+        /**
+          * 触发链接点击
+          * @method 
+          * @async 
+          * @description 通过编程方式触发链接的点击行为： - 模拟用户点击效果 - 保持与原生事件的一致性 - 适用于自动化测试场景
+         */
         "triggerClick": () => Promise<void>;
     }
     /**
-     * @name Menu
-     * @description Menus display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @img /assets/img/menu.webp
-     * @imgDark /assets/img/menu-dark.webp
+     * 多功能菜单容器组件
+     * @component zane-menu
+     * @tags navigation, menu, container
+     * @shadow true
+     * @description 提供标准化的菜单容器实现，支持：
+     * - 多种视觉尺寸层级
+     * - 键盘导航支持
+     * - 空状态展示
+     * - 动态焦点管理
+     * @example <!-- 基础菜单 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 空状态菜单 -->
+     * <zane-menu empty empty-state-headline="无数据" empty-state-description="请添加菜单项">
+     * </zane-menu>
      */
     interface ZaneMenu {
         /**
+          * 空状态标识
+          * @type {boolean}
+          * @mutable 
           * @default false
+          * @description 控制是否显示空状态界面： - `true`: 显示空状态组件 - `false`: 渲染常规菜单项 当设置为true时，将忽略slot内容
          */
         "empty": boolean;
         /**
+          * 空状态描述文本
+          * @type {string}
+          * @mutable 
           * @default 'There are no items to display'
+          * @description 空状态界面中的辅助说明文字 支持HTML转义字符和多语言配置
          */
         "emptyStateDescription": string;
         /**
+          * 空状态标题文本
+          * @type {string}
+          * @mutable 
           * @default 'No items'
+          * @description 空状态界面中的主标题文字 通常使用简短有力的提示语
          */
         "emptyStateHeadline": string;
+        /**
+          * UI层级样式
+          * @type {'01' | '02' | 'background'}
+          * @reflect 
+          * @description 控制菜单的视觉层级深度： - `01`: 表层菜单 (默认层级，高度为1dp) - `02`: 中层菜单 (高度为2dp，更明显的阴影) - `background`: 背景层菜单 (无阴影，用于嵌套场景) 对应不同的box-shadow和z-index值
+         */
         "layer"?: '01' | '02' | 'background';
         /**
-          * Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+          * 设置初始焦点
+          * @method 
+          * @async 
+          * @description 公共API方法： - 自动聚焦首个菜单项 - 用于页面加载后的自动聚焦 - 配合屏幕阅读器实现无障碍访问
          */
         "setFocus": () => Promise<void>;
         /**
+          * 加载状态标识
+          * @type {boolean}
           * @default false
+          * @description 控制是否显示加载指示器： - `true`: 显示加载动画 - `false`: 正常显示内容 实际实现需在模板中添加加载器组件
          */
         "showLoader": boolean;
         /**
-          * The menu item size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 菜单尺寸
+          * @type {'lg' | 'md' | 'sm'}
+          * @reflect 
           * @default 'md'
+          * @description 控制菜单项尺寸和间距： - `sm`: 紧凑模式 (高度32px，字号12px) - `md`: 标准模式 (高度40px，字号14px) - `lg`: 大尺寸模式 (高度48px，字号16px) 影响内边距和行高
          */
         "size": 'lg' | 'md' | 'sm';
+        /**
+          * 当前选中值
+          * @type {number | string}
+          * @description 记录当前选中的菜单项值 应与子组件 zane-menu-item 的 value 属性联动 用于实现受控菜单组件
+         */
         "value"?: number | string;
     }
     /**
-     * @name MenuDivider
-     * @description A divider to separate menu items.
-     * @category Layout
-     * @subcategory Menu
-     * @childComponents true
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 菜单分隔线组件
+     * @component zane-menu-divider
+     * @shadow true
+     * @description 提供菜单项之间的视觉分隔效果，用于增强菜单结构的可读性。该组件：
+     * - 实现菜单项分组逻辑分隔
+     * - 支持深浅主题色自动适配
+     * - 提供标准化的间距和高度
+     * @example <!-- 基础用法 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider> <!-- 分隔线 -->
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 分组场景 -->
+     * <zane-menu>
+     *   <zane-menu-item>操作类</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider>
+     *   <zane-menu-item>设置类</zane-menu-item>
+     * </zane-menu>
      */
     interface ZaneMenuDivider {
     }
     /**
-     * @name Menu Item
-     * @description Menu items display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @childComponent true
+     * 菜单项组件 (zane-menu-item)
+     * @component zane-menu-item
+     * @shadow true
+     * @description 实现标准导航菜单项的核心组件，提供：
+     * - 多状态交互（正常/选中/禁用/聚焦）
+     * - 8种语义化色彩主题
+     * - 可选中标记功能（带对勾图标）
+     * - 原生链接支持（href/target）
+     * - 键盘导航支持（空格/回车触发）
+     * - 无障碍ARIA兼容设计
+     * @example <!-- 基础文本菜单项 -->
+     * <zane-menu-item>个人中心</zane-menu-item>
+     * <!-- 带图标和选中状态的菜单项 -->
+     * <zane-menu-item selected selectable>
+     *   收件箱
+     *   <zane-badge slot="end">12</zane-badge>
+     * </zane-menu-item>
+     * <!-- 作为链接的菜单项 -->
+     * <zane-menu-item
+     *   href="/settings"
+     *   color="primary"
+     *   target="_blank">
+     *   系统设置
+     * </zane-menu-item>
+     * @designSystem | 状态         | 视觉特征                     |
+     * |--------------|----------------------------|
+     * | 正常         | 浅灰背景，深灰文字          |
+     * | 悬停         | 浅蓝色背景（#f0f7ff）       |
+     * | 聚焦         | 2px蓝色边框（#1a73e8）      |
+     * | 选中         | 左侧蓝色条+对勾图标         |
+     * | 禁用         | 50%透明度，阻止交互事件     |
      */
     interface ZaneMenuItem {
         /**
+          * 菜单项色彩主题
+          * @prop {string} color - 预定义色彩方案，默认'default'
+          * @options - 'black'：深黑商务风 - 'danger'：错误操作（红） - 'default'：中性灰（默认） - 'primary'：品牌主色（蓝） - 'secondary'：辅助色（紫） - 'success'：成功状态（绿） - 'warning'：警示操作（黄） - 'white'：浅色模式专用
           * @default 'default'
          */
         "color": | 'black'
@@ -1078,83 +1644,172 @@ export namespace Components {
     | 'warning'
     | 'white';
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态开关
+          * @prop {boolean} disabled - 禁用交互并降低透明度（默认false）
+          * @designNote 禁用时阻止所有点击/键盘事件传递
           * @default false
          */
         "disabled": boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址
+          * @prop {string} href - 设置后组件渲染为<a>元素（默认undefined）
+          * @behavior 点击时自动执行 window.open(href,  target)
          */
         "href": string;
+        /**
+          * 视觉层级
+          * @prop {string} layer - 背景透明度层级（默认继承父菜单）
+          * @options '01'|'02'|'background'
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 可选状态开关
+          * @prop {boolean} selectable - 启用选中标记功能（默认false）
+          * @visualEffect 激活时显示左侧选中条和对勾图标
           * @default false
          */
         "selectable": boolean;
         /**
-          * Menu item selection state.
+          * 选中状态
+          * @prop {boolean} selected - 标记为选中项（需selectable=true）
+          * @renderCondition 当selectable=true时显示选中状态视觉
           * @default false
          */
         "selected": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除焦点方法
+          * @method setBlur
+          * @public 
+          * @description 通过编程方式使菜单项失去焦点
+          * @usage 常用于菜单关闭时清除焦点状态
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 获取焦点方法
+          * @method setFocus
+          * @public 
+          * @description 通过编程方式聚焦菜单项
+          * @usage 常用于键盘导航时移动焦点
          */
         "setFocus": () => Promise<void>;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @prop {string} target - 同<a>标签target属性（默认'_self'）
           * @default '_self'
          */
         "target": string;
         /**
-          * The menu item value.
+          * 菜单项值
+          * @prop {string|number} value - 事件传递的标识值（默认innerText）
+          * @emitChange 点击事件中作为payload.value 传递
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Modal
-     * @description Modals are used to display content in a layer above the app.
-     * @category Informational
-     * @subcategory Modal
-     * @tags controls
-     * @img /assets/img/modal.webp
-     * @imgDark /assets/img/modal-dark.webp
+     * 模态框组件 (zane-modal)
+     * @component zane-modal
+     * @shadow true
+     * @description 提供企业级应用的模态对话框解决方案，支持：
+     * - 多种预设尺寸响应式布局
+     * - 灵活的内容插槽（头部/主体/底部）
+     * - 加载状态可视化
+     * - 可控关闭行为（自动关闭/受控关闭）
+     * - 无障碍访问支持
+     * - 滚动条自动管理
+     * @example <!-- 基础用法 -->
+     * <zane-modal
+     *   heading="确认操作"
+     *   open={true}>
+     *   <p>确定要删除此项吗？</p>
+     *   <div slot="footer">
+     *     <zane-button>取消</zane-button>
+     *     <zane-button variant="primary">确定</zane-button>
+     *   </div>
+     * </zane-modal>
+     * <!-- 带加载状态的模态框 -->
+     * <zane-modal
+     *   heading="数据处理中"
+     *   open={true}
+     *   showLoader={true}>
+     *   <p>请稍候，正在保存您的数据...</p>
+     * </zane-modal>
      */
     interface ZaneModal {
+        /**
+          * 模态框主标题
+          * @prop {string} heading - 显示在顶部的标题文本
+          * @visualEffect 使用 heading 样式（字号1.25rem/粗体）
+         */
         "heading": string;
         /**
+          * 隐藏关闭按钮
+          * @prop {boolean} hideClose - 是否隐藏右上角关闭按钮（默认false）
           * @default false
          */
         "hideClose": boolean;
         /**
-          * Specify whether the Modal is managed by the parent component
+          * 受控模式开关
+          * @prop {boolean} managed - 是否由外部状态控制关闭行为（默认false）
+          * @behavior - false（默认）：组件内部管理 open 状态（点击关闭按钮自动关闭） - true：需外部监听 zane-modal--close 事件并手动更新 open 状态
+          * @usageNote 在复杂状态管理场景中使用（如React/Vue集成）
           * @default false
          */
         "managed": boolean;
         /**
-          * Specify whether the Modal is currently open
+          * 模态框开启状态
+          * @prop {boolean} open - 控制模态框显示/隐藏（默认false）
+          * @important 核心显示控制属性
+          * @effect 开启时自动禁用页面滚动（关闭时恢复）
           * @default false
          */
         "open": boolean;
         /**
+          * 加载状态显示
+          * @prop {boolean} showLoader - 是否显示加载指示器（默认false）
+          * @visualEffect - 半透明遮罩层覆盖内容区 - 居中显示旋转加载图标
+          * @usageNote 适合异步操作期间禁用交互
           * @default false
          */
         "showLoader": boolean;
         /**
+          * 模态框尺寸方案
+          * @prop {'lg' | 'md' | 'sm'} size - 预设响应式尺寸（默认'md'）
+          * @options - 'sm'：小尺寸 - 'md'：中尺寸- 默认值 - 'lg'：大尺寸
+          * @responsive 自动适配移动端（小屏下占满宽度）
           * @default 'md'
          */
         "size": 'lg' | 'md' | 'sm';
+        /**
+          * 副标题文本
+          * @prop {string} subheading - 显示在主标题下方的辅助文本
+          * @visualEffect 次级文本样式（字号0.875rem/灰色）
+         */
         "subheading": string;
     }
     /**
-     * @name Modal Content
-     * @description The Modal Content component is used to display the content within a modal.
-     * @category Informational
-     * @subcategory Modal
-     * @childComponent true
+     * 模态框内容容器组件 (zane-modal-content)
+     * @component zane-modal-content
+     * @shadow true
+     * @description 专为 zane-modal 设计的结构化内容容器，提供三种预设内容样式方案，
+     * 支持动态切换内容展示模式。作为模态框生态系统的核心子组件，实现：
+     * - 内容区域样式规范化
+     * - 自适应内容布局
+     * - 多场景内容样式预设
+     * - 无缝衔接父级模态框的交互状态
+     * @see {@link zane-modal } 关联的父级模态框组件
+     * @example <!-- 默认带边框样式 -->
+     * <zane-modal-content>
+     *   <p>标准内容区块</p>
+     * </zane-modal-content>
+     * <!-- 无边框模式 -->
+     * <zane-modal-content type="borderless">
+     *   <img src="data-chart.png"  alt="数据图表"/>
+     * </zane-modal-content>
+     * <!-- 文本优化模式 -->
+     * <zane-modal-content type="text">
+     *   <h3>服务条款</h3>
+     *   <p>这里是详细的协议文本内容...</p>
+     * </zane-modal-content>
      */
     interface ZaneModalContent {
         /**
@@ -1163,59 +1818,104 @@ export namespace Components {
         "type": 'borderless' | 'default' | 'text';
     }
     /**
-     * @name Notification
-     * @description Notifications are messages that communicate information to the user.
-     * @category Informational
-     * @tags notification
-     * @example <zane-notification state="success">
-     *      <div slot='title'>Successful saved the record</div>
-     *    </zane-notification>
+     * 智能通知系统组件 (zane-notification)
+     * @component zane-notification
+     * @shadow true
+     * @description 提供多场景智能通知解决方案，支持四态反馈、操作交互和主题适配。
+     * 核心功能包括：
+     * - 状态图标自动匹配
+     * - 暗黑模式/高对比度自适应
+     * - 内联/块级布局切换
+     * - 可定制的操作按钮
+     * - 可控的关闭行为
+     * - 无障碍访问支持
+     * @example <!-- 基础警告通知 -->
+     * <zane-notification state="warning" dismissible>
+     *   <span slot="title">存储空间不足</span>
+     *   <span slot="subtitle">剩余 5% 磁盘空间，建议清理缓存</span>
+     * </zane-notification>
+     * <!-- 带操作的成功通知 -->
+     * <zane-notification state="success" action="查看详情" high-contrast>
+     *   <span slot="title">支付成功</span>
+     *   <span slot="subtitle">订单号：20250719-2156</span>
+     * </zane-notification>
      */
     interface ZaneNotification {
         /**
-          * Action to be displayed on the notification
+          * 操作按钮文本
+          * @prop {string} [action] - 显示在通知右侧的操作按钮文字
+          * @example <zane-notification action="撤销操作">...</zane-notification>
          */
         "action": string;
         /**
-          * Whether the notification is dismissible
+          * 可关闭特性
+          * @prop {boolean} [dismissible=false] - 是否显示关闭按钮
+          * @example <zane-notification dismissible>...</zane-notification>
           * @default false
          */
         "dismissible": boolean;
         /**
-          * Whether to use high contrast mode
+          * 高对比度模式
+          * @prop {boolean} [highContrast=false] - 启用高对比度视觉方案 - 设计规范：符合WCAG 2.1 AA标准 - 亮色模式：深色文字+加粗边框 - 暗色模式：反转配色方案
+          * @example <zane-notification high-contrast>...</zane-notification>
           * @default false
          */
         "highContrast": boolean;
         /**
-          * Whether the notification should be displayed inline
+          * 内联布局模式
+          * @prop {boolean} [inline=false] - 切换为行内样式布局 - 特征： - 移除背景色和边框 - 状态图标与文本对齐 - 操作按钮变为幽灵样式 - 适用场景：表单内联校验提示
+          * @example <p>请输入验证码 <zane-notification inline state="error">验证码失效</zane-notification></p>
           * @default false
          */
         "inline": boolean;
         /**
-          * Whether the notification is managed by the notification manager
+          * 托管关闭模式
+          * @prop {boolean} [managed=false] - 关闭行为是否由外部控制 - 当设为true时： - 点击关闭按钮不会隐藏组件 - 必须监听 zane-notification--dismiss 事件手动处理 - 适用场景：通知队列管理/动画关闭
+          * @example <zane-notification managed dismissible>...</zane-notification>  <script>   notification.addEventListener('zane-notification--dismiss',  () => {     // 执行动画后移除DOM   }) </script>
           * @default false
          */
         "managed": boolean;
         /**
-          * The state of the notification. Possible values are: 'success', 'error', 'info', 'warning'
+          * 通知状态类型
+          * @prop {'error'|'info'|'success'|'warning'} [state='info'] - 定义通知的语义化状态
+          * @option error - 错误状态（红色系） - 图标：❌ 错误图标 - 场景：系统故障/操作失败 - 样式特征： - 背景色：#fee2e2 (浅红) - 边框色：#dc2626 (暗红)
+          * @option info - 信息状态（蓝色系） - 图标：ℹ️ 信息图标 - 场景：系统通知/进程提示 - 样式特征： - 背景色：#dbeafe (浅蓝) - 边框色：#2563eb (深蓝)
+          * @option success - 成功状态（绿色系） - 图标：✅ 对勾图标 - 场景：操作成功/流程完成 - 样式特征： - 背景色：#dcfce7 (浅绿) - 边框色：#16a34a (深绿)
+          * @option warning - 警告状态（橙色系） - 图标：⚠️ 感叹号图标 - 场景：风险提示/操作确认 - 样式特征： - 背景色：#ffedd5 (浅橙) - 边框色：#ea580c (深橙)
           * @default 'info'
          */
         "state": 'error' | 'info' | 'success' | 'warning';
     }
     /**
-     * @name Notification Manager
-     * @description The Notification Manager handles the organization and display of notifications within the application.
-     * @category Informational
-     * @tags notification
-     * @img /assets/img/notification-manager.webp
-     * @imgDark /assets/img/notification-manager-dark.webp
+     * 智能通知管理系统组件 (zane-notification-manager)
+     * @component zane-notification-manager
+     * @shadow true
+     * @description 全局通知管理中心，提供以下核心能力：
+     * 1. 跨组件通知聚合：通过事件总线收集全应用通知
+     * 2. 多位置布局：支持4种屏幕定位策略
+     * 3. 生命周期管理：自动关闭/手动关闭/防重复
+     * 4. 安全渲染：内置DOM净化防止XSS攻击
+     * 5. 主题适配：自动同步暗黑模式状态
+     * @example <!-- 基础用法 -->
+     * <zane-notification-manager position="top-right"></zane-notification-manager>
+     * <!-- 自定义命名管理器 -->
+     * <zane-notification-manager name="dashboard" position="bottom-left"></zane-notification-manager>
      */
     interface ZaneNotificationManager {
         /**
+          * 管理器命名空间
+          * @prop {string} [name='global'] - 管理器唯一标识 - `global`：默认全局管理器，接收未指定目标的通告 - 自定义名：只接收相同target参数的通告
+          * @example // 发送到指定管理器 const event = new CustomEvent('zane-notification', {   detail: { target: 'dashboard', title: '数据更新完成' } }); window.dispatchEvent(event);
           * @default 'global'
          */
         "name": string;
         /**
+          * 通知定位策略
+          * @prop {'top-left'|'top-right'|'bottom-left'|'bottom-right'} [position='bottom-right'] - 通知容器屏幕位置
+          * @option top-left - 左上角定位 - 适用场景：重要实时状态更新（如系统监控） - 设计规范：距顶部20px，距左侧20px
+          * @option top-right - 右上角定位（默认） - 适用场景：通用信息提示（如操作反馈） - 设计规范：距顶部20px，距右侧20px
+          * @option bottom-left - 左下角定位 - 适用场景：后台任务通知（如文件下载） - 设计规范：距底部20px，距左侧20px
+          * @option bottom-right - 右下角定位 - 适用场景：非紧急通知（如新闻推送） - 设计规范：距底部20px，距右侧20px
           * @default 'bottom-right'
          */
         "position": | 'bottom-left'
@@ -1224,15 +1924,19 @@ export namespace Components {
     | 'top-right';
     }
     /**
-     * @name Number
-     * @description Number input lets users enter a numeric value and incrementally increase or decrease the value with a two-segment control.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-number value="100"></zane-input>
+     * 数字输入框组件 zane-number
+     * 核心功能：
+     * 1. 支持数字输入及增减按钮控制
+     * 2. 提供四种状态反馈（默认/成功/警告/错误）
+     * 3. 表单验证支持（必填/禁用/只读）
+     * 4. 防抖事件处理与无障碍访问优化
+     * 5. 插槽扩展能力（前后扩展区域）
+     * @implements ComponentInterface *
+     * @implements InputComponentInterface *
      */
     interface ZaneNumber {
         /**
-          * Indicates whether the value of the control can be automatically completed by the browser.
+          * 自动填充控制 - `on`: 允许浏览器自动填充 - `off`: 禁用自动填充
           * @default 'off'
          */
         "autocomplete": 'off' | 'on';
@@ -1241,18 +1945,23 @@ export namespace Components {
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 防抖延迟(ms) - 控制 zane-number--change 事件触发频率
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "disabled": boolean;
+        /**
+          * 获取组件全局唯一标识
+          * @returns 组件ID
+         */
         "getComponentId": () => Promise<string>;
         "helperText": string;
         /**
+          * 操作按钮可见性控制  - true: 隐藏增减按钮  - false: 显示（默认）
+          * @attr 
           * @default false
          */
         "hideActions": boolean;
@@ -1267,34 +1976,23 @@ export namespace Components {
         "invalidText": string;
         "label": string;
         /**
-          * The input field name.
           * @default `zane-input-${this.gid}`
          */
         "name": string;
-        /**
-          * The input field placeholder.
-         */
         "placeholder": string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
           * @default false
          */
         "required": boolean;
-        /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
-         */
         "setBlur": () => Promise<void>;
-        /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
-         */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸规格 - `sm`: 小尺寸(高度约32px) - `md`: 中尺寸(高度约40px) - `lg`: 大尺寸(高度约48px)
+          * @attr 
           * @default 'md'
          */
         "size": 'lg' | 'md' | 'sm';
@@ -1303,12 +2001,14 @@ export namespace Components {
          */
         "skeleton": boolean;
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 组件状态标识 - `default`: 默认状态（无特殊样式） - `success`: 成功状态（通常用绿色标识） - `warning`: 警告状态（通常用橙色标识） - `error`: 错误状态（通常用红色标识）
+          * @attr 
           * @default 'default'
          */
         "state": 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
+          * 输入值（数字类型） - 支持 null 表示空值 - 使用 mutable 实现双向绑定
+          * @example <zane-number value={5} />
           * @default null
          */
         "value"?: null | number;
@@ -1319,122 +2019,194 @@ export namespace Components {
         "warnText": string;
     }
     /**
-     * @name Popover
-     * @description The Popover component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 弹出框组件（Popover）
+     * @component zane-popover
+     * @shadow true
+     * @description `zane-popover` 是一个灵活的弹出框组件，可以在目标元素周围显示内容。它支持多种触发方式（点击、悬停、手动控制）、多种箭头样式以及自定义位置。
+     * 使用此组件时，需要在组件内部放置一个 `zane-popover-content` 组件作为弹出内容，以及一个触发元素（例如按钮）。
+     * @example <zane-popover trigger="click">
+     *   <button>点击我</button>
+     *   <zane-popover-content>
+     *     这里是弹出内容
+     *   </zane-popover-content>
+     * </zane-popover>
      */
     interface ZanePopover {
         /**
-          * Time in milliseconds to wait before hiding the popover when the trigger is set to `"hover"`.
+          * 弹出框关闭的动画时间（毫秒）
+          * @prop {number} [dismissTimeout=300]
           * @default 300
          */
         "dismissTimeout": number;
         /**
-          * Hides the popover. This method is useful when the trigger is set to `"manual"`.
+          * 隐藏弹出框的公共方法
+          * @method hide
+          * @async
          */
         "hide": () => Promise<void>;
         /**
-          * The offset of the popover relative to the trigger element. This value is used to adjust the position of the popover along the axis of the trigger element.
+          * 弹出框与目标元素之间的偏移量（像素）
+          * @prop {number} [offset=4]
           * @default 4
          */
         "offset": number;
         /**
-          * Determines whether the popover is open.
+          * 控制弹出框的打开状态
+          * @prop {boolean} [open=false]
+          * @mutable 
+          * @reflect 
           * @default false
          */
         "open": boolean;
         /**
-          * Time in milliseconds to wait before showing the popover when the trigger is set to `"hover"`.
+          * 弹出框打开的动画时间（毫秒）
+          * @prop {number} [openTimeout=200]
           * @default 200
          */
         "openTimeout": number;
         /**
-          * The placement of the popover relative to the trigger element. Possible values are: - `"top"`: The popover is placed above the trigger element. - `"top-start"`: The popover is placed above the trigger element, aligned to the start. - `"top-end"`: The popover is placed above the trigger element, aligned to the end. - `"right"`: The popover is placed to the right of the trigger element. - `"right-start"`: The popover is placed to the right of the trigger element, aligned to the start. - `"right-end"`: The popover is placed to the right of the trigger element, aligned to the end. - `"bottom"`: The popover is placed below the trigger element. - `"bottom-start"`: The popover is placed below the trigger element, aligned to the start. - `"bottom-end"`: The popover is placed below the trigger element, aligned to the end. - `"left"`: The popover is placed to the left of the trigger element. - `"left-start"`: The popover is placed to the left of the trigger element, aligned to the start. - `"left-end"`: The popover is placed to the left of the trigger element, aligned to the end.
+          * 弹出框的位置偏好设置，使用逗号分隔的字符串，例如："top,bottom"  当 `tip` 属性为 'tab' 时，默认设置为 'bottom-end,bottom-start,top-end,top-start'
+          * @prop {string} [placements]
+          * @mutable
          */
         "placements": string;
         /**
-          * Shows the popover. This method is particularly useful when the trigger mode is set to `"manual"`. It allows for programmatic control over the visibility of the popover, making it visible regardless of the trigger mode. Optionally, a target HTMLElement can be provided to dynamically set the trigger element for the popover.
+          * 显示弹出框的公共方法
+          * @method show
+          * @async 
+          * @param target - 可选的触发元素。如果提供，将使用此元素作为触发元素。
          */
         "show": (target?: HTMLElement) => Promise<void>;
         /**
-          * The tip of the popover. Possible values are: - `"caret"`: A triangle tip. - `"tab"`: A tab tip. - `"none"`: No tip.
+          * 弹出框的箭头样式
+          * @prop {'caret' | 'none' | 'tab'} [tip='caret']  - 'caret': 使用一个三角形的箭头（默认）。 - 'none': 没有箭头。 - 'tab': 使用一个类似标签页的箭头，通常用于下拉菜单。
           * @default 'caret'
+          * @reflect
          */
         "tip": 'caret' | 'none' | 'tab';
         /**
-          * Determines how the popover is triggered. Possible values are: - `"click"`: The popover is shown or hidden when the trigger element is clicked. - `"hover"`: The popover is shown when the mouse hovers over the trigger element and hidden when it leaves. - `"manual"`: The visibility of the popover must be manually controlled through the `open` property.
+          * 触发弹出框的方式
+          * @prop {'click' | 'hover' | 'manual'} [trigger='hover']  - 'click': 点击触发元素时打开/关闭弹出框。 - 'hover': 鼠标悬停在触发元素上时打开，移开时关闭。 - 'manual': 手动控制，通过调用组件的 `show()` 和 `hide()` 方法控制。
           * @default 'hover'
          */
         "trigger": 'click' | 'hover' | 'manual';
     }
     /**
-     * @name Popover Content
-     * @description The PopoverContent component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @childComponent true
+     * 弹出框内容容器组件 (zane-popover-content)
+     * @component zane-popover-content
+     * @shadow true
+     * @description 弹出框系统的核心内容承载容器，提供以下核心功能：
+     * 1. 结构化内容容器：为弹出内容提供标准化的布局结构
+     * 2. 动态箭头指示器：根据父组件配置自动调整箭头样式和位置
+     * 3. 无障碍支持：内置ARIA角色属性增强可访问性
+     * 4. 主题适配：通过CSS变量支持深度主题定制
+     * @dependency 必须作为`<zane-popover>`组件的直接子元素使用
+     * @example <!-- 基础用法 -->
+     * <zane-popover-content>
+     *   <h3>标题</h3>
+     *   <p>详细说明内容...</p>
+     *   <button>确认</button>
+     * </zane-popover-content>
+     * <!-- 带样式定制 -->
+     * <zane-popover-content style="--background: #2c3e50; --color: white">
+     *   ...
+     * </zane-popover-content>
      */
     interface ZanePopoverContent {
     }
     /**
-     * @name Progress
-     * @description Progress indicators express an unspecified wait time or display the length of a process.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-progress value="40" label="Progress" width="100%" helper-text="Optional helper text goes here..."></zane-progress>
+     * 动态进度指示器组件 (zane-progress)
+     * @component zane-progress
+     * @shadow true
+     * @description 提供可视化任务进程的进度指示器，支持多种状态显示和尺寸配置。适用于文件上传、数据加载、操作流程等场景。
+     * @example <!-- 基础用法 -->
+     * <zane-progress value={75}></zane-progress>
+     * <!-- 带标签和状态 -->
+     * <zane-progress
+     *   value={50}
+     *   label="上传进度"
+     *   status="active"
+     *   helperText="剩余时间：2分钟"
+     * ></zane-progress>
+     * <!-- 错误状态 -->
+     * <zane-progress
+     *   value={30}
+     *   status="error"
+     *   helperText="上传失败，请重试"
+     * ></zane-progress>
      */
     interface ZaneProgress {
+        /**
+          * 辅助说明文本
+          * @designNote - 显示在进度条下方的补充信息 - 可用于展示剩余时间、错误详情等动态内容 - 建议不超过40字符
+          * @example "剩余时间：2分钟" | "上传失败：网络断开"
+         */
         "helperText": string;
         /**
+          * 是否隐藏标签区域
           * @default false
+          * @designNote - 设为 true 时隐藏顶部标签区域（包括标签和状态图标） - 适用于空间受限场景（如移动端小部件） - 与 `label` 属性联动：当 hideLabel=true 时 label 自动失效
          */
         "hideLabel": boolean;
         /**
-          * A label describing the progress bar.
+          * 进度标签文本
+          * @designNote - 显示在进度条顶部的标题文本 - 建议使用简洁的动词短语（如："文件上传"、"数据处理"） - 国际化支持：可通过 slot 机制实现多语言
+          * @example "安装进度" | "资源加载"
          */
         "label": string;
         /**
-          * Possible values are: `"sm"` and `"md"` in pixel. Defaults to `"md"`.
+          * 组件尺寸模式
           * @default 'md'
+          * @designNote 可选值及其应用场景： | **值** | **尺寸** | **适用场景**            | |---------|----------|------------------------| | 'md'    | 中等尺寸 | 标准页面内容区（默认）  | | 'sm'    | 小型尺寸 | 表格内嵌/工具栏紧凑布局 |  尺寸规范： | **尺寸** | 高度 | 字体大小 | 圆角半径 | |-----------|------|----------|----------| | md        | 24px | 14px     | 12px     | | sm        | 16px | 12px     | 8px      |
          */
         "size": 'md' | 'sm';
         /**
+          * 进度状态类型
           * @default 'active'
+          * @designNote 状态机逻辑： | **状态值** | **视觉表现**                     | **使用场景**               | |-------------|----------------------------------|----------------------------| | 'active'    | 蓝色动态条纹（默认）             | 进行中的任务               | | 'success'   | 绿色+成功图标（✔️）              | 已完成的任务               | | 'error'     | 红色+错误图标（❌）              | 失败/中断的任务            |  状态交互规则： 1. 当 value=100 时自动切换为 'success'（优先级高于手动设置） 2. 'error' 状态必须手动触发（如网络异常）
          */
         "status": 'active' | 'error' | 'success';
         /**
+          * 当前进度值
           * @default null
+          * @designNote - 范围：0-100（百分比值） - 特殊值 null：显示不定长动画（indeterminate 模式） - 边界处理：   - <0 自动修正为0   - >100 自动修正为100 - 动画效果：进度变化时带300ms缓动过渡
          */
         "value": number;
     }
     /**
-     * @name Select
-     * @description Allows the user to select one or more options using a dropdown.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/select.webp
-     * @imgDark /assets/img/select-dark.webp
+     * 基于 Floating UI 的增强型下拉选择组件
+     * @component 
+     * @tag zane-select
+     * @implements ComponentInterface , InputComponentInterface}
+     * @example <!-- 基础用法 -->
+     * <zane-select
+     *   items={[{label: '选项1', value: 1}]}
+     *   placeholder="请选择"
+     *   size="md"
+     * />
      */
     interface ZaneSelect {
         /**
-          * If `true`, a clear icon will appear in the input when there is a value. Clicking it clears the input.
+          * 是否显示清除按钮
+          * @type {boolean}
           * @default false
          */
         "clearable": boolean;
         /**
+          * ARIA属性配置对象
+          * @type {Object}
+          * @mutable 
+          * @example configAria={{ 'aria-labelledby': 'custom-label' }}  支持动态配置以下属性： - aria-label：定义组件的语义标签 - aria-labelledby：关联可见标签元素 - aria-describedby：关联描述元素
           * @default {}
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 搜索输入防抖时间（毫秒）
+          * @type {number}
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "disabled": boolean;
@@ -1454,7 +2226,6 @@ export namespace Components {
         "invalid": boolean;
         "invalidText": string;
         /**
-          * [{   label: 'Zane Deng',   value: 'zane-deng',   icon: 'person' }]
           * @default []
          */
         "items": {
@@ -1463,13 +2234,17 @@ export namespace Components {
     value: number | string;
   }[];
         "label": string;
+        /**
+          * 视觉层级配置
+          * @type {'01' | '02' | 'background'}
+          * @example layer="02" // 使用第二层级的阴影和背景  层级说明： - 01：基础层级（默认），适用于常规布局 - 02：更高层级，适合悬浮卡片效果 - background：背景层级，适合非交互元素
+         */
         "layer"?: '01' | '02' | 'background';
         /**
           * @default false
          */
         "multiple": boolean;
         /**
-          * The input field name.
           * @default `zane-input-${this.gid}`
          */
         "name": string;
@@ -1478,53 +2253,50 @@ export namespace Components {
          */
         "open": boolean;
         "openSelectList": () => Promise<void>;
-        /**
-          * The input field placeholder.
-         */
         "placeholder": string;
         /**
+          * 下拉菜单定位策略配置
+          * @type {string}
           * @default 'bottom-start,top-start,bottom-end,top-end'
+          * @example placements="top,right-start" // 优先尝试顶部对齐，次选右侧对齐  格式说明： - 使用逗号分隔的定位字符串 - 每个定位字符串格式为[方向]-[对齐方式] - 方向选项：top | right | bottom | left - 对齐方式：start | end
          */
         "placements": string;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
           * @default false
          */
         "required": boolean;
         /**
-          * Search type Possible values are `"none"`, `"initial"`, `"contains"`, `"managed"`. Defaults to `"none"`.
+          * 搜索模式配置
+          * @type {'contains' | 'initial' | 'managed' | 'none'}
           * @default 'none'
+          * @example search="contains" // 实时子字符串匹配  模式说明： - none：禁用搜索功能 - contains：根据输入内容进行子字符串匹配过滤 - initial：仅在打开菜单时执行初始过滤 - managed：由父组件完全控制搜索逻辑
          */
         "search": 'contains' | 'initial' | 'managed' | 'none';
-        /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
-         */
         "setBlur": () => Promise<void>;
-        /**
-          * Sets focus on the native `input` in `ion-input`. Use this method instead of the global `input.focus()`.t
-         */
         "setFocus": () => Promise<void>;
         /**
           * @default false
          */
         "showLoader": boolean;
         /**
-          * The select input size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸选项
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @example size="sm" // 小尺寸样式  具体尺寸对应关系： - sm：高度32px，适合紧凑布局 - md：高度40px，标准尺寸 - lg：高度48px，强调视觉重点
          */
         "size": 'lg' | 'md' | 'sm';
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 组件状态标识
+          * @type {'default' | 'error' | 'success' | 'warning'}
           * @default 'default'
+          * @example state="error" // 显示错误状态样式  状态说明： - default：常规状态 - error：输入验证失败 - success：输入验证通过 - warning：存在潜在问题
          */
         "state": 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
           * @default ''
          */
         "value"?: number | string;
@@ -1535,319 +2307,546 @@ export namespace Components {
         "warnText": string;
     }
     /**
-     * @name1 Side Navigation
-     * @description1 The side navigation component provides an easy way to navigate through your website / application.
-     * @img1 /assets/img/sidenav.webp
+     * 侧边导航栏组件，提供页面侧边导航功能
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneSidenav {
         /**
+          * 是否显示加载指示器
+          * @Prop 可从外部设置的属性
           * @default false
          */
         "showLoader": boolean;
     }
+    /**
+     * 侧边导航菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneSidenavMenu {
         /**
+          * 是否显示空状态
+          * @type {boolean}
           * @default false
+          * @mutable 可变的
          */
         "empty": boolean;
         /**
-          * @default `{     "headline": "No items",     "description": "There are no items to display"   }`
+          * 空状态配置(JSON字符串格式)
+          * @type {string}
+          * @default '{"headline": "No items", "description": "There are no items to display"}'
+          * @mutable 可变的
          */
         "emptyState": any;
         /**
-          * Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+          * 公开方法：设置焦点到第一个菜单项
+          * @Method 装饰器定义公共API方法
+          * @returns
          */
         "setFocus": () => Promise<void>;
         /**
+          * 是否显示加载指示器
+          * @type {boolean}
           * @default false
          */
         "showLoader": boolean;
+        /**
+          * 组件值，可以是数字或字符串
+          * @type {number|string}
+          * @mutable 可变的
+         */
         "value"?: number | string;
     }
+    /**
+     * 侧边导航菜单项组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneSidenavMenuItem {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用菜单项
+          * @type {boolean}
           * @default false
+          * @reflect 属性值会反射到DOM属性
          */
         "disabled": boolean;
         /**
-          * Menu item selection state.
+          * 选中状态
+          * @type {boolean}
           * @default false
+          * @reflect 属性值会反射到DOM属性
          */
         "selected": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除焦点
+          * @Method 装饰器定义公共API方法
+          * @returns
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 设置焦点
+          * @Method 装饰器定义公共API方法
+          * @returns
          */
         "setFocus": () => Promise<void>;
         /**
-          * The menu item value.
+          * 菜单项值，支持null/数字/字符串类型
+          * @type {null|number|string}
+          * @mutable 可变的
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Slider
-     * @description Sliders allow users to make selections from a range of values.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/slider.webp
-     * @imgDark /assets/img/slider-dark.webp
+     * 滑动选择器组件
+     * 提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+     * @component zane-slider
+     * @tags zane-slider
+     * @shadow true
+     * @example <!-- 基础用法 -->
+     * <zane-slider min="0" max="100" value="50"></zane-slider>
+     * <!-- 禁用状态 -->
+     * <zane-slider disabled value="30"></zane-slider>
+     * <!-- 隐藏数值输入框 -->
+     * <zane-slider show-only-slider value="75"></zane-slider>
      */
     interface ZaneSlider {
         /**
+          * ARIA 属性配置对象
+          * @prop {Object} configAria - 收集所有以 `aria-` 开头的自定义属性
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 值变更事件的防抖时间（毫秒）
+          * @prop {number} debounce - 用于优化频繁触发的事件
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态开关
+          * @prop {boolean} disabled
+          * @reflect 
           * @default false
          */
         "disabled": boolean;
         /**
-          * function to format the value of the input
+          * 数值格式化函数
+          * @prop {(value: number | string) => string} formatter - 用于自定义显示值的格式
+          * @example (val) => `${val}%`
          */
         "formatter": (value: number | string) => string;
+        /**
+          * 获取组件唯一ID
+          * @method 
+          * @returns 组件唯一标识符
+         */
         "getComponentId": () => Promise<string>;
         /**
+          * 滑块最大值
+          * @prop {number} max
           * @default 100
          */
         "max": number;
         /**
+          * 滑块最小值
+          * @prop {number} min
           * @default 0
          */
         "min": number;
         /**
-          * The input field name.
-          * @default `zane-input-${this.gid}`
+          * 表单字段名称
+          * @prop {string} name - 自动生成唯一名称
+          * @default `zane-input-${gid}`
          */
         "name": string;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 只读状态开关
+          * @prop {boolean} readonly
+          * @reflect 
           * @default false
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
+          * @prop {boolean} required
+          * @reflect 
           * @default false
          */
         "required": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除组件焦点
+          * @method
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `ion-input`. Use this method instead of the global `input.focus()`.
+          * 设置组件焦点
+          * @method
          */
         "setFocus": () => Promise<void>;
         /**
+          * 是否仅显示滑块（隐藏数值输入框）
+          * @prop {boolean} showOnlySlider
           * @default false
          */
         "showOnlySlider": boolean;
         /**
+          * 步进值
+          * @prop {number} step - 每次增减的数值单位
+          * @mutable 
           * @default 1
          */
         "step": number;
         /**
-          * The input field value.
+          * 当前滑块值
+          * @prop {number} value - 受控属性
+          * @mutable 
           * @default 0
          */
         "value"?: number;
     }
     /**
-     * @name Spinner
-     * @description Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-spinner class="rainbow" size="2rem"></zane-spinner>
+     * 加载指示器组件 (zane-spinner)
+     * @component 
+     * @shadow true
+     * @description 用于表示加载状态的动画指示器，支持自定义尺寸和样式。
+     * @example <!-- 基本用法 -->
+     * <zane-spinner></zane-spinner>
+     * <!-- 自定义描述文本 -->
+     * <zane-spinner description="数据加载中"></zane-spinner>
+     * <!-- 隐藏背景圆环 -->
+     * <zane-spinner hide-background></zane-spinner>
      */
     interface ZaneSpinner {
         /**
+          * 辅助文本描述
+          * @prop 
+          * @attribute description
           * @default 'Loading...'
+          * @description 为屏幕阅读器提供加载状态描述，同时作为 SVG 的 title 属性提升可访问性。
          */
         "description": string;
         /**
+          * 是否隐藏背景圆环
+          * @prop 
+          * @attribute hide-background
           * @default false
+          * @description 当设置为 true 时，隐藏加载动画后的半透明背景圆环。
          */
         "hideBackground": boolean;
         /**
-          * The Icon size. Possible values are: `"sm"`, `"md"`, `"lg"` and size in pixel. Defaults to `"md"`.
+          * 加载指示器尺寸
+          * @prop 
+          * @attribute size
+          * @reflect true
           * @default 'md'
+          * @description 控制加载指示器尺寸，支持预设枚举或自定义 CSS 单位： - `'lg'`: 大尺寸 (5.5rem) - `'md'`: 中等尺寸 (1rem) - `'sm'`: 小尺寸 (0.75rem) - `string`: 自定义尺寸（支持 '2rem'/'32px' 格式）
          */
         "size": 'lg' | 'md' | 'sm' | string;
     }
     /**
-     * @name SVG
-     * @description Render SVG content from an external source.
-     * @category Data Display
-     * @example <zane-svg src="https://icons.getbootstrap.com/assets/icons/bug.svg" size="2rem"></zane-svg>
+     * SVG 动态加载组件 (zane-svg)
+     * @component 
+     * @shadow true
+     * @description 智能 SVG 图标容器，支持动态加载、尺寸控制与样式继承
+     * @example <!-- 基础用法 -->
+     * <zane-svg src="/assets/icon.svg"></zane-svg>
+     * <!-- 带尺寸控制 -->
+     * <zane-svg src="/assets/logo.svg"  size="xl"></zane-svg>
+     * <!-- 自定义尺寸 -->
+     * <zane-svg src="/assets/chart.svg"  size="32px"></zane-svg>
      */
     interface ZaneSvg {
         /**
-          * The Icon size.
+          * 图标尺寸配置
+          * @prop 
+          * @attribute size
+          * @reflect true
+          * @default undefined
+          * @description 控制 SVG 图标显示尺寸，支持以下类型： - 预设枚举：'xs' | 'sm' | 'md' | 'lg' | 'xl' - CSS 单位值：'24px' | '2rem' | '100%' - 未设置时继承父级字体大小
+          * @presetDetails | 值   | 换算公式    | 典型场景          | |------|------------|-------------------| | xs   | 0.5rem (8px) | 表格行内小图标     | | sm   | 0.75rem (12px)| 按钮辅助图标      | | md   | 1rem (16px)  | 默认标准尺寸       | | lg   | 1.5rem (24px)| 卡片头部图标       | | xl   | 1.75rem (28px)| 展示型大图标      |
          */
         "size": string;
         /**
+          * SVG 资源路径
+          * @prop 
+          * @attribute src
           * @default ''
+          * @description 需要加载的 SVG 文件路径或 URL，支持： - 相对路径（基于项目根目录） - 绝对 URL（需配置 CORS） - 内联 DataURL（base64 编码）
+          * @securityNote 当使用外部 URL 时，组件会自动添加 `rel="noopener noreferrer"` 防止钓鱼攻击，建议优先使用本地托管 SVG
          */
         "src": string;
     }
+    /**
+     * 单个标签页元素，支持多种交互状态和类型
+     */
     interface ZaneTab {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用标签
+          * @type {boolean}
+          * @prop disabled
           * @default false
+          * @reflect
          */
         "disabled": boolean;
         /**
+          * 禁用状态提示信息（支持无障碍访问）
+          * @type {string}
+          * @prop disabledReason
           * @default ''
          */
         "disabledReason": string;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（存在时渲染为<a>标签）
+          * @type {string}
+          * @prop href
          */
         "href": string;
         /**
-          * Icon which will displayed on button. Possible values are bootstrap icon names.
+          * 图标名称（内置图标库）
+          * @type {string}
+          * @prop icon
          */
         "icon": string;
+        /**
+          * 标签文本（备用显示内容）
+          * @type {string}
+          * @prop label
+         */
         "label": string;
         /**
-          * Button selection state.
+          * 选中状态（与父级Tabs组件联动）
+          * @type {boolean}
+          * @prop selected
           * @default false
+          * @reflect
          */
         "selected": boolean;
+        /**
+          * 设置焦点（公共方法）
+          * @method setFocus
+         */
         "setFocus": () => Promise<void>;
         /**
-          * Show loader.
+          * 显示加载指示器
+          * @type {boolean}
+          * @prop showLoader
           * @default false
          */
         "showLoader": boolean;
+        /**
+          * 关联面板标识
+          * @type {string}
+          * @prop target
+         */
         "target": string;
+        /**
+          * 触发点击（公共方法）
+          * @method triggerClick
+         */
         "triggerClick": () => Promise<void>;
         /**
+          * 标签类型（需与父级Tabs组件同步）
+          * @type {'contained' | 'contained-bottom' | 'default'}
+          * @prop type
           * @default 'default'
+          * @reflect
          */
         "type": 'contained' | 'contained-bottom' | 'default';
-        "value": string;
-    }
-    interface ZaneTabPanel {
         /**
-          * @default false
+          * 标签值（用于表单场景）
+          * @type {string}
+          * @prop value
          */
-        "active": boolean;
-        "layer"?: '01' | '02' | 'background';
         "value": string;
     }
     /**
-     * @name Table
-     * @description A configurable component for displaying tabular data.
-     * @category Data Display
-     * @img /assets/img/table.webp
-     * @imgDark /assets/img/table-dark.webp
+     * 标签页内容面板容器
+     * 该组件与 zane-tab 标签页组件配合使用，形成完整的标签页系统。当标签页被激活时，
+     * 关联的面板内容将显示在界面中，支持层级深度控制以实现复杂的视觉层次效果。
+     * @example <zane-tab-panel value="profile" active>
+     *   用户资料详情内容
+     * </zane-tab-panel>
      */
+    interface ZaneTabPanel {
+        /**
+          * 面板激活状态（与关联标签页同步）  当设置为 true 时，面板将显示在界面中。该属性通常由父级 zane-tabs 组件自动管理， 开发者也支持手动控制以实现特殊交互场景。
+          * @type {boolean}
+          * @prop active
+          * @default false
+          * @reflect
+         */
+        "active": boolean;
+        /**
+          * 视觉层级深度控制  提供三层深度选项，用于构建层次化界面效果： - '01': 顶层面板（默认最高层级） - '02': 中间层级面板 - 'background': 背景层级面板（最低层级）
+          * @type {'01' | '02' | 'background'}
+          * @prop layer
+          * @reflect
+         */
+        "layer"?: '01' | '02' | 'background';
+        /**
+          * 面板唯一标识值  必须与对应 zane-tab 组件的 target 属性匹配，建立标签页与内容面板的关联关系。 该值应确保在同一个 zane-tabs 容器中保持唯一。
+          * @type {string}
+          * @prop value
+          * @reflect
+         */
+        "value": string;
+    }
     interface ZaneTable {
         /**
-          * Grid columns configuration. [ {   "name":"name",   "label":"Name",   "width":300,   "fixed":true,   "template": function(row, column) { return row[column.name];}  }, {   "name":"age",   "label":"Age" } ]
+          * 表格列配置数组
+          * @prop {Array<Object>} columns
+          * @example [   {     name: "name",         // 数据字段名     label: "Name",        // 列标题显示文本     width: 300,           // 列宽度（像素或rem）     fixed: true,          // 是否固定列（左侧固定）     template: (row, column) => `<b>${row[column.name]}</b>` // 自定义渲染模板   },   {     name: "age",     label: "Age"   } ]
           * @default []
          */
         "columns": any[];
         /**
-          * Grid data to display on table [{  'id': '5e7118ddce4b3d577956457f',  'age': 21,  'name': 'John',  'company': 'India',  'email': 'john@example.com',  'phone': '+1 (839) 560-3581',  'address': '326 Irving Street, Grimsley, Texas, 4048'  }]
+          * 表格数据源
+          * @prop {Array<Object>} data
+          * @example [{   id: '5e7118ddce4b3d577956457f',   age: 21,   name: 'John' }]
           * @default []
          */
         "data": any[];
         /**
+          * 空状态描述文本
+          * @prop {string} emptyStateDescription
           * @default 'There are no items to display'
          */
         "emptyStateDescription": string;
         /**
+          * 空状态标题文本
+          * @prop {string} emptyStateHeadline
           * @default 'No items'
          */
         "emptyStateHeadline": string;
         /**
+          * 行数据唯一标识字段名
+          * @prop {string} keyField
           * @default 'id'
          */
         "keyField": string;
+        /**
+          * 组件视觉层级（影响阴影和z-index）
+          * @prop {'01' | '02' | 'background'} [layer] - '01': 基础层级（默认） - '02': 中层（用于悬浮元素） - 'background': 底层（无阴影）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 是否为托管模式（外部控制分页/排序）
+          * @prop {boolean} managed
           * @default false
+          * @desc true: 外部控制数据（需监听事件处理分页/排序） false: 组件内部处理分页/排序
          */
         "managed": boolean;
         /**
+          * 当前页码
+          * @prop {number} page
           * @default 1
          */
         "page": number;
         /**
+          * 每页显示条数
+          * @prop {number} pageSize
           * @default 10
          */
         "pageSize": number;
         /**
+          * 是否启用分页
+          * @prop {boolean} paginate
           * @default true
          */
         "paginate": boolean;
         /**
+          * 已选中的行key数组
+          * @prop {string[]} selectedRowKeys
           * @default []
          */
         "selectedRowKeys": string[];
+        /**
+          * 行选择类型
+          * @prop {'checkbox' | undefined} [selectionType] - 'checkbox': 显示多选框列 - undefined: 无选择功能
+         */
         "selectionType": 'checkbox' | undefined;
+        /**
+          * 当前排序字段
+          * @prop {string} [sortBy]
+         */
         "sortBy": string;
         /**
+          * 排序方向
+          * @prop {'asc' | 'desc'} [sortOrder] - 'asc': 升序（A-Z/0-9） - 'desc': 降序（Z-A/9-0）
           * @default 'asc'
          */
         "sortOrder": 'asc' | 'desc';
         /**
+          * 是否启用排序
+          * @prop {boolean} sortable
           * @default true
          */
         "sortable": boolean;
+        /**
+          * 数据总条数（托管模式下必传）
+          * @prop {number} [totalItems]
+         */
         "totalItems": any;
     }
     /**
-     * @name Tabs
-     * @description The tabs component is used to display multiple panels of content in a container.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-tabs>
-     * <zane-tabs-list>
-     * <zane-tab selected >Tab 1</zane-tab>
-     * <zane-tab>Tab 2</zane-tab>
-     * </zane-tabs-list>
-     * </zane-tabs>
+     * 标签页容器组件，用于管理和切换多个标签页
      */
     interface ZaneTabs {
+        /**
+          * 组件层级设置，影响样式和视觉层次
+          * @type {'01' | '02' | 'background'}
+          * @prop layer
+          * @memberof Tabs  - `'01'`: 第一层级（最高层级，用于凸出显示） - `'02'`: 第二层级（中等层级，常规内容） - `'background'`: 背景层级（最低层级，用于背景元素）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 标签页类型，决定标签页的视觉样式
+          * @type {'contained' | 'contained-bottom' | 'default'}
+          * @prop type
           * @default 'default'
+          * @memberof Tabs  - `'contained'`: 包含式标签（标签与内容区域视觉统一） - `'contained-bottom'`: 底部包含式标签（标签位于内容底部） - `'default'`: 默认样式（标准分隔式标签）
          */
         "type": 'contained' | 'contained-bottom' | 'default';
     }
     interface ZaneTabsList {
         /**
+          * 是否由外部管理状态（如父组件 zane-tabs 管理） 如果为 true，则点击标签页时不会自动修改选中状态，而是由外部通过事件来控制。 默认情况下，组件自身管理状态。
           * @default false
          */
         "managed": boolean;
         /**
+          * 标签栏的样式类型 - default: 默认样式 - contained: 包含式（通常有背景和边框） - contained-bottom: 包含式，标签位于底部
           * @default 'default'
          */
         "type": 'contained' | 'contained-bottom' | 'default';
     }
     /**
-     * @name Tag
-     * @description Use tags to label, categorize, or organize items using keywords that describe them.
-     * @category Data Display
-     * @tag controls
-     * @example <zane-tag class="color-red">Important</zane-tag>
+     * 多功能标签/徽章组件
+     * 提供灵活的内容展示能力，支持多种颜色主题、尺寸规格、可关闭操作和选中状态。
+     * 适用于分类标记、状态指示、可选项选择等场景，可与表单组件或列表组件配合使用。
+     * @example <!-- 基础用法 -->
+     * <zane-tag>默认标签</zane-tag>
+     * <!-- 带关闭按钮 -->
+     * <zane-tag dismissible>可关闭标签</zane-tag>
+     * <!-- 带图片 -->
+     * <zane-tag image-src="/path/to/avatar.jpg"> 用户标签</zane-tag>
      */
     interface ZaneTag {
         /**
-          * Tag color. Possible values are: 'gray', 'blue', 'green', 'red', 'yellow', 'primary', 'success', 'info', 'warning', 'error'.
+          * 标签颜色主题  提供10种预设颜色方案，满足不同场景的视觉需求： - `blue`: 蓝色主题（中性信息） - `error`: 错误红色（操作失败/危险状态） - `gray`: 灰色主题（默认中性色） - `green`: 绿色主题（成功/完成状态） - `info`: 信息蓝（通知/提示信息） - `primary`: 品牌主色（重要内容） - `red`: 警示红色（紧急通知） - `success`: 成功绿色（操作成功） - `warning`: 警告黄色（注意/提醒） - `yellow`: 强调黄色（高亮显示）
+          * @type {'blue' | 'error' | 'gray' | 'green' | 'info' | 'primary' | 'red' | 'success' | 'warning' | 'yellow'}
+          * @prop color
           * @default 'gray'
+          * @reflect
          */
         "color": | 'blue'
     | 'error'
@@ -1860,39 +2859,61 @@ export namespace Components {
     | 'warning'
     | 'yellow';
         /**
-          * If true, the tag will have a close icon.
+          * 是否显示关闭按钮  设置为 true 时，标签右侧显示关闭图标，点击触发 `zane-tag--dismiss` 事件
+          * @type {boolean}
+          * @prop dismissible
           * @default false
          */
         "dismissible": boolean;
         /**
-          * Image source.
+          * 标签图片地址  设置后，在标签左侧显示指定图片（如用户头像）
+          * @type {string}
+          * @prop imageSrc
          */
         "imageSrc"?: string;
         /**
-          * If true, the tag will be selected.
+          * 选中状态  表示标签是否被选中，常用于多选场景
+          * @type {boolean}
+          * @prop selected
           * @default false
+          * @reflect
          */
         "selected": boolean;
         /**
-          * Text size.
+          * 标签尺寸  控制标签的整体尺寸规格： - `md`: 中等尺寸（默认） - `sm`: 小型尺寸（紧凑布局）
+          * @type {'md' | 'sm'}
+          * @prop size
           * @default 'md'
+          * @reflect
          */
         "size": 'md' | 'sm';
         /**
-          * Tag value.
+          * 标签值  标签关联的业务数据值，在事件触发时作为参数传递
+          * @type {string}
+          * @prop value
           * @default ''
+          * @reflect
          */
         "value": string;
     }
     /**
-     * @name Text
-     * @description Typography are used for rendering headlines, paragraphs and captions.
-     * @category General
-     * @example <zane-text type="heading" level="1">Heading</zane-typography>
+     * 多功能文本展示组件
+     * 提供丰富的文本样式和语义化支持，满足不同场景的文本展示需求。支持多种文本类型、
+     * 颜色主题、标题级别和响应式文本大小，集成了完善的 ARIA 可访问性支持。
+     * @example <!-- 基础文本 -->
+     * <zane-text>普通段落文本</zane-text>
+     * <!-- 标题文本 -->
+     * <zane-text type="heading" heading-level="2">二级标题</zane-text>
+     * <!-- 带颜色的辅助文本 -->
+     * <zane-text type="helper-text" color="helper">表单提示文本</zane-text>
      */
     interface ZaneText {
         /**
+          * 文本颜色主题  提供7种预设颜色方案，满足不同场景的视觉需求： - `primary`: 主要文本颜色（默认） - `secondary`: 次要文本颜色（较浅） - `tertiary`: 三级文本颜色（最浅） - `error`: 错误状态文本（红色系） - `helper`: 辅助说明文本（灰色系） - `inverse`: 反色文本（深色背景使用） - `on-color`: 彩色背景上的文本
+          * @prop color
+          * @type {'primary' | 'secondary' | 'tertiary' | 'error' | 'helper' | 'inverse' | 'on-color'}
           * @default 'primary'
+          * @reflect
          */
         "color": | 'error'
     | 'helper'
@@ -1902,21 +2923,50 @@ export namespace Components {
     | 'secondary'
     | 'tertiary';
         /**
+          * ARIA 属性配置  用于存储动态收集的 ARIA 属性，提高组件的可访问性。 组件会自动收集元素上的所有 aria-* 属性并转移到内部元素。
+          * @prop configAria
+          * @type {any}
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria": any;
         /**
+          * 情感化文本模式  启用特殊的情感化排版样式，通常用于突出重要内容： - 更大的字号间距 - 更丰富的字体变化 - 增强的视觉层次
+          * @prop expressive
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "expressive": boolean;
+        /**
+          * 标题语义级别  定义标题的 HTML 语义级别（h1-h6），影响： 1. 文档大纲结构 2. 屏幕阅读器识别 3. SEO 权重  当未指定时，组件会根据标题尺寸自动推导
+          * @prop headingLevel
+          * @type {1 | 2 | 3 | 4 | 5 | 6}
+          * @reflect
+         */
         "headingLevel": 1 | 2 | 3 | 4 | 5 | 6;
+        /**
+          * 标题视觉尺寸  控制标题的视觉大小（1-7级），与实际语义级别分离： - 1: 最大标题尺寸 - 7: 最小标题尺寸  当未指定时，默认值为： - 普通标题: 7 - 流式标题: 6
+          * @prop headingSize
+          * @type {1 | 2 | 3 | 4 | 5 | 6 | 7}
+          * @reflect
+         */
         "headingSize": 1 | 2 | 3 | 4 | 5 | 6 | 7;
         /**
+          * 行内模式  设置为 true 时，文本将以行内元素（span）渲染， 否则以块级元素（p）渲染
+          * @prop inline
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "inline": boolean;
         /**
+          * 文本类型  定义文本的语义类型和基本样式： - `body`: 标准正文文本（默认） - `body-compact`: 紧凑正文（较小行高） - `code`: 代码样式（等宽字体） - `fluid-heading`: 流式响应式标题 - `heading`: 标准标题 - `heading-compact`: 紧凑标题 - `helper-text`: 辅助说明文本 - `label`: 表单标签文本 - `legal`: 法律条款小字
+          * @prop type
+          * @type {'body' | 'body-compact' | 'code' | 'fluid-heading' | 'heading' | 'heading-compact' | 'helper-text' | 'label' | 'legal'}
           * @default 'body'
+          * @reflect
          */
         "type": | 'body'
     | 'body-compact'
@@ -1929,313 +2979,470 @@ export namespace Components {
     | 'legal';
     }
     /**
-     * @name Textarea
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-textarea placeholder="Enter some description over here"></zane-textarea>
+     * 多功能文本区域输入组件
+     * 提供完整的表单文本区域解决方案，支持响应式布局、表单验证、辅助文本提示和丰富的交互功能。
+     * 集成了 ARIA 可访问性支持和多状态反馈设计，适用于复杂表单场景。
+     * @example <!-- 基础用法 -->
+     * <zane-textarea label="用户反馈" placeholder="请输入您的建议"></zane-textarea>
+     * <!-- 带验证状态 -->
+     * <zane-textarea
+     *   label="密码"
+     *   state="error"
+     *   invalid-text="密码长度不足8位"
+     * ></zane-textarea>
      */
     interface ZaneTextarea {
         /**
-          * If `true`, a clear icon will appear in the input when there is a value. Clicking it clears the input.
+          * 是否显示清除按钮  设置为 true 时，在输入框有内容时会显示清除按钮
+          * @prop clearable
+          * @type {boolean}
           * @default false
          */
         "clearable": boolean;
         /**
+          * ARIA 属性配置  存储动态收集的 ARIA 属性，用于增强组件可访问性。 组件加载时会自动收集宿主元素上的 aria-* 属性。
+          * @prop configAria
+          * @type {any}
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria": any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zane:change` event after each keystroke.
+          * 输入事件防抖时间（毫秒）  减少频繁输入事件的处理频率，优化性能
+          * @prop debounce
+          * @type {number}
           * @default 300
          */
         "debounce": number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态  设置为 true 时，组件不可交互且样式变灰
+          * @prop disabled
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "disabled": boolean;
+        /**
+          * 获取组件ID  公开方法，获取组件全局唯一ID
+          * @method getComponentId
+          * @returns
+         */
         "getComponentId": () => Promise<string>;
+        /**
+          * 辅助提示文本  显示在输入区域下方的帮助信息
+          * @prop helperText
+          * @type {string}
+         */
         "helperText": string;
         /**
+          * 行内布局模式  设置为 true 时，标签和输入框水平排列
+          * @prop inline
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "inline": boolean;
         /**
+          * 错误验证状态  设置为 true 时显示错误样式和错误文本
+          * @prop invalid
+          * @type {boolean}
           * @default false
          */
         "invalid": boolean;
+        /**
+          * 错误提示文本  当 invalid 为 true 时显示的错误信息
+          * @prop invalidText
+          * @type {string}
+         */
         "invalidText": string;
+        /**
+          * 输入框标签文本  显示在输入区域上方的描述标签
+          * @prop label
+          * @type {string}
+         */
         "label": string;
         /**
-          * The input field name.
-          * @default `zane-input-${this.gid}`
+          * 表单字段名称  用于表单提交的字段名，默认自动生成唯一值
+          * @prop name
+          * @type {string}
+          * @default `zane-input-${gid}`
          */
         "name": string;
         /**
-          * The input field placeholder.
+          * 占位符文本  输入框为空时显示的提示文本
+          * @prop placeholder
+          * @type {string}
          */
         "placeholder": string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 只读状态  设置为 true 时，内容不可编辑但可复制
+          * @prop readonly
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态  设置为 true 时，标签旁显示红色星号标记
+          * @prop required
+          * @type {boolean}
           * @default false
          */
         "required": boolean;
         /**
-          * Sets blur on the native `textarea` in `zane-textarea`. Use this method instead of the global `textarea.blur()`.
+          * 移除焦点  公开方法，使文本域失去焦点
+          * @method setBlur
+          * @returns
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `textarea` in `zane-textarea`. Use this method instead of the global `textarea.focus()`.
+          * 设置焦点  公开方法，使文本域获得焦点
+          * @method setFocus
+          * @returns
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸规格  控制输入框的整体尺寸： - `lg`: 大尺寸（48px） - `md`: 中尺寸（40px，默认） - `sm`: 小尺寸（32px）
+          * @prop size
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflect
          */
         "size": 'lg' | 'md' | 'sm';
         /**
+          * 骨架屏状态  设置为 true 时显示加载占位样式
+          * @prop skeleton
+          * @type {boolean}
           * @default false
          */
         "skeleton": boolean;
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 输入状态标识  控制输入框的视觉状态反馈： - `default`: 默认状态（无特殊样式） - `error`: 错误状态（红色边框） - `success`: 成功状态（绿色边框） - `warning`: 警告状态（黄色边框）
+          * @prop state
+          * @type {'default' | 'error' | 'success' | 'warning'}
           * @default 'default'
+          * @reflect
          */
         "state": 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
+          * 输入值  文本域的当前值，支持双向绑定
+          * @prop value
+          * @type {string}
+          * @mutable
          */
         "value": string;
         /**
+          * 警告状态  设置为 true 时显示警告样式和警告文本
+          * @prop warn
+          * @type {boolean}
           * @default false
          */
         "warn": boolean;
+        /**
+          * 警告提示文本  当 warn 为 true 时显示的警告信息
+          * @prop warnText
+          * @type {string}
+         */
         "warnText": string;
     }
     /**
-     * @name Time Picker
-     * @description Captures time input.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-time-picker value='true'></zane-time-picker>
+     * 时间选择器组件
      */
     interface ZaneTimePicker {
         /**
+          * 动态收集的ARIA属性配置对象
+          * @remarks 在组件加载时会自动收集宿主元素上所有以"aria-"开头的属性， 存储到该对象后从宿主元素移除，避免重复渲染问题
           * @default {}
          */
         "configAria": any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态标志（会反映到DOM属性）
           * @default false
          */
         "disabled": boolean;
+        /**
+          * 获取组件实例的唯一标识符
+          * @method 
+          * @async 
+          * @returns 组件实例ID
+         */
         "getComponentId": () => Promise<string>;
         /**
           * @default false
          */
         "inline": boolean;
         /**
-          * The input field name.
+          * 自动生成的表单字段名称
+          * @example 当gid为"123"时，name值为"zane-input-123"
           * @default `zane-input-${this.gid}`
          */
         "name": string;
-        /**
-          * The input field placeholder.
-         */
         "placeholder": string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
           * @default false
          */
         "readonly": boolean;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 主动使时间选择器失去焦点
+          * @method 
+          * @async
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 主动使时间选择器获得焦点
+          * @method 
+          * @async
          */
         "setFocus": () => Promise<void>;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
           * @default 'md'
          */
         "size": 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 时间值绑定
+          * @remarks 支持三种格式： - null: 未选择状态 - number: Unix时间戳（毫秒级） - string: ISO格式时间字符串
           * @default ''
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Toggle
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-toggle value='true'>Want ice cream?</zane-toggle>
+     * 开关组件
+     * 该组件实现了可定制的开关切换控件，支持多种交互状态和样式配置，
+     * 符合WAI-ARIA无障碍规范，可无缝集成到表单中使用。
      */
     interface ZaneToggle {
         /**
+          * ARIA属性配置对象
+          * @prop {Object} configAria - 动态收集的ARIA属性键值对
+          * @mutable 允许组件内部修改
+          * @reflect 属性值变化时同步到DOM属性
           * @default {}
          */
         "configAria": any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态
+          * @prop {boolean} disabled - 是否禁用开关交互
           * @default false
+          * @reflect 同步到DOM属性
          */
         "disabled": boolean;
+        /**
+          * 获取组件唯一ID
+          * @method getComponentId
+          * @returns 组件ID
+         */
         "getComponentId": () => Promise<string>;
         /**
-          * The checkbox label.
+          * 开关标签文本
+          * @prop {string} label - 显示在开关旁的文本内容
          */
         "label": string;
         /**
-          * The input field name.
+          * 表单字段名称
+          * @prop {string} name - 关联input元素的name属性
           * @default `zane-input-${this.gid}`
          */
         "name": string;
         /**
+          * 只读状态
+          * @prop {boolean} readonly - 是否只读（可聚焦但不可修改）
           * @default false
+          * @reflect 同步到DOM属性
          */
         "readonly": boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
+          * @prop {boolean} required - 是否必填项
           * @default false
+          * @reflect 同步到DOM属性
          */
         "required": boolean;
         /**
+          * 圆角样式
+          * @prop {boolean} rounded - 是否显示为圆形开关
           * @default true
          */
         "rounded": boolean;
         /**
-          * Sets blur on the native `input` in `zane-toggle`. Use this method instead of the global `input.blur()`.
+          * 移除焦点
+          * @method setBlur
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-toggle`. Use this method instead of the global `input.focus()`.
+          * 设置焦点
+          * @method setFocus
          */
         "setFocus": () => Promise<void>;
         /**
-          * The button size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 开关尺寸
+          * @prop {'lg' | 'md'} size - 控制开关尺寸的枚举值 - 'lg': 大尺寸 (large) - 'md': 中尺寸 (medium)
           * @default 'md'
          */
         "size": 'lg' | 'md';
         /**
-          * The input field value.
+          * 开关值
+          * @prop {boolean} value - 开关当前状态（开/关）
+          * @mutable 允许双向绑定
           * @default false
          */
         "value": boolean;
     }
     /**
-     * @name Tooltip
-     * @description The Tooltip component is used to display additional information on hover.
-     * @category Informational
-     * @tag content
-     * @img /assets/img/tooltip.webp
-     * @imgDark /assets/img/tooltip-dark.webp
+     * 工具提示组件 (zane-tooltip)
+     * 该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。
+     * 支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
      */
     interface ZaneTooltip {
         /**
-          * The content of the tooltip.
+          * 工具提示内容
+          * @prop {string} content - 显示在提示框内的文本内容
+          * @mutable 允许动态更新内容
           * @default ''
          */
         "content": string;
         /**
-          * The placement of the popover relative to the trigger element. Possible values are: - `"top"`: The popover is placed above the trigger element. - `"right"`: The popover is placed to the right of the trigger element. - `"bottom"`: The popover is placed below the trigger element. - `"left"`: The popover is placed to the left of the trigger element.
-          * @default 'top,bottom,right,left'
+          * 提示框定位方向
+          * @prop {string} placements - 逗号分隔的可用定位方向列表
+          * @description   支持的定位值：   - 'top'     : 上方定位   - 'bottom'  : 下方定位   - 'right'   : 右侧定位   - 'left'    : 左侧定位
+          * @default 'top,bottom,right,left' (支持所有方向)
          */
         "placements": string;
         /**
-          * If true, the tooltip will be managed by the parent component.
+          * 触发方式
+          * @prop {'hover' | 'manual'} trigger - 控制提示显示触发的模式 - 'hover' : 鼠标悬停在目标元素时自动触发（默认） - 'manual': 需要通过编程方式触发（如调用show()方法）
           * @default 'hover'
+          * @reflect 同步到DOM属性
          */
         "trigger": 'hover' | 'manual';
     }
     /**
-     * @name Tree
-     * @description A tree view is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构可视化组件
+     * @example <!-- 基础用法 -->
+     * <zane-tree>
+     *   <zane-tree-node value="node1">一级节点</zane-tree-node>
+     *   <zane-tree-node value="node2">二级节点</zane-tree-node>
+     * </zane-tree>
      */
     interface ZaneTree {
         /**
+          * 空状态显示开关
+          * @prop {boolean} [empty=false] - 是否展示空状态界面
+          * @mutable 
+          * @example <zane-tree empty></zane-tree>
           * @default false
          */
         "empty": boolean;
         /**
-          * @default `{     "headline": "No items",     "description": "There are no items to display"   }`
+          * 空状态配置（JSON 字符串或对象）
+          * @prop {string|Object} [emptyState] - 空状态配置参数，支持两种格式： 1. JSON 字符串格式（推荐） 2. 直接传入配置对象
+          * @default { "headline": "No items", "description": "There are no items to display" }
+          * @mutable 
+          * @example <!-- JSON字符串形式 --> <zane-tree empty-state='{"headline":"空数据","description":"请添加节点"}'>  <!-- 对象形式（需通过JS绑定） --> <zane-tree empty-state={myConfig}>
          */
         "emptyState": string;
+        /**
+          * 获取当前选中节点
+          * @method 
+          * @returns 当前选中节点的value值
+          * @example const tree = document.querySelector('zane-tree'); const selected = await tree.getSelectedNode();
+         */
         "getSelectedNode": () => Promise<string>;
+        /**
+          * 当前选中节点标识
+          * @prop {string} selectedNode - 当前选中节点的唯一标识符（对应zane-tree-node的value）
+          * @mutable
+         */
         "selectedNode": string;
         /**
-          * Sets focus on first menu item. Use this method instead of the global `element.focus()`.
+          * 设置初始焦点
+          * @method 
+          * @description 将焦点设置到树的第一个节点（无障碍支持）
+          * @example const tree = document.querySelector('zane-tree'); await tree.setFocus();
          */
         "setFocus": () => Promise<void>;
+        /**
+          * 订阅节点选择事件
+          * @method 
+          * @param cb - 选择事件回调函数
+          * @description 注册回调函数，当节点被选择时触发。 回调函数接收当前选中节点的value值。  注意：需手动管理订阅关系，组件销毁前建议取消订阅
+          * @example tree.subscribeToSelect((value)  => {   console.log('Selected  node:', value); });
+         */
         "subscribeToSelect": (cb: any) => Promise<void>;
     }
     /**
-     * @name TreeNode
-     * @description A tree node is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @childComponent true
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构节点组件
      */
     interface ZaneTreeNode {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用节点交互
+          * @prop {boolean} [disabled=false]
+          * @reflect 属性值会同步到 DOM 属性
           * @default false
          */
         "disabled": boolean;
         /**
+          * 控制子节点展开状态
+          * @prop {boolean} [expanded=true]
+          * @mutable 允许组件内部修改
+          * @reflect 属性值会同步到 DOM 属性
           * @default true
          */
         "expanded": boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（存在时节点渲染为<a>标签）
+          * @prop {string} href
+          * @reflect 属性值会同步到 DOM 属性
          */
         "href": string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 节点图标名称（需配合图标库使用）
+          * @prop {string} icon
          */
         "icon": string;
         /**
+          * 节点显示文本
+          * @prop {string} [label='']
+          * @mutable 允许组件内部修改
           * @default ''
          */
         "label": string;
         /**
+          * 节点层级（从父节点自动计算）
+          * @prop {number} [level=0]
+          * @reflect 属性值会同步到 DOM 属性
           * @default 0
          */
         "level": number;
         /**
-          * Menu item selection state.
+          * 当前选中节点标识符
+          * @prop {string} selectedNode
+          * @mutable 允许组件内部修改
+          * @reflect 属性值会同步到 DOM 属性
          */
         "selectedNode": string;
         /**
-          * Sets blur on the native `input` in `zane-input`. Use this method instead of the global `input.blur()`.
+          * 移除元素焦点
+          * @method 
+          * @async
          */
         "setBlur": () => Promise<void>;
         /**
-          * Sets focus on the native `input` in `zane-input`. Use this method instead of the global `input.focus()`.
+          * 设置元素焦点
+          * @method 
+          * @async
          */
         "setFocus": () => Promise<void>;
         /**
-          * Sets or retrieves the window or frame at which to target content.
-          * @default '_self'
+          * 链接打开方式（仅在设置 href 时生效）
+          * @prop {('_self'|'_blank'|'_parent'|'_top')} [target='_self']
+          * @defaultValue '_self'
          */
         "target": string;
         /**
-          * The menu item value.
+          * 节点唯一标识符（优先级高于 label）
+          * @prop {(null|number|string)} [value]
+          * @mutable 允许组件内部修改
          */
         "value"?: null | number | string;
     }
@@ -2338,15 +3545,9 @@ export interface ZaneTreeNodeCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     /**
-     * @name Accordion
-     * @description An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
-     * @overview  <p>The accordion component delivers large amounts of content in a small space through progressive disclosure. The header title give the user a high level overview of the content allowing the user to decide which sections to read.</p>
-     *  <p>Accordions can make information processing and discovering more effective. However, it does hide content from users and it’s important to account for a user not noticing or reading all of the included content. If a user is likely to read all of the content then don’t use an accordion as it adds the burden of an extra click; instead use a full scrolling page with normal headers.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @tags display
-     * @img /assets/img/accordion.webp
-     * @imgDark /assets/img/accordion-dark.webp
+     * 可折叠面板(Accordion)容器组件
+     * 提供可折叠内容区域的容器组件，管理多个折叠项的状态和交互。
+     * 支持单开/多开模式、多种尺寸和图标位置配置。
      */
     interface HTMLZaneAccordionElement extends Components.ZaneAccordion, HTMLStencilElement {
     }
@@ -2358,12 +3559,10 @@ declare global {
         "zane-accordion-item--click": any;
     }
     /**
-     * @name Accordion Item
-     * @description An accordion item is single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user.
-     * @overview  <p>The accordion item component is a single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user. The accordion item can be used in conjunction with the accordion component to create a list of expandable items.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @childComponent true
+     * 可折叠面板项(Accordion Item)组件
+     * 作为zane-accordion的子组件使用，实现单个可折叠面板项的功能
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface HTMLZaneAccordionItemElement extends Components.ZaneAccordionItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneAccordionItemElementEventMap>(type: K, listener: (this: HTMLZaneAccordionItemElement, ev: ZaneAccordionItemCustomEvent<HTMLZaneAccordionItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2380,11 +3579,11 @@ declare global {
         new (): HTMLZaneAccordionItemElement;
     };
     /**
-     * @name Avatar
-     * @description The Avatar component is used to represent user, and displays the profile picture, initials or fallback icon.
-     * @category Data Display
-     * @tags display
-     * @example <zane-avatar size="5rem" name="Shivaji Varma" src="/assets/img/avatar.webp"></zane-avatar>
+     * 头像组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface HTMLZaneAvatarElement extends Components.ZaneAvatar, HTMLStencilElement {
     }
@@ -2393,11 +3592,11 @@ declare global {
         new (): HTMLZaneAvatarElement;
     };
     /**
-     * @name Badge
-     * @description The badge component is used to display a small amount of information to the user.
-     * @category Informational
-     * @tag content
-     * @example <zane-badge content="5"> <zane-icon name="notification" size="2rem"></zane-icon></zane-badge>
+     * 徽章组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface HTMLZaneBadgeElement extends Components.ZaneBadge, HTMLStencilElement {
     }
@@ -2406,11 +3605,19 @@ declare global {
         new (): HTMLZaneBadgeElement;
     };
     /**
-     * @name Breadcrumb
-     * @description A breadcrumb is a secondary navigation scheme that reveals the user's location in a website or web application.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-breadcrumb><zane-breadcrumb-item href="#">Home</zane-breadcrumb-item><zane-breadcrumb-item href="#" active>Page</zane-breadcrumb-item></zane-breadcrumb>
+     * 面包屑导航组件
+     * 用于显示当前页面在网站层次结构中的位置，并提供快速导航功能。
+     * @example ```html
+     * <zane-breadcrumb>
+     *   <zane-breadcrumb-item href="/home">首页</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item href="/products">产品</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item>当前页面</zane-breadcrumb-item>
+     * </zane-breadcrumb>
+     * ```
+     * @Component 装饰器定义了组件的元数据
+     * @property {boolean} shadow - 启用 Shadow DOM 封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 组件的自定义元素标签名
      */
     interface HTMLZaneBreadcrumbElement extends Components.ZaneBreadcrumb, HTMLStencilElement {
     }
@@ -2418,6 +3625,25 @@ declare global {
         prototype: HTMLZaneBreadcrumbElement;
         new (): HTMLZaneBreadcrumbElement;
     };
+    /**
+     * 面包屑导航项组件
+     * 作为面包屑导航系统的单个项使用，必须作为`zane-breadcrumb`的子元素使用。
+     * 支持链接导航、活动状态指示和Schema.org 结构化数据。
+     * @example ```html
+     * <!-- 活动状态项(当前页面) -->
+     * <zane-breadcrumb-item active>
+     *   当前页面
+     * </zane-breadcrumb-item>
+     * <!-- 可点击链接项 -->
+     * <zane-breadcrumb-item href="/products" position="2">
+     *   产品列表
+     * </zane-breadcrumb-item>
+     * ```
+     * @Component 配置项说明：
+     * @property {boolean} shadow - 启用Shadow DOM封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 自定义元素标签名
+     */
     interface HTMLZaneBreadcrumbItemElement extends Components.ZaneBreadcrumbItem, HTMLStencilElement {
     }
     var HTMLZaneBreadcrumbItemElement: {
@@ -2430,14 +3656,34 @@ declare global {
   };
     }
     /**
-     * @name Button
-     * @description Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
-     * @overview  <p>Buttons are clickable elements that are used to trigger actions. They communicate calls to action to the user and allow users to interact with pages in a variety of ways. Button labels express what action will occur when the user interacts with it.</p>
-     * @category General
-     * @tags controls
-     * @example <zane-button>
-     * Button CTA
+     * 多功能按钮组件
+     * 提供丰富的交互样式和状态管理，支持：
+     * - 多种视觉变体(variant)
+     * - 完整的大小(size)控制
+     * - 主题颜色(color)系统
+     * - 暗黑模式适配
+     * - 完善的ARIA可访问性
+     * - 图标集成
+     * - 加载状态
+     * @example 基础使用
+     * ```html
+     * <zane-button>普通按钮</zane-button>
+     * <zane-button variant="outline">轮廓按钮</zane-button>
+     * <zane-button icon="settings" iconAlign="start">带图标按钮</zane-button>
+     * ```
+     * @example 高级使用
+     * ```html
+     * <zane-button
+     * color="danger"
+     * darkModeColor="warning"
+     * variant="ghost.simple"
+     * size="xl"
+     * disabled
+     * disabledReason="权限不足"
+     * >
+     * 危险操作
      * </zane-button>
+     * ```
      */
     interface HTMLZaneButtonElement extends Components.ZaneButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneButtonElementEventMap>(type: K, listener: (this: HTMLZaneButtonElement, ev: ZaneButtonCustomEvent<HTMLZaneButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2454,14 +3700,7 @@ declare global {
         new (): HTMLZaneButtonElement;
     };
     /**
-     * @name Button Group
-     * @description Group a series of buttons together on a single line with the button group, and super-power.
-     * @category General
-     * @tags controls
-     * @example <zane-button-group>
-     * <zane-button block icon="home"></zane-button>
-     * <zane-button block icon="alarm"></zane-button>
-     * </zane-button-group>
+     * 按钮组容器组件
      */
     interface HTMLZaneButtonGroupElement extends Components.ZaneButtonGroup, HTMLStencilElement {
     }
@@ -2469,6 +3708,10 @@ declare global {
         prototype: HTMLZaneButtonGroupElement;
         new (): HTMLZaneButtonGroupElement;
     };
+    /**
+     * 卡片组件
+     * 提供可自定义阴影级别的卡片容器
+     */
     interface HTMLZaneCardElement extends Components.ZaneCard, HTMLStencilElement {
     }
     var HTMLZaneCardElement: {
@@ -2481,11 +3724,18 @@ declare global {
         "zane-checkbox--focus": any;
     }
     /**
-     * @name Checkbox
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-checkbox value='true'>Want ice cream?</zane-checkbox>
+     * 自定义复选框组件
+     * 实现可定制的复选框控件，支持选中/未选/中间态三种状态，
+     * 提供完整的ARIA支持、键盘交互和事件响应机制。
+     * @example ```html
+     * <zane-checkbox
+     *   label="同意协议"
+     *   size="md"
+     *   layer="02"
+     *   rounded
+     *   required
+     * ></zane-checkbox>
+     * ```
      */
     interface HTMLZaneCheckboxElement extends Components.ZaneCheckbox, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneCheckboxElementEventMap>(type: K, listener: (this: HTMLZaneCheckboxElement, ev: ZaneCheckboxCustomEvent<HTMLZaneCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2505,12 +3755,17 @@ declare global {
         "zane-code-editor--change": any;
     }
     /**
-     * @name Code Editor
-     * @description A browser based code editor.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/code-editor.webp
-     * @imgDark /assets/img/code-editor-dark.webp
+     * 基于Monaco Editor的代码编辑器组件
+     * 提供语法高亮、智能提示等专业编辑功能，支持暗黑/亮色主题切换，
+     * 内置防抖机制优化高频变更事件，适用于代码片段展示和实时编辑场景。
+     * @example ```html
+     * <zane-code-editor
+     *   language="javascript"
+     *   minimap
+     *   debounce="500"
+     *   value="console.log('Hello  World')"
+     * ></zane-code-editor>
+     * ```
      */
     interface HTMLZaneCodeEditorElement extends Components.ZaneCodeEditor, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneCodeEditorElementEventMap>(type: K, listener: (this: HTMLZaneCodeEditorElement, ev: ZaneCodeEditorCustomEvent<HTMLZaneCodeEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2527,12 +3782,11 @@ declare global {
         new (): HTMLZaneCodeEditorElement;
     };
     /**
-     * @name Code Highlighter
-     * @description A browser based code highlighter.
-     * @category Data Display
-     * @tag display, code
-     * @img /assets/img/code-highlighter.webp
-     * @imgDark /assets/img/code-highlighter-dark.webp
+     * 代码高亮组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneCodeHighlighterElement extends Components.ZaneCodeHighlighter, HTMLStencilElement {
     }
@@ -2540,6 +3794,13 @@ declare global {
         prototype: HTMLZaneCodeHighlighterElement;
         new (): HTMLZaneCodeHighlighterElement;
     };
+    /**
+     * 容器布局组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
+     */
     interface HTMLZaneContainerElement extends Components.ZaneContainer, HTMLStencilElement {
     }
     var HTMLZaneContainerElement: {
@@ -2547,10 +3808,11 @@ declare global {
         new (): HTMLZaneContainerElement;
     };
     /**
-     * @name Current Time
-     * @description Displays the current time in a given timezone.
-     * @category Others
-     * @example <zane-current-time></zane-current-time>
+     * 当前时间显示组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneCurrentTimeElement extends Components.ZaneCurrentTime, HTMLStencilElement {
     }
@@ -2565,10 +3827,11 @@ declare global {
         "zane-date-picker--input": any;
     }
     /**
-     * @name Date Picker
-     * @category Form Inputs
-     * @description Captures date input.
-     * @example <zane-date-picker value='true'></zane-date-picker>
+     * 日期选择器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneDatePickerElement extends Components.ZaneDatePicker, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneDatePickerElementEventMap>(type: K, listener: (this: HTMLZaneDatePickerElement, ev: ZaneDatePickerCustomEvent<HTMLZaneDatePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2585,10 +3848,11 @@ declare global {
         new (): HTMLZaneDatePickerElement;
     };
     /**
-     * @name Divider
-     * @description A divider can be used to segment content vertically or horizontally.
-     * @category Layout
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 分割线组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneDividerElement extends Components.ZaneDivider, HTMLStencilElement {
     }
@@ -2602,12 +3866,11 @@ declare global {
         "zane-dropdown--item-click": any;
     }
     /**
-     * @name Dropdown
-     * @description Enables native inputs to be used within a Form field.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 下拉菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneDropdownElement extends Components.ZaneDropdown, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneDropdownElementEventMap>(type: K, listener: (this: HTMLZaneDropdownElement, ev: ZaneDropdownCustomEvent<HTMLZaneDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2624,11 +3887,11 @@ declare global {
         new (): HTMLZaneDropdownElement;
     };
     /**
-     * @name Dropdown Menu
-     * @description The Dropdown Menu component is used to display a list of options.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @childComponent true
+     * 下拉菜单内容组件（需与zane-dropdown配合使用）
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneDropdownMenuElement extends Components.ZaneDropdownMenu, HTMLStencilElement {
     }
@@ -2637,11 +3900,11 @@ declare global {
         new (): HTMLZaneDropdownMenuElement;
     };
     /**
-     * @name Empty State
-     * @description A message that displays when there is no information to display.
-     * @category Data Display
-     * @img /assets/img/empty-state.webp
-     * @imgDark /assets/img/empty-state-dark.webp
+     * 空状态(Empty State)组件
+     * 用于展示无数据时的占位内容，包含插图、标题、描述和操作按钮
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     * @implements ComponentInterface 实现Stencil组件生命周期接口
      */
     interface HTMLZaneEmptyStateElement extends Components.ZaneEmptyState, HTMLStencilElement {
     }
@@ -2650,12 +3913,10 @@ declare global {
         new (): HTMLZaneEmptyStateElement;
     };
     /**
-     * @name Footer
-     * @description The footer component provides a container for displaying additional navigation information about a site.
-     * @overview <p>The footer is one of the most underestimated sections of a website being located at the very bottom of every page, however, it can be used as a way to try to convince users to stay on your website if they haven’t found the information they’ve been looking for inside the main content area.</p>
-     * @category Navigation
-     * @img /assets/img/footer.webp
-     * @imgDark /assets/img/footer-dark.webp
+     * 页脚(Footer)组件
+     * 提供可定制的页脚布局，支持多种变体和插槽内容
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface HTMLZaneFooterElement extends Components.ZaneFooter, HTMLStencilElement {
     }
@@ -2663,12 +3924,24 @@ declare global {
         prototype: HTMLZaneFooterElement;
         new (): HTMLZaneFooterElement;
     };
+    /**
+     * 页脚版权(Footer Copyright)组件
+     * 用于展示标准版权声明，包含年份、版权所有者链接和保留权利声明
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
     interface HTMLZaneFooterCopyrightElement extends Components.ZaneFooterCopyright, HTMLStencilElement {
     }
     var HTMLZaneFooterCopyrightElement: {
         prototype: HTMLZaneFooterCopyrightElement;
         new (): HTMLZaneFooterCopyrightElement;
     };
+    /**
+     * 页脚链接(Footer Links)组件
+     * 用于展示页脚导航链接列表，支持动态链接数据传入
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
     interface HTMLZaneFooterLinksElement extends Components.ZaneFooterLinks, HTMLStencilElement {
     }
     var HTMLZaneFooterLinksElement: {
@@ -2676,13 +3949,11 @@ declare global {
         new (): HTMLZaneFooterLinksElement;
     };
     /**
-     * @name Form Control
-     * @description The Form Control component adds a label and caption for its child control.
-     * @category Form Inputs
-     * @tags form
-     * @example <zane-form-control label='Full Name' required>
-     * <zane-input type='text'></zane-input>
-     * </zane-form-control>
+     * 表单控件容器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface HTMLZaneFormControlElement extends Components.ZaneFormControl, HTMLStencilElement {
     }
@@ -2691,11 +3962,11 @@ declare global {
         new (): HTMLZaneFormControlElement;
     };
     /**
-     * @name Header
-     * @description Header component is used to display a header with a brand, navigation, and actions.
-     * @category Navigation
-     * @img /assets/img/header.webp
-     * @imgDark /assets/img/header-dark.webp
+     * 头部组件，提供可定制的页面顶部导航栏
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface HTMLZaneHeaderElement extends Components.ZaneHeader, HTMLStencilElement {
     }
@@ -2703,12 +3974,26 @@ declare global {
         prototype: HTMLZaneHeaderElement;
         new (): HTMLZaneHeaderElement;
     };
+    /**
+     * 头部操作按钮组件，用于在头部导航栏中创建可交互的操作项
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface HTMLZaneHeaderActionElement extends Components.ZaneHeaderAction, HTMLStencilElement {
     }
     var HTMLZaneHeaderActionElement: {
         prototype: HTMLZaneHeaderActionElement;
         new (): HTMLZaneHeaderActionElement;
     };
+    /**
+     * 头部品牌标识组件，用于显示网站/应用的品牌标识和名称
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface HTMLZaneHeaderBrandElement extends Components.ZaneHeaderBrand, HTMLStencilElement {
     }
     var HTMLZaneHeaderBrandElement: {
@@ -2720,12 +4005,13 @@ declare global {
         "zane-html-editor--search": any;
     }
     /**
-     * @name HTML Editor
-     * @description HTML Editor component is a WYSIWYG editor that allows users to edit HTML content.
-     * @category Up coming
-     * @tags input, form
-     * @img /assets/img/html-editor.webp
-     * @imgDark /assets/img/html-editor-dark.webp
+     * 基于 Tiptap 的富文本编辑器组件，支持：
+     * - HTML 源码编辑
+     * - Mention（@提及）自动补全功能
+     * - 内置工具条（加粗、斜体、列表等）
+     * - 主题切换（vs-dark / vs-light）
+     * - 可视化编辑与 HTML 源码切换
+     * - 与表单集成（name、required、readonly 等属性）
      */
     interface HTMLZaneHtmlEditorElement extends Components.ZaneHtmlEditor, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneHtmlEditorElementEventMap>(type: K, listener: (this: HTMLZaneHtmlEditorElement, ev: ZaneHtmlEditorCustomEvent<HTMLZaneHtmlEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2742,11 +4028,15 @@ declare global {
         new (): HTMLZaneHtmlEditorElement;
     };
     /**
-     * @name Icon
-     * @description Icons are visual symbols used to represent ideas, objects, or actions.
-     * @overview Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
-     * @category General
-     * @example <zane-icon name="home" size="2rem"></zane-icon>
+     * 图标组件（zane-icon）
+     * 该组件基于 Stencil 构建，用于按需异步加载并渲染 SVG 图标。
+     * 支持通过属性 name 指定图标名称，通过 size 控制图标尺寸。
+     * 组件内部使用 Shadow DOM 实现样式隔离，并暴露 CSS 自定义属性
+     * `--zane-icon-size` 供外部覆盖默认尺寸。
+     * @example <!-- 基础用法 -->
+     * <zane-icon name="home" size="md"></zane-icon>
+     * <!-- 自定义尺寸 -->
+     * <zane-icon name="user" size="32px"></zane-icon>
      */
     interface HTMLZaneIconElement extends Components.ZaneIcon, HTMLStencilElement {
     }
@@ -2754,6 +4044,19 @@ declare global {
         prototype: HTMLZaneIconElement;
         new (): HTMLZaneIconElement;
     };
+    /**
+     * 自适应主题图片组件（zane-image）
+     * 该组件能够根据当前系统的明暗主题自动切换显示的图片资源。
+     * 当检测到处于暗色模式时，优先使用 darkSrc 指定的暗色主题图片；
+     * 否则使用 src 指定的默认图片。
+     * 组件内部通过监听主题变化事件实现实时切换，无需手动刷新。
+     * @example <!-- 基础用法 -->
+     * <zane-image
+     *   src="assets/logo-light.svg"
+     *   dark-src="assets/logo-dark.svg"
+     *   image-title="公司 Logo">
+     * </zane-image>
+     */
     interface HTMLZaneImageElement extends Components.ZaneImage, HTMLStencilElement {
     }
     var HTMLZaneImageElement: {
@@ -2767,11 +4070,13 @@ declare global {
         "zane-input--input": any;
     }
     /**
-     * @name Input
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-input placeholder="Enter your name"></zane-input>
+     * 自定义输入框组件 zane-input
+     * 实现功能：
+     * 1. 支持多种输入类型（文本、密码、邮箱等）及尺寸控制
+     * 2. 包含表单验证状态（错误/警告）及辅助文本展示
+     * 3. 提供前后插槽(start/end)扩展能力
+     * 4. 支持防抖事件处理与无障碍访问
+     * 5. 集成密码可见性切换功能
      */
     interface HTMLZaneInputElement extends Components.ZaneInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneInputElementEventMap>(type: K, listener: (this: HTMLZaneInputElement, ev: ZaneInputCustomEvent<HTMLZaneInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2792,11 +4097,19 @@ declare global {
         "valueChange": string;
     }
     /**
-     * @name Input URL
-     * @description A specialized input field for URL validation.
-     * @category Up coming
-     * @tags input, form, url
-     * @example <zane-input-url value="https://shivajivarma.com"></zane-input-url>
+     * 双模式URL输入组件
+     * @component zane-input-url
+     * @tags form-control, input, url
+     * @shadow true
+     * @description 提供URL输入与预览双模式交互的输入组件。在展示模式下显示可点击的URL链接，
+     * 在编辑模式下提供带验证功能的输入框。支持防抖值变化事件和实时URL验证。
+     * @example <!-- 基础用法 -->
+     * <zane-input-url
+     *   value="https://example.com"
+     *   placeholder="输入网站地址"
+     * />
+     * <!-- 带尺寸控制 -->
+     * <zane-input-url size="sm" />
      */
     interface HTMLZaneInputUrlElement extends Components.ZaneInputUrl, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneInputUrlElementEventMap>(type: K, listener: (this: HTMLZaneInputUrlElement, ev: ZaneInputUrlCustomEvent<HTMLZaneInputUrlElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2813,10 +4126,22 @@ declare global {
         new (): HTMLZaneInputUrlElement;
     };
     /**
-     * @name Link
-     * @description Links allow users to click their way from page to page.
-     * @category Navigation
-     * @example <zane-link href="#">Link</zane-link>
+     * 智能链接组件
+     * @component zane-link
+     * @tags navigation, link, interactive
+     * @shadow true
+     * @description 增强型可交互链接组件，支持动态状态反馈和键盘导航优化。
+     * 特性包括：
+     * - 视觉状态反馈（聚焦/激活）
+     * - 空格键触发点击
+     * - 跨浏览器兼容的焦点管理
+     * - 无障碍属性支持
+     * @example <!-- 基础链接 -->
+     * <zane-link href="/about">关于我们</zane-link>
+     * <!-- 新窗口打开 -->
+     * <zane-link href="https://external.com"  target="_blank">
+     *   外部链接
+     * </zane-link>
      */
     interface HTMLZaneLinkElement extends Components.ZaneLink, HTMLStencilElement {
     }
@@ -2825,12 +4150,23 @@ declare global {
         new (): HTMLZaneLinkElement;
     };
     /**
-     * @name Menu
-     * @description Menus display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @img /assets/img/menu.webp
-     * @imgDark /assets/img/menu-dark.webp
+     * 多功能菜单容器组件
+     * @component zane-menu
+     * @tags navigation, menu, container
+     * @shadow true
+     * @description 提供标准化的菜单容器实现，支持：
+     * - 多种视觉尺寸层级
+     * - 键盘导航支持
+     * - 空状态展示
+     * - 动态焦点管理
+     * @example <!-- 基础菜单 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 空状态菜单 -->
+     * <zane-menu empty empty-state-headline="无数据" empty-state-description="请添加菜单项">
+     * </zane-menu>
      */
     interface HTMLZaneMenuElement extends Components.ZaneMenu, HTMLStencilElement {
     }
@@ -2839,12 +4175,25 @@ declare global {
         new (): HTMLZaneMenuElement;
     };
     /**
-     * @name MenuDivider
-     * @description A divider to separate menu items.
-     * @category Layout
-     * @subcategory Menu
-     * @childComponents true
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 菜单分隔线组件
+     * @component zane-menu-divider
+     * @shadow true
+     * @description 提供菜单项之间的视觉分隔效果，用于增强菜单结构的可读性。该组件：
+     * - 实现菜单项分组逻辑分隔
+     * - 支持深浅主题色自动适配
+     * - 提供标准化的间距和高度
+     * @example <!-- 基础用法 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider> <!-- 分隔线 -->
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 分组场景 -->
+     * <zane-menu>
+     *   <zane-menu-item>操作类</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider>
+     *   <zane-menu-item>设置类</zane-menu-item>
+     * </zane-menu>
      */
     interface HTMLZaneMenuDividerElement extends Components.ZaneMenuDivider, HTMLStencilElement {
     }
@@ -2856,11 +4205,37 @@ declare global {
         "zane-menu-item--click": any;
     }
     /**
-     * @name Menu Item
-     * @description Menu items display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @childComponent true
+     * 菜单项组件 (zane-menu-item)
+     * @component zane-menu-item
+     * @shadow true
+     * @description 实现标准导航菜单项的核心组件，提供：
+     * - 多状态交互（正常/选中/禁用/聚焦）
+     * - 8种语义化色彩主题
+     * - 可选中标记功能（带对勾图标）
+     * - 原生链接支持（href/target）
+     * - 键盘导航支持（空格/回车触发）
+     * - 无障碍ARIA兼容设计
+     * @example <!-- 基础文本菜单项 -->
+     * <zane-menu-item>个人中心</zane-menu-item>
+     * <!-- 带图标和选中状态的菜单项 -->
+     * <zane-menu-item selected selectable>
+     *   收件箱
+     *   <zane-badge slot="end">12</zane-badge>
+     * </zane-menu-item>
+     * <!-- 作为链接的菜单项 -->
+     * <zane-menu-item
+     *   href="/settings"
+     *   color="primary"
+     *   target="_blank">
+     *   系统设置
+     * </zane-menu-item>
+     * @designSystem | 状态         | 视觉特征                     |
+     * |--------------|----------------------------|
+     * | 正常         | 浅灰背景，深灰文字          |
+     * | 悬停         | 浅蓝色背景（#f0f7ff）       |
+     * | 聚焦         | 2px蓝色边框（#1a73e8）      |
+     * | 选中         | 左侧蓝色条+对勾图标         |
+     * | 禁用         | 50%透明度，阻止交互事件     |
      */
     interface HTMLZaneMenuItemElement extends Components.ZaneMenuItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneMenuItemElementEventMap>(type: K, listener: (this: HTMLZaneMenuItemElement, ev: ZaneMenuItemCustomEvent<HTMLZaneMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2880,13 +4255,33 @@ declare global {
         "zane-modal--close": any;
     }
     /**
-     * @name Modal
-     * @description Modals are used to display content in a layer above the app.
-     * @category Informational
-     * @subcategory Modal
-     * @tags controls
-     * @img /assets/img/modal.webp
-     * @imgDark /assets/img/modal-dark.webp
+     * 模态框组件 (zane-modal)
+     * @component zane-modal
+     * @shadow true
+     * @description 提供企业级应用的模态对话框解决方案，支持：
+     * - 多种预设尺寸响应式布局
+     * - 灵活的内容插槽（头部/主体/底部）
+     * - 加载状态可视化
+     * - 可控关闭行为（自动关闭/受控关闭）
+     * - 无障碍访问支持
+     * - 滚动条自动管理
+     * @example <!-- 基础用法 -->
+     * <zane-modal
+     *   heading="确认操作"
+     *   open={true}>
+     *   <p>确定要删除此项吗？</p>
+     *   <div slot="footer">
+     *     <zane-button>取消</zane-button>
+     *     <zane-button variant="primary">确定</zane-button>
+     *   </div>
+     * </zane-modal>
+     * <!-- 带加载状态的模态框 -->
+     * <zane-modal
+     *   heading="数据处理中"
+     *   open={true}
+     *   showLoader={true}>
+     *   <p>请稍候，正在保存您的数据...</p>
+     * </zane-modal>
      */
     interface HTMLZaneModalElement extends Components.ZaneModal, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneModalElementEventMap>(type: K, listener: (this: HTMLZaneModalElement, ev: ZaneModalCustomEvent<HTMLZaneModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2903,11 +4298,29 @@ declare global {
         new (): HTMLZaneModalElement;
     };
     /**
-     * @name Modal Content
-     * @description The Modal Content component is used to display the content within a modal.
-     * @category Informational
-     * @subcategory Modal
-     * @childComponent true
+     * 模态框内容容器组件 (zane-modal-content)
+     * @component zane-modal-content
+     * @shadow true
+     * @description 专为 zane-modal 设计的结构化内容容器，提供三种预设内容样式方案，
+     * 支持动态切换内容展示模式。作为模态框生态系统的核心子组件，实现：
+     * - 内容区域样式规范化
+     * - 自适应内容布局
+     * - 多场景内容样式预设
+     * - 无缝衔接父级模态框的交互状态
+     * @see {@link zane-modal } 关联的父级模态框组件
+     * @example <!-- 默认带边框样式 -->
+     * <zane-modal-content>
+     *   <p>标准内容区块</p>
+     * </zane-modal-content>
+     * <!-- 无边框模式 -->
+     * <zane-modal-content type="borderless">
+     *   <img src="data-chart.png"  alt="数据图表"/>
+     * </zane-modal-content>
+     * <!-- 文本优化模式 -->
+     * <zane-modal-content type="text">
+     *   <h3>服务条款</h3>
+     *   <p>这里是详细的协议文本内容...</p>
+     * </zane-modal-content>
      */
     interface HTMLZaneModalContentElement extends Components.ZaneModalContent, HTMLStencilElement {
     }
@@ -2920,13 +4333,27 @@ declare global {
         "zane-notification--dismiss": any;
     }
     /**
-     * @name Notification
-     * @description Notifications are messages that communicate information to the user.
-     * @category Informational
-     * @tags notification
-     * @example <zane-notification state="success">
-     *      <div slot='title'>Successful saved the record</div>
-     *    </zane-notification>
+     * 智能通知系统组件 (zane-notification)
+     * @component zane-notification
+     * @shadow true
+     * @description 提供多场景智能通知解决方案，支持四态反馈、操作交互和主题适配。
+     * 核心功能包括：
+     * - 状态图标自动匹配
+     * - 暗黑模式/高对比度自适应
+     * - 内联/块级布局切换
+     * - 可定制的操作按钮
+     * - 可控的关闭行为
+     * - 无障碍访问支持
+     * @example <!-- 基础警告通知 -->
+     * <zane-notification state="warning" dismissible>
+     *   <span slot="title">存储空间不足</span>
+     *   <span slot="subtitle">剩余 5% 磁盘空间，建议清理缓存</span>
+     * </zane-notification>
+     * <!-- 带操作的成功通知 -->
+     * <zane-notification state="success" action="查看详情" high-contrast>
+     *   <span slot="title">支付成功</span>
+     *   <span slot="subtitle">订单号：20250719-2156</span>
+     * </zane-notification>
      */
     interface HTMLZaneNotificationElement extends Components.ZaneNotification, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneNotificationElementEventMap>(type: K, listener: (this: HTMLZaneNotificationElement, ev: ZaneNotificationCustomEvent<HTMLZaneNotificationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2943,12 +4370,19 @@ declare global {
         new (): HTMLZaneNotificationElement;
     };
     /**
-     * @name Notification Manager
-     * @description The Notification Manager handles the organization and display of notifications within the application.
-     * @category Informational
-     * @tags notification
-     * @img /assets/img/notification-manager.webp
-     * @imgDark /assets/img/notification-manager-dark.webp
+     * 智能通知管理系统组件 (zane-notification-manager)
+     * @component zane-notification-manager
+     * @shadow true
+     * @description 全局通知管理中心，提供以下核心能力：
+     * 1. 跨组件通知聚合：通过事件总线收集全应用通知
+     * 2. 多位置布局：支持4种屏幕定位策略
+     * 3. 生命周期管理：自动关闭/手动关闭/防重复
+     * 4. 安全渲染：内置DOM净化防止XSS攻击
+     * 5. 主题适配：自动同步暗黑模式状态
+     * @example <!-- 基础用法 -->
+     * <zane-notification-manager position="top-right"></zane-notification-manager>
+     * <!-- 自定义命名管理器 -->
+     * <zane-notification-manager name="dashboard" position="bottom-left"></zane-notification-manager>
      */
     interface HTMLZaneNotificationManagerElement extends Components.ZaneNotificationManager, HTMLStencilElement {
     }
@@ -2963,11 +4397,15 @@ declare global {
         "zane-number--input": any;
     }
     /**
-     * @name Number
-     * @description Number input lets users enter a numeric value and incrementally increase or decrease the value with a two-segment control.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-number value="100"></zane-input>
+     * 数字输入框组件 zane-number
+     * 核心功能：
+     * 1. 支持数字输入及增减按钮控制
+     * 2. 提供四种状态反馈（默认/成功/警告/错误）
+     * 3. 表单验证支持（必填/禁用/只读）
+     * 4. 防抖事件处理与无障碍访问优化
+     * 5. 插槽扩展能力（前后扩展区域）
+     * @implements ComponentInterface *
+     * @implements InputComponentInterface *
      */
     interface HTMLZaneNumberElement extends Components.ZaneNumber, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneNumberElementEventMap>(type: K, listener: (this: HTMLZaneNumberElement, ev: ZaneNumberCustomEvent<HTMLZaneNumberElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -2988,12 +4426,17 @@ declare global {
         "zane-popover--open": any;
     }
     /**
-     * @name Popover
-     * @description The Popover component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 弹出框组件（Popover）
+     * @component zane-popover
+     * @shadow true
+     * @description `zane-popover` 是一个灵活的弹出框组件，可以在目标元素周围显示内容。它支持多种触发方式（点击、悬停、手动控制）、多种箭头样式以及自定义位置。
+     * 使用此组件时，需要在组件内部放置一个 `zane-popover-content` 组件作为弹出内容，以及一个触发元素（例如按钮）。
+     * @example <zane-popover trigger="click">
+     *   <button>点击我</button>
+     *   <zane-popover-content>
+     *     这里是弹出内容
+     *   </zane-popover-content>
+     * </zane-popover>
      */
     interface HTMLZanePopoverElement extends Components.ZanePopover, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZanePopoverElementEventMap>(type: K, listener: (this: HTMLZanePopoverElement, ev: ZanePopoverCustomEvent<HTMLZanePopoverElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3010,11 +4453,25 @@ declare global {
         new (): HTMLZanePopoverElement;
     };
     /**
-     * @name Popover Content
-     * @description The PopoverContent component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @childComponent true
+     * 弹出框内容容器组件 (zane-popover-content)
+     * @component zane-popover-content
+     * @shadow true
+     * @description 弹出框系统的核心内容承载容器，提供以下核心功能：
+     * 1. 结构化内容容器：为弹出内容提供标准化的布局结构
+     * 2. 动态箭头指示器：根据父组件配置自动调整箭头样式和位置
+     * 3. 无障碍支持：内置ARIA角色属性增强可访问性
+     * 4. 主题适配：通过CSS变量支持深度主题定制
+     * @dependency 必须作为`<zane-popover>`组件的直接子元素使用
+     * @example <!-- 基础用法 -->
+     * <zane-popover-content>
+     *   <h3>标题</h3>
+     *   <p>详细说明内容...</p>
+     *   <button>确认</button>
+     * </zane-popover-content>
+     * <!-- 带样式定制 -->
+     * <zane-popover-content style="--background: #2c3e50; --color: white">
+     *   ...
+     * </zane-popover-content>
      */
     interface HTMLZanePopoverContentElement extends Components.ZanePopoverContent, HTMLStencilElement {
     }
@@ -3023,11 +4480,25 @@ declare global {
         new (): HTMLZanePopoverContentElement;
     };
     /**
-     * @name Progress
-     * @description Progress indicators express an unspecified wait time or display the length of a process.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-progress value="40" label="Progress" width="100%" helper-text="Optional helper text goes here..."></zane-progress>
+     * 动态进度指示器组件 (zane-progress)
+     * @component zane-progress
+     * @shadow true
+     * @description 提供可视化任务进程的进度指示器，支持多种状态显示和尺寸配置。适用于文件上传、数据加载、操作流程等场景。
+     * @example <!-- 基础用法 -->
+     * <zane-progress value={75}></zane-progress>
+     * <!-- 带标签和状态 -->
+     * <zane-progress
+     *   value={50}
+     *   label="上传进度"
+     *   status="active"
+     *   helperText="剩余时间：2分钟"
+     * ></zane-progress>
+     * <!-- 错误状态 -->
+     * <zane-progress
+     *   value={30}
+     *   status="error"
+     *   helperText="上传失败，请重试"
+     * ></zane-progress>
      */
     interface HTMLZaneProgressElement extends Components.ZaneProgress, HTMLStencilElement {
     }
@@ -3041,12 +4512,16 @@ declare global {
         "zane-select--enter": any;
     }
     /**
-     * @name Select
-     * @description Allows the user to select one or more options using a dropdown.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/select.webp
-     * @imgDark /assets/img/select-dark.webp
+     * 基于 Floating UI 的增强型下拉选择组件
+     * @component 
+     * @tag zane-select
+     * @implements ComponentInterface , InputComponentInterface}
+     * @example <!-- 基础用法 -->
+     * <zane-select
+     *   items={[{label: '选项1', value: 1}]}
+     *   placeholder="请选择"
+     *   size="md"
+     * />
      */
     interface HTMLZaneSelectElement extends Components.ZaneSelect, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneSelectElementEventMap>(type: K, listener: (this: HTMLZaneSelectElement, ev: ZaneSelectCustomEvent<HTMLZaneSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3063,9 +4538,11 @@ declare global {
         new (): HTMLZaneSelectElement;
     };
     /**
-     * @name1 Side Navigation
-     * @description1 The side navigation component provides an easy way to navigate through your website / application.
-     * @img1 /assets/img/sidenav.webp
+     * 侧边导航栏组件，提供页面侧边导航功能
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface HTMLZaneSidenavElement extends Components.ZaneSidenav, HTMLStencilElement {
     }
@@ -3073,6 +4550,13 @@ declare global {
         prototype: HTMLZaneSidenavElement;
         new (): HTMLZaneSidenavElement;
     };
+    /**
+     * 侧边导航菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface HTMLZaneSidenavMenuElement extends Components.ZaneSidenavMenu, HTMLStencilElement {
     }
     var HTMLZaneSidenavMenuElement: {
@@ -3082,6 +4566,13 @@ declare global {
     interface HTMLZaneSidenavMenuItemElementEventMap {
         "zane:sidenav-menu-item-click": any;
     }
+    /**
+     * 侧边导航菜单项组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface HTMLZaneSidenavMenuItemElement extends Components.ZaneSidenavMenuItem, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneSidenavMenuItemElementEventMap>(type: K, listener: (this: HTMLZaneSidenavMenuItemElement, ev: ZaneSidenavMenuItemCustomEvent<HTMLZaneSidenavMenuItemElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3101,12 +4592,17 @@ declare global {
         "zane-slider--input": any;
     }
     /**
-     * @name Slider
-     * @description Sliders allow users to make selections from a range of values.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/slider.webp
-     * @imgDark /assets/img/slider-dark.webp
+     * 滑动选择器组件
+     * 提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+     * @component zane-slider
+     * @tags zane-slider
+     * @shadow true
+     * @example <!-- 基础用法 -->
+     * <zane-slider min="0" max="100" value="50"></zane-slider>
+     * <!-- 禁用状态 -->
+     * <zane-slider disabled value="30"></zane-slider>
+     * <!-- 隐藏数值输入框 -->
+     * <zane-slider show-only-slider value="75"></zane-slider>
      */
     interface HTMLZaneSliderElement extends Components.ZaneSlider, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneSliderElementEventMap>(type: K, listener: (this: HTMLZaneSliderElement, ev: ZaneSliderCustomEvent<HTMLZaneSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3123,11 +4619,16 @@ declare global {
         new (): HTMLZaneSliderElement;
     };
     /**
-     * @name Spinner
-     * @description Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-spinner class="rainbow" size="2rem"></zane-spinner>
+     * 加载指示器组件 (zane-spinner)
+     * @component 
+     * @shadow true
+     * @description 用于表示加载状态的动画指示器，支持自定义尺寸和样式。
+     * @example <!-- 基本用法 -->
+     * <zane-spinner></zane-spinner>
+     * <!-- 自定义描述文本 -->
+     * <zane-spinner description="数据加载中"></zane-spinner>
+     * <!-- 隐藏背景圆环 -->
+     * <zane-spinner hide-background></zane-spinner>
      */
     interface HTMLZaneSpinnerElement extends Components.ZaneSpinner, HTMLStencilElement {
     }
@@ -3136,10 +4637,16 @@ declare global {
         new (): HTMLZaneSpinnerElement;
     };
     /**
-     * @name SVG
-     * @description Render SVG content from an external source.
-     * @category Data Display
-     * @example <zane-svg src="https://icons.getbootstrap.com/assets/icons/bug.svg" size="2rem"></zane-svg>
+     * SVG 动态加载组件 (zane-svg)
+     * @component 
+     * @shadow true
+     * @description 智能 SVG 图标容器，支持动态加载、尺寸控制与样式继承
+     * @example <!-- 基础用法 -->
+     * <zane-svg src="/assets/icon.svg"></zane-svg>
+     * <!-- 带尺寸控制 -->
+     * <zane-svg src="/assets/logo.svg"  size="xl"></zane-svg>
+     * <!-- 自定义尺寸 -->
+     * <zane-svg src="/assets/chart.svg"  size="32px"></zane-svg>
      */
     interface HTMLZaneSvgElement extends Components.ZaneSvg, HTMLStencilElement {
     }
@@ -3150,6 +4657,9 @@ declare global {
     interface HTMLZaneTabElementEventMap {
         "zane-tab--click": any;
     }
+    /**
+     * 单个标签页元素，支持多种交互状态和类型
+     */
     interface HTMLZaneTabElement extends Components.ZaneTab, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTabElementEventMap>(type: K, listener: (this: HTMLZaneTabElement, ev: ZaneTabCustomEvent<HTMLZaneTabElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3164,6 +4674,14 @@ declare global {
         prototype: HTMLZaneTabElement;
         new (): HTMLZaneTabElement;
     };
+    /**
+     * 标签页内容面板容器
+     * 该组件与 zane-tab 标签页组件配合使用，形成完整的标签页系统。当标签页被激活时，
+     * 关联的面板内容将显示在界面中，支持层级深度控制以实现复杂的视觉层次效果。
+     * @example <zane-tab-panel value="profile" active>
+     *   用户资料详情内容
+     * </zane-tab-panel>
+     */
     interface HTMLZaneTabPanelElement extends Components.ZaneTabPanel, HTMLStencilElement {
     }
     var HTMLZaneTabPanelElement: {
@@ -3176,13 +4694,6 @@ declare global {
         "zane-table--selection-change": any;
         "zane-table--sort": any;
     }
-    /**
-     * @name Table
-     * @description A configurable component for displaying tabular data.
-     * @category Data Display
-     * @img /assets/img/table.webp
-     * @imgDark /assets/img/table-dark.webp
-     */
     interface HTMLZaneTableElement extends Components.ZaneTable, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTableElementEventMap>(type: K, listener: (this: HTMLZaneTableElement, ev: ZaneTableCustomEvent<HTMLZaneTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3198,16 +4709,7 @@ declare global {
         new (): HTMLZaneTableElement;
     };
     /**
-     * @name Tabs
-     * @description The tabs component is used to display multiple panels of content in a container.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-tabs>
-     * <zane-tabs-list>
-     * <zane-tab selected >Tab 1</zane-tab>
-     * <zane-tab>Tab 2</zane-tab>
-     * </zane-tabs-list>
-     * </zane-tabs>
+     * 标签页容器组件，用于管理和切换多个标签页
      */
     interface HTMLZaneTabsElement extends Components.ZaneTabs, HTMLStencilElement {
     }
@@ -3226,11 +4728,15 @@ declare global {
         "zane-tag--dismiss": any;
     }
     /**
-     * @name Tag
-     * @description Use tags to label, categorize, or organize items using keywords that describe them.
-     * @category Data Display
-     * @tag controls
-     * @example <zane-tag class="color-red">Important</zane-tag>
+     * 多功能标签/徽章组件
+     * 提供灵活的内容展示能力，支持多种颜色主题、尺寸规格、可关闭操作和选中状态。
+     * 适用于分类标记、状态指示、可选项选择等场景，可与表单组件或列表组件配合使用。
+     * @example <!-- 基础用法 -->
+     * <zane-tag>默认标签</zane-tag>
+     * <!-- 带关闭按钮 -->
+     * <zane-tag dismissible>可关闭标签</zane-tag>
+     * <!-- 带图片 -->
+     * <zane-tag image-src="/path/to/avatar.jpg"> 用户标签</zane-tag>
      */
     interface HTMLZaneTagElement extends Components.ZaneTag, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTagElementEventMap>(type: K, listener: (this: HTMLZaneTagElement, ev: ZaneTagCustomEvent<HTMLZaneTagElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3247,10 +4753,15 @@ declare global {
         new (): HTMLZaneTagElement;
     };
     /**
-     * @name Text
-     * @description Typography are used for rendering headlines, paragraphs and captions.
-     * @category General
-     * @example <zane-text type="heading" level="1">Heading</zane-typography>
+     * 多功能文本展示组件
+     * 提供丰富的文本样式和语义化支持，满足不同场景的文本展示需求。支持多种文本类型、
+     * 颜色主题、标题级别和响应式文本大小，集成了完善的 ARIA 可访问性支持。
+     * @example <!-- 基础文本 -->
+     * <zane-text>普通段落文本</zane-text>
+     * <!-- 标题文本 -->
+     * <zane-text type="heading" heading-level="2">二级标题</zane-text>
+     * <!-- 带颜色的辅助文本 -->
+     * <zane-text type="helper-text" color="helper">表单提示文本</zane-text>
      */
     interface HTMLZaneTextElement extends Components.ZaneText, HTMLStencilElement {
     }
@@ -3266,11 +4777,17 @@ declare global {
         "zane-textarea--input": any;
     }
     /**
-     * @name Textarea
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-textarea placeholder="Enter some description over here"></zane-textarea>
+     * 多功能文本区域输入组件
+     * 提供完整的表单文本区域解决方案，支持响应式布局、表单验证、辅助文本提示和丰富的交互功能。
+     * 集成了 ARIA 可访问性支持和多状态反馈设计，适用于复杂表单场景。
+     * @example <!-- 基础用法 -->
+     * <zane-textarea label="用户反馈" placeholder="请输入您的建议"></zane-textarea>
+     * <!-- 带验证状态 -->
+     * <zane-textarea
+     *   label="密码"
+     *   state="error"
+     *   invalid-text="密码长度不足8位"
+     * ></zane-textarea>
      */
     interface HTMLZaneTextareaElement extends Components.ZaneTextarea, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTextareaElementEventMap>(type: K, listener: (this: HTMLZaneTextareaElement, ev: ZaneTextareaCustomEvent<HTMLZaneTextareaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3293,11 +4810,7 @@ declare global {
         "zane-time-picker--input": any;
     }
     /**
-     * @name Time Picker
-     * @description Captures time input.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-time-picker value='true'></zane-time-picker>
+     * 时间选择器组件
      */
     interface HTMLZaneTimePickerElement extends Components.ZaneTimePicker, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTimePickerElementEventMap>(type: K, listener: (this: HTMLZaneTimePickerElement, ev: ZaneTimePickerCustomEvent<HTMLZaneTimePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3319,11 +4832,9 @@ declare global {
         "zane-toggle--focus": any;
     }
     /**
-     * @name Toggle
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-toggle value='true'>Want ice cream?</zane-toggle>
+     * 开关组件
+     * 该组件实现了可定制的开关切换控件，支持多种交互状态和样式配置，
+     * 符合WAI-ARIA无障碍规范，可无缝集成到表单中使用。
      */
     interface HTMLZaneToggleElement extends Components.ZaneToggle, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneToggleElementEventMap>(type: K, listener: (this: HTMLZaneToggleElement, ev: ZaneToggleCustomEvent<HTMLZaneToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3340,12 +4851,9 @@ declare global {
         new (): HTMLZaneToggleElement;
     };
     /**
-     * @name Tooltip
-     * @description The Tooltip component is used to display additional information on hover.
-     * @category Informational
-     * @tag content
-     * @img /assets/img/tooltip.webp
-     * @imgDark /assets/img/tooltip-dark.webp
+     * 工具提示组件 (zane-tooltip)
+     * 该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。
+     * 支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
      */
     interface HTMLZaneTooltipElement extends Components.ZaneTooltip, HTMLStencilElement {
     }
@@ -3354,12 +4862,12 @@ declare global {
         new (): HTMLZaneTooltipElement;
     };
     /**
-     * @name Tree
-     * @description A tree view is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构可视化组件
+     * @example <!-- 基础用法 -->
+     * <zane-tree>
+     *   <zane-tree-node value="node1">一级节点</zane-tree-node>
+     *   <zane-tree-node value="node2">二级节点</zane-tree-node>
+     * </zane-tree>
      */
     interface HTMLZaneTreeElement extends Components.ZaneTree, HTMLStencilElement {
     }
@@ -3371,13 +4879,7 @@ declare global {
         "zane-tree-node--click": any;
     }
     /**
-     * @name TreeNode
-     * @description A tree node is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @childComponent true
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构节点组件
      */
     interface HTMLZaneTreeNodeElement extends Components.ZaneTreeNode, HTMLStencilElement {
         addEventListener<K extends keyof HTMLZaneTreeNodeElementEventMap>(type: K, listener: (this: HTMLZaneTreeNodeElement, ev: ZaneTreeNodeCustomEvent<HTMLZaneTreeNodeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3461,142 +4963,225 @@ declare global {
 }
 declare namespace LocalJSX {
     /**
-     * @name Accordion
-     * @description An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
-     * @overview  <p>The accordion component delivers large amounts of content in a small space through progressive disclosure. The header title give the user a high level overview of the content allowing the user to decide which sections to read.</p>
-     *  <p>Accordions can make information processing and discovering more effective. However, it does hide content from users and it’s important to account for a user not noticing or reading all of the included content. If a user is likely to read all of the content then don’t use an accordion as it adds the burden of an extra click; instead use a full scrolling page with normal headers.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @tags display
-     * @img /assets/img/accordion.webp
-     * @imgDark /assets/img/accordion-dark.webp
+     * 可折叠面板(Accordion)容器组件
+     * 提供可折叠内容区域的容器组件，管理多个折叠项的状态和交互。
+     * 支持单开/多开模式、多种尺寸和图标位置配置。
      */
     interface ZaneAccordion {
         /**
-          * Accordion item dropdown alignment.
+          * 控制折叠指示图标的位置  1. `end`: 图标显示在面板标题的末尾(右侧)(默认值) 2. `start`: 图标显示在面板标题的开头(左侧)
+          * @type {'end' | 'start'}
           * @default 'end'
+          * @reflectToAttr 属性值会同步到DOM元素上
+          * @example <zane-accordion align="start"></zane-accordion>
          */
         "align"?: 'end' | 'start';
         /**
+          * 是否允许多个面板同时展开  - true: 允许多个面板同时保持展开状态 - false: 同一时间只能展开一个面板(默认值)
+          * @type {boolean}
           * @default false
+          * @example <zane-accordion multiple></zane-accordion>
          */
         "multiple"?: boolean;
         /**
-          * The According size.
+          * 控制折叠面板的尺寸变体  - 'lg': 大尺寸，适合需要突出显示的内容 - 'md': 中等尺寸(默认值)，通用尺寸 - 'sm': 小尺寸，适合紧凑布局
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflectToAttr 属性值会同步到DOM元素上
+          * @example <zane-accordion size="lg"></zane-accordion>
          */
         "size"?: 'lg' | 'md' | 'sm';
     }
     /**
-     * @name Accordion Item
-     * @description An accordion item is single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user.
-     * @overview  <p>The accordion item component is a single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user. The accordion item can be used in conjunction with the accordion component to create a list of expandable items.</p>
-     * @category Data Display
-     * @subcategory Accordion
-     * @childComponent true
+     * 可折叠面板项(Accordion Item)组件
+     * 作为zane-accordion的子组件使用，实现单个可折叠面板项的功能
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface ZaneAccordionItem {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态控制  - true: 禁用该折叠项，不可交互 - false: 正常状态(默认)
+          * @type {boolean}
           * @default false
          */
         "disabled"?: boolean;
         /**
-          * The menu item value.
+          * 面板标题文本  当heading插槽无内容时显示此文本
+          * @type {string}
          */
         "heading"?: string;
         /**
-          * Emitted when the menu item is clicked.
+          * 面板点击事件  当面板被点击时触发，携带当前元素引用和状态
+          * @type {EventEmitter}
+          * @event zane-accordion-item--click
          */
         "onZane-accordion-item--click"?: (event: ZaneAccordionItemCustomEvent<any>) => void;
         /**
-          * Menu item selection state.
+          * 面板展开状态  - true: 面板已展开 - false: 面板已折叠(默认)
+          * @type {boolean}
           * @default false
+          * @mutable 允许组件内部修改
+          * @reflectToAttr 同步到DOM属性
          */
         "open"?: boolean;
     }
     /**
-     * @name Avatar
-     * @description The Avatar component is used to represent user, and displays the profile picture, initials or fallback icon.
-     * @category Data Display
-     * @tags display
-     * @example <zane-avatar size="5rem" name="Shivaji Varma" src="/assets/img/avatar.webp"></zane-avatar>
+     * 头像组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneAvatar {
         /**
+          * 用户姓名（用于生成首字母头像）
+          * @type {string}
           * @default ''
          */
         "name"?: string;
         /**
-          * Avatar size.
+          * 头像尺寸（支持CSS单位）
+          * @type {string}
           * @default '2rem'
          */
         "size"?: string;
         /**
+          * 头像图片URL（优先级高于name）
+          * @type {string}
           * @default ''
          */
         "src"?: string;
     }
     /**
-     * @name Badge
-     * @description The badge component is used to display a small amount of information to the user.
-     * @category Informational
-     * @tag content
-     * @example <zane-badge content="5"> <zane-icon name="notification" size="2rem"></zane-icon></zane-badge>
+     * 徽章组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneBadge {
         /**
+          * 徽章颜色主题
+          * @type {'error'|'primary'|'secondary'|'success'|'warning'}
           * @default 'error'
+          * @reflect 属性值会反射到DOM属性  枚举说明： - error: 错误状态（红色系） - primary: 主要状态（品牌主色系） - secondary: 次要状态（中性色系） - success: 成功状态（绿色系） - warning: 警告状态（黄色系）
          */
         "color"?: | 'error'
     | 'primary'
     | 'secondary'
     | 'success'
     | 'warning';
+        /**
+          * 徽章显示内容
+          * @type {string}
+         */
         "content"?: string;
     }
     /**
-     * @name Breadcrumb
-     * @description A breadcrumb is a secondary navigation scheme that reveals the user's location in a website or web application.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-breadcrumb><zane-breadcrumb-item href="#">Home</zane-breadcrumb-item><zane-breadcrumb-item href="#" active>Page</zane-breadcrumb-item></zane-breadcrumb>
+     * 面包屑导航组件
+     * 用于显示当前页面在网站层次结构中的位置，并提供快速导航功能。
+     * @example ```html
+     * <zane-breadcrumb>
+     *   <zane-breadcrumb-item href="/home">首页</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item href="/products">产品</zane-breadcrumb-item>
+     *   <zane-breadcrumb-item>当前页面</zane-breadcrumb-item>
+     * </zane-breadcrumb>
+     * ```
+     * @Component 装饰器定义了组件的元数据
+     * @property {boolean} shadow - 启用 Shadow DOM 封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 组件的自定义元素标签名
      */
     interface ZaneBreadcrumb {
     }
+    /**
+     * 面包屑导航项组件
+     * 作为面包屑导航系统的单个项使用，必须作为`zane-breadcrumb`的子元素使用。
+     * 支持链接导航、活动状态指示和Schema.org 结构化数据。
+     * @example ```html
+     * <!-- 活动状态项(当前页面) -->
+     * <zane-breadcrumb-item active>
+     *   当前页面
+     * </zane-breadcrumb-item>
+     * <!-- 可点击链接项 -->
+     * <zane-breadcrumb-item href="/products" position="2">
+     *   产品列表
+     * </zane-breadcrumb-item>
+     * ```
+     * @Component 配置项说明：
+     * @property {boolean} shadow - 启用Shadow DOM封装
+     * @property {string} styleUrl - 组件样式文件路径
+     * @property {string} tag - 自定义元素标签名
+     */
     interface ZaneBreadcrumbItem {
         /**
+          * 活动状态标识  表示当前面包屑项是否为活动状态(通常是当前页面)。 当设置为true时，该项会以非链接形式呈现。
+          * @type {boolean}
           * @default false
+          * @memberof BreadcrumbItem
          */
         "active"?: boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址  指定面包屑项的跳转链接。未设置时表示该项不可点击。 当active为true时，此属性会被忽略。
+          * @type {string}
+          * @memberof BreadcrumbItem
          */
         "href"?: string;
+        /**
+          * 项在列表中的位置  表示该项在面包屑导航中的序号位置(从1开始)。 用于Schema.org 微数据和样式控制。
+          * @type {string}
+          * @memberof BreadcrumbItem
+         */
         "position"?: string;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式  指定链接的打开方式，等同于HTML的target属性。 常用值: '_blank'|'_self'|'_parent'|'_top'
+          * @type {string}
+          * @memberof BreadcrumbItem
          */
         "target"?: string;
     }
     /**
-     * @name Button
-     * @description Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
-     * @overview  <p>Buttons are clickable elements that are used to trigger actions. They communicate calls to action to the user and allow users to interact with pages in a variety of ways. Button labels express what action will occur when the user interacts with it.</p>
-     * @category General
-     * @tags controls
-     * @example <zane-button>
-     * Button CTA
+     * 多功能按钮组件
+     * 提供丰富的交互样式和状态管理，支持：
+     * - 多种视觉变体(variant)
+     * - 完整的大小(size)控制
+     * - 主题颜色(color)系统
+     * - 暗黑模式适配
+     * - 完善的ARIA可访问性
+     * - 图标集成
+     * - 加载状态
+     * @example 基础使用
+     * ```html
+     * <zane-button>普通按钮</zane-button>
+     * <zane-button variant="outline">轮廓按钮</zane-button>
+     * <zane-button icon="settings" iconAlign="start">带图标按钮</zane-button>
+     * ```
+     * @example 高级使用
+     * ```html
+     * <zane-button
+     * color="danger"
+     * darkModeColor="warning"
+     * variant="ghost.simple"
+     * size="xl"
+     * disabled
+     * disabledReason="权限不足"
+     * >
+     * 危险操作
      * </zane-button>
+     * ```
      */
     interface ZaneButton {
         /**
-          * The `appendData` property allows you to attach additional data to the button component. This data can be of any type, making it versatile for various use cases. It's particularly useful for passing extra context or information that can be accessed in event handlers or other component logic.
+          * 附加数据对象  会在点击事件中回传，用于携带上下文数据
+          * @type {any}
          */
         "appendData"?: any;
         /**
-          * Defines the primary color of the button. This can be set to predefined color names to apply specific color themes.
+          * 按钮主题色  支持预设颜色或自定义颜色名称(需在CSS中定义对应变量)
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
           * @default 'primary'
+          * @example 预设颜色 - 'primary': 品牌主色 - 'danger': 危险操作红色 - 'success': 成功操作绿色
+          * @example 自定义颜色 需在CSS中定义: --color-custom和--color-custom-10等变量
          */
         "color"?: | 'black'
     | 'danger'
@@ -3606,11 +5191,14 @@ declare namespace LocalJSX {
     | 'warning'
     | 'white';
         /**
+          * ARIA 可访问性配置 可动态修改并反映到DOM属性
+          * @type {Object}
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Color variant for dark mode, applicable when [data-theme="dark"] is set.
+          * 暗黑模式下的替代颜色  当检测到暗黑模式时自动切换为此颜色
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white'}
          */
         "darkModeColor"?: | 'black'
     | 'danger'
@@ -3620,72 +5208,89 @@ declare namespace LocalJSX {
     | 'warning'
     | 'white';
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 按钮禁用状态
+          * @type {boolean}
           * @default false
+          * @reflectToAttr
          */
         "disabled"?: boolean;
         /**
-          * If button is disabled, the reason why it is disabled.
+          * 禁用原因说明  会以ARIA方式提供给辅助技术，提升可访问性
+          * @type {string}
           * @default ''
          */
         "disabledReason"?: string;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（使按钮表现为链接） 设置后按钮渲染为 <a> 标签
          */
         "href"?: string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 图标名称  指定要显示的图标，需要配合zane-icon组件使用
+          * @type {string}
          */
         "icon"?: string;
         /**
-          * Icon alignment. Possible values are `"start"`, `"end"`. Defaults to `"end"`.
+          * 图标对齐方式  控制图标相对于文本的位置
+          * @type {'end' | 'start'}
           * @default 'end'
+          * @description - 'start': 图标在文本左侧 - 'end': 图标在文本右侧
          */
         "iconAlign"?: 'end' | 'start';
         /**
-          * Triggered when the button is clicked.
+          * 按钮点击事件  触发时会返回包含appendData的事件对象
+          * @event zane-button--click
+          * @type {EventEmitter<{ appendData: any }>}
          */
         "onZane-button--click"?: (event: ZaneButtonCustomEvent<{
     appendData: any;
   }>) => void;
         /**
-          * Button selection state.
+          * 按钮选中状态  常用于按钮组或切换场景
+          * @type {boolean}
           * @default false
+          * @reflectToAttr
          */
         "selected"?: boolean;
         /**
-          * If true, a loader will be displayed on button.
+          * 显示加载指示器  设置为true时会显示旋转加载图标并禁用交互
+          * @type {boolean}
           * @default false
          */
         "showLoader"?: boolean;
         /**
-          * Button size. Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"2xl"`, `"full"`. Defaults to `"md"`.
+          * 按钮尺寸  支持从xs到2xl共6种预设尺寸
+          * @type {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'}
           * @default 'md'
+          * @reflectToAttr 
+          * @description - xs: 超小尺寸(24px) - sm: 小尺寸(32px) - md: 中尺寸(40px) - lg: 大尺寸(48px) - xl: 超大尺寸(56px) - 2xl: 特大尺寸(64px)
          */
         "size"?: '2xl' | 'lg' | 'md' | 'sm' | 'xl' | 'xs';
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开目标（当href存在时有效）
           * @default '_self'
          */
         "target"?: string;
         /**
-          * Sets the delay for throttle in milliseconds. Defaults to 200 milliseconds.
+          * 点击事件节流延迟(ms)
           * @default 200
          */
         "throttleDelay"?: number;
         /**
-          * If true, the button will be in a toggled state.
+          * 是否为切换型按钮 启用时点击会保持激活状态
           * @default false
          */
         "toggle"?: boolean;
         /**
-          * Button type based on which actions are performed when the button is clicked.
+          * 按钮类型（当作为表单按钮时） - 'button': 普通按钮 - 'reset': 表单重置按钮 - 'submit': 表单提交按钮
           * @default 'button'
          */
         "type"?: 'button' | 'reset' | 'submit';
         /**
-          * The visual style of the button.   Possible variant values: `"default"` is a filled button. `"outline"` is an outlined button. `"ghost"` is a transparent button. `"light"` is a light color button.  Possible sub-variant values: `"simple"` is a simple button without default padding at end. `"block"` is a full-width button that spans the full width of its container.    Mix and match the `variant` and `sub-variant` to create a variety of buttons.  `"default.simple"`, `"outline.block"` etc.
+          * 按钮视觉变体  支持基础变体和带.simple后缀的简化变体
+          * @type {    * 'default' | 'default.simple'  | 'ghost' | 'ghost.simple'  | 'light' | 'light.simple'  | 'link' | 'link.simple'  | 'neo' | 'neo.simple'  | 'outline' | 'outline.simple' }
           * @default 'default'
+          * @reflectToAttr 
+          * @description - default: 实心填充按钮 - ghost: 透明背景按钮 - light: 浅色背景按钮 - link: 链接样式按钮 - neo: 新拟态风格按钮 - outline: 边框轮廓按钮 - .simple: 简化版变体(减少视觉效果)
          */
         "variant"?: | 'default'
     | 'default.simple'
@@ -3701,443 +5306,626 @@ declare namespace LocalJSX {
     | 'outline.simple';
     }
     /**
-     * @name Button Group
-     * @description Group a series of buttons together on a single line with the button group, and super-power.
-     * @category General
-     * @tags controls
-     * @example <zane-button-group>
-     * <zane-button block icon="home"></zane-button>
-     * <zane-button block icon="alarm"></zane-button>
-     * </zane-button-group>
+     * 按钮组容器组件
      */
     interface ZaneButtonGroup {
     }
+    /**
+     * 卡片组件
+     * 提供可自定义阴影级别的卡片容器
+     */
     interface ZaneCard {
+        /**
+          * 卡片阴影级别
+          * @type {'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxl' | undefined} - 'xs': 超小阴影 (extra small) - 'sm': 小阴影 (small) - 'md': 中等阴影 (medium，默认未指定时) - 'lg': 大阴影 (large) - 'xl': 超大阴影 (extra large) - 'xxl': 特大阴影 (extra extra large) - undefined: 无阴影 阴影级别应在card.scss中定义对应的box-shadow值
+         */
         "shadowLevel"?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxl' | undefined;
     }
     /**
-     * @name Checkbox
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-checkbox value='true'>Want ice cream?</zane-checkbox>
+     * 自定义复选框组件
+     * 实现可定制的复选框控件，支持选中/未选/中间态三种状态，
+     * 提供完整的ARIA支持、键盘交互和事件响应机制。
+     * @example ```html
+     * <zane-checkbox
+     *   label="同意协议"
+     *   size="md"
+     *   layer="02"
+     *   rounded
+     *   required
+     * ></zane-checkbox>
+     * ```
      */
     interface ZaneCheckbox {
         /**
-          * @default {}
+          * ARIA属性配置对象  用于动态设置ARIA属性（如aria-label, aria-describedby等）， 组件会自动收集元素上所有`aria-*`属性到该对象。
+          * @defaultValue `{}`
          */
         "configAria"?: any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
-          * @default false
+          * 禁用状态  当设置为`true`时，组件不可交互且视觉上变灰
+          * @defaultValue `false`
          */
         "disabled"?: boolean;
         /**
-          * @default false
+          * 中间态状态  当设置为`true`时显示"-"图标，表示部分选中状态， 与`value`属性互斥（中间态时`value`应为false）
+          * @defaultValue `false`
          */
         "intermediate"?: boolean;
         /**
-          * The checkbox label.
+          * 复选框标签文本
          */
         "label"?: string;
+        /**
+          * 视觉层级  控制组件在UI中的层级深度，影响阴影和背景色： - `01`: 表层组件（最高层级） - `02`: 中层组件 - `background`: 背景层组件（最低层级）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
-          * The input field name.
+          * 表单字段名（自动生成）
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件
          */
         "onZane-checkbox--blur"?: (event: ZaneCheckboxCustomEvent<any>) => void;
         /**
-          * On change of input a CustomEvent 'zane-checkbox--change' will be triggered. Event details contains parent event, oldValue, newValue of input.
+          * 值变更事件
          */
         "onZane-checkbox--change"?: (event: ZaneCheckboxCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件
          */
         "onZane-checkbox--focus"?: (event: ZaneCheckboxCustomEvent<any>) => void;
         /**
+          * 只读状态
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
           * @default false
          */
         "required"?: boolean;
         /**
+          * 圆角样式
           * @default false
          */
         "rounded"?: boolean;
         /**
-          * The button size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
-          * @default 'md'
+          * 尺寸规格  - `lg`: 大尺寸(48px) - `md`: 中尺寸(40px) - `sm`: 小尺寸(32px)
+          * @defaultValue `'md'`
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
-          * @default false
+          * 选中状态  当设置为`true`时显示选中图标， 与`intermediate`属性互斥
+          * @defaultValue `false`
          */
         "value"?: boolean;
     }
     /**
-     * @name Code Editor
-     * @description A browser based code editor.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/code-editor.webp
-     * @imgDark /assets/img/code-editor-dark.webp
+     * 基于Monaco Editor的代码编辑器组件
+     * 提供语法高亮、智能提示等专业编辑功能，支持暗黑/亮色主题切换，
+     * 内置防抖机制优化高频变更事件，适用于代码片段展示和实时编辑场景。
+     * @example ```html
+     * <zane-code-editor
+     *   language="javascript"
+     *   minimap
+     *   debounce="500"
+     *   value="console.log('Hello  World')"
+     * ></zane-code-editor>
+     * ```
      */
     interface ZaneCodeEditor {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `onChange` event after each keystroke.
-          * @default 250
+          * 变更事件防抖时间（毫秒）  避免高频输入时频繁触发变更事件， 设置为0可禁用防抖
+          * @defaultValue `250`
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
-          * @default false
+          * 禁用状态  禁用时编辑器不可编辑但可滚动查看内容
+          * @defaultValue `false`
          */
         "disabled"?: boolean;
         /**
-          * @default 'javascript'
+          * 编程语言支持  支持的语法类型： - `html`: HTML/XML标记语言 - `javascript`: JavaScript/TypeScript - `json`: JSON数据格式
+          * @defaultValue `'javascript'`
          */
         "language"?: 'html' | 'javascript' | 'json';
+        /**
+          * 类型声明库源码  用于提供智能提示的类型定义， 格式应为对应语言的类型声明字符串
+         */
         "libSource"?: any;
         /**
-          * @default 'on'
+          * 行号显示控制  - `on`: 显示行号 - `off`: 隐藏行号
+          * @defaultValue `'on'`
          */
         "lineNumbers"?: 'off' | 'on';
         /**
-          * @default false
+          * 缩略图显示  在编辑器右侧显示代码导航缩略图
+          * @defaultValue `false`
          */
         "minimap"?: boolean;
         /**
-          * The input field name.
+          * 表单字段名（自动生成）
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the value has changed.
+          * 内容变更事件（带防抖）
          */
         "onZane-code-editor--change"?: (event: ZaneCodeEditorCustomEvent<any>) => void;
         /**
-          * @default false
+          * 只读模式  开启后禁止编辑但保留代码高亮
+          * @defaultValue `false`
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
-          * @default false
+          * 必填状态
+          * @defaultValue `false`
          */
         "required"?: boolean;
         /**
-          * The input field value.
+          * 编辑器内容  双向绑定的代码文本值
          */
         "value"?: string;
     }
     /**
-     * @name Code Highlighter
-     * @description A browser based code highlighter.
-     * @category Data Display
-     * @tag display, code
-     * @img /assets/img/code-highlighter.webp
-     * @imgDark /assets/img/code-highlighter-dark.webp
+     * 代码高亮组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneCodeHighlighter {
         /**
-          * Format the code snippet.
+          * 是否格式化代码
+          * @Prop 装饰器表示这是组件的公开属性
+          * @mutable 表示属性可变
+          * @reflect 表示属性值会反映到DOM属性上
          */
         "format"?: boolean;
         /**
-          * Hide the copy button.
+          * 是否隐藏复制按钮
+          * @Prop 默认值为false
           * @default false
          */
         "hideCopy"?: boolean;
         /**
-          * Display the code snippet inline.
+          * 是否为内联模式（非块级显示）
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "inline"?: boolean;
         /**
-          * The language of the code snippet.
+          * 代码语言类型
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'javascript'
           * @default 'javascript'
          */
         "language"?: Language;
         /**
-          * Display line numbers.
+          * 是否显示行号
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "lineNumbers"?: boolean;
         /**
-          * The code snippet to highlight.
+          * 代码内容
+          * @Prop 装饰器
           * @default ''
          */
         "value"?: string;
     }
+    /**
+     * 容器布局组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
+     */
     interface ZaneContainer {
         /**
+          * 容器尺寸选项 - 'full': 全宽容器 - 'lg': 大号容器 - 'max': 最大宽度容器 - 'md': 中等容器 (默认值) - 'sm': 小号容器 - 'xl': 超大容器
+          * @Prop 装饰器表示这是组件的公开属性
+          * @reflect 表示属性值会反映到DOM属性上 默认值为 'full'
           * @default 'full'
          */
         "size"?: 'full' | 'lg' | 'max' | 'md' | 'sm' | 'xl';
     }
     /**
-     * @name Current Time
-     * @description Displays the current time in a given timezone.
-     * @category Others
-     * @example <zane-current-time></zane-current-time>
+     * 当前时间显示组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneCurrentTime {
+        /**
+          * 时区设置 遵循IANA时区数据库的时区字符串格式 例如: "Asia/Shanghai", "America/New_York"
+          * @Prop 装饰器表示这是组件的公开属性 未指定时使用运行环境的默认时区
+         */
         "timezone"?: string;
     }
     /**
-     * @name Date Picker
-     * @category Form Inputs
-     * @description Captures date input.
-     * @example <zane-date-picker value='true'></zane-date-picker>
+     * 日期选择器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDatePicker {
         /**
+          * ARIA无障碍属性配置对象 用于存储所有aria-*属性
+          * @Prop 装饰器表示这是组件的公开属性
+          * @mutable 表示属性可变
+          * @reflect 表示属性值会反映到DOM属性上
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 事件防抖时间(毫秒) 用于控制change事件的触发频率
+          * @Prop 默认值为300ms
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用组件
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * 辅助文本 显示在输入框下方的帮助信息
+          * @Prop
+         */
         "helperText"?: string;
         /**
+          * 是否为内联模式
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "inline"?: boolean;
         /**
+          * 是否为无效状态
+          * @Prop 
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * 无效状态提示文本
+          * @Prop
+         */
         "invalidText"?: string;
+        /**
+          * 标签文本
+          * @Prop
+         */
         "label"?: string;
         /**
-          * The input field name.
+          * 输入框name属性 默认值为"zane-input-{唯一ID}"
+          * @Prop 
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件
+          * @Event 装饰器定义自定义事件 事件名称为'zane-date-picker--blur'
          */
         "onZane-date-picker--blur"?: (event: ZaneDatePickerCustomEvent<any>) => void;
         /**
-          * Emitted when the value has changed.
+          * 值变化事件(带防抖)
+          * @Event 装饰器定义自定义事件 事件名称为'zane-date-picker--change'
          */
         "onZane-date-picker--change"?: (event: ZaneDatePickerCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件
+          * @Event 装饰器定义自定义事件 事件名称为'zane-date-picker--focus'
          */
         "onZane-date-picker--focus"?: (event: ZaneDatePickerCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 输入事件(实时触发)
+          * @Event 装饰器定义自定义事件 事件名称为'zane-date-picker--input'
          */
         "onZane-date-picker--input"?: (event: ZaneDatePickerCustomEvent<any>) => void;
         /**
-          * The input field placeholder.
+          * 占位符文本
+          * @Prop
          */
         "placeholder"?: string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 是否为只读状态
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 是否为必填项
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "required"?: boolean;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸 - 'lg': 大尺寸 - 'md': 中等尺寸(默认) - 'sm': 小尺寸
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default 'md'
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 当前值 可以是null、number或string类型
+          * @Prop 装饰器，mutable表示属性可变
           * @default ''
          */
         "value"?: null | number | string;
         /**
+          * 是否为警告状态
+          * @Prop 
           * @default false
          */
         "warn"?: boolean;
+        /**
+          * 警告状态提示文本
+          * @Prop
+         */
         "warnText"?: string;
     }
     /**
-     * @name Divider
-     * @description A divider can be used to segment content vertically or horizontally.
-     * @category Layout
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 分割线组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDivider {
         /**
+          * 是否为垂直方向
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false(水平方向)
           * @default false
          */
         "vertical"?: boolean;
     }
     /**
-     * @name Dropdown
-     * @description Enables native inputs to be used within a Form field.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 下拉菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDropdown {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用下拉菜单
+          * @Prop 默认值为false
           * @default false
          */
         "disabled"?: boolean;
         /**
+          * 是否为受控模式 在受控模式下，组件的状态完全由外部控制
+          * @Prop 装饰器，reflect表示会反映到DOM属性上
           * @default false
          */
         "managed"?: boolean;
         /**
-          * Emitted when the dropdown is closed.
+          * 下拉菜单关闭事件
+          * @Event 装饰器定义自定义事件 事件名称为'zane-dropdown--close'
          */
         "onZane-dropdown--close"?: (event: ZaneDropdownCustomEvent<any>) => void;
+        /**
+          * 菜单项点击事件
+          * @Event 装饰器定义自定义事件 事件名称为'zane-dropdown--item-click'
+         */
         "onZane-dropdown--item-click"?: (event: ZaneDropdownCustomEvent<any>) => void;
         /**
-          * Emitted when the dropdown is opened.
+          * 下拉菜单打开事件
+          * @Event 装饰器定义自定义事件 事件名称为'zane-dropdown--open'
          */
         "onZane-dropdown--open"?: (event: ZaneDropdownCustomEvent<any>) => void;
         /**
+          * 下拉菜单是否打开
+          * @Prop 装饰器，mutable表示属性可变，reflect表示会反映到DOM属性上
           * @default false
          */
         "open"?: boolean;
         /**
+          * 下拉菜单位置选项 多个位置用逗号分隔，按优先级排序
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'bottom-start,top-start,bottom-end,top-end'
           * @default 'bottom-start,top-start,bottom-end,top-end'
          */
         "placements"?: string;
         /**
+          * 触发下拉菜单的方式 - 'click': 点击触发 - 'hover': 悬停触发 - 'manual': 手动控制
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为'click'
           * @default 'click'
          */
         "trigger"?: 'click' | 'hover' | 'manual';
     }
     /**
-     * @name Dropdown Menu
-     * @description The Dropdown Menu component is used to display a list of options.
-     * @category Navigation
-     * @subcategory Dropdown
-     * @childComponent true
+     * 下拉菜单内容组件（需与zane-dropdown配合使用）
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneDropdownMenu {
     }
     /**
-     * @name Empty State
-     * @description A message that displays when there is no information to display.
-     * @category Data Display
-     * @img /assets/img/empty-state.webp
-     * @imgDark /assets/img/empty-state-dark.webp
+     * 空状态(Empty State)组件
+     * 用于展示无数据时的占位内容，包含插图、标题、描述和操作按钮
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     * @implements ComponentInterface 实现Stencil组件生命周期接口
      */
     interface ZaneEmptyState {
+        /**
+          * 操作按钮文本  当设置此属性时会显示操作按钮
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "action"?: string;
         /**
+          * 禁用操作按钮  - true: 禁用操作按钮 - false: 启用操作按钮(默认)
+          * @type {boolean}
           * @default false
          */
         "actionDisabled"?: boolean;
+        /**
+          * 操作按钮跳转链接  设置后会渲染为<a>标签而非<button>
+          * @type {string}
+         */
         "actionUrl"?: string;
         /**
+          * 操作按钮样式变体  - 'default': 默认填充样式 - 'ghost': 幽灵按钮样式 - 'outline': 描边按钮样式(默认)
+          * @type {'default' | 'ghost' | 'outline'}
           * @default 'default'
          */
         "actionVariant"?: 'default' | 'ghost' | 'outline';
+        /**
+          * 描述文本  支持HTML内容，会自动进行XSS过滤
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "description"?: string;
+        /**
+          * 标题文本
+          * @type {string}
+          * @reflectToAttr 同步到DOM属性
+         */
         "headline"?: string;
         /**
+          * 插图名称  对应assets/images/empty-state目录下的SVG文件名
+          * @type {string}
           * @default 'no-document'
+          * @reflectToAttr 同步到DOM属性
          */
         "illustration"?: string;
     }
     /**
-     * @name Footer
-     * @description The footer component provides a container for displaying additional navigation information about a site.
-     * @overview <p>The footer is one of the most underestimated sections of a website being located at the very bottom of every page, however, it can be used as a way to try to convince users to stay on your website if they haven’t found the information they’ve been looking for inside the main content area.</p>
-     * @category Navigation
-     * @img /assets/img/footer.webp
-     * @imgDark /assets/img/footer-dark.webp
+     * 页脚(Footer)组件
+     * 提供可定制的页脚布局，支持多种变体和插槽内容
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
      */
     interface ZaneFooter {
         /**
+          * 页脚样式变体  通过CSS类名控制不同样式变体 默认值'simple'会生成'variant-simple'类名
+          * @type {string}
           * @default 'simple'
+          * @reflectToAttr 同步到DOM属性
          */
         "variant"?: string;
         /**
+          * 版权年份  默认为当前年份，可通过属性覆盖
+          * @type {number}
           * @default new Date().getFullYear()
          */
         "year"?: number;
-    }
-    interface ZaneFooterCopyright {
-        "copyright"?: string;
-        "copyrightHref"?: string;
-        /**
-          * @default new Date().getFullYear()
-         */
-        "year"?: number;
-    }
-    interface ZaneFooterLinks {
-        /**
-          * @default []
-         */
-        "links"?: { href: string; name: string }[];
     }
     /**
-     * @name Form Control
-     * @description The Form Control component adds a label and caption for its child control.
-     * @category Form Inputs
-     * @tags form
-     * @example <zane-form-control label='Full Name' required>
-     * <zane-input type='text'></zane-input>
-     * </zane-form-control>
+     * 页脚版权(Footer Copyright)组件
+     * 用于展示标准版权声明，包含年份、版权所有者链接和保留权利声明
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
+    interface ZaneFooterCopyright {
+        /**
+          * 版权所有者名称  将显示为可点击链接（当copyrightHref设置时）
+          * @type {string}
+         */
+        "copyright"?: string;
+        /**
+          * 版权所有者链接  设置后会将版权名称渲染为可点击链接
+          * @type {string}
+         */
+        "copyrightHref"?: string;
+        /**
+          * 版权年份  默认为当前年份，可通过属性覆盖
+          * @type {number}
+          * @default new Date().getFullYear()
+         */
+        "year"?: number;
+    }
+    /**
+     * 页脚链接(Footer Links)组件
+     * 用于展示页脚导航链接列表，支持动态链接数据传入
+     * @component 
+     * @shadowDom 使用Shadow DOM封装组件样式
+     */
+    interface ZaneFooterLinks {
+        /**
+          * 链接数据数组  支持两种格式： 1. 对象数组格式: [{href: string, name: string}] 2. JSON字符串格式: '[{"href":"...","name":"..."}]'
+          * @type {(Array<{href: string, name: string}>|string)}
+          * @default []
+         */
+        "links"?: { href: string; name: string }[]|string;
+    }
+    /**
+     * 表单控件容器组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 组件样式表路径
+     * @tag 组件自定义标签名称
      */
     interface ZaneFormControl {
+        /**
+          * 辅助文本 显示在表单控件下方的帮助信息
+          * @Prop
+         */
         "helperText"?: string;
         /**
+          * 是否为内联布局
+          * @Prop 装饰器，reflect表示会反映到DOM属性上 默认值为false
           * @default false
          */
         "inline"?: boolean;
         /**
+          * 是否为无效状态
+          * @Prop 
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * 无效状态提示文本
+          * @Prop
+         */
         "invalidText"?: string;
+        /**
+          * 标签文本
+          * @Prop
+         */
         "label"?: string;
         /**
-          * Whether the form control is required.
+          * 是否为必填项
+          * @Prop 
           * @default false
          */
         "required"?: boolean;
         /**
+          * 是否显示骨架屏 用于加载状态
+          * @Prop 
           * @default false
          */
         "skeleton"?: boolean;
         /**
+          * 是否为警告状态
+          * @Prop 
           * @default false
          */
         "warn"?: boolean;
+        /**
+          * 警告状态提示文本
+          * @Prop
+         */
         "warnText"?: string;
     }
     /**
-     * @name Header
-     * @description Header component is used to display a header with a brand, navigation, and actions.
-     * @category Navigation
-     * @img /assets/img/header.webp
-     * @imgDark /assets/img/header-dark.webp
+     * 头部组件，提供可定制的页面顶部导航栏
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneHeader {
         /**
-          * Defines the primary color of the header. This can be set to predefined color names to apply specific color themes.
+          * 头部组件的颜色主题
+          * @Prop 可从外部设置的属性
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white' | string} - 'black': 黑色主题 - 'danger': 危险/错误状态颜色 - 'primary': 主品牌色 - 'secondary': 次要颜色 - 'success': 成功状态颜色 - 'warning': 警告状态颜色 - 'white': 白色主题 - string: 自定义颜色值
           * @default 'black'
          */
         "color"?: | 'black'
@@ -4149,7 +5937,9 @@ declare namespace LocalJSX {
     | 'white'
     | string;
         /**
-          * Color variant for dark mode, applicable when [data-theme="dark"] is set.
+          * 暗黑模式下的颜色主题
+          * @Prop 可选属性，暗黑模式下的替代颜色
+          * @type {'black' | 'danger' | 'primary' | 'secondary' | 'success' | 'warning' | 'white' | string} 枚举值与color属性相同
          */
         "darkModeColor"?: | 'black'
     | 'danger'
@@ -4160,73 +5950,121 @@ declare namespace LocalJSX {
     | 'white'
     | string;
         /**
+          * 是否启用浮动模式
+          * @Prop 控制头部是否浮动在内容上方
           * @default false
          */
         "float"?: boolean;
     }
+    /**
+     * 头部操作按钮组件，用于在头部导航栏中创建可交互的操作项
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneHeaderAction {
         /**
+          * 徽标内容
+          * @Prop 可从外部设置的属性
           * @default '_self'
          */
         "badge"?: string;
         /**
+          * ARIA可访问性配置
+          * @Prop 可从外部设置的属性
+          * @mutable 允许组件内部修改
+          * @reflect 将属性值反映到DOM属性
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址
+          * @Prop 可从外部设置的属性
+          * @reflect 将属性值反映到DOM属性
          */
         "href"?: string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 图标名称
+          * @Prop 可从外部设置的属性
          */
         "icon"?: string;
         /**
-          * Button selection state.
+          * 是否选中状态
+          * @Prop 可从外部设置的属性
           * @default false
          */
         "selected"?: boolean;
         /**
-          * Button size. Possible values are `"sm"`, `"md"`, `"lg"`, `"xl"`, `"xxl"`, `"none"`. Defaults to `"md"`.
+          * 按钮尺寸
+          * @Prop 可从外部设置的属性
+          * @type {'lg' | 'md' | 'none' | 'sm' | 'xl' | 'xxl'} - 'lg': 大尺寸 - 'md': 中等尺寸(默认) - 'none': 无特定尺寸 - 'sm': 小尺寸 - 'xl': 超大尺寸 - 'xxl': 特大尺寸
           * @default 'md'
          */
         "size"?: 'lg' | 'md' | 'none' | 'sm' | 'xl' | 'xxl';
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @Prop 可从外部设置的属性
           * @default '_self'
          */
         "target"?: string;
     }
+    /**
+     * 头部品牌标识组件，用于显示网站/应用的品牌标识和名称
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneHeaderBrand {
         /**
-          * @default '#'
+          * 品牌链接地址
+          * @Prop 可从外部设置的属性
+          * @default '#' 默认链接到页面顶部
          */
         "href"?: string;
+        /**
+          * 品牌logo图片路径
+          * @Prop 可从外部设置的属性 支持SVG和普通图片格式
+         */
         "logo"?: string;
+        /**
+          * 品牌名称
+          * @Prop 可从外部设置的属性
+         */
         "name"?: string;
+        /**
+          * 品牌副标题
+          * @Prop 可从外部设置的属性
+         */
         "subTitle"?: string;
     }
     /**
-     * @name HTML Editor
-     * @description HTML Editor component is a WYSIWYG editor that allows users to edit HTML content.
-     * @category Up coming
-     * @tags input, form
-     * @img /assets/img/html-editor.webp
-     * @imgDark /assets/img/html-editor-dark.webp
+     * 基于 Tiptap 的富文本编辑器组件，支持：
+     * - HTML 源码编辑
+     * - Mention（@提及）自动补全功能
+     * - 内置工具条（加粗、斜体、列表等）
+     * - 主题切换（vs-dark / vs-light）
+     * - 可视化编辑与 HTML 源码切换
+     * - 与表单集成（name、required、readonly 等属性）
      */
     interface ZaneHtmlEditor {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `onChange` event after each keystroke.
+          * 设置事件触发的防抖时间（毫秒），用于优化 `zaneChange` 事件的触发频率。 默认值：250。
           * @default 250
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 控制编辑器是否禁用。 - `true`：编辑器不可编辑。 - `false`：编辑器可编辑（默认）。
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * 设置组件的层级样式类，用于区分不同视觉层级的组件。 可选值： - '01'：主层级，视觉权重最高（如模态框） - '02'：次级层级，用于普通组件 - 'background'：背景层级，通常用于遮罩、背景等
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 设置是否在代码编辑器中显示行号。 - 'on'：显示行号（默认） - 'off'：不显示行号
           * @default 'on'
          */
         "lineNumbers"?: 'off' | 'on';
@@ -4235,32 +6073,34 @@ declare namespace LocalJSX {
          */
         "mentions"?: { label: string; value: string }[];
         /**
+          * 配置 Mention 提及功能的搜索方式。 - 'contains'：使用本地数组进行模糊匹配（适合静态数据） - 'managed'：通过事件 `zane-html-editor--search` 获取动态数据（适合异步搜索）
           * @default 'contains'
          */
         "mentionsSearch"?: 'contains' | 'managed';
         /**
-          * The input field name.
+          * 表单字段名称，用于提交或获取数据。 默认值：`zane-input-<index>`，其中 `<index>` 为组件唯一标识符。
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the value has changed..
+          * 当编辑器内容发生变化时触发该事件。 事件参数格式：`{ value: string }`，其中 `value` 为当前 HTML 内容。
          */
         "onZane-html-editor--change"?: (event: ZaneHtmlEditorCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 当 Mention 提及功能需要异步搜索时触发该事件。 事件参数格式：`{ query: string, callback: (mentions: { label: string; value: string }[]) => void }`。 开发者需通过 `callback` 返回匹配的 Mention 数据。
          */
         "onZane-html-editor--search"?: (event: ZaneHtmlEditorCustomEvent<any>) => void;
         /**
-          * The input field placeholder.
+          * 编辑器的占位文本（未输入内容时显示的提示文本）。
          */
         "placeholder"?: string;
         /**
+          * 设置编辑器是否为只读模式。 - `true`：用户不能修改内容 - `false`：用户可编辑（默认）
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 设置是否为必填字段，通常用于表单验证。 - `true`：必须输入 - `false`：非必填（默认）
           * @default false
          */
         "required"?: boolean;
@@ -4277,250 +6117,445 @@ declare namespace LocalJSX {
          */
         "suggestionCharacter"?: string;
         /**
+          * 设置编辑器的外观主题。 - 'vs-dark'：深色主题 - 'vs-light'：浅色主题（默认）
           * @default 'vs-light'
          */
         "theme"?: 'vs-dark' | 'vs-light';
         /**
-          * The input field value.
+          * 设置或获取富文本编辑器的当前内容值（HTML 字符串）。
          */
         "value"?: string;
     }
     /**
-     * @name Icon
-     * @description Icons are visual symbols used to represent ideas, objects, or actions.
-     * @overview Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
-     * @category General
-     * @example <zane-icon name="home" size="2rem"></zane-icon>
+     * 图标组件（zane-icon）
+     * 该组件基于 Stencil 构建，用于按需异步加载并渲染 SVG 图标。
+     * 支持通过属性 name 指定图标名称，通过 size 控制图标尺寸。
+     * 组件内部使用 Shadow DOM 实现样式隔离，并暴露 CSS 自定义属性
+     * `--zane-icon-size` 供外部覆盖默认尺寸。
+     * @example <!-- 基础用法 -->
+     * <zane-icon name="home" size="md"></zane-icon>
+     * <!-- 自定义尺寸 -->
+     * <zane-icon name="user" size="32px"></zane-icon>
      */
     interface ZaneIcon {
         /**
-          * The identifier for the icon. This name corresponds to a specific SVG asset in the icon set.
+          * 图标名称，对应图标库中的文件名。 当该值发生变化时，组件会重新异步加载对应 SVG。
+          * @example <zane-icon name="arrow-down"></zane-icon>
          */
         "name"?: string;
         /**
-          * The size of the icon. This can be specified in pixels (px) or rem units to control the icon's dimensions. If a number is provided, it will be treated as rem units. For example, '16px', '2rem', or 2 would be valid values.
+          * 图标尺寸。 - 可选内置枚举：'xs' | 'sm' | 'md' | 'lg' | 'xl' - 也可传入任意合法的 CSS 长度值（如 "24px"、"1.5rem"）或纯数字字符串（如 "2"）。
+          * @example <zane-icon size="lg"></zane-icon> <zane-icon size="32px"></zane-icon>
          */
         "size"?: string;
     }
+    /**
+     * 自适应主题图片组件（zane-image）
+     * 该组件能够根据当前系统的明暗主题自动切换显示的图片资源。
+     * 当检测到处于暗色模式时，优先使用 darkSrc 指定的暗色主题图片；
+     * 否则使用 src 指定的默认图片。
+     * 组件内部通过监听主题变化事件实现实时切换，无需手动刷新。
+     * @example <!-- 基础用法 -->
+     * <zane-image
+     *   src="assets/logo-light.svg"
+     *   dark-src="assets/logo-dark.svg"
+     *   image-title="公司 Logo">
+     * </zane-image>
+     */
     interface ZaneImage {
+        /**
+          * 暗色主题下的图片地址。 当系统处于暗色模式且该值存在时，将优先渲染此图片。
+          * @example dark-src="assets/banner-dark.png"
+         */
         "darkSrc"?: string;
+        /**
+          * 图片的替代文本（alt 属性）。 用于无障碍访问及图片加载失败时的占位说明。
+          * @example image-title="用户头像"
+         */
         "imageTitle"?: string;
         "src"?: string;
     }
     /**
-     * @name Input
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-input placeholder="Enter your name"></zane-input>
+     * 自定义输入框组件 zane-input
+     * 实现功能：
+     * 1. 支持多种输入类型（文本、密码、邮箱等）及尺寸控制
+     * 2. 包含表单验证状态（错误/警告）及辅助文本展示
+     * 3. 提供前后插槽(start/end)扩展能力
+     * 4. 支持防抖事件处理与无障碍访问
+     * 5. 集成密码可见性切换功能
      */
     interface ZaneInput {
         /**
-          * Indicates whether the value of the control can be automatically completed by the browser.
+          * 自动填充控制 - `on`: 允许浏览器自动填充 - `off`: 禁用自动填充
           * @default 'off'
          */
         "autocomplete"?: 'off' | 'on';
         /**
+          * 动态ARIA属性配置对象 - 收集宿主元素上所有`aria-*`属性并转移到内部input元素 - 需通过mutable允许组件内修改
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 输入内容变化事件(zane-input--change)的防抖延迟(ms)
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态 - 设置后阻止用户交互
+          * @attr 
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * 辅助说明文本 - 在非错误/警告状态下显示
+         */
         "helperText"?: string;
         /**
+          * 行内布局模式 - 设置后标签与输入框水平排列
+          * @attr 
           * @default false
          */
         "inline"?: boolean;
         /**
+          * 验证失败状态 - 激活时会显示invalidText并应用错误样式
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * 验证失败提示文本 - 当invalid=true时显示
+         */
         "invalidText"?: string;
+        /**
+          * 输入框标签文本 - 显示在输入区域上方
+         */
         "label"?: string;
         /**
-          * The input field name.
+          * 输入框名称 - 用于表单提交时识别字段 - 默认生成唯一ID: zane-input-{gid}
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件
+          * @event zane-input--blur
+          * @param ev - 原生焦点事件对象
          */
         "onZane-input--blur"?: (event: ZaneInputCustomEvent<any>) => void;
         /**
-          * Emitted when the value has changed.
+          * 防抖后的值变更事件
+          * @event zane-input--change
+          * @param ev - 键盘事件对象(防抖处理)
          */
         "onZane-input--change"?: (event: ZaneInputCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件
+          * @event zane-input--focus
+          * @param ev - 原生焦点事件对象
          */
         "onZane-input--focus"?: (event: ZaneInputCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 实时输入事件
+          * @event zane-input--input
+          * @param ev - 每次按键触发的键盘事件
          */
         "onZane-input--input"?: (event: ZaneInputCustomEvent<any>) => void;
         /**
-          * The input field placeholder.
+          * 占位提示文本
          */
         "placeholder"?: string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 只读状态 - 允许查看但禁止修改内容
+          * @attr 
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填标识 - 显示红色星号(*)并触发浏览器原生验证
+          * @attr 
           * @default false
          */
         "required"?: boolean;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸控制 - `sm`: 小尺寸(高度32px) - `md`: 中尺寸(高度40px) - `lg`: 大尺寸(高度48px)
           * @default 'md'
+          * @attr
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
+          * 骨架屏模式 - 加载状态时显示灰色占位块
           * @default false
          */
         "skeleton"?: boolean;
         /**
-          * The type of control to display. Possible values are: `"text"`, `"password"`, `"email"`, `"tel"`. Defaults to `"text"`.
+          * 输入类型 - `text`: 普通文本 - `password`: 密码(带可见切换按钮) - `email`: 邮箱格式验证 - `tel`: 电话号码输入
           * @default 'text'
          */
         "type"?: 'email' | 'password' | 'tel' | 'text';
         /**
-          * The input field value.
+          * 输入框值 - 使用双向数据绑定
          */
         "value"?: string;
         /**
+          * 警告状态 - 非致命性错误提示，显示warnText
           * @default false
          */
         "warn"?: boolean;
+        /**
+          * 警告提示文本 - 当warn=true时显示
+         */
         "warnText"?: string;
     }
     /**
-     * @name Input URL
-     * @description A specialized input field for URL validation.
-     * @category Up coming
-     * @tags input, form, url
-     * @example <zane-input-url value="https://shivajivarma.com"></zane-input-url>
+     * 双模式URL输入组件
+     * @component zane-input-url
+     * @tags form-control, input, url
+     * @shadow true
+     * @description 提供URL输入与预览双模式交互的输入组件。在展示模式下显示可点击的URL链接，
+     * 在编辑模式下提供带验证功能的输入框。支持防抖值变化事件和实时URL验证。
+     * @example <!-- 基础用法 -->
+     * <zane-input-url
+     *   value="https://example.com"
+     *   placeholder="输入网站地址"
+     * />
+     * <!-- 带尺寸控制 -->
+     * <zane-input-url size="sm" />
      */
     interface ZaneInputUrl {
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `valueChange` event after each keystroke.
+          * 值变化事件的防抖时间（毫秒）
+          * @type {number}
           * @default 300
+          * @description 控制`valueChange`事件触发前的延迟时间，用于优化频繁输入时的性能表现。 值越小响应越快，值越大可减少事件触发次数。
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the input. Defaults to `false`.
+          * 禁用状态
+          * @type {boolean}
           * @default false
+          * @reflect 
+          * @description 当设置为true时，组件进入禁用状态： - 输入框不可交互 - 视觉上呈现禁用样式 - 编辑按钮不可点击
          */
         "disabled"?: boolean;
         /**
+          * 编辑模式状态
+          * @type {boolean}
           * @default false
+          * @mutable 
+          * @reflect 
+          * @description 控制组件当前交互模式： - `false`: 展示模式（显示URL链接） - `true`: 编辑模式（显示输入框）  该属性支持双向绑定，组件内部状态变化时会自动更新。
          */
         "editing"?: boolean;
         /**
-          * The input field name.
-          * @default `zane-input-url-${this.gid}`
+          * 输入框名称属性
+          * @type {string}
+          * @default `zane-input-url-${gid}`
+          * @description 对应原生input元素的`name`属性，用于表单提交。 默认自动生成格式为`zane-input-url-{唯一ID}`的值。
          */
         "name"?: string;
         /**
-          * Emitted when the URL input is invalid.
+          * 输入无效事件
+          * @event inputInvalid
+          * @type {EventEmitter<boolean>}
+          * @description 当URL验证状态变化时触发，携带当前是否无效的状态。 事件数据： - `true`: 当前值无效 - `false`: 当前值有效
+          * @example <zane-input-url onInputInvalid={(e) => console.log(' 无效状态:', e.detail)}  />
          */
         "onInputInvalid"?: (event: ZaneInputUrlCustomEvent<boolean>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 值变化事件
+          * @event valueChange
+          * @type {EventEmitter<string>}
+          * @description 当输入值变化时触发（经过防抖处理）。 携带当前输入框的最新值。
+          * @example <zane-input-url onValueChange={(e) => console.log(' 新值:', e.detail)}  />
          */
         "onValueChange"?: (event: ZaneInputUrlCustomEvent<string>) => void;
         /**
-          * The input field placeholder.
+          * 输入框占位文本
+          * @type {string}
+          * @description 编辑模式下输入框显示的提示文本。 当输入值为空时显示。
          */
         "placeholder"?: string;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸规格
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflect 
+          * @description 控制组件的视觉尺寸，可选值： - `'sm'`: 小尺寸 (适用于紧凑界面) - `'md'`: 中尺寸 (默认标准尺寸) - `'lg'`: 大尺寸 (适用于强调场景)  该属性会反映到宿主元素的HTML属性上，可通过CSS属性选择器进行样式定制。
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 输入值
+          * @type {string}
+          * @mutable 
+          * @description 组件的当前URL值，支持双向绑定。 在展示模式下显示为可点击链接，在编辑模式下作为输入框的值。
          */
         "value"?: string;
     }
     /**
-     * @name Link
-     * @description Links allow users to click their way from page to page.
-     * @category Navigation
-     * @example <zane-link href="#">Link</zane-link>
+     * 智能链接组件
+     * @component zane-link
+     * @tags navigation, link, interactive
+     * @shadow true
+     * @description 增强型可交互链接组件，支持动态状态反馈和键盘导航优化。
+     * 特性包括：
+     * - 视觉状态反馈（聚焦/激活）
+     * - 空格键触发点击
+     * - 跨浏览器兼容的焦点管理
+     * - 无障碍属性支持
+     * @example <!-- 基础链接 -->
+     * <zane-link href="/about">关于我们</zane-link>
+     * <!-- 新窗口打开 -->
+     * <zane-link href="https://external.com"  target="_blank">
+     *   外部链接
+     * </zane-link>
      */
     interface ZaneLink {
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址
+          * @type {string}
+          * @reflect 
+          * @description 对应 HTML anchor 元素的 href 属性： - 支持绝对路径和相对路径 - 支持哈希锚点定位 - 空值时渲染为无跳转功能的伪链接
          */
         "href"?: string;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @type {string}
+          * @description 对应 HTML anchor 元素的 target 属性： - `_blank`: 新窗口/标签页打开 - `_self`: 当前窗口打开（默认） - `_parent` / `_top`: 框架控制
          */
         "target"?: string;
     }
     /**
-     * @name Menu
-     * @description Menus display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @img /assets/img/menu.webp
-     * @imgDark /assets/img/menu-dark.webp
+     * 多功能菜单容器组件
+     * @component zane-menu
+     * @tags navigation, menu, container
+     * @shadow true
+     * @description 提供标准化的菜单容器实现，支持：
+     * - 多种视觉尺寸层级
+     * - 键盘导航支持
+     * - 空状态展示
+     * - 动态焦点管理
+     * @example <!-- 基础菜单 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 空状态菜单 -->
+     * <zane-menu empty empty-state-headline="无数据" empty-state-description="请添加菜单项">
+     * </zane-menu>
      */
     interface ZaneMenu {
         /**
+          * 空状态标识
+          * @type {boolean}
+          * @mutable 
           * @default false
+          * @description 控制是否显示空状态界面： - `true`: 显示空状态组件 - `false`: 渲染常规菜单项 当设置为true时，将忽略slot内容
          */
         "empty"?: boolean;
         /**
+          * 空状态描述文本
+          * @type {string}
+          * @mutable 
           * @default 'There are no items to display'
+          * @description 空状态界面中的辅助说明文字 支持HTML转义字符和多语言配置
          */
         "emptyStateDescription"?: string;
         /**
+          * 空状态标题文本
+          * @type {string}
+          * @mutable 
           * @default 'No items'
+          * @description 空状态界面中的主标题文字 通常使用简短有力的提示语
          */
         "emptyStateHeadline"?: string;
+        /**
+          * UI层级样式
+          * @type {'01' | '02' | 'background'}
+          * @reflect 
+          * @description 控制菜单的视觉层级深度： - `01`: 表层菜单 (默认层级，高度为1dp) - `02`: 中层菜单 (高度为2dp，更明显的阴影) - `background`: 背景层菜单 (无阴影，用于嵌套场景) 对应不同的box-shadow和z-index值
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 加载状态标识
+          * @type {boolean}
           * @default false
+          * @description 控制是否显示加载指示器： - `true`: 显示加载动画 - `false`: 正常显示内容 实际实现需在模板中添加加载器组件
          */
         "showLoader"?: boolean;
         /**
-          * The menu item size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 菜单尺寸
+          * @type {'lg' | 'md' | 'sm'}
+          * @reflect 
           * @default 'md'
+          * @description 控制菜单项尺寸和间距： - `sm`: 紧凑模式 (高度32px，字号12px) - `md`: 标准模式 (高度40px，字号14px) - `lg`: 大尺寸模式 (高度48px，字号16px) 影响内边距和行高
          */
         "size"?: 'lg' | 'md' | 'sm';
+        /**
+          * 当前选中值
+          * @type {number | string}
+          * @description 记录当前选中的菜单项值 应与子组件 zane-menu-item 的 value 属性联动 用于实现受控菜单组件
+         */
         "value"?: number | string;
     }
     /**
-     * @name MenuDivider
-     * @description A divider to separate menu items.
-     * @category Layout
-     * @subcategory Menu
-     * @childComponents true
-     * @example <zane-divider style="width: 12rem;">or</zane-divider>
+     * 菜单分隔线组件
+     * @component zane-menu-divider
+     * @shadow true
+     * @description 提供菜单项之间的视觉分隔效果，用于增强菜单结构的可读性。该组件：
+     * - 实现菜单项分组逻辑分隔
+     * - 支持深浅主题色自动适配
+     * - 提供标准化的间距和高度
+     * @example <!-- 基础用法 -->
+     * <zane-menu>
+     *   <zane-menu-item>选项一</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider> <!-- 分隔线 -->
+     *   <zane-menu-item>选项二</zane-menu-item>
+     * </zane-menu>
+     * <!-- 分组场景 -->
+     * <zane-menu>
+     *   <zane-menu-item>操作类</zane-menu-item>
+     *   <zane-menu-divider></zane-menu-divider>
+     *   <zane-menu-item>设置类</zane-menu-item>
+     * </zane-menu>
      */
     interface ZaneMenuDivider {
     }
     /**
-     * @name Menu Item
-     * @description Menu items display a list of choices on temporary surfaces.
-     * @category Navigation
-     * @subcategory Menu
-     * @childComponent true
+     * 菜单项组件 (zane-menu-item)
+     * @component zane-menu-item
+     * @shadow true
+     * @description 实现标准导航菜单项的核心组件，提供：
+     * - 多状态交互（正常/选中/禁用/聚焦）
+     * - 8种语义化色彩主题
+     * - 可选中标记功能（带对勾图标）
+     * - 原生链接支持（href/target）
+     * - 键盘导航支持（空格/回车触发）
+     * - 无障碍ARIA兼容设计
+     * @example <!-- 基础文本菜单项 -->
+     * <zane-menu-item>个人中心</zane-menu-item>
+     * <!-- 带图标和选中状态的菜单项 -->
+     * <zane-menu-item selected selectable>
+     *   收件箱
+     *   <zane-badge slot="end">12</zane-badge>
+     * </zane-menu-item>
+     * <!-- 作为链接的菜单项 -->
+     * <zane-menu-item
+     *   href="/settings"
+     *   color="primary"
+     *   target="_blank">
+     *   系统设置
+     * </zane-menu-item>
+     * @designSystem | 状态         | 视觉特征                     |
+     * |--------------|----------------------------|
+     * | 正常         | 浅灰背景，深灰文字          |
+     * | 悬停         | 浅蓝色背景（#f0f7ff）       |
+     * | 聚焦         | 2px蓝色边框（#1a73e8）      |
+     * | 选中         | 左侧蓝色条+对勾图标         |
+     * | 禁用         | 50%透明度，阻止交互事件     |
      */
     interface ZaneMenuItem {
         /**
+          * 菜单项色彩主题
+          * @prop {string} color - 预定义色彩方案，默认'default'
+          * @options - 'black'：深黑商务风 - 'danger'：错误操作（红） - 'default'：中性灰（默认） - 'primary'：品牌主色（蓝） - 'secondary'：辅助色（紫） - 'success'：成功状态（绿） - 'warning'：警示操作（黄） - 'white'：浅色模式专用
           * @default 'default'
          */
         "color"?: | 'black'
@@ -4532,83 +6567,170 @@ declare namespace LocalJSX {
     | 'warning'
     | 'white';
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态开关
+          * @prop {boolean} disabled - 禁用交互并降低透明度（默认false）
+          * @designNote 禁用时阻止所有点击/键盘事件传递
           * @default false
          */
         "disabled"?: boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接目标地址
+          * @prop {string} href - 设置后组件渲染为<a>元素（默认undefined）
+          * @behavior 点击时自动执行 window.open(href,  target)
          */
         "href"?: string;
+        /**
+          * 视觉层级
+          * @prop {string} layer - 背景透明度层级（默认继承父菜单）
+          * @options '01'|'02'|'background'
+         */
         "layer"?: '01' | '02' | 'background';
         /**
-          * Emitted when the menu item is clicked.
+          * 菜单项点击事件
+          * @event zane-menu-item--click
+          * @payload { value: string|number }
+          * @description 点击时触发（禁用状态不触发）
          */
         "onZane-menu-item--click"?: (event: ZaneMenuItemCustomEvent<any>) => void;
         /**
+          * 可选状态开关
+          * @prop {boolean} selectable - 启用选中标记功能（默认false）
+          * @visualEffect 激活时显示左侧选中条和对勾图标
           * @default false
          */
         "selectable"?: boolean;
         /**
-          * Menu item selection state.
+          * 选中状态
+          * @prop {boolean} selected - 标记为选中项（需selectable=true）
+          * @renderCondition 当selectable=true时显示选中状态视觉
           * @default false
          */
         "selected"?: boolean;
         /**
-          * Sets or retrieves the window or frame at which to target content.
+          * 链接打开方式
+          * @prop {string} target - 同<a>标签target属性（默认'_self'）
           * @default '_self'
          */
         "target"?: string;
         /**
-          * The menu item value.
+          * 菜单项值
+          * @prop {string|number} value - 事件传递的标识值（默认innerText）
+          * @emitChange 点击事件中作为payload.value 传递
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Modal
-     * @description Modals are used to display content in a layer above the app.
-     * @category Informational
-     * @subcategory Modal
-     * @tags controls
-     * @img /assets/img/modal.webp
-     * @imgDark /assets/img/modal-dark.webp
+     * 模态框组件 (zane-modal)
+     * @component zane-modal
+     * @shadow true
+     * @description 提供企业级应用的模态对话框解决方案，支持：
+     * - 多种预设尺寸响应式布局
+     * - 灵活的内容插槽（头部/主体/底部）
+     * - 加载状态可视化
+     * - 可控关闭行为（自动关闭/受控关闭）
+     * - 无障碍访问支持
+     * - 滚动条自动管理
+     * @example <!-- 基础用法 -->
+     * <zane-modal
+     *   heading="确认操作"
+     *   open={true}>
+     *   <p>确定要删除此项吗？</p>
+     *   <div slot="footer">
+     *     <zane-button>取消</zane-button>
+     *     <zane-button variant="primary">确定</zane-button>
+     *   </div>
+     * </zane-modal>
+     * <!-- 带加载状态的模态框 -->
+     * <zane-modal
+     *   heading="数据处理中"
+     *   open={true}
+     *   showLoader={true}>
+     *   <p>请稍候，正在保存您的数据...</p>
+     * </zane-modal>
      */
     interface ZaneModal {
+        /**
+          * 模态框主标题
+          * @prop {string} heading - 显示在顶部的标题文本
+          * @visualEffect 使用 heading 样式（字号1.25rem/粗体）
+         */
         "heading"?: string;
         /**
+          * 隐藏关闭按钮
+          * @prop {boolean} hideClose - 是否隐藏右上角关闭按钮（默认false）
           * @default false
          */
         "hideClose"?: boolean;
         /**
-          * Specify whether the Modal is managed by the parent component
+          * 受控模式开关
+          * @prop {boolean} managed - 是否由外部状态控制关闭行为（默认false）
+          * @behavior - false（默认）：组件内部管理 open 状态（点击关闭按钮自动关闭） - true：需外部监听 zane-modal--close 事件并手动更新 open 状态
+          * @usageNote 在复杂状态管理场景中使用（如React/Vue集成）
           * @default false
          */
         "managed"?: boolean;
         /**
-          * On click of button, a CustomEvent 'zane-modal--close' will be triggered.
+          * 模态框关闭事件
+          * @event zane-modal--close
+          * @description 当以下情况触发： - 点击关闭按钮 - 点击模态框外部遮罩层
+          * @important 受控模式下必须监听此事件来更新 open 状态
          */
         "onZane-modal--close"?: (event: ZaneModalCustomEvent<any>) => void;
         /**
-          * Specify whether the Modal is currently open
+          * 模态框开启状态
+          * @prop {boolean} open - 控制模态框显示/隐藏（默认false）
+          * @important 核心显示控制属性
+          * @effect 开启时自动禁用页面滚动（关闭时恢复）
           * @default false
          */
         "open"?: boolean;
         /**
+          * 加载状态显示
+          * @prop {boolean} showLoader - 是否显示加载指示器（默认false）
+          * @visualEffect - 半透明遮罩层覆盖内容区 - 居中显示旋转加载图标
+          * @usageNote 适合异步操作期间禁用交互
           * @default false
          */
         "showLoader"?: boolean;
         /**
+          * 模态框尺寸方案
+          * @prop {'lg' | 'md' | 'sm'} size - 预设响应式尺寸（默认'md'）
+          * @options - 'sm'：小尺寸 - 'md'：中尺寸- 默认值 - 'lg'：大尺寸
+          * @responsive 自动适配移动端（小屏下占满宽度）
           * @default 'md'
          */
         "size"?: 'lg' | 'md' | 'sm';
+        /**
+          * 副标题文本
+          * @prop {string} subheading - 显示在主标题下方的辅助文本
+          * @visualEffect 次级文本样式（字号0.875rem/灰色）
+         */
         "subheading"?: string;
     }
     /**
-     * @name Modal Content
-     * @description The Modal Content component is used to display the content within a modal.
-     * @category Informational
-     * @subcategory Modal
-     * @childComponent true
+     * 模态框内容容器组件 (zane-modal-content)
+     * @component zane-modal-content
+     * @shadow true
+     * @description 专为 zane-modal 设计的结构化内容容器，提供三种预设内容样式方案，
+     * 支持动态切换内容展示模式。作为模态框生态系统的核心子组件，实现：
+     * - 内容区域样式规范化
+     * - 自适应内容布局
+     * - 多场景内容样式预设
+     * - 无缝衔接父级模态框的交互状态
+     * @see {@link zane-modal } 关联的父级模态框组件
+     * @example <!-- 默认带边框样式 -->
+     * <zane-modal-content>
+     *   <p>标准内容区块</p>
+     * </zane-modal-content>
+     * <!-- 无边框模式 -->
+     * <zane-modal-content type="borderless">
+     *   <img src="data-chart.png"  alt="数据图表"/>
+     * </zane-modal-content>
+     * <!-- 文本优化模式 -->
+     * <zane-modal-content type="text">
+     *   <h3>服务条款</h3>
+     *   <p>这里是详细的协议文本内容...</p>
+     * </zane-modal-content>
      */
     interface ZaneModalContent {
         /**
@@ -4617,64 +6739,119 @@ declare namespace LocalJSX {
         "type"?: 'borderless' | 'default' | 'text';
     }
     /**
-     * @name Notification
-     * @description Notifications are messages that communicate information to the user.
-     * @category Informational
-     * @tags notification
-     * @example <zane-notification state="success">
-     *      <div slot='title'>Successful saved the record</div>
-     *    </zane-notification>
+     * 智能通知系统组件 (zane-notification)
+     * @component zane-notification
+     * @shadow true
+     * @description 提供多场景智能通知解决方案，支持四态反馈、操作交互和主题适配。
+     * 核心功能包括：
+     * - 状态图标自动匹配
+     * - 暗黑模式/高对比度自适应
+     * - 内联/块级布局切换
+     * - 可定制的操作按钮
+     * - 可控的关闭行为
+     * - 无障碍访问支持
+     * @example <!-- 基础警告通知 -->
+     * <zane-notification state="warning" dismissible>
+     *   <span slot="title">存储空间不足</span>
+     *   <span slot="subtitle">剩余 5% 磁盘空间，建议清理缓存</span>
+     * </zane-notification>
+     * <!-- 带操作的成功通知 -->
+     * <zane-notification state="success" action="查看详情" high-contrast>
+     *   <span slot="title">支付成功</span>
+     *   <span slot="subtitle">订单号：20250719-2156</span>
+     * </zane-notification>
      */
     interface ZaneNotification {
         /**
-          * Action to be displayed on the notification
+          * 操作按钮文本
+          * @prop {string} [action] - 显示在通知右侧的操作按钮文字
+          * @example <zane-notification action="撤销操作">...</zane-notification>
          */
         "action"?: string;
         /**
-          * Whether the notification is dismissible
+          * 可关闭特性
+          * @prop {boolean} [dismissible=false] - 是否显示关闭按钮
+          * @example <zane-notification dismissible>...</zane-notification>
           * @default false
          */
         "dismissible"?: boolean;
         /**
-          * Whether to use high contrast mode
+          * 高对比度模式
+          * @prop {boolean} [highContrast=false] - 启用高对比度视觉方案 - 设计规范：符合WCAG 2.1 AA标准 - 亮色模式：深色文字+加粗边框 - 暗色模式：反转配色方案
+          * @example <zane-notification high-contrast>...</zane-notification>
           * @default false
          */
         "highContrast"?: boolean;
         /**
-          * Whether the notification should be displayed inline
+          * 内联布局模式
+          * @prop {boolean} [inline=false] - 切换为行内样式布局 - 特征： - 移除背景色和边框 - 状态图标与文本对齐 - 操作按钮变为幽灵样式 - 适用场景：表单内联校验提示
+          * @example <p>请输入验证码 <zane-notification inline state="error">验证码失效</zane-notification></p>
           * @default false
          */
         "inline"?: boolean;
         /**
-          * Whether the notification is managed by the notification manager
+          * 托管关闭模式
+          * @prop {boolean} [managed=false] - 关闭行为是否由外部控制 - 当设为true时： - 点击关闭按钮不会隐藏组件 - 必须监听 zane-notification--dismiss 事件手动处理 - 适用场景：通知队列管理/动画关闭
+          * @example <zane-notification managed dismissible>...</zane-notification>  <script>   notification.addEventListener('zane-notification--dismiss',  () => {     // 执行动画后移除DOM   }) </script>
           * @default false
          */
         "managed"?: boolean;
+        /**
+          * 操作按钮点击事件
+          * @event zane-notification--action-click
+          * @type {EventEmitter<void>}
+          * @example document.querySelector('zane-notification').addEventListener(   'zane-notification--action-click',   () => { console.log('Action  clicked') } )
+         */
         "onZane-notification--action-click"?: (event: ZaneNotificationCustomEvent<any>) => void;
         /**
-          * Emitted when the notification is dismissed
+          * 通知关闭事件
+          * @event zane-notification--dismiss
+          * @type {EventEmitter<MouseEvent>}
+          * @property {MouseEvent} detail - 原始点击事件对象
+          * @example notificationEl.addEventListener('zane-notification--dismiss',  (evt) => {   console.log(' 关闭事件', evt.detail) })
          */
         "onZane-notification--dismiss"?: (event: ZaneNotificationCustomEvent<any>) => void;
         /**
-          * The state of the notification. Possible values are: 'success', 'error', 'info', 'warning'
+          * 通知状态类型
+          * @prop {'error'|'info'|'success'|'warning'} [state='info'] - 定义通知的语义化状态
+          * @option error - 错误状态（红色系） - 图标：❌ 错误图标 - 场景：系统故障/操作失败 - 样式特征： - 背景色：#fee2e2 (浅红) - 边框色：#dc2626 (暗红)
+          * @option info - 信息状态（蓝色系） - 图标：ℹ️ 信息图标 - 场景：系统通知/进程提示 - 样式特征： - 背景色：#dbeafe (浅蓝) - 边框色：#2563eb (深蓝)
+          * @option success - 成功状态（绿色系） - 图标：✅ 对勾图标 - 场景：操作成功/流程完成 - 样式特征： - 背景色：#dcfce7 (浅绿) - 边框色：#16a34a (深绿)
+          * @option warning - 警告状态（橙色系） - 图标：⚠️ 感叹号图标 - 场景：风险提示/操作确认 - 样式特征： - 背景色：#ffedd5 (浅橙) - 边框色：#ea580c (深橙)
           * @default 'info'
          */
         "state"?: 'error' | 'info' | 'success' | 'warning';
     }
     /**
-     * @name Notification Manager
-     * @description The Notification Manager handles the organization and display of notifications within the application.
-     * @category Informational
-     * @tags notification
-     * @img /assets/img/notification-manager.webp
-     * @imgDark /assets/img/notification-manager-dark.webp
+     * 智能通知管理系统组件 (zane-notification-manager)
+     * @component zane-notification-manager
+     * @shadow true
+     * @description 全局通知管理中心，提供以下核心能力：
+     * 1. 跨组件通知聚合：通过事件总线收集全应用通知
+     * 2. 多位置布局：支持4种屏幕定位策略
+     * 3. 生命周期管理：自动关闭/手动关闭/防重复
+     * 4. 安全渲染：内置DOM净化防止XSS攻击
+     * 5. 主题适配：自动同步暗黑模式状态
+     * @example <!-- 基础用法 -->
+     * <zane-notification-manager position="top-right"></zane-notification-manager>
+     * <!-- 自定义命名管理器 -->
+     * <zane-notification-manager name="dashboard" position="bottom-left"></zane-notification-manager>
      */
     interface ZaneNotificationManager {
         /**
+          * 管理器命名空间
+          * @prop {string} [name='global'] - 管理器唯一标识 - `global`：默认全局管理器，接收未指定目标的通告 - 自定义名：只接收相同target参数的通告
+          * @example // 发送到指定管理器 const event = new CustomEvent('zane-notification', {   detail: { target: 'dashboard', title: '数据更新完成' } }); window.dispatchEvent(event);
           * @default 'global'
          */
         "name"?: string;
         /**
+          * 通知定位策略
+          * @prop {'top-left'|'top-right'|'bottom-left'|'bottom-right'} [position='bottom-right'] - 通知容器屏幕位置
+          * @option top-left - 左上角定位 - 适用场景：重要实时状态更新（如系统监控） - 设计规范：距顶部20px，距左侧20px
+          * @option top-right - 右上角定位（默认） - 适用场景：通用信息提示（如操作反馈） - 设计规范：距顶部20px，距右侧20px
+          * @option bottom-left - 左下角定位 - 适用场景：后台任务通知（如文件下载） - 设计规范：距底部20px，距左侧20px
+          * @option bottom-right - 右下角定位 - 适用场景：非紧急通知（如新闻推送） - 设计规范：距底部20px，距右侧20px
           * @default 'bottom-right'
          */
         "position"?: | 'bottom-left'
@@ -4683,15 +6860,19 @@ declare namespace LocalJSX {
     | 'top-right';
     }
     /**
-     * @name Number
-     * @description Number input lets users enter a numeric value and incrementally increase or decrease the value with a two-segment control.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-number value="100"></zane-input>
+     * 数字输入框组件 zane-number
+     * 核心功能：
+     * 1. 支持数字输入及增减按钮控制
+     * 2. 提供四种状态反馈（默认/成功/警告/错误）
+     * 3. 表单验证支持（必填/禁用/只读）
+     * 4. 防抖事件处理与无障碍访问优化
+     * 5. 插槽扩展能力（前后扩展区域）
+     * @implements ComponentInterface *
+     * @implements InputComponentInterface *
      */
     interface ZaneNumber {
         /**
-          * Indicates whether the value of the control can be automatically completed by the browser.
+          * 自动填充控制 - `on`: 允许浏览器自动填充 - `off`: 禁用自动填充
           * @default 'off'
          */
         "autocomplete"?: 'off' | 'on';
@@ -4700,17 +6881,18 @@ declare namespace LocalJSX {
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 防抖延迟(ms) - 控制 zane-number--change 事件触发频率
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "disabled"?: boolean;
         "helperText"?: string;
         /**
+          * 操作按钮可见性控制  - true: 隐藏增减按钮  - false: 显示（默认）
+          * @attr 
           * @default false
          */
         "hideActions"?: boolean;
@@ -4725,42 +6907,46 @@ declare namespace LocalJSX {
         "invalidText"?: string;
         "label"?: string;
         /**
-          * The input field name.
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件
+          * @event zane-number--blur
+          * @param ev - 焦点事件对象
          */
         "onZane-number--blur"?: (event: ZaneNumberCustomEvent<any>) => void;
         /**
-          * Emitted when the value has changed.
+          * 数字变化事件（防抖处理）
+          * @event zane-number--change
+          * @param ev - 键盘事件对象
+          * @property {number} value - 当前输入值
          */
         "onZane-number--change"?: (event: ZaneNumberCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件
+          * @event zane-number--focus
+          * @param ev - 焦点事件对象
          */
         "onZane-number--focus"?: (event: ZaneNumberCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 实时输入事件
+          * @event zane-number--input
+          * @param ev - 原始输入事件
          */
         "onZane-number--input"?: (event: ZaneNumberCustomEvent<any>) => void;
-        /**
-          * The input field placeholder.
-         */
         "placeholder"?: string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
           * @default false
          */
         "required"?: boolean;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸规格 - `sm`: 小尺寸(高度约32px) - `md`: 中尺寸(高度约40px) - `lg`: 大尺寸(高度约48px)
+          * @attr 
           * @default 'md'
          */
         "size"?: 'lg' | 'md' | 'sm';
@@ -4769,12 +6955,14 @@ declare namespace LocalJSX {
          */
         "skeleton"?: boolean;
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 组件状态标识 - `default`: 默认状态（无特殊样式） - `success`: 成功状态（通常用绿色标识） - `warning`: 警告状态（通常用橙色标识） - `error`: 错误状态（通常用红色标识）
+          * @attr 
           * @default 'default'
          */
         "state"?: 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
+          * 输入值（数字类型） - 支持 null 表示空值 - 使用 mutable 实现双向绑定
+          * @example <zane-number value={5} />
           * @default null
          */
         "value"?: null | number;
@@ -4785,122 +6973,191 @@ declare namespace LocalJSX {
         "warnText"?: string;
     }
     /**
-     * @name Popover
-     * @description The Popover component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @img /assets/img/dropdown.webp
-     * @imgDark /assets/img/dropdown-dark.webp
+     * 弹出框组件（Popover）
+     * @component zane-popover
+     * @shadow true
+     * @description `zane-popover` 是一个灵活的弹出框组件，可以在目标元素周围显示内容。它支持多种触发方式（点击、悬停、手动控制）、多种箭头样式以及自定义位置。
+     * 使用此组件时，需要在组件内部放置一个 `zane-popover-content` 组件作为弹出内容，以及一个触发元素（例如按钮）。
+     * @example <zane-popover trigger="click">
+     *   <button>点击我</button>
+     *   <zane-popover-content>
+     *     这里是弹出内容
+     *   </zane-popover-content>
+     * </zane-popover>
      */
     interface ZanePopover {
         /**
-          * Time in milliseconds to wait before hiding the popover when the trigger is set to `"hover"`.
+          * 弹出框关闭的动画时间（毫秒）
+          * @prop {number} [dismissTimeout=300]
           * @default 300
          */
         "dismissTimeout"?: number;
         /**
-          * The offset of the popover relative to the trigger element. This value is used to adjust the position of the popover along the axis of the trigger element.
+          * 弹出框与目标元素之间的偏移量（像素）
+          * @prop {number} [offset=4]
           * @default 4
          */
         "offset"?: number;
         /**
-          * Emitted when the popover is closed.
+          * 当弹出框关闭时发出的事件
+          * @event zane-popover--close
          */
         "onZane-popover--close"?: (event: ZanePopoverCustomEvent<any>) => void;
         /**
-          * Emitted when the popover is opened.
+          * 当弹出框打开时发出的事件
+          * @event zane-popover--open
          */
         "onZane-popover--open"?: (event: ZanePopoverCustomEvent<any>) => void;
         /**
-          * Determines whether the popover is open.
+          * 控制弹出框的打开状态
+          * @prop {boolean} [open=false]
+          * @mutable 
+          * @reflect 
           * @default false
          */
         "open"?: boolean;
         /**
-          * Time in milliseconds to wait before showing the popover when the trigger is set to `"hover"`.
+          * 弹出框打开的动画时间（毫秒）
+          * @prop {number} [openTimeout=200]
           * @default 200
          */
         "openTimeout"?: number;
         /**
-          * The placement of the popover relative to the trigger element. Possible values are: - `"top"`: The popover is placed above the trigger element. - `"top-start"`: The popover is placed above the trigger element, aligned to the start. - `"top-end"`: The popover is placed above the trigger element, aligned to the end. - `"right"`: The popover is placed to the right of the trigger element. - `"right-start"`: The popover is placed to the right of the trigger element, aligned to the start. - `"right-end"`: The popover is placed to the right of the trigger element, aligned to the end. - `"bottom"`: The popover is placed below the trigger element. - `"bottom-start"`: The popover is placed below the trigger element, aligned to the start. - `"bottom-end"`: The popover is placed below the trigger element, aligned to the end. - `"left"`: The popover is placed to the left of the trigger element. - `"left-start"`: The popover is placed to the left of the trigger element, aligned to the start. - `"left-end"`: The popover is placed to the left of the trigger element, aligned to the end.
+          * 弹出框的位置偏好设置，使用逗号分隔的字符串，例如："top,bottom"  当 `tip` 属性为 'tab' 时，默认设置为 'bottom-end,bottom-start,top-end,top-start'
+          * @prop {string} [placements]
+          * @mutable
          */
         "placements"?: string;
         /**
-          * The tip of the popover. Possible values are: - `"caret"`: A triangle tip. - `"tab"`: A tab tip. - `"none"`: No tip.
+          * 弹出框的箭头样式
+          * @prop {'caret' | 'none' | 'tab'} [tip='caret']  - 'caret': 使用一个三角形的箭头（默认）。 - 'none': 没有箭头。 - 'tab': 使用一个类似标签页的箭头，通常用于下拉菜单。
           * @default 'caret'
+          * @reflect
          */
         "tip"?: 'caret' | 'none' | 'tab';
         /**
-          * Determines how the popover is triggered. Possible values are: - `"click"`: The popover is shown or hidden when the trigger element is clicked. - `"hover"`: The popover is shown when the mouse hovers over the trigger element and hidden when it leaves. - `"manual"`: The visibility of the popover must be manually controlled through the `open` property.
+          * 触发弹出框的方式
+          * @prop {'click' | 'hover' | 'manual'} [trigger='hover']  - 'click': 点击触发元素时打开/关闭弹出框。 - 'hover': 鼠标悬停在触发元素上时打开，移开时关闭。 - 'manual': 手动控制，通过调用组件的 `show()` 和 `hide()` 方法控制。
           * @default 'hover'
          */
         "trigger"?: 'click' | 'hover' | 'manual';
     }
     /**
-     * @name Popover Content
-     * @description The PopoverContent component is used to display additional information.
-     * @category Informational
-     * @subcategory Popover
-     * @childComponent true
+     * 弹出框内容容器组件 (zane-popover-content)
+     * @component zane-popover-content
+     * @shadow true
+     * @description 弹出框系统的核心内容承载容器，提供以下核心功能：
+     * 1. 结构化内容容器：为弹出内容提供标准化的布局结构
+     * 2. 动态箭头指示器：根据父组件配置自动调整箭头样式和位置
+     * 3. 无障碍支持：内置ARIA角色属性增强可访问性
+     * 4. 主题适配：通过CSS变量支持深度主题定制
+     * @dependency 必须作为`<zane-popover>`组件的直接子元素使用
+     * @example <!-- 基础用法 -->
+     * <zane-popover-content>
+     *   <h3>标题</h3>
+     *   <p>详细说明内容...</p>
+     *   <button>确认</button>
+     * </zane-popover-content>
+     * <!-- 带样式定制 -->
+     * <zane-popover-content style="--background: #2c3e50; --color: white">
+     *   ...
+     * </zane-popover-content>
      */
     interface ZanePopoverContent {
     }
     /**
-     * @name Progress
-     * @description Progress indicators express an unspecified wait time or display the length of a process.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-progress value="40" label="Progress" width="100%" helper-text="Optional helper text goes here..."></zane-progress>
+     * 动态进度指示器组件 (zane-progress)
+     * @component zane-progress
+     * @shadow true
+     * @description 提供可视化任务进程的进度指示器，支持多种状态显示和尺寸配置。适用于文件上传、数据加载、操作流程等场景。
+     * @example <!-- 基础用法 -->
+     * <zane-progress value={75}></zane-progress>
+     * <!-- 带标签和状态 -->
+     * <zane-progress
+     *   value={50}
+     *   label="上传进度"
+     *   status="active"
+     *   helperText="剩余时间：2分钟"
+     * ></zane-progress>
+     * <!-- 错误状态 -->
+     * <zane-progress
+     *   value={30}
+     *   status="error"
+     *   helperText="上传失败，请重试"
+     * ></zane-progress>
      */
     interface ZaneProgress {
+        /**
+          * 辅助说明文本
+          * @designNote - 显示在进度条下方的补充信息 - 可用于展示剩余时间、错误详情等动态内容 - 建议不超过40字符
+          * @example "剩余时间：2分钟" | "上传失败：网络断开"
+         */
         "helperText"?: string;
         /**
+          * 是否隐藏标签区域
           * @default false
+          * @designNote - 设为 true 时隐藏顶部标签区域（包括标签和状态图标） - 适用于空间受限场景（如移动端小部件） - 与 `label` 属性联动：当 hideLabel=true 时 label 自动失效
          */
         "hideLabel"?: boolean;
         /**
-          * A label describing the progress bar.
+          * 进度标签文本
+          * @designNote - 显示在进度条顶部的标题文本 - 建议使用简洁的动词短语（如："文件上传"、"数据处理"） - 国际化支持：可通过 slot 机制实现多语言
+          * @example "安装进度" | "资源加载"
          */
         "label"?: string;
         /**
-          * Possible values are: `"sm"` and `"md"` in pixel. Defaults to `"md"`.
+          * 组件尺寸模式
           * @default 'md'
+          * @designNote 可选值及其应用场景： | **值** | **尺寸** | **适用场景**            | |---------|----------|------------------------| | 'md'    | 中等尺寸 | 标准页面内容区（默认）  | | 'sm'    | 小型尺寸 | 表格内嵌/工具栏紧凑布局 |  尺寸规范： | **尺寸** | 高度 | 字体大小 | 圆角半径 | |-----------|------|----------|----------| | md        | 24px | 14px     | 12px     | | sm        | 16px | 12px     | 8px      |
          */
         "size"?: 'md' | 'sm';
         /**
+          * 进度状态类型
           * @default 'active'
+          * @designNote 状态机逻辑： | **状态值** | **视觉表现**                     | **使用场景**               | |-------------|----------------------------------|----------------------------| | 'active'    | 蓝色动态条纹（默认）             | 进行中的任务               | | 'success'   | 绿色+成功图标（✔️）              | 已完成的任务               | | 'error'     | 红色+错误图标（❌）              | 失败/中断的任务            |  状态交互规则： 1. 当 value=100 时自动切换为 'success'（优先级高于手动设置） 2. 'error' 状态必须手动触发（如网络异常）
          */
         "status"?: 'active' | 'error' | 'success';
         /**
+          * 当前进度值
           * @default null
+          * @designNote - 范围：0-100（百分比值） - 特殊值 null：显示不定长动画（indeterminate 模式） - 边界处理：   - <0 自动修正为0   - >100 自动修正为100 - 动画效果：进度变化时带300ms缓动过渡
          */
         "value"?: number;
     }
     /**
-     * @name Select
-     * @description Allows the user to select one or more options using a dropdown.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/select.webp
-     * @imgDark /assets/img/select-dark.webp
+     * 基于 Floating UI 的增强型下拉选择组件
+     * @component 
+     * @tag zane-select
+     * @implements ComponentInterface , InputComponentInterface}
+     * @example <!-- 基础用法 -->
+     * <zane-select
+     *   items={[{label: '选项1', value: 1}]}
+     *   placeholder="请选择"
+     *   size="md"
+     * />
      */
     interface ZaneSelect {
         /**
-          * If `true`, a clear icon will appear in the input when there is a value. Clicking it clears the input.
+          * 是否显示清除按钮
+          * @type {boolean}
           * @default false
          */
         "clearable"?: boolean;
         /**
+          * ARIA属性配置对象
+          * @type {Object}
+          * @mutable 
+          * @example configAria={{ 'aria-labelledby': 'custom-label' }}  支持动态配置以下属性： - aria-label：定义组件的语义标签 - aria-labelledby：关联可见标签元素 - aria-describedby：关联描述元素
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 搜索输入防抖时间（毫秒）
+          * @type {number}
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "disabled"?: boolean;
@@ -4919,7 +7176,6 @@ declare namespace LocalJSX {
         "invalid"?: boolean;
         "invalidText"?: string;
         /**
-          * [{   label: 'Zane Deng',   value: 'zane-deng',   icon: 'person' }]
           * @default []
          */
         "items"?: {
@@ -4928,50 +7184,66 @@ declare namespace LocalJSX {
     value: number | string;
   }[];
         "label"?: string;
+        /**
+          * 视觉层级配置
+          * @type {'01' | '02' | 'background'}
+          * @example layer="02" // 使用第二层级的阴影和背景  层级说明： - 01：基础层级（默认），适用于常规布局 - 02：更高层级，适合悬浮卡片效果 - background：背景层级，适合非交互元素
+         */
         "layer"?: '01' | '02' | 'background';
         /**
           * @default false
          */
         "multiple"?: boolean;
         /**
-          * The input field name.
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the value has changed.
+          * 值变更事件
+          * @event zane-select--change
+          * @type {EventEmitter<{ newItem?: object, removedItem?: object, value: string }>}
+          * @example <zane-select onZaneSelectChange={e => console.log(e.detail)}>  事件参数说明： - newItem：新增项的对象数据（当为添加操作时存在） - removedItem：移除项的对象数据（当为删除操作时存在） - value：当前选中值的逗号分隔字符串
          */
         "onZane-select--change"?: (event: ZaneSelectCustomEvent<any>) => void;
+        /**
+          * 搜索回车确认事件
+          * @event zane-select--enter
+          * @type {EventEmitter<{ currentItems: array, value: string }>}
+          * @example <zane-search onZaneSearchEnter={e => loadMore(e.detail.value)}>  事件参数说明： - currentItems：当前过滤后的菜单项数组 - value：当前的搜索关键词
+         */
         "onZane-select--enter"?: (event: ZaneSelectCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 搜索输入事件（带防抖）
+          * @event zane-select--search
+          * @type {EventEmitter<{ value: string }>}
+          * @example <zane-search onZaneSearch={e => handleSearch(e.detail.value)}>  触发条件： - 当search不为'none'时 - 输入内容发生变更且经过防抖处理
          */
         "onZane-select--search"?: (event: ZaneSelectCustomEvent<any>) => void;
         /**
           * @default false
          */
         "open"?: boolean;
-        /**
-          * The input field placeholder.
-         */
         "placeholder"?: string;
         /**
+          * 下拉菜单定位策略配置
+          * @type {string}
           * @default 'bottom-start,top-start,bottom-end,top-end'
+          * @example placements="top,right-start" // 优先尝试顶部对齐，次选右侧对齐  格式说明： - 使用逗号分隔的定位字符串 - 每个定位字符串格式为[方向]-[对齐方式] - 方向选项：top | right | bottom | left - 对齐方式：start | end
          */
         "placements"?: string;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
           * @default false
          */
         "required"?: boolean;
         /**
-          * Search type Possible values are `"none"`, `"initial"`, `"contains"`, `"managed"`. Defaults to `"none"`.
+          * 搜索模式配置
+          * @type {'contains' | 'initial' | 'managed' | 'none'}
           * @default 'none'
+          * @example search="contains" // 实时子字符串匹配  模式说明： - none：禁用搜索功能 - contains：根据输入内容进行子字符串匹配过滤 - initial：仅在打开菜单时执行初始过滤 - managed：由父组件完全控制搜索逻辑
          */
         "search"?: 'contains' | 'initial' | 'managed' | 'none';
         /**
@@ -4979,17 +7251,20 @@ declare namespace LocalJSX {
          */
         "showLoader"?: boolean;
         /**
-          * The select input size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 组件尺寸选项
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @example size="sm" // 小尺寸样式  具体尺寸对应关系： - sm：高度32px，适合紧凑布局 - md：高度40px，标准尺寸 - lg：高度48px，强调视觉重点
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 组件状态标识
+          * @type {'default' | 'error' | 'success' | 'warning'}
           * @default 'default'
+          * @example state="error" // 显示错误状态样式  状态说明： - default：常规状态 - error：输入验证失败 - success：输入验证通过 - warning：存在潜在问题
          */
         "state"?: 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
           * @default ''
          */
         "value"?: number | string;
@@ -5000,328 +7275,564 @@ declare namespace LocalJSX {
         "warnText"?: string;
     }
     /**
-     * @name1 Side Navigation
-     * @description1 The side navigation component provides an easy way to navigate through your website / application.
-     * @img1 /assets/img/sidenav.webp
+     * 侧边导航栏组件，提供页面侧边导航功能
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
      */
     interface ZaneSidenav {
         /**
+          * 是否显示加载指示器
+          * @Prop 可从外部设置的属性
           * @default false
          */
         "showLoader"?: boolean;
     }
+    /**
+     * 侧边导航菜单组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneSidenavMenu {
         /**
+          * 是否显示空状态
+          * @type {boolean}
           * @default false
+          * @mutable 可变的
          */
         "empty"?: boolean;
         /**
-          * @default `{     "headline": "No items",     "description": "There are no items to display"   }`
+          * 空状态配置(JSON字符串格式)
+          * @type {string}
+          * @default '{"headline": "No items", "description": "There are no items to display"}'
+          * @mutable 可变的
          */
         "emptyState"?: any;
         /**
+          * 是否显示加载指示器
+          * @type {boolean}
           * @default false
          */
         "showLoader"?: boolean;
+        /**
+          * 组件值，可以是数字或字符串
+          * @type {number|string}
+          * @mutable 可变的
+         */
         "value"?: number | string;
     }
+    /**
+     * 侧边导航菜单项组件
+     * @Component 装饰器定义组件元数据
+     * @shadow 启用Shadow DOM封装
+     * @styleUrl 指定组件样式文件
+     * @tag 定义组件在HTML中的标签名
+     */
     interface ZaneSidenavMenuItem {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用菜单项
+          * @type {boolean}
           * @default false
+          * @reflect 属性值会反射到DOM属性
          */
         "disabled"?: boolean;
         /**
-          * Emitted when the menu item is clicked.
+          * 菜单项点击事件
+          * @type {EventEmitter}
+          * @event zane:sidenav-menu-item-click
          */
         "onZane:sidenav-menu-item-click"?: (event: ZaneSidenavMenuItemCustomEvent<any>) => void;
         /**
-          * Menu item selection state.
+          * 选中状态
+          * @type {boolean}
           * @default false
+          * @reflect 属性值会反射到DOM属性
          */
         "selected"?: boolean;
         /**
-          * The menu item value.
+          * 菜单项值，支持null/数字/字符串类型
+          * @type {null|number|string}
+          * @mutable 可变的
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Slider
-     * @description Sliders allow users to make selections from a range of values.
-     * @category Form Inputs
-     * @tags input, form
-     * @img /assets/img/slider.webp
-     * @imgDark /assets/img/slider-dark.webp
+     * 滑动选择器组件
+     * 提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+     * @component zane-slider
+     * @tags zane-slider
+     * @shadow true
+     * @example <!-- 基础用法 -->
+     * <zane-slider min="0" max="100" value="50"></zane-slider>
+     * <!-- 禁用状态 -->
+     * <zane-slider disabled value="30"></zane-slider>
+     * <!-- 隐藏数值输入框 -->
+     * <zane-slider show-only-slider value="75"></zane-slider>
      */
     interface ZaneSlider {
         /**
+          * ARIA 属性配置对象
+          * @prop {Object} configAria - 收集所有以 `aria-` 开头的自定义属性
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+          * 值变更事件的防抖时间（毫秒）
+          * @prop {number} debounce - 用于优化频繁触发的事件
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态开关
+          * @prop {boolean} disabled
+          * @reflect 
           * @default false
          */
         "disabled"?: boolean;
         /**
-          * function to format the value of the input
+          * 数值格式化函数
+          * @prop {(value: number | string) => string} formatter - 用于自定义显示值的格式
+          * @example (val) => `${val}%`
          */
         "formatter"?: (value: number | string) => string;
         /**
+          * 滑块最大值
+          * @prop {number} max
           * @default 100
          */
         "max"?: number;
         /**
+          * 滑块最小值
+          * @prop {number} min
           * @default 0
          */
         "min"?: number;
         /**
-          * The input field name.
-          * @default `zane-input-${this.gid}`
+          * 表单字段名称
+          * @prop {string} name - 自动生成唯一名称
+          * @default `zane-input-${gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the value has changed.
+          * 值变更事件（带防抖）
+          * @event zane-slider--change
+          * @property {Object} detail - 事件详情
+          * @property {number} detail.value  - 变更后的值
          */
         "onZane-slider--change"?: (event: ZaneSliderCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 输入实时事件
+          * @event zane-slider--input
+          * @property {Object} detail - 事件详情
+          * @property {number} detail.value  - 当前输入值
          */
         "onZane-slider--input"?: (event: ZaneSliderCustomEvent<any>) => void;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 只读状态开关
+          * @prop {boolean} readonly
+          * @reflect 
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
+          * @prop {boolean} required
+          * @reflect 
           * @default false
          */
         "required"?: boolean;
         /**
+          * 是否仅显示滑块（隐藏数值输入框）
+          * @prop {boolean} showOnlySlider
           * @default false
          */
         "showOnlySlider"?: boolean;
         /**
+          * 步进值
+          * @prop {number} step - 每次增减的数值单位
+          * @mutable 
           * @default 1
          */
         "step"?: number;
         /**
-          * The input field value.
+          * 当前滑块值
+          * @prop {number} value - 受控属性
+          * @mutable 
           * @default 0
          */
         "value"?: number;
     }
     /**
-     * @name Spinner
-     * @description Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
-     * @category Informational
-     * @tags feedback, loading, progress, spinner
-     * @example <zane-spinner class="rainbow" size="2rem"></zane-spinner>
+     * 加载指示器组件 (zane-spinner)
+     * @component 
+     * @shadow true
+     * @description 用于表示加载状态的动画指示器，支持自定义尺寸和样式。
+     * @example <!-- 基本用法 -->
+     * <zane-spinner></zane-spinner>
+     * <!-- 自定义描述文本 -->
+     * <zane-spinner description="数据加载中"></zane-spinner>
+     * <!-- 隐藏背景圆环 -->
+     * <zane-spinner hide-background></zane-spinner>
      */
     interface ZaneSpinner {
         /**
+          * 辅助文本描述
+          * @prop 
+          * @attribute description
           * @default 'Loading...'
+          * @description 为屏幕阅读器提供加载状态描述，同时作为 SVG 的 title 属性提升可访问性。
          */
         "description"?: string;
         /**
+          * 是否隐藏背景圆环
+          * @prop 
+          * @attribute hide-background
           * @default false
+          * @description 当设置为 true 时，隐藏加载动画后的半透明背景圆环。
          */
         "hideBackground"?: boolean;
         /**
-          * The Icon size. Possible values are: `"sm"`, `"md"`, `"lg"` and size in pixel. Defaults to `"md"`.
+          * 加载指示器尺寸
+          * @prop 
+          * @attribute size
+          * @reflect true
           * @default 'md'
+          * @description 控制加载指示器尺寸，支持预设枚举或自定义 CSS 单位： - `'lg'`: 大尺寸 (5.5rem) - `'md'`: 中等尺寸 (1rem) - `'sm'`: 小尺寸 (0.75rem) - `string`: 自定义尺寸（支持 '2rem'/'32px' 格式）
          */
         "size"?: 'lg' | 'md' | 'sm' | string;
     }
     /**
-     * @name SVG
-     * @description Render SVG content from an external source.
-     * @category Data Display
-     * @example <zane-svg src="https://icons.getbootstrap.com/assets/icons/bug.svg" size="2rem"></zane-svg>
+     * SVG 动态加载组件 (zane-svg)
+     * @component 
+     * @shadow true
+     * @description 智能 SVG 图标容器，支持动态加载、尺寸控制与样式继承
+     * @example <!-- 基础用法 -->
+     * <zane-svg src="/assets/icon.svg"></zane-svg>
+     * <!-- 带尺寸控制 -->
+     * <zane-svg src="/assets/logo.svg"  size="xl"></zane-svg>
+     * <!-- 自定义尺寸 -->
+     * <zane-svg src="/assets/chart.svg"  size="32px"></zane-svg>
      */
     interface ZaneSvg {
         /**
-          * The Icon size.
+          * 图标尺寸配置
+          * @prop 
+          * @attribute size
+          * @reflect true
+          * @default undefined
+          * @description 控制 SVG 图标显示尺寸，支持以下类型： - 预设枚举：'xs' | 'sm' | 'md' | 'lg' | 'xl' - CSS 单位值：'24px' | '2rem' | '100%' - 未设置时继承父级字体大小
+          * @presetDetails | 值   | 换算公式    | 典型场景          | |------|------------|-------------------| | xs   | 0.5rem (8px) | 表格行内小图标     | | sm   | 0.75rem (12px)| 按钮辅助图标      | | md   | 1rem (16px)  | 默认标准尺寸       | | lg   | 1.5rem (24px)| 卡片头部图标       | | xl   | 1.75rem (28px)| 展示型大图标      |
          */
         "size"?: string;
         /**
+          * SVG 资源路径
+          * @prop 
+          * @attribute src
           * @default ''
+          * @description 需要加载的 SVG 文件路径或 URL，支持： - 相对路径（基于项目根目录） - 绝对 URL（需配置 CORS） - 内联 DataURL（base64 编码）
+          * @securityNote 当使用外部 URL 时，组件会自动添加 `rel="noopener noreferrer"` 防止钓鱼攻击，建议优先使用本地托管 SVG
          */
         "src"?: string;
     }
+    /**
+     * 单个标签页元素，支持多种交互状态和类型
+     */
     interface ZaneTab {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 是否禁用标签
+          * @type {boolean}
+          * @prop disabled
           * @default false
+          * @reflect
          */
         "disabled"?: boolean;
         /**
+          * 禁用状态提示信息（支持无障碍访问）
+          * @type {string}
+          * @prop disabledReason
           * @default ''
          */
         "disabledReason"?: string;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（存在时渲染为<a>标签）
+          * @type {string}
+          * @prop href
          */
         "href"?: string;
         /**
-          * Icon which will displayed on button. Possible values are bootstrap icon names.
+          * 图标名称（内置图标库）
+          * @type {string}
+          * @prop icon
          */
         "icon"?: string;
+        /**
+          * 标签文本（备用显示内容）
+          * @type {string}
+          * @prop label
+         */
         "label"?: string;
         /**
-          * On click of tab, a CustomEvent 'zane-tab-click' will be triggered.
+          * 标签点击事件（冒泡给父级Tabs）
+          * @event zane-tab--click
+          * @type {EventEmitter<{element: HTMLElement; target: string; value: string}>}
          */
         "onZane-tab--click"?: (event: ZaneTabCustomEvent<any>) => void;
         /**
-          * Button selection state.
+          * 选中状态（与父级Tabs组件联动）
+          * @type {boolean}
+          * @prop selected
           * @default false
+          * @reflect
          */
         "selected"?: boolean;
         /**
-          * Show loader.
+          * 显示加载指示器
+          * @type {boolean}
+          * @prop showLoader
           * @default false
          */
         "showLoader"?: boolean;
+        /**
+          * 关联面板标识
+          * @type {string}
+          * @prop target
+         */
         "target"?: string;
         /**
+          * 标签类型（需与父级Tabs组件同步）
+          * @type {'contained' | 'contained-bottom' | 'default'}
+          * @prop type
           * @default 'default'
+          * @reflect
          */
         "type"?: 'contained' | 'contained-bottom' | 'default';
-        "value"?: string;
-    }
-    interface ZaneTabPanel {
         /**
-          * @default false
+          * 标签值（用于表单场景）
+          * @type {string}
+          * @prop value
          */
-        "active"?: boolean;
-        "layer"?: '01' | '02' | 'background';
         "value"?: string;
     }
     /**
-     * @name Table
-     * @description A configurable component for displaying tabular data.
-     * @category Data Display
-     * @img /assets/img/table.webp
-     * @imgDark /assets/img/table-dark.webp
+     * 标签页内容面板容器
+     * 该组件与 zane-tab 标签页组件配合使用，形成完整的标签页系统。当标签页被激活时，
+     * 关联的面板内容将显示在界面中，支持层级深度控制以实现复杂的视觉层次效果。
+     * @example <zane-tab-panel value="profile" active>
+     *   用户资料详情内容
+     * </zane-tab-panel>
      */
+    interface ZaneTabPanel {
+        /**
+          * 面板激活状态（与关联标签页同步）  当设置为 true 时，面板将显示在界面中。该属性通常由父级 zane-tabs 组件自动管理， 开发者也支持手动控制以实现特殊交互场景。
+          * @type {boolean}
+          * @prop active
+          * @default false
+          * @reflect
+         */
+        "active"?: boolean;
+        /**
+          * 视觉层级深度控制  提供三层深度选项，用于构建层次化界面效果： - '01': 顶层面板（默认最高层级） - '02': 中间层级面板 - 'background': 背景层级面板（最低层级）
+          * @type {'01' | '02' | 'background'}
+          * @prop layer
+          * @reflect
+         */
+        "layer"?: '01' | '02' | 'background';
+        /**
+          * 面板唯一标识值  必须与对应 zane-tab 组件的 target 属性匹配，建立标签页与内容面板的关联关系。 该值应确保在同一个 zane-tabs 容器中保持唯一。
+          * @type {string}
+          * @prop value
+          * @reflect
+         */
+        "value"?: string;
+    }
     interface ZaneTable {
         /**
-          * Grid columns configuration. [ {   "name":"name",   "label":"Name",   "width":300,   "fixed":true,   "template": function(row, column) { return row[column.name];}  }, {   "name":"age",   "label":"Age" } ]
+          * 表格列配置数组
+          * @prop {Array<Object>} columns
+          * @example [   {     name: "name",         // 数据字段名     label: "Name",        // 列标题显示文本     width: 300,           // 列宽度（像素或rem）     fixed: true,          // 是否固定列（左侧固定）     template: (row, column) => `<b>${row[column.name]}</b>` // 自定义渲染模板   },   {     name: "age",     label: "Age"   } ]
           * @default []
          */
         "columns"?: any[];
         /**
-          * Grid data to display on table [{  'id': '5e7118ddce4b3d577956457f',  'age': 21,  'name': 'John',  'company': 'India',  'email': 'john@example.com',  'phone': '+1 (839) 560-3581',  'address': '326 Irving Street, Grimsley, Texas, 4048'  }]
+          * 表格数据源
+          * @prop {Array<Object>} data
+          * @example [{   id: '5e7118ddce4b3d577956457f',   age: 21,   name: 'John' }]
           * @default []
          */
         "data"?: any[];
         /**
+          * 空状态描述文本
+          * @prop {string} emptyStateDescription
           * @default 'There are no items to display'
          */
         "emptyStateDescription"?: string;
         /**
+          * 空状态标题文本
+          * @prop {string} emptyStateHeadline
           * @default 'No items'
          */
         "emptyStateHeadline"?: string;
         /**
+          * 行数据唯一标识字段名
+          * @prop {string} keyField
           * @default 'id'
          */
         "keyField"?: string;
+        /**
+          * 组件视觉层级（影响阴影和z-index）
+          * @prop {'01' | '02' | 'background'} [layer] - '01': 基础层级（默认） - '02': 中层（用于悬浮元素） - 'background': 底层（无阴影）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 是否为托管模式（外部控制分页/排序）
+          * @prop {boolean} managed
           * @default false
+          * @desc true: 外部控制数据（需监听事件处理分页/排序） false: 组件内部处理分页/排序
          */
         "managed"?: boolean;
         /**
-          * Emitted when a table cell is clicked.
+          * 单元格点击事件
+          * @event zane-table--cell-click
+          * @param detail - 事件详情
+          * @param detail.altKey - 是否按下Alt键
+          * @param detail.column - 列配置对象
+          * @param detail.ctrlKey - 是否按下Ctrl键
+          * @param detail.metaKey - 是否按下Meta键
+          * @param detail.record - 行数据对象
+          * @param detail.shiftKey - 是否按下Shift键
          */
         "onZane-table--cell-click"?: (event: ZaneTableCustomEvent<any>) => void;
         /**
-          * Emitted when the page changes.
+          * 分页变更事件
+          * @event zane-table--page
+          * @param detail - 事件详情
+          * @param detail.page - 新页码
+          * @param detail.pageSize - 新每页条数
          */
         "onZane-table--page"?: (event: ZaneTableCustomEvent<any>) => void;
         /**
-          * Emitted when the selection changes.
+          * 选择变更事件
+          * @event zane-table--selection-change
+          * @param detail - 事件详情
+          * @param detail.isSelectAll - 是否全选
+          * @param detail.value - 选中行key数组
          */
         "onZane-table--selection-change"?: (event: ZaneTableCustomEvent<any>) => void;
         /**
-          * Emitted when the table is sorted.
+          * 排序事件
+          * @event zane-table--sort
+          * @param detail - 事件详情
+          * @param detail.sortBy - 排序字段
+          * @param detail.sortOrder - 排序方向
          */
         "onZane-table--sort"?: (event: ZaneTableCustomEvent<any>) => void;
         /**
+          * 当前页码
+          * @prop {number} page
           * @default 1
          */
         "page"?: number;
         /**
+          * 每页显示条数
+          * @prop {number} pageSize
           * @default 10
          */
         "pageSize"?: number;
         /**
+          * 是否启用分页
+          * @prop {boolean} paginate
           * @default true
          */
         "paginate"?: boolean;
         /**
+          * 已选中的行key数组
+          * @prop {string[]} selectedRowKeys
           * @default []
          */
         "selectedRowKeys"?: string[];
+        /**
+          * 行选择类型
+          * @prop {'checkbox' | undefined} [selectionType] - 'checkbox': 显示多选框列 - undefined: 无选择功能
+         */
         "selectionType"?: 'checkbox' | undefined;
+        /**
+          * 当前排序字段
+          * @prop {string} [sortBy]
+         */
         "sortBy"?: string;
         /**
+          * 排序方向
+          * @prop {'asc' | 'desc'} [sortOrder] - 'asc': 升序（A-Z/0-9） - 'desc': 降序（Z-A/9-0）
           * @default 'asc'
          */
         "sortOrder"?: 'asc' | 'desc';
         /**
+          * 是否启用排序
+          * @prop {boolean} sortable
           * @default true
          */
         "sortable"?: boolean;
+        /**
+          * 数据总条数（托管模式下必传）
+          * @prop {number} [totalItems]
+         */
         "totalItems"?: any;
     }
     /**
-     * @name Tabs
-     * @description The tabs component is used to display multiple panels of content in a container.
-     * @category Navigation
-     * @tags navigation
-     * @example <zane-tabs>
-     * <zane-tabs-list>
-     * <zane-tab selected >Tab 1</zane-tab>
-     * <zane-tab>Tab 2</zane-tab>
-     * </zane-tabs-list>
-     * </zane-tabs>
+     * 标签页容器组件，用于管理和切换多个标签页
      */
     interface ZaneTabs {
+        /**
+          * 组件层级设置，影响样式和视觉层次
+          * @type {'01' | '02' | 'background'}
+          * @prop layer
+          * @memberof Tabs  - `'01'`: 第一层级（最高层级，用于凸出显示） - `'02'`: 第二层级（中等层级，常规内容） - `'background'`: 背景层级（最低层级，用于背景元素）
+         */
         "layer"?: '01' | '02' | 'background';
         /**
+          * 标签页类型，决定标签页的视觉样式
+          * @type {'contained' | 'contained-bottom' | 'default'}
+          * @prop type
           * @default 'default'
+          * @memberof Tabs  - `'contained'`: 包含式标签（标签与内容区域视觉统一） - `'contained-bottom'`: 底部包含式标签（标签位于内容底部） - `'default'`: 默认样式（标准分隔式标签）
          */
         "type"?: 'contained' | 'contained-bottom' | 'default';
     }
     interface ZaneTabsList {
         /**
+          * 是否由外部管理状态（如父组件 zane-tabs 管理） 如果为 true，则点击标签页时不会自动修改选中状态，而是由外部通过事件来控制。 默认情况下，组件自身管理状态。
           * @default false
          */
         "managed"?: boolean;
         /**
+          * 标签栏的样式类型 - default: 默认样式 - contained: 包含式（通常有背景和边框） - contained-bottom: 包含式，标签位于底部
           * @default 'default'
          */
         "type"?: 'contained' | 'contained-bottom' | 'default';
     }
     /**
-     * @name Tag
-     * @description Use tags to label, categorize, or organize items using keywords that describe them.
-     * @category Data Display
-     * @tag controls
-     * @example <zane-tag class="color-red">Important</zane-tag>
+     * 多功能标签/徽章组件
+     * 提供灵活的内容展示能力，支持多种颜色主题、尺寸规格、可关闭操作和选中状态。
+     * 适用于分类标记、状态指示、可选项选择等场景，可与表单组件或列表组件配合使用。
+     * @example <!-- 基础用法 -->
+     * <zane-tag>默认标签</zane-tag>
+     * <!-- 带关闭按钮 -->
+     * <zane-tag dismissible>可关闭标签</zane-tag>
+     * <!-- 带图片 -->
+     * <zane-tag image-src="/path/to/avatar.jpg"> 用户标签</zane-tag>
      */
     interface ZaneTag {
         /**
-          * Tag color. Possible values are: 'gray', 'blue', 'green', 'red', 'yellow', 'primary', 'success', 'info', 'warning', 'error'.
+          * 标签颜色主题  提供10种预设颜色方案，满足不同场景的视觉需求： - `blue`: 蓝色主题（中性信息） - `error`: 错误红色（操作失败/危险状态） - `gray`: 灰色主题（默认中性色） - `green`: 绿色主题（成功/完成状态） - `info`: 信息蓝（通知/提示信息） - `primary`: 品牌主色（重要内容） - `red`: 警示红色（紧急通知） - `success`: 成功绿色（操作成功） - `warning`: 警告黄色（注意/提醒） - `yellow`: 强调黄色（高亮显示）
+          * @type {'blue' | 'error' | 'gray' | 'green' | 'info' | 'primary' | 'red' | 'success' | 'warning' | 'yellow'}
+          * @prop color
           * @default 'gray'
+          * @reflect
          */
         "color"?: | 'blue'
     | 'error'
@@ -5334,47 +7845,73 @@ declare namespace LocalJSX {
     | 'warning'
     | 'yellow';
         /**
-          * If true, the tag will have a close icon.
+          * 是否显示关闭按钮  设置为 true 时，标签右侧显示关闭图标，点击触发 `zane-tag--dismiss` 事件
+          * @type {boolean}
+          * @prop dismissible
           * @default false
          */
         "dismissible"?: boolean;
         /**
-          * Image source.
+          * 标签图片地址  设置后，在标签左侧显示指定图片（如用户头像）
+          * @type {string}
+          * @prop imageSrc
          */
         "imageSrc"?: string;
         /**
-          * Emitted when the tag is clicked.
+          * 标签点击事件  当标签被点击时触发（不包括关闭按钮区域）
+          * @event zane-tag--click
+          * @type {EventEmitter}
          */
         "onZane-tag--click"?: (event: ZaneTagCustomEvent<any>) => void;
         /**
-          * Emitted when the close icon is clicked.
+          * 标签关闭事件  当关闭按钮被点击时触发，传递标签的 value 或文本内容
+          * @event zane-tag--dismiss
+          * @type {EventEmitter<{ value: string }>}
          */
         "onZane-tag--dismiss"?: (event: ZaneTagCustomEvent<any>) => void;
         /**
-          * If true, the tag will be selected.
+          * 选中状态  表示标签是否被选中，常用于多选场景
+          * @type {boolean}
+          * @prop selected
           * @default false
+          * @reflect
          */
         "selected"?: boolean;
         /**
-          * Text size.
+          * 标签尺寸  控制标签的整体尺寸规格： - `md`: 中等尺寸（默认） - `sm`: 小型尺寸（紧凑布局）
+          * @type {'md' | 'sm'}
+          * @prop size
           * @default 'md'
+          * @reflect
          */
         "size"?: 'md' | 'sm';
         /**
-          * Tag value.
+          * 标签值  标签关联的业务数据值，在事件触发时作为参数传递
+          * @type {string}
+          * @prop value
           * @default ''
+          * @reflect
          */
         "value"?: string;
     }
     /**
-     * @name Text
-     * @description Typography are used for rendering headlines, paragraphs and captions.
-     * @category General
-     * @example <zane-text type="heading" level="1">Heading</zane-typography>
+     * 多功能文本展示组件
+     * 提供丰富的文本样式和语义化支持，满足不同场景的文本展示需求。支持多种文本类型、
+     * 颜色主题、标题级别和响应式文本大小，集成了完善的 ARIA 可访问性支持。
+     * @example <!-- 基础文本 -->
+     * <zane-text>普通段落文本</zane-text>
+     * <!-- 标题文本 -->
+     * <zane-text type="heading" heading-level="2">二级标题</zane-text>
+     * <!-- 带颜色的辅助文本 -->
+     * <zane-text type="helper-text" color="helper">表单提示文本</zane-text>
      */
     interface ZaneText {
         /**
+          * 文本颜色主题  提供7种预设颜色方案，满足不同场景的视觉需求： - `primary`: 主要文本颜色（默认） - `secondary`: 次要文本颜色（较浅） - `tertiary`: 三级文本颜色（最浅） - `error`: 错误状态文本（红色系） - `helper`: 辅助说明文本（灰色系） - `inverse`: 反色文本（深色背景使用） - `on-color`: 彩色背景上的文本
+          * @prop color
+          * @type {'primary' | 'secondary' | 'tertiary' | 'error' | 'helper' | 'inverse' | 'on-color'}
           * @default 'primary'
+          * @reflect
          */
         "color"?: | 'error'
     | 'helper'
@@ -5384,21 +7921,50 @@ declare namespace LocalJSX {
     | 'secondary'
     | 'tertiary';
         /**
+          * ARIA 属性配置  用于存储动态收集的 ARIA 属性，提高组件的可访问性。 组件会自动收集元素上的所有 aria-* 属性并转移到内部元素。
+          * @prop configAria
+          * @type {any}
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria"?: any;
         /**
+          * 情感化文本模式  启用特殊的情感化排版样式，通常用于突出重要内容： - 更大的字号间距 - 更丰富的字体变化 - 增强的视觉层次
+          * @prop expressive
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "expressive"?: boolean;
+        /**
+          * 标题语义级别  定义标题的 HTML 语义级别（h1-h6），影响： 1. 文档大纲结构 2. 屏幕阅读器识别 3. SEO 权重  当未指定时，组件会根据标题尺寸自动推导
+          * @prop headingLevel
+          * @type {1 | 2 | 3 | 4 | 5 | 6}
+          * @reflect
+         */
         "headingLevel"?: 1 | 2 | 3 | 4 | 5 | 6;
+        /**
+          * 标题视觉尺寸  控制标题的视觉大小（1-7级），与实际语义级别分离： - 1: 最大标题尺寸 - 7: 最小标题尺寸  当未指定时，默认值为： - 普通标题: 7 - 流式标题: 6
+          * @prop headingSize
+          * @type {1 | 2 | 3 | 4 | 5 | 6 | 7}
+          * @reflect
+         */
         "headingSize"?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
         /**
+          * 行内模式  设置为 true 时，文本将以行内元素（span）渲染， 否则以块级元素（p）渲染
+          * @prop inline
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "inline"?: boolean;
         /**
+          * 文本类型  定义文本的语义类型和基本样式： - `body`: 标准正文文本（默认） - `body-compact`: 紧凑正文（较小行高） - `code`: 代码样式（等宽字体） - `fluid-heading`: 流式响应式标题 - `heading`: 标准标题 - `heading-compact`: 紧凑标题 - `helper-text`: 辅助说明文本 - `label`: 表单标签文本 - `legal`: 法律条款小字
+          * @prop type
+          * @type {'body' | 'body-compact' | 'code' | 'fluid-heading' | 'heading' | 'heading-compact' | 'helper-text' | 'label' | 'legal'}
           * @default 'body'
+          * @reflect
          */
         "type"?: | 'body'
     | 'body-compact'
@@ -5411,120 +7977,197 @@ declare namespace LocalJSX {
     | 'legal';
     }
     /**
-     * @name Textarea
-     * @description Enables native inputs to be used within a Form field.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-textarea placeholder="Enter some description over here"></zane-textarea>
+     * 多功能文本区域输入组件
+     * 提供完整的表单文本区域解决方案，支持响应式布局、表单验证、辅助文本提示和丰富的交互功能。
+     * 集成了 ARIA 可访问性支持和多状态反馈设计，适用于复杂表单场景。
+     * @example <!-- 基础用法 -->
+     * <zane-textarea label="用户反馈" placeholder="请输入您的建议"></zane-textarea>
+     * <!-- 带验证状态 -->
+     * <zane-textarea
+     *   label="密码"
+     *   state="error"
+     *   invalid-text="密码长度不足8位"
+     * ></zane-textarea>
      */
     interface ZaneTextarea {
         /**
-          * If `true`, a clear icon will appear in the input when there is a value. Clicking it clears the input.
+          * 是否显示清除按钮  设置为 true 时，在输入框有内容时会显示清除按钮
+          * @prop clearable
+          * @type {boolean}
           * @default false
          */
         "clearable"?: boolean;
         /**
+          * ARIA 属性配置  存储动态收集的 ARIA 属性，用于增强组件可访问性。 组件加载时会自动收集宿主元素上的 aria-* 属性。
+          * @prop configAria
+          * @type {any}
+          * @mutable 
+          * @reflect 
           * @default {}
          */
         "configAria"?: any;
         /**
-          * Set the amount of time, in milliseconds, to wait to trigger the `zane:change` event after each keystroke.
+          * 输入事件防抖时间（毫秒）  减少频繁输入事件的处理频率，优化性能
+          * @prop debounce
+          * @type {number}
           * @default 300
          */
         "debounce"?: number;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态  设置为 true 时，组件不可交互且样式变灰
+          * @prop disabled
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "disabled"?: boolean;
+        /**
+          * 辅助提示文本  显示在输入区域下方的帮助信息
+          * @prop helperText
+          * @type {string}
+         */
         "helperText"?: string;
         /**
+          * 行内布局模式  设置为 true 时，标签和输入框水平排列
+          * @prop inline
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "inline"?: boolean;
         /**
+          * 错误验证状态  设置为 true 时显示错误样式和错误文本
+          * @prop invalid
+          * @type {boolean}
           * @default false
          */
         "invalid"?: boolean;
+        /**
+          * 错误提示文本  当 invalid 为 true 时显示的错误信息
+          * @prop invalidText
+          * @type {string}
+         */
         "invalidText"?: string;
+        /**
+          * 输入框标签文本  显示在输入区域上方的描述标签
+          * @prop label
+          * @type {string}
+         */
         "label"?: string;
         /**
-          * The input field name.
-          * @default `zane-input-${this.gid}`
+          * 表单字段名称  用于表单提交的字段名，默认自动生成唯一值
+          * @prop name
+          * @type {string}
+          * @default `zane-input-${gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the action button is clicked.
+          * 操作按钮点击事件  当操作按钮（如清除按钮）被点击时触发
+          * @event zane-textarea--action-click
+          * @type {EventEmitter}
          */
         "onZane-textarea--action-click"?: (event: ZaneTextareaCustomEvent<any>) => void;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件  当文本域失去焦点时触发
+          * @event zane-textarea--blur
+          * @type {EventEmitter}
          */
         "onZane-textarea--blur"?: (event: ZaneTextareaCustomEvent<any>) => void;
         /**
-          * Emitted when the value has changed..
+          * 值变更事件（防抖）  当文本域值变化且经过防抖处理后触发
+          * @event zane-textarea--change
+          * @type {EventEmitter}
          */
         "onZane-textarea--change"?: (event: ZaneTextareaCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件  当文本域获得焦点时触发
+          * @event zane-textarea--focus
+          * @type {EventEmitter}
          */
         "onZane-textarea--focus"?: (event: ZaneTextareaCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 输入事件（实时）  当文本域值变化时实时触发
+          * @event zane-textarea--input
+          * @type {EventEmitter}
          */
         "onZane-textarea--input"?: (event: ZaneTextareaCustomEvent<any>) => void;
         /**
-          * The input field placeholder.
+          * 占位符文本  输入框为空时显示的提示文本
+          * @prop placeholder
+          * @type {string}
          */
         "placeholder"?: string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
+          * 只读状态  设置为 true 时，内容不可编辑但可复制
+          * @prop readonly
+          * @type {boolean}
           * @default false
+          * @reflect
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态  设置为 true 时，标签旁显示红色星号标记
+          * @prop required
+          * @type {boolean}
           * @default false
          */
         "required"?: boolean;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 尺寸规格  控制输入框的整体尺寸： - `lg`: 大尺寸（48px） - `md`: 中尺寸（40px，默认） - `sm`: 小尺寸（32px）
+          * @prop size
+          * @type {'lg' | 'md' | 'sm'}
           * @default 'md'
+          * @reflect
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
+          * 骨架屏状态  设置为 true 时显示加载占位样式
+          * @prop skeleton
+          * @type {boolean}
           * @default false
          */
         "skeleton"?: boolean;
         /**
-          * The input state. Possible values are: `"success"`, `"error"`, `"warning"`, 'default'. Defaults to `"default"`.
+          * 输入状态标识  控制输入框的视觉状态反馈： - `default`: 默认状态（无特殊样式） - `error`: 错误状态（红色边框） - `success`: 成功状态（绿色边框） - `warning`: 警告状态（黄色边框）
+          * @prop state
+          * @type {'default' | 'error' | 'success' | 'warning'}
           * @default 'default'
+          * @reflect
          */
         "state"?: 'default' | 'error' | 'success' | 'warning';
         /**
-          * The input field value.
+          * 输入值  文本域的当前值，支持双向绑定
+          * @prop value
+          * @type {string}
+          * @mutable
          */
         "value"?: string;
         /**
+          * 警告状态  设置为 true 时显示警告样式和警告文本
+          * @prop warn
+          * @type {boolean}
           * @default false
          */
         "warn"?: boolean;
+        /**
+          * 警告提示文本  当 warn 为 true 时显示的警告信息
+          * @prop warnText
+          * @type {string}
+         */
         "warnText"?: string;
     }
     /**
-     * @name Time Picker
-     * @description Captures time input.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-time-picker value='true'></zane-time-picker>
+     * 时间选择器组件
      */
     interface ZaneTimePicker {
         /**
+          * 动态收集的ARIA属性配置对象
+          * @remarks 在组件加载时会自动收集宿主元素上所有以"aria-"开头的属性， 存储到该对象后从宿主元素移除，避免重复渲染问题
           * @default {}
          */
         "configAria"?: any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态标志（会反映到DOM属性）
           * @default false
          */
         "disabled"?: boolean;
@@ -5533,202 +8176,264 @@ declare namespace LocalJSX {
          */
         "inline"?: boolean;
         /**
-          * The input field name.
+          * 自动生成的表单字段名称
+          * @example 当gid为"123"时，name值为"zane-input-123"
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 当时间选择器失去焦点时触发
+          * @event zane-time-picker--blur
+          * @type {EventEmitter<FocusEvent>}
          */
         "onZane-time-picker--blur"?: (event: ZaneTimePickerCustomEvent<any>) => void;
         /**
-          * Emitted when the value has changed.
+          * 当时间选择器的值发生改变时触发（仅当值实际变化）
+          * @event zane-time-picker--change
+          * @type {EventEmitter<KeyboardEvent>}
          */
         "onZane-time-picker--change"?: (event: ZaneTimePickerCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 当时间选择器获得焦点时触发
+          * @event zane-time-picker--focus
+          * @type {EventEmitter<FocusEvent>}
          */
         "onZane-time-picker--focus"?: (event: ZaneTimePickerCustomEvent<any>) => void;
         /**
-          * Emitted when a keyboard input occurred.
+          * 当时间选择器输入时触发（每次输入都会触发）
+          * @event zane-time-picker--input
+          * @type {EventEmitter<KeyboardEvent>}
          */
         "onZane-time-picker--input"?: (event: ZaneTimePickerCustomEvent<any>) => void;
-        /**
-          * The input field placeholder.
-         */
         "placeholder"?: string;
         /**
-          * If true, the user read the value cannot modify it. Defaults to `false`.
           * @default false
          */
         "readonly"?: boolean;
         /**
-          * The input field size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
           * @default 'md'
          */
         "size"?: 'lg' | 'md' | 'sm';
         /**
-          * The input field value.
+          * 时间值绑定
+          * @remarks 支持三种格式： - null: 未选择状态 - number: Unix时间戳（毫秒级） - string: ISO格式时间字符串
           * @default ''
          */
         "value"?: null | number | string;
     }
     /**
-     * @name Toggle
-     * @description Captures boolean input with an optional indeterminate mode.
-     * @category Form Inputs
-     * @tags input, form
-     * @example <zane-toggle value='true'>Want ice cream?</zane-toggle>
+     * 开关组件
+     * 该组件实现了可定制的开关切换控件，支持多种交互状态和样式配置，
+     * 符合WAI-ARIA无障碍规范，可无缝集成到表单中使用。
      */
     interface ZaneToggle {
         /**
+          * ARIA属性配置对象
+          * @prop {Object} configAria - 动态收集的ARIA属性键值对
+          * @mutable 允许组件内部修改
+          * @reflect 属性值变化时同步到DOM属性
           * @default {}
          */
         "configAria"?: any;
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用状态
+          * @prop {boolean} disabled - 是否禁用开关交互
           * @default false
+          * @reflect 同步到DOM属性
          */
         "disabled"?: boolean;
         /**
-          * The checkbox label.
+          * 开关标签文本
+          * @prop {string} label - 显示在开关旁的文本内容
          */
         "label"?: string;
         /**
-          * The input field name.
+          * 表单字段名称
+          * @prop {string} name - 关联input元素的name属性
           * @default `zane-input-${this.gid}`
          */
         "name"?: string;
         /**
-          * Emitted when the input loses focus.
+          * 失去焦点事件
+          * @event zane-toggle--blur
+          * @emits {FocusEvent} 原生焦点事件对象
          */
         "onZane-toggle--blur"?: (event: ZaneToggleCustomEvent<any>) => void;
         /**
-          * On change of input a CustomEvent 'zane-change' will be triggered. Event details contains parent event, oldValue, newValue of input.
+          * 值变更事件
+          * @event zane-toggle--change
+          * @emits {UIEvent} 原生UI事件对象
          */
         "onZane-toggle--change"?: (event: ZaneToggleCustomEvent<any>) => void;
         /**
-          * Emitted when the input has focus.
+          * 获得焦点事件
+          * @event zane-toggle--focus
+          * @emits {FocusEvent} 原生焦点事件对象
          */
         "onZane-toggle--focus"?: (event: ZaneToggleCustomEvent<any>) => void;
         /**
+          * 只读状态
+          * @prop {boolean} readonly - 是否只读（可聚焦但不可修改）
           * @default false
+          * @reflect 同步到DOM属性
          */
         "readonly"?: boolean;
         /**
-          * If true, required icon is show. Defaults to `false`.
+          * 必填状态
+          * @prop {boolean} required - 是否必填项
           * @default false
+          * @reflect 同步到DOM属性
          */
         "required"?: boolean;
         /**
+          * 圆角样式
+          * @prop {boolean} rounded - 是否显示为圆形开关
           * @default true
          */
         "rounded"?: boolean;
         /**
-          * The button size. Possible values are: `"sm"`, `"md"`, `"lg"`. Defaults to `"md"`.
+          * 开关尺寸
+          * @prop {'lg' | 'md'} size - 控制开关尺寸的枚举值 - 'lg': 大尺寸 (large) - 'md': 中尺寸 (medium)
           * @default 'md'
          */
         "size"?: 'lg' | 'md';
         /**
-          * The input field value.
+          * 开关值
+          * @prop {boolean} value - 开关当前状态（开/关）
+          * @mutable 允许双向绑定
           * @default false
          */
         "value"?: boolean;
     }
     /**
-     * @name Tooltip
-     * @description The Tooltip component is used to display additional information on hover.
-     * @category Informational
-     * @tag content
-     * @img /assets/img/tooltip.webp
-     * @imgDark /assets/img/tooltip-dark.webp
+     * 工具提示组件 (zane-tooltip)
+     * 该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。
+     * 支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
      */
     interface ZaneTooltip {
         /**
-          * The content of the tooltip.
+          * 工具提示内容
+          * @prop {string} content - 显示在提示框内的文本内容
+          * @mutable 允许动态更新内容
           * @default ''
          */
         "content"?: string;
         /**
-          * The placement of the popover relative to the trigger element. Possible values are: - `"top"`: The popover is placed above the trigger element. - `"right"`: The popover is placed to the right of the trigger element. - `"bottom"`: The popover is placed below the trigger element. - `"left"`: The popover is placed to the left of the trigger element.
-          * @default 'top,bottom,right,left'
+          * 提示框定位方向
+          * @prop {string} placements - 逗号分隔的可用定位方向列表
+          * @description   支持的定位值：   - 'top'     : 上方定位   - 'bottom'  : 下方定位   - 'right'   : 右侧定位   - 'left'    : 左侧定位
+          * @default 'top,bottom,right,left' (支持所有方向)
          */
         "placements"?: string;
         /**
-          * If true, the tooltip will be managed by the parent component.
+          * 触发方式
+          * @prop {'hover' | 'manual'} trigger - 控制提示显示触发的模式 - 'hover' : 鼠标悬停在目标元素时自动触发（默认） - 'manual': 需要通过编程方式触发（如调用show()方法）
           * @default 'hover'
+          * @reflect 同步到DOM属性
          */
         "trigger"?: 'hover' | 'manual';
     }
     /**
-     * @name Tree
-     * @description A tree view is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构可视化组件
+     * @example <!-- 基础用法 -->
+     * <zane-tree>
+     *   <zane-tree-node value="node1">一级节点</zane-tree-node>
+     *   <zane-tree-node value="node2">二级节点</zane-tree-node>
+     * </zane-tree>
      */
     interface ZaneTree {
         /**
+          * 空状态显示开关
+          * @prop {boolean} [empty=false] - 是否展示空状态界面
+          * @mutable 
+          * @example <zane-tree empty></zane-tree>
           * @default false
          */
         "empty"?: boolean;
         /**
-          * @default `{     "headline": "No items",     "description": "There are no items to display"   }`
+          * 空状态配置（JSON 字符串或对象）
+          * @prop {string|Object} [emptyState] - 空状态配置参数，支持两种格式： 1. JSON 字符串格式（推荐） 2. 直接传入配置对象
+          * @default { "headline": "No items", "description": "There are no items to display" }
+          * @mutable 
+          * @example <!-- JSON字符串形式 --> <zane-tree empty-state='{"headline":"空数据","description":"请添加节点"}'>  <!-- 对象形式（需通过JS绑定） --> <zane-tree empty-state={myConfig}>
          */
         "emptyState"?: string;
+        /**
+          * 当前选中节点标识
+          * @prop {string} selectedNode - 当前选中节点的唯一标识符（对应zane-tree-node的value）
+          * @mutable
+         */
         "selectedNode"?: string;
     }
     /**
-     * @name TreeNode
-     * @description A tree node is a hierarchical structure that provides nested levels of navigation.
-     * @category Navigation
-     * @subcategory Tree View
-     * @childComponent true
-     * @img /assets/img/tree-view.webp
-     * @imgDark /assets/img/tree-view-dark.webp
+     * 树形结构节点组件
      */
     interface ZaneTreeNode {
         /**
-          * If true, the user cannot interact with the button. Defaults to `false`.
+          * 禁用节点交互
+          * @prop {boolean} [disabled=false]
+          * @reflect 属性值会同步到 DOM 属性
           * @default false
          */
         "disabled"?: boolean;
         /**
+          * 控制子节点展开状态
+          * @prop {boolean} [expanded=true]
+          * @mutable 允许组件内部修改
+          * @reflect 属性值会同步到 DOM 属性
           * @default true
          */
         "expanded"?: boolean;
         /**
-          * Hyperlink to navigate to on click.
+          * 链接地址（存在时节点渲染为<a>标签）
+          * @prop {string} href
+          * @reflect 属性值会同步到 DOM 属性
          */
         "href"?: string;
         /**
-          * Icon which will displayed on button. Possible values are icon names.
+          * 节点图标名称（需配合图标库使用）
+          * @prop {string} icon
          */
         "icon"?: string;
         /**
+          * 节点显示文本
+          * @prop {string} [label='']
+          * @mutable 允许组件内部修改
           * @default ''
          */
         "label"?: string;
         /**
+          * 节点层级（从父节点自动计算）
+          * @prop {number} [level=0]
+          * @reflect 属性值会同步到 DOM 属性
           * @default 0
          */
         "level"?: number;
         /**
-          * Emitted when the menu item is clicked.
+          * 节点点击事件
+          * @event zane-tree-node--click
+          * @property {boolean} expand - 当前展开状态
+          * @property {string} id - 组件全局 ID
+          * @property {string} value - 节点标识值（优先取 value，否则使用 label）
          */
         "onZane-tree-node--click"?: (event: ZaneTreeNodeCustomEvent<any>) => void;
         /**
-          * Menu item selection state.
+          * 当前选中节点标识符
+          * @prop {string} selectedNode
+          * @mutable 允许组件内部修改
+          * @reflect 属性值会同步到 DOM 属性
          */
         "selectedNode"?: string;
         /**
-          * Sets or retrieves the window or frame at which to target content.
-          * @default '_self'
+          * 链接打开方式（仅在设置 href 时生效）
+          * @prop {('_self'|'_blank'|'_parent'|'_top')} [target='_self']
+          * @defaultValue '_self'
          */
         "target"?: string;
         /**
-          * The menu item value.
+          * 节点唯一标识符（优先级高于 label）
+          * @prop {(null|number|string)} [value]
+          * @mutable 允许组件内部修改
          */
         "value"?: null | number | string;
     }
@@ -5803,445 +8508,740 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             /**
-             * @name Accordion
-             * @description An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
-             * @overview  <p>The accordion component delivers large amounts of content in a small space through progressive disclosure. The header title give the user a high level overview of the content allowing the user to decide which sections to read.</p>
-             *  <p>Accordions can make information processing and discovering more effective. However, it does hide content from users and it’s important to account for a user not noticing or reading all of the included content. If a user is likely to read all of the content then don’t use an accordion as it adds the burden of an extra click; instead use a full scrolling page with normal headers.</p>
-             * @category Data Display
-             * @subcategory Accordion
-             * @tags display
-             * @img /assets/img/accordion.webp
-             * @imgDark /assets/img/accordion-dark.webp
+             * 可折叠面板(Accordion)容器组件
+             * 提供可折叠内容区域的容器组件，管理多个折叠项的状态和交互。
+             * 支持单开/多开模式、多种尺寸和图标位置配置。
              */
             "zane-accordion": LocalJSX.ZaneAccordion & JSXBase.HTMLAttributes<HTMLZaneAccordionElement>;
             /**
-             * @name Accordion Item
-             * @description An accordion item is single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user.
-             * @overview  <p>The accordion item component is a single item in an accordion list. It contains a header and a content section that can be expanded or collapsed by the user. The accordion item can be used in conjunction with the accordion component to create a list of expandable items.</p>
-             * @category Data Display
-             * @subcategory Accordion
-             * @childComponent true
+             * 可折叠面板项(Accordion Item)组件
+             * 作为zane-accordion的子组件使用，实现单个可折叠面板项的功能
+             * @component 
+             * @shadowDom 使用Shadow DOM封装组件样式
              */
             "zane-accordion-item": LocalJSX.ZaneAccordionItem & JSXBase.HTMLAttributes<HTMLZaneAccordionItemElement>;
             /**
-             * @name Avatar
-             * @description The Avatar component is used to represent user, and displays the profile picture, initials or fallback icon.
-             * @category Data Display
-             * @tags display
-             * @example <zane-avatar size="5rem" name="Shivaji Varma" src="/assets/img/avatar.webp"></zane-avatar>
+             * 头像组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
              */
             "zane-avatar": LocalJSX.ZaneAvatar & JSXBase.HTMLAttributes<HTMLZaneAvatarElement>;
             /**
-             * @name Badge
-             * @description The badge component is used to display a small amount of information to the user.
-             * @category Informational
-             * @tag content
-             * @example <zane-badge content="5"> <zane-icon name="notification" size="2rem"></zane-icon></zane-badge>
+             * 徽章组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
              */
             "zane-badge": LocalJSX.ZaneBadge & JSXBase.HTMLAttributes<HTMLZaneBadgeElement>;
             /**
-             * @name Breadcrumb
-             * @description A breadcrumb is a secondary navigation scheme that reveals the user's location in a website or web application.
-             * @category Navigation
-             * @tags navigation
-             * @example <zane-breadcrumb><zane-breadcrumb-item href="#">Home</zane-breadcrumb-item><zane-breadcrumb-item href="#" active>Page</zane-breadcrumb-item></zane-breadcrumb>
+             * 面包屑导航组件
+             * 用于显示当前页面在网站层次结构中的位置，并提供快速导航功能。
+             * @example ```html
+             * <zane-breadcrumb>
+             *   <zane-breadcrumb-item href="/home">首页</zane-breadcrumb-item>
+             *   <zane-breadcrumb-item href="/products">产品</zane-breadcrumb-item>
+             *   <zane-breadcrumb-item>当前页面</zane-breadcrumb-item>
+             * </zane-breadcrumb>
+             * ```
+             * @Component 装饰器定义了组件的元数据
+             * @property {boolean} shadow - 启用 Shadow DOM 封装
+             * @property {string} styleUrl - 组件样式文件路径
+             * @property {string} tag - 组件的自定义元素标签名
              */
             "zane-breadcrumb": LocalJSX.ZaneBreadcrumb & JSXBase.HTMLAttributes<HTMLZaneBreadcrumbElement>;
+            /**
+             * 面包屑导航项组件
+             * 作为面包屑导航系统的单个项使用，必须作为`zane-breadcrumb`的子元素使用。
+             * 支持链接导航、活动状态指示和Schema.org 结构化数据。
+             * @example ```html
+             * <!-- 活动状态项(当前页面) -->
+             * <zane-breadcrumb-item active>
+             *   当前页面
+             * </zane-breadcrumb-item>
+             * <!-- 可点击链接项 -->
+             * <zane-breadcrumb-item href="/products" position="2">
+             *   产品列表
+             * </zane-breadcrumb-item>
+             * ```
+             * @Component 配置项说明：
+             * @property {boolean} shadow - 启用Shadow DOM封装
+             * @property {string} styleUrl - 组件样式文件路径
+             * @property {string} tag - 自定义元素标签名
+             */
             "zane-breadcrumb-item": LocalJSX.ZaneBreadcrumbItem & JSXBase.HTMLAttributes<HTMLZaneBreadcrumbItemElement>;
             /**
-             * @name Button
-             * @description Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
-             * @overview  <p>Buttons are clickable elements that are used to trigger actions. They communicate calls to action to the user and allow users to interact with pages in a variety of ways. Button labels express what action will occur when the user interacts with it.</p>
-             * @category General
-             * @tags controls
-             * @example <zane-button>
-             * Button CTA
+             * 多功能按钮组件
+             * 提供丰富的交互样式和状态管理，支持：
+             * - 多种视觉变体(variant)
+             * - 完整的大小(size)控制
+             * - 主题颜色(color)系统
+             * - 暗黑模式适配
+             * - 完善的ARIA可访问性
+             * - 图标集成
+             * - 加载状态
+             * @example 基础使用
+             * ```html
+             * <zane-button>普通按钮</zane-button>
+             * <zane-button variant="outline">轮廓按钮</zane-button>
+             * <zane-button icon="settings" iconAlign="start">带图标按钮</zane-button>
+             * ```
+             * @example 高级使用
+             * ```html
+             * <zane-button
+             * color="danger"
+             * darkModeColor="warning"
+             * variant="ghost.simple"
+             * size="xl"
+             * disabled
+             * disabledReason="权限不足"
+             * >
+             * 危险操作
              * </zane-button>
+             * ```
              */
             "zane-button": LocalJSX.ZaneButton & JSXBase.HTMLAttributes<HTMLZaneButtonElement>;
             /**
-             * @name Button Group
-             * @description Group a series of buttons together on a single line with the button group, and super-power.
-             * @category General
-             * @tags controls
-             * @example <zane-button-group>
-             * <zane-button block icon="home"></zane-button>
-             * <zane-button block icon="alarm"></zane-button>
-             * </zane-button-group>
+             * 按钮组容器组件
              */
             "zane-button-group": LocalJSX.ZaneButtonGroup & JSXBase.HTMLAttributes<HTMLZaneButtonGroupElement>;
+            /**
+             * 卡片组件
+             * 提供可自定义阴影级别的卡片容器
+             */
             "zane-card": LocalJSX.ZaneCard & JSXBase.HTMLAttributes<HTMLZaneCardElement>;
             /**
-             * @name Checkbox
-             * @description Captures boolean input with an optional indeterminate mode.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-checkbox value='true'>Want ice cream?</zane-checkbox>
+             * 自定义复选框组件
+             * 实现可定制的复选框控件，支持选中/未选/中间态三种状态，
+             * 提供完整的ARIA支持、键盘交互和事件响应机制。
+             * @example ```html
+             * <zane-checkbox
+             *   label="同意协议"
+             *   size="md"
+             *   layer="02"
+             *   rounded
+             *   required
+             * ></zane-checkbox>
+             * ```
              */
             "zane-checkbox": LocalJSX.ZaneCheckbox & JSXBase.HTMLAttributes<HTMLZaneCheckboxElement>;
             /**
-             * @name Code Editor
-             * @description A browser based code editor.
-             * @category Form Inputs
-             * @tags input, form
-             * @img /assets/img/code-editor.webp
-             * @imgDark /assets/img/code-editor-dark.webp
+             * 基于Monaco Editor的代码编辑器组件
+             * 提供语法高亮、智能提示等专业编辑功能，支持暗黑/亮色主题切换，
+             * 内置防抖机制优化高频变更事件，适用于代码片段展示和实时编辑场景。
+             * @example ```html
+             * <zane-code-editor
+             *   language="javascript"
+             *   minimap
+             *   debounce="500"
+             *   value="console.log('Hello  World')"
+             * ></zane-code-editor>
+             * ```
              */
             "zane-code-editor": LocalJSX.ZaneCodeEditor & JSXBase.HTMLAttributes<HTMLZaneCodeEditorElement>;
             /**
-             * @name Code Highlighter
-             * @description A browser based code highlighter.
-             * @category Data Display
-             * @tag display, code
-             * @img /assets/img/code-highlighter.webp
-             * @imgDark /assets/img/code-highlighter-dark.webp
+             * 代码高亮组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-code-highlighter": LocalJSX.ZaneCodeHighlighter & JSXBase.HTMLAttributes<HTMLZaneCodeHighlighterElement>;
+            /**
+             * 容器布局组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
+             */
             "zane-container": LocalJSX.ZaneContainer & JSXBase.HTMLAttributes<HTMLZaneContainerElement>;
             /**
-             * @name Current Time
-             * @description Displays the current time in a given timezone.
-             * @category Others
-             * @example <zane-current-time></zane-current-time>
+             * 当前时间显示组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-current-time": LocalJSX.ZaneCurrentTime & JSXBase.HTMLAttributes<HTMLZaneCurrentTimeElement>;
             /**
-             * @name Date Picker
-             * @category Form Inputs
-             * @description Captures date input.
-             * @example <zane-date-picker value='true'></zane-date-picker>
+             * 日期选择器组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-date-picker": LocalJSX.ZaneDatePicker & JSXBase.HTMLAttributes<HTMLZaneDatePickerElement>;
             /**
-             * @name Divider
-             * @description A divider can be used to segment content vertically or horizontally.
-             * @category Layout
-             * @example <zane-divider style="width: 12rem;">or</zane-divider>
+             * 分割线组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-divider": LocalJSX.ZaneDivider & JSXBase.HTMLAttributes<HTMLZaneDividerElement>;
             /**
-             * @name Dropdown
-             * @description Enables native inputs to be used within a Form field.
-             * @category Navigation
-             * @subcategory Dropdown
-             * @img /assets/img/dropdown.webp
-             * @imgDark /assets/img/dropdown-dark.webp
+             * 下拉菜单组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-dropdown": LocalJSX.ZaneDropdown & JSXBase.HTMLAttributes<HTMLZaneDropdownElement>;
             /**
-             * @name Dropdown Menu
-             * @description The Dropdown Menu component is used to display a list of options.
-             * @category Navigation
-             * @subcategory Dropdown
-             * @childComponent true
+             * 下拉菜单内容组件（需与zane-dropdown配合使用）
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-dropdown-menu": LocalJSX.ZaneDropdownMenu & JSXBase.HTMLAttributes<HTMLZaneDropdownMenuElement>;
             /**
-             * @name Empty State
-             * @description A message that displays when there is no information to display.
-             * @category Data Display
-             * @img /assets/img/empty-state.webp
-             * @imgDark /assets/img/empty-state-dark.webp
+             * 空状态(Empty State)组件
+             * 用于展示无数据时的占位内容，包含插图、标题、描述和操作按钮
+             * @component 
+             * @shadowDom 使用Shadow DOM封装组件样式
+             * @implements ComponentInterface 实现Stencil组件生命周期接口
              */
             "zane-empty-state": LocalJSX.ZaneEmptyState & JSXBase.HTMLAttributes<HTMLZaneEmptyStateElement>;
             /**
-             * @name Footer
-             * @description The footer component provides a container for displaying additional navigation information about a site.
-             * @overview <p>The footer is one of the most underestimated sections of a website being located at the very bottom of every page, however, it can be used as a way to try to convince users to stay on your website if they haven’t found the information they’ve been looking for inside the main content area.</p>
-             * @category Navigation
-             * @img /assets/img/footer.webp
-             * @imgDark /assets/img/footer-dark.webp
+             * 页脚(Footer)组件
+             * 提供可定制的页脚布局，支持多种变体和插槽内容
+             * @component 
+             * @shadowDom 使用Shadow DOM封装组件样式
              */
             "zane-footer": LocalJSX.ZaneFooter & JSXBase.HTMLAttributes<HTMLZaneFooterElement>;
+            /**
+             * 页脚版权(Footer Copyright)组件
+             * 用于展示标准版权声明，包含年份、版权所有者链接和保留权利声明
+             * @component 
+             * @shadowDom 使用Shadow DOM封装组件样式
+             */
             "zane-footer-copyright": LocalJSX.ZaneFooterCopyright & JSXBase.HTMLAttributes<HTMLZaneFooterCopyrightElement>;
+            /**
+             * 页脚链接(Footer Links)组件
+             * 用于展示页脚导航链接列表，支持动态链接数据传入
+             * @component 
+             * @shadowDom 使用Shadow DOM封装组件样式
+             */
             "zane-footer-links": LocalJSX.ZaneFooterLinks & JSXBase.HTMLAttributes<HTMLZaneFooterLinksElement>;
             /**
-             * @name Form Control
-             * @description The Form Control component adds a label and caption for its child control.
-             * @category Form Inputs
-             * @tags form
-             * @example <zane-form-control label='Full Name' required>
-             * <zane-input type='text'></zane-input>
-             * </zane-form-control>
+             * 表单控件容器组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 组件样式表路径
+             * @tag 组件自定义标签名称
              */
             "zane-form-control": LocalJSX.ZaneFormControl & JSXBase.HTMLAttributes<HTMLZaneFormControlElement>;
             /**
-             * @name Header
-             * @description Header component is used to display a header with a brand, navigation, and actions.
-             * @category Navigation
-             * @img /assets/img/header.webp
-             * @imgDark /assets/img/header-dark.webp
+             * 头部组件，提供可定制的页面顶部导航栏
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
              */
             "zane-header": LocalJSX.ZaneHeader & JSXBase.HTMLAttributes<HTMLZaneHeaderElement>;
+            /**
+             * 头部操作按钮组件，用于在头部导航栏中创建可交互的操作项
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
+             */
             "zane-header-action": LocalJSX.ZaneHeaderAction & JSXBase.HTMLAttributes<HTMLZaneHeaderActionElement>;
+            /**
+             * 头部品牌标识组件，用于显示网站/应用的品牌标识和名称
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
+             */
             "zane-header-brand": LocalJSX.ZaneHeaderBrand & JSXBase.HTMLAttributes<HTMLZaneHeaderBrandElement>;
             /**
-             * @name HTML Editor
-             * @description HTML Editor component is a WYSIWYG editor that allows users to edit HTML content.
-             * @category Up coming
-             * @tags input, form
-             * @img /assets/img/html-editor.webp
-             * @imgDark /assets/img/html-editor-dark.webp
+             * 基于 Tiptap 的富文本编辑器组件，支持：
+             * - HTML 源码编辑
+             * - Mention（@提及）自动补全功能
+             * - 内置工具条（加粗、斜体、列表等）
+             * - 主题切换（vs-dark / vs-light）
+             * - 可视化编辑与 HTML 源码切换
+             * - 与表单集成（name、required、readonly 等属性）
              */
             "zane-html-editor": LocalJSX.ZaneHtmlEditor & JSXBase.HTMLAttributes<HTMLZaneHtmlEditorElement>;
             /**
-             * @name Icon
-             * @description Icons are visual symbols used to represent ideas, objects, or actions.
-             * @overview Icons are visual symbols used to represent ideas, objects, or actions. They communicate messages at a glance, afford interactivity, and draw attention to important information.
-             * @category General
-             * @example <zane-icon name="home" size="2rem"></zane-icon>
+             * 图标组件（zane-icon）
+             * 该组件基于 Stencil 构建，用于按需异步加载并渲染 SVG 图标。
+             * 支持通过属性 name 指定图标名称，通过 size 控制图标尺寸。
+             * 组件内部使用 Shadow DOM 实现样式隔离，并暴露 CSS 自定义属性
+             * `--zane-icon-size` 供外部覆盖默认尺寸。
+             * @example <!-- 基础用法 -->
+             * <zane-icon name="home" size="md"></zane-icon>
+             * <!-- 自定义尺寸 -->
+             * <zane-icon name="user" size="32px"></zane-icon>
              */
             "zane-icon": LocalJSX.ZaneIcon & JSXBase.HTMLAttributes<HTMLZaneIconElement>;
+            /**
+             * 自适应主题图片组件（zane-image）
+             * 该组件能够根据当前系统的明暗主题自动切换显示的图片资源。
+             * 当检测到处于暗色模式时，优先使用 darkSrc 指定的暗色主题图片；
+             * 否则使用 src 指定的默认图片。
+             * 组件内部通过监听主题变化事件实现实时切换，无需手动刷新。
+             * @example <!-- 基础用法 -->
+             * <zane-image
+             *   src="assets/logo-light.svg"
+             *   dark-src="assets/logo-dark.svg"
+             *   image-title="公司 Logo">
+             * </zane-image>
+             */
             "zane-image": LocalJSX.ZaneImage & JSXBase.HTMLAttributes<HTMLZaneImageElement>;
             /**
-             * @name Input
-             * @description Enables native inputs to be used within a Form field.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-input placeholder="Enter your name"></zane-input>
+             * 自定义输入框组件 zane-input
+             * 实现功能：
+             * 1. 支持多种输入类型（文本、密码、邮箱等）及尺寸控制
+             * 2. 包含表单验证状态（错误/警告）及辅助文本展示
+             * 3. 提供前后插槽(start/end)扩展能力
+             * 4. 支持防抖事件处理与无障碍访问
+             * 5. 集成密码可见性切换功能
              */
             "zane-input": LocalJSX.ZaneInput & JSXBase.HTMLAttributes<HTMLZaneInputElement>;
             /**
-             * @name Input URL
-             * @description A specialized input field for URL validation.
-             * @category Up coming
-             * @tags input, form, url
-             * @example <zane-input-url value="https://shivajivarma.com"></zane-input-url>
+             * 双模式URL输入组件
+             * @component zane-input-url
+             * @tags form-control, input, url
+             * @shadow true
+             * @description 提供URL输入与预览双模式交互的输入组件。在展示模式下显示可点击的URL链接，
+             * 在编辑模式下提供带验证功能的输入框。支持防抖值变化事件和实时URL验证。
+             * @example <!-- 基础用法 -->
+             * <zane-input-url
+             *   value="https://example.com"
+             *   placeholder="输入网站地址"
+             * />
+             * <!-- 带尺寸控制 -->
+             * <zane-input-url size="sm" />
              */
             "zane-input-url": LocalJSX.ZaneInputUrl & JSXBase.HTMLAttributes<HTMLZaneInputUrlElement>;
             /**
-             * @name Link
-             * @description Links allow users to click their way from page to page.
-             * @category Navigation
-             * @example <zane-link href="#">Link</zane-link>
+             * 智能链接组件
+             * @component zane-link
+             * @tags navigation, link, interactive
+             * @shadow true
+             * @description 增强型可交互链接组件，支持动态状态反馈和键盘导航优化。
+             * 特性包括：
+             * - 视觉状态反馈（聚焦/激活）
+             * - 空格键触发点击
+             * - 跨浏览器兼容的焦点管理
+             * - 无障碍属性支持
+             * @example <!-- 基础链接 -->
+             * <zane-link href="/about">关于我们</zane-link>
+             * <!-- 新窗口打开 -->
+             * <zane-link href="https://external.com"  target="_blank">
+             *   外部链接
+             * </zane-link>
              */
             "zane-link": LocalJSX.ZaneLink & JSXBase.HTMLAttributes<HTMLZaneLinkElement>;
             /**
-             * @name Menu
-             * @description Menus display a list of choices on temporary surfaces.
-             * @category Navigation
-             * @subcategory Menu
-             * @img /assets/img/menu.webp
-             * @imgDark /assets/img/menu-dark.webp
+             * 多功能菜单容器组件
+             * @component zane-menu
+             * @tags navigation, menu, container
+             * @shadow true
+             * @description 提供标准化的菜单容器实现，支持：
+             * - 多种视觉尺寸层级
+             * - 键盘导航支持
+             * - 空状态展示
+             * - 动态焦点管理
+             * @example <!-- 基础菜单 -->
+             * <zane-menu>
+             *   <zane-menu-item>选项一</zane-menu-item>
+             *   <zane-menu-item>选项二</zane-menu-item>
+             * </zane-menu>
+             * <!-- 空状态菜单 -->
+             * <zane-menu empty empty-state-headline="无数据" empty-state-description="请添加菜单项">
+             * </zane-menu>
              */
             "zane-menu": LocalJSX.ZaneMenu & JSXBase.HTMLAttributes<HTMLZaneMenuElement>;
             /**
-             * @name MenuDivider
-             * @description A divider to separate menu items.
-             * @category Layout
-             * @subcategory Menu
-             * @childComponents true
-             * @example <zane-divider style="width: 12rem;">or</zane-divider>
+             * 菜单分隔线组件
+             * @component zane-menu-divider
+             * @shadow true
+             * @description 提供菜单项之间的视觉分隔效果，用于增强菜单结构的可读性。该组件：
+             * - 实现菜单项分组逻辑分隔
+             * - 支持深浅主题色自动适配
+             * - 提供标准化的间距和高度
+             * @example <!-- 基础用法 -->
+             * <zane-menu>
+             *   <zane-menu-item>选项一</zane-menu-item>
+             *   <zane-menu-divider></zane-menu-divider> <!-- 分隔线 -->
+             *   <zane-menu-item>选项二</zane-menu-item>
+             * </zane-menu>
+             * <!-- 分组场景 -->
+             * <zane-menu>
+             *   <zane-menu-item>操作类</zane-menu-item>
+             *   <zane-menu-divider></zane-menu-divider>
+             *   <zane-menu-item>设置类</zane-menu-item>
+             * </zane-menu>
              */
             "zane-menu-divider": LocalJSX.ZaneMenuDivider & JSXBase.HTMLAttributes<HTMLZaneMenuDividerElement>;
             /**
-             * @name Menu Item
-             * @description Menu items display a list of choices on temporary surfaces.
-             * @category Navigation
-             * @subcategory Menu
-             * @childComponent true
+             * 菜单项组件 (zane-menu-item)
+             * @component zane-menu-item
+             * @shadow true
+             * @description 实现标准导航菜单项的核心组件，提供：
+             * - 多状态交互（正常/选中/禁用/聚焦）
+             * - 8种语义化色彩主题
+             * - 可选中标记功能（带对勾图标）
+             * - 原生链接支持（href/target）
+             * - 键盘导航支持（空格/回车触发）
+             * - 无障碍ARIA兼容设计
+             * @example <!-- 基础文本菜单项 -->
+             * <zane-menu-item>个人中心</zane-menu-item>
+             * <!-- 带图标和选中状态的菜单项 -->
+             * <zane-menu-item selected selectable>
+             *   收件箱
+             *   <zane-badge slot="end">12</zane-badge>
+             * </zane-menu-item>
+             * <!-- 作为链接的菜单项 -->
+             * <zane-menu-item
+             *   href="/settings"
+             *   color="primary"
+             *   target="_blank">
+             *   系统设置
+             * </zane-menu-item>
+             * @designSystem | 状态         | 视觉特征                     |
+             * |--------------|----------------------------|
+             * | 正常         | 浅灰背景，深灰文字          |
+             * | 悬停         | 浅蓝色背景（#f0f7ff）       |
+             * | 聚焦         | 2px蓝色边框（#1a73e8）      |
+             * | 选中         | 左侧蓝色条+对勾图标         |
+             * | 禁用         | 50%透明度，阻止交互事件     |
              */
             "zane-menu-item": LocalJSX.ZaneMenuItem & JSXBase.HTMLAttributes<HTMLZaneMenuItemElement>;
             /**
-             * @name Modal
-             * @description Modals are used to display content in a layer above the app.
-             * @category Informational
-             * @subcategory Modal
-             * @tags controls
-             * @img /assets/img/modal.webp
-             * @imgDark /assets/img/modal-dark.webp
+             * 模态框组件 (zane-modal)
+             * @component zane-modal
+             * @shadow true
+             * @description 提供企业级应用的模态对话框解决方案，支持：
+             * - 多种预设尺寸响应式布局
+             * - 灵活的内容插槽（头部/主体/底部）
+             * - 加载状态可视化
+             * - 可控关闭行为（自动关闭/受控关闭）
+             * - 无障碍访问支持
+             * - 滚动条自动管理
+             * @example <!-- 基础用法 -->
+             * <zane-modal
+             *   heading="确认操作"
+             *   open={true}>
+             *   <p>确定要删除此项吗？</p>
+             *   <div slot="footer">
+             *     <zane-button>取消</zane-button>
+             *     <zane-button variant="primary">确定</zane-button>
+             *   </div>
+             * </zane-modal>
+             * <!-- 带加载状态的模态框 -->
+             * <zane-modal
+             *   heading="数据处理中"
+             *   open={true}
+             *   showLoader={true}>
+             *   <p>请稍候，正在保存您的数据...</p>
+             * </zane-modal>
              */
             "zane-modal": LocalJSX.ZaneModal & JSXBase.HTMLAttributes<HTMLZaneModalElement>;
             /**
-             * @name Modal Content
-             * @description The Modal Content component is used to display the content within a modal.
-             * @category Informational
-             * @subcategory Modal
-             * @childComponent true
+             * 模态框内容容器组件 (zane-modal-content)
+             * @component zane-modal-content
+             * @shadow true
+             * @description 专为 zane-modal 设计的结构化内容容器，提供三种预设内容样式方案，
+             * 支持动态切换内容展示模式。作为模态框生态系统的核心子组件，实现：
+             * - 内容区域样式规范化
+             * - 自适应内容布局
+             * - 多场景内容样式预设
+             * - 无缝衔接父级模态框的交互状态
+             * @see {@link zane-modal } 关联的父级模态框组件
+             * @example <!-- 默认带边框样式 -->
+             * <zane-modal-content>
+             *   <p>标准内容区块</p>
+             * </zane-modal-content>
+             * <!-- 无边框模式 -->
+             * <zane-modal-content type="borderless">
+             *   <img src="data-chart.png"  alt="数据图表"/>
+             * </zane-modal-content>
+             * <!-- 文本优化模式 -->
+             * <zane-modal-content type="text">
+             *   <h3>服务条款</h3>
+             *   <p>这里是详细的协议文本内容...</p>
+             * </zane-modal-content>
              */
             "zane-modal-content": LocalJSX.ZaneModalContent & JSXBase.HTMLAttributes<HTMLZaneModalContentElement>;
             /**
-             * @name Notification
-             * @description Notifications are messages that communicate information to the user.
-             * @category Informational
-             * @tags notification
-             * @example <zane-notification state="success">
-             *      <div slot='title'>Successful saved the record</div>
-             *    </zane-notification>
+             * 智能通知系统组件 (zane-notification)
+             * @component zane-notification
+             * @shadow true
+             * @description 提供多场景智能通知解决方案，支持四态反馈、操作交互和主题适配。
+             * 核心功能包括：
+             * - 状态图标自动匹配
+             * - 暗黑模式/高对比度自适应
+             * - 内联/块级布局切换
+             * - 可定制的操作按钮
+             * - 可控的关闭行为
+             * - 无障碍访问支持
+             * @example <!-- 基础警告通知 -->
+             * <zane-notification state="warning" dismissible>
+             *   <span slot="title">存储空间不足</span>
+             *   <span slot="subtitle">剩余 5% 磁盘空间，建议清理缓存</span>
+             * </zane-notification>
+             * <!-- 带操作的成功通知 -->
+             * <zane-notification state="success" action="查看详情" high-contrast>
+             *   <span slot="title">支付成功</span>
+             *   <span slot="subtitle">订单号：20250719-2156</span>
+             * </zane-notification>
              */
             "zane-notification": LocalJSX.ZaneNotification & JSXBase.HTMLAttributes<HTMLZaneNotificationElement>;
             /**
-             * @name Notification Manager
-             * @description The Notification Manager handles the organization and display of notifications within the application.
-             * @category Informational
-             * @tags notification
-             * @img /assets/img/notification-manager.webp
-             * @imgDark /assets/img/notification-manager-dark.webp
+             * 智能通知管理系统组件 (zane-notification-manager)
+             * @component zane-notification-manager
+             * @shadow true
+             * @description 全局通知管理中心，提供以下核心能力：
+             * 1. 跨组件通知聚合：通过事件总线收集全应用通知
+             * 2. 多位置布局：支持4种屏幕定位策略
+             * 3. 生命周期管理：自动关闭/手动关闭/防重复
+             * 4. 安全渲染：内置DOM净化防止XSS攻击
+             * 5. 主题适配：自动同步暗黑模式状态
+             * @example <!-- 基础用法 -->
+             * <zane-notification-manager position="top-right"></zane-notification-manager>
+             * <!-- 自定义命名管理器 -->
+             * <zane-notification-manager name="dashboard" position="bottom-left"></zane-notification-manager>
              */
             "zane-notification-manager": LocalJSX.ZaneNotificationManager & JSXBase.HTMLAttributes<HTMLZaneNotificationManagerElement>;
             /**
-             * @name Number
-             * @description Number input lets users enter a numeric value and incrementally increase or decrease the value with a two-segment control.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-number value="100"></zane-input>
+             * 数字输入框组件 zane-number
+             * 核心功能：
+             * 1. 支持数字输入及增减按钮控制
+             * 2. 提供四种状态反馈（默认/成功/警告/错误）
+             * 3. 表单验证支持（必填/禁用/只读）
+             * 4. 防抖事件处理与无障碍访问优化
+             * 5. 插槽扩展能力（前后扩展区域）
+             * @implements ComponentInterface *
+             * @implements InputComponentInterface *
              */
             "zane-number": LocalJSX.ZaneNumber & JSXBase.HTMLAttributes<HTMLZaneNumberElement>;
             /**
-             * @name Popover
-             * @description The Popover component is used to display additional information.
-             * @category Informational
-             * @subcategory Popover
-             * @img /assets/img/dropdown.webp
-             * @imgDark /assets/img/dropdown-dark.webp
+             * 弹出框组件（Popover）
+             * @component zane-popover
+             * @shadow true
+             * @description `zane-popover` 是一个灵活的弹出框组件，可以在目标元素周围显示内容。它支持多种触发方式（点击、悬停、手动控制）、多种箭头样式以及自定义位置。
+             * 使用此组件时，需要在组件内部放置一个 `zane-popover-content` 组件作为弹出内容，以及一个触发元素（例如按钮）。
+             * @example <zane-popover trigger="click">
+             *   <button>点击我</button>
+             *   <zane-popover-content>
+             *     这里是弹出内容
+             *   </zane-popover-content>
+             * </zane-popover>
              */
             "zane-popover": LocalJSX.ZanePopover & JSXBase.HTMLAttributes<HTMLZanePopoverElement>;
             /**
-             * @name Popover Content
-             * @description The PopoverContent component is used to display additional information.
-             * @category Informational
-             * @subcategory Popover
-             * @childComponent true
+             * 弹出框内容容器组件 (zane-popover-content)
+             * @component zane-popover-content
+             * @shadow true
+             * @description 弹出框系统的核心内容承载容器，提供以下核心功能：
+             * 1. 结构化内容容器：为弹出内容提供标准化的布局结构
+             * 2. 动态箭头指示器：根据父组件配置自动调整箭头样式和位置
+             * 3. 无障碍支持：内置ARIA角色属性增强可访问性
+             * 4. 主题适配：通过CSS变量支持深度主题定制
+             * @dependency 必须作为`<zane-popover>`组件的直接子元素使用
+             * @example <!-- 基础用法 -->
+             * <zane-popover-content>
+             *   <h3>标题</h3>
+             *   <p>详细说明内容...</p>
+             *   <button>确认</button>
+             * </zane-popover-content>
+             * <!-- 带样式定制 -->
+             * <zane-popover-content style="--background: #2c3e50; --color: white">
+             *   ...
+             * </zane-popover-content>
              */
             "zane-popover-content": LocalJSX.ZanePopoverContent & JSXBase.HTMLAttributes<HTMLZanePopoverContentElement>;
             /**
-             * @name Progress
-             * @description Progress indicators express an unspecified wait time or display the length of a process.
-             * @category Informational
-             * @tags feedback, loading, progress, spinner
-             * @example <zane-progress value="40" label="Progress" width="100%" helper-text="Optional helper text goes here..."></zane-progress>
+             * 动态进度指示器组件 (zane-progress)
+             * @component zane-progress
+             * @shadow true
+             * @description 提供可视化任务进程的进度指示器，支持多种状态显示和尺寸配置。适用于文件上传、数据加载、操作流程等场景。
+             * @example <!-- 基础用法 -->
+             * <zane-progress value={75}></zane-progress>
+             * <!-- 带标签和状态 -->
+             * <zane-progress
+             *   value={50}
+             *   label="上传进度"
+             *   status="active"
+             *   helperText="剩余时间：2分钟"
+             * ></zane-progress>
+             * <!-- 错误状态 -->
+             * <zane-progress
+             *   value={30}
+             *   status="error"
+             *   helperText="上传失败，请重试"
+             * ></zane-progress>
              */
             "zane-progress": LocalJSX.ZaneProgress & JSXBase.HTMLAttributes<HTMLZaneProgressElement>;
             /**
-             * @name Select
-             * @description Allows the user to select one or more options using a dropdown.
-             * @category Form Inputs
-             * @tags input, form
-             * @img /assets/img/select.webp
-             * @imgDark /assets/img/select-dark.webp
+             * 基于 Floating UI 的增强型下拉选择组件
+             * @component 
+             * @tag zane-select
+             * @implements ComponentInterface , InputComponentInterface}
+             * @example <!-- 基础用法 -->
+             * <zane-select
+             *   items={[{label: '选项1', value: 1}]}
+             *   placeholder="请选择"
+             *   size="md"
+             * />
              */
             "zane-select": LocalJSX.ZaneSelect & JSXBase.HTMLAttributes<HTMLZaneSelectElement>;
             /**
-             * @name1 Side Navigation
-             * @description1 The side navigation component provides an easy way to navigate through your website / application.
-             * @img1 /assets/img/sidenav.webp
+             * 侧边导航栏组件，提供页面侧边导航功能
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
              */
             "zane-sidenav": LocalJSX.ZaneSidenav & JSXBase.HTMLAttributes<HTMLZaneSidenavElement>;
+            /**
+             * 侧边导航菜单组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
+             */
             "zane-sidenav-menu": LocalJSX.ZaneSidenavMenu & JSXBase.HTMLAttributes<HTMLZaneSidenavMenuElement>;
+            /**
+             * 侧边导航菜单项组件
+             * @Component 装饰器定义组件元数据
+             * @shadow 启用Shadow DOM封装
+             * @styleUrl 指定组件样式文件
+             * @tag 定义组件在HTML中的标签名
+             */
             "zane-sidenav-menu-item": LocalJSX.ZaneSidenavMenuItem & JSXBase.HTMLAttributes<HTMLZaneSidenavMenuItemElement>;
             /**
-             * @name Slider
-             * @description Sliders allow users to make selections from a range of values.
-             * @category Form Inputs
-             * @tags input, form
-             * @img /assets/img/slider.webp
-             * @imgDark /assets/img/slider-dark.webp
+             * 滑动选择器组件
+             * 提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+             * @component zane-slider
+             * @tags zane-slider
+             * @shadow true
+             * @example <!-- 基础用法 -->
+             * <zane-slider min="0" max="100" value="50"></zane-slider>
+             * <!-- 禁用状态 -->
+             * <zane-slider disabled value="30"></zane-slider>
+             * <!-- 隐藏数值输入框 -->
+             * <zane-slider show-only-slider value="75"></zane-slider>
              */
             "zane-slider": LocalJSX.ZaneSlider & JSXBase.HTMLAttributes<HTMLZaneSliderElement>;
             /**
-             * @name Spinner
-             * @description Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
-             * @category Informational
-             * @tags feedback, loading, progress, spinner
-             * @example <zane-spinner class="rainbow" size="2rem"></zane-spinner>
+             * 加载指示器组件 (zane-spinner)
+             * @component 
+             * @shadow true
+             * @description 用于表示加载状态的动画指示器，支持自定义尺寸和样式。
+             * @example <!-- 基本用法 -->
+             * <zane-spinner></zane-spinner>
+             * <!-- 自定义描述文本 -->
+             * <zane-spinner description="数据加载中"></zane-spinner>
+             * <!-- 隐藏背景圆环 -->
+             * <zane-spinner hide-background></zane-spinner>
              */
             "zane-spinner": LocalJSX.ZaneSpinner & JSXBase.HTMLAttributes<HTMLZaneSpinnerElement>;
             /**
-             * @name SVG
-             * @description Render SVG content from an external source.
-             * @category Data Display
-             * @example <zane-svg src="https://icons.getbootstrap.com/assets/icons/bug.svg" size="2rem"></zane-svg>
+             * SVG 动态加载组件 (zane-svg)
+             * @component 
+             * @shadow true
+             * @description 智能 SVG 图标容器，支持动态加载、尺寸控制与样式继承
+             * @example <!-- 基础用法 -->
+             * <zane-svg src="/assets/icon.svg"></zane-svg>
+             * <!-- 带尺寸控制 -->
+             * <zane-svg src="/assets/logo.svg"  size="xl"></zane-svg>
+             * <!-- 自定义尺寸 -->
+             * <zane-svg src="/assets/chart.svg"  size="32px"></zane-svg>
              */
             "zane-svg": LocalJSX.ZaneSvg & JSXBase.HTMLAttributes<HTMLZaneSvgElement>;
-            "zane-tab": LocalJSX.ZaneTab & JSXBase.HTMLAttributes<HTMLZaneTabElement>;
-            "zane-tab-panel": LocalJSX.ZaneTabPanel & JSXBase.HTMLAttributes<HTMLZaneTabPanelElement>;
             /**
-             * @name Table
-             * @description A configurable component for displaying tabular data.
-             * @category Data Display
-             * @img /assets/img/table.webp
-             * @imgDark /assets/img/table-dark.webp
+             * 单个标签页元素，支持多种交互状态和类型
              */
+            "zane-tab": LocalJSX.ZaneTab & JSXBase.HTMLAttributes<HTMLZaneTabElement>;
+            /**
+             * 标签页内容面板容器
+             * 该组件与 zane-tab 标签页组件配合使用，形成完整的标签页系统。当标签页被激活时，
+             * 关联的面板内容将显示在界面中，支持层级深度控制以实现复杂的视觉层次效果。
+             * @example <zane-tab-panel value="profile" active>
+             *   用户资料详情内容
+             * </zane-tab-panel>
+             */
+            "zane-tab-panel": LocalJSX.ZaneTabPanel & JSXBase.HTMLAttributes<HTMLZaneTabPanelElement>;
             "zane-table": LocalJSX.ZaneTable & JSXBase.HTMLAttributes<HTMLZaneTableElement>;
             /**
-             * @name Tabs
-             * @description The tabs component is used to display multiple panels of content in a container.
-             * @category Navigation
-             * @tags navigation
-             * @example <zane-tabs>
-             * <zane-tabs-list>
-             * <zane-tab selected >Tab 1</zane-tab>
-             * <zane-tab>Tab 2</zane-tab>
-             * </zane-tabs-list>
-             * </zane-tabs>
+             * 标签页容器组件，用于管理和切换多个标签页
              */
             "zane-tabs": LocalJSX.ZaneTabs & JSXBase.HTMLAttributes<HTMLZaneTabsElement>;
             "zane-tabs-list": LocalJSX.ZaneTabsList & JSXBase.HTMLAttributes<HTMLZaneTabsListElement>;
             /**
-             * @name Tag
-             * @description Use tags to label, categorize, or organize items using keywords that describe them.
-             * @category Data Display
-             * @tag controls
-             * @example <zane-tag class="color-red">Important</zane-tag>
+             * 多功能标签/徽章组件
+             * 提供灵活的内容展示能力，支持多种颜色主题、尺寸规格、可关闭操作和选中状态。
+             * 适用于分类标记、状态指示、可选项选择等场景，可与表单组件或列表组件配合使用。
+             * @example <!-- 基础用法 -->
+             * <zane-tag>默认标签</zane-tag>
+             * <!-- 带关闭按钮 -->
+             * <zane-tag dismissible>可关闭标签</zane-tag>
+             * <!-- 带图片 -->
+             * <zane-tag image-src="/path/to/avatar.jpg"> 用户标签</zane-tag>
              */
             "zane-tag": LocalJSX.ZaneTag & JSXBase.HTMLAttributes<HTMLZaneTagElement>;
             /**
-             * @name Text
-             * @description Typography are used for rendering headlines, paragraphs and captions.
-             * @category General
-             * @example <zane-text type="heading" level="1">Heading</zane-typography>
+             * 多功能文本展示组件
+             * 提供丰富的文本样式和语义化支持，满足不同场景的文本展示需求。支持多种文本类型、
+             * 颜色主题、标题级别和响应式文本大小，集成了完善的 ARIA 可访问性支持。
+             * @example <!-- 基础文本 -->
+             * <zane-text>普通段落文本</zane-text>
+             * <!-- 标题文本 -->
+             * <zane-text type="heading" heading-level="2">二级标题</zane-text>
+             * <!-- 带颜色的辅助文本 -->
+             * <zane-text type="helper-text" color="helper">表单提示文本</zane-text>
              */
             "zane-text": LocalJSX.ZaneText & JSXBase.HTMLAttributes<HTMLZaneTextElement>;
             /**
-             * @name Textarea
-             * @description Enables native inputs to be used within a Form field.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-textarea placeholder="Enter some description over here"></zane-textarea>
+             * 多功能文本区域输入组件
+             * 提供完整的表单文本区域解决方案，支持响应式布局、表单验证、辅助文本提示和丰富的交互功能。
+             * 集成了 ARIA 可访问性支持和多状态反馈设计，适用于复杂表单场景。
+             * @example <!-- 基础用法 -->
+             * <zane-textarea label="用户反馈" placeholder="请输入您的建议"></zane-textarea>
+             * <!-- 带验证状态 -->
+             * <zane-textarea
+             *   label="密码"
+             *   state="error"
+             *   invalid-text="密码长度不足8位"
+             * ></zane-textarea>
              */
             "zane-textarea": LocalJSX.ZaneTextarea & JSXBase.HTMLAttributes<HTMLZaneTextareaElement>;
             /**
-             * @name Time Picker
-             * @description Captures time input.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-time-picker value='true'></zane-time-picker>
+             * 时间选择器组件
              */
             "zane-time-picker": LocalJSX.ZaneTimePicker & JSXBase.HTMLAttributes<HTMLZaneTimePickerElement>;
             /**
-             * @name Toggle
-             * @description Captures boolean input with an optional indeterminate mode.
-             * @category Form Inputs
-             * @tags input, form
-             * @example <zane-toggle value='true'>Want ice cream?</zane-toggle>
+             * 开关组件
+             * 该组件实现了可定制的开关切换控件，支持多种交互状态和样式配置，
+             * 符合WAI-ARIA无障碍规范，可无缝集成到表单中使用。
              */
             "zane-toggle": LocalJSX.ZaneToggle & JSXBase.HTMLAttributes<HTMLZaneToggleElement>;
             /**
-             * @name Tooltip
-             * @description The Tooltip component is used to display additional information on hover.
-             * @category Informational
-             * @tag content
-             * @img /assets/img/tooltip.webp
-             * @imgDark /assets/img/tooltip-dark.webp
+             * 工具提示组件 (zane-tooltip)
+             * 该组件实现了一个灵活的工具提示系统，可通过悬停或手动触发显示上下文信息。
+             * 支持四种定位方向，可动态绑定目标元素，并适配无障碍规范。
              */
             "zane-tooltip": LocalJSX.ZaneTooltip & JSXBase.HTMLAttributes<HTMLZaneTooltipElement>;
             /**
-             * @name Tree
-             * @description A tree view is a hierarchical structure that provides nested levels of navigation.
-             * @category Navigation
-             * @subcategory Tree View
-             * @img /assets/img/tree-view.webp
-             * @imgDark /assets/img/tree-view-dark.webp
+             * 树形结构可视化组件
+             * @example <!-- 基础用法 -->
+             * <zane-tree>
+             *   <zane-tree-node value="node1">一级节点</zane-tree-node>
+             *   <zane-tree-node value="node2">二级节点</zane-tree-node>
+             * </zane-tree>
              */
             "zane-tree": LocalJSX.ZaneTree & JSXBase.HTMLAttributes<HTMLZaneTreeElement>;
             /**
-             * @name TreeNode
-             * @description A tree node is a hierarchical structure that provides nested levels of navigation.
-             * @category Navigation
-             * @subcategory Tree View
-             * @childComponent true
-             * @img /assets/img/tree-view.webp
-             * @imgDark /assets/img/tree-view-dark.webp
+             * 树形结构节点组件
              */
             "zane-tree-node": LocalJSX.ZaneTreeNode & JSXBase.HTMLAttributes<HTMLZaneTreeNodeElement>;
         }

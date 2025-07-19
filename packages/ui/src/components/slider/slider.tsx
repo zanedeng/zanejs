@@ -20,12 +20,23 @@ import { DRAG_EVENT_TYPES, DRAG_STOP_EVENT_TYPES } from '../../constants';
 import { debounceEvent, getComponentIndex, isInViewport } from '../../utils';
 
 /**
- * @name Slider
- * @description Sliders allow users to make selections from a range of values.
- * @category Form Inputs
- * @tags input, form
- * @img /assets/img/slider.webp
- * @imgDark /assets/img/slider-dark.webp
+ * 滑动选择器组件
+ *
+ * 提供可拖动的滑块选择器，支持鼠标/触摸交互、键盘操作和数值输入框集成。
+ *
+ * @component zane-slider
+ * @tags zane-slider
+ * @shadow true
+ *
+ * @example
+ * <!-- 基础用法 -->
+ * <zane-slider min="0" max="100" value="50"></zane-slider>
+ *
+ * <!-- 禁用状态 -->
+ * <zane-slider disabled value="30"></zane-slider>
+ *
+ * <!-- 隐藏数值输入框 -->
+ * <zane-slider show-only-slider value="75"></zane-slider>
  */
 @Component({
   shadow: true,
@@ -33,40 +44,74 @@ import { debounceEvent, getComponentIndex, isInViewport } from '../../utils';
   tag: 'zane-slider',
 })
 export class Slider implements ComponentInterface, InputComponentInterface {
+  /**
+   * ARIA 属性配置对象
+   * @prop {Object} configAria - 收集所有以 `aria-` 开头的自定义属性
+   * @mutable
+   * @reflect
+   */
   @Prop({ mutable: true, reflect: true }) configAria: any = {};
 
   /**
-   * Set the amount of time, in milliseconds, to wait to trigger the `zaneChange` event after each keystroke.
+   * 值变更事件的防抖时间（毫秒）
+   * @prop {number} debounce - 用于优化频繁触发的事件
+   * @default 300
    */
   @Prop() debounce = 300;
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 禁用状态开关
+   * @prop {boolean} disabled
+   * @reflect
+   * @default false
    */
   @Prop({ reflect: true }) disabled: boolean = false;
 
+  /** 宿主元素引用 */
   @Element() elm!: HTMLElement;
 
   /**
-   * function to format the value of the input
+   * 数值格式化函数
+   * @prop {(value: number | string) => string} formatter - 用于自定义显示值的格式
+   * @example (val) => `${val}%`
    */
   @Prop() formatter: (value: number | string) => string;
 
+  /** 组件唯一标识符 */
   gid: string = getComponentIndex();
 
+  /** 当前是否获得焦点状态 */
   @State() hasFocus = false;
 
+  /**
+   * 滑块最大值
+   * @prop {number} max
+   * @default 100
+   */
   @Prop() max: number = 100;
 
+  /**
+   * 滑块最小值
+   * @prop {number} min
+   * @default 0
+   */
   @Prop() min: number = 0;
 
   /**
-   * The input field name.
+   * 表单字段名称
+   * @prop {string} name - 自动生成唯一名称
+   * @default `zane-input-${gid}`
    */
   @Prop() name: string = `zane-input-${this.gid}`;
 
+  /** 标记是否需要释放事件 */
   @State() needsOnRelease = false;
 
+  /**
+   * 内部拖拽事件处理函数
+   * @private
+   * @param {Event} event - 鼠标/触摸事件
+   */
   _onDrag = (event) => {
     // Do nothing if component is disabled
     if (this.disabled || this.readonly) {
@@ -83,39 +128,68 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.updateByPosition(clientX);
   };
 
+  /** 节流后的拖拽处理函数（1ms节流） */
   onDrag = throttle(this._onDrag, 1);
 
   /**
-   * If true, the user cannot interact with the button. Defaults to `false`.
+   * 只读状态开关
+   * @prop {boolean} readonly
+   * @reflect
+   * @default false
    */
   @Prop({ reflect: true }) readonly: boolean = false;
 
   /**
-   * If true, required icon is show. Defaults to `false`.
+   * 必填状态
+   * @prop {boolean} required
+   * @reflect
+   * @default false
    */
   @Prop({ reflect: true }) required: boolean = false;
 
+  /**
+   * 是否仅显示滑块（隐藏数值输入框）
+   * @prop {boolean} showOnlySlider
+   * @default false
+   */
   @Prop() showOnlySlider: boolean = false;
 
+  /** 滑块轨道宽度（像素） */
   @State()
   slideElementWidth: null | number = null;
 
+  /**
+   * 步进值
+   * @prop {number} step - 每次增减的数值单位
+   * @mutable
+   * @default 1
+   */
   @Prop({ mutable: true }) step: number = 1;
 
   /**
-   * The input field value.
+   * 当前滑块值
+   * @prop {number} value - 受控属性
+   * @mutable
+   * @default 0
    */
   @Prop({ mutable: true }) value?: number = 0;
 
   /**
-   * Emitted when the value has changed.
+   * 值变更事件（带防抖）
+   * @event zane-slider--change
+   * @property {Object} detail - 事件详情
+   * @property {number} detail.value  - 变更后的值
    */
   @Event({ eventName: 'zane-slider--change' }) zaneChange: EventEmitter;
 
   /**
-   * Emitted when a keyboard input occurred.
+   * 输入实时事件
+   * @event zane-slider--input
+   * @property {Object} detail - 事件详情
+   * @property {number} detail.value  - 当前输入值
    */
   @Event({ eventName: 'zane-slider--input' }) zaneInput: EventEmitter;
+
   private displayElement?: HTMLElement;
 
   private inputValue: number;
@@ -123,6 +197,10 @@ export class Slider implements ComponentInterface, InputComponentInterface {
   private slideElement?: HTMLElement;
   private thumbElement?: HTMLElement;
 
+  /**
+   * 组件加载完成生命周期
+   * 初始化滑块宽度计算并设置ResizeObserver
+   */
   componentDidLoad() {
     this.#computeSliderWidth();
 
@@ -133,6 +211,10 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     resizeObserver.observe(this.elm);
   }
 
+  /**
+   * 组件加载前生命周期
+   * 收集ARIA属性并初始化内部值
+   */
   componentWillLoad() {
     this.elm.getAttributeNames().forEach((name: string) => {
       if (name.includes('aria-')) {
@@ -144,15 +226,25 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.inputValue = this.value;
   }
 
+  /** 连接回调 - 初始化防抖设置 */
   connectedCallback() {
     this.debounceChanged();
   }
 
+  /**
+   * 获取组件唯一ID
+   * @method
+   * @returns {Promise<string>} 组件唯一标识符
+   */
   @Method()
   async getComponentId() {
     return this.gid;
   }
 
+  /**
+   * 拖拽开始事件处理
+   * @param {Event} event - 鼠标/触摸事件
+   */
   onDragStart = (event) => {
     // Do nothing if component is disabled
     if (this.disabled || this.readonly) {
@@ -175,8 +267,8 @@ export class Slider implements ComponentInterface, InputComponentInterface {
   };
 
   /**
-   * Unregisters "drag" and "drag stop" event handlers and calls sets the flag
-   * indicating that the `onRelease` callback should be called.
+   * 拖拽结束事件处理
+   * @param {Event} event - 鼠标/触摸事件
    */
   onDragStop = (event) => {
     // Do nothing if component is disabled
@@ -202,6 +294,10 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.updateByPosition(clientX);
   };
 
+  /**
+   * 滚轮事件处理
+   * @param {WheelEvent} event - 鼠标滚轮事件
+   */
   onWheel = (event) => {
     // Do nothing if component is disabled
     if (this.disabled || this.readonly) {
@@ -221,6 +317,11 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.updateValue(Number.parseInt(String(this.value)) + delta * this.step);
   };
 
+  /**
+   * 控制工具提示显示
+   * @param {HTMLElement} target - 目标元素
+   * @param {boolean} open - 开启/关闭状态
+   */
   openTooltip = (target, open) => {
     window.dispatchEvent(
       new CustomEvent('zane-tooltip-open', {
@@ -232,6 +333,10 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     );
   };
 
+  /**
+   * 渲染组件
+   * @returns {JSX.Element} 组件虚拟DOM树
+   */
   render() {
     return (
       <Host has-focus={this.hasFocus} has-value={this.hasValue()}>
@@ -318,8 +423,8 @@ export class Slider implements ComponentInterface, InputComponentInterface {
   }
 
   /**
-   * Sets blur on the native `input` in `zane-input`. Use this method instead of the global
-   * `input.blur()`.
+   * 移除组件焦点
+   * @method
    */
   @Method()
   async setBlur() {
@@ -329,14 +434,18 @@ export class Slider implements ComponentInterface, InputComponentInterface {
   }
 
   /**
-   * Sets focus on the native `input` in `ion-input`. Use this method instead of the global
-   * `input.focus()`.
+   * 设置组件焦点
+   * @method
    */
   @Method()
   async setFocus(): Promise<void> {
     this.displayElement.focus();
   }
 
+  /**
+   * 根据坐标位置更新滑块值
+   * @param {number} currentX - 当前指针X坐标
+   */
   updateByPosition(current) {
     const start = this.slideElement.getBoundingClientRect().left;
     const total = this.slideElement.getBoundingClientRect().width;
@@ -347,6 +456,10 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.inputValue = this.value;
   }
 
+  /**
+   * 更新滑块值并触发事件
+   * @param {number} newValue - 新数值
+   */
   updateValue = (newValue) => {
     const oldValue = this.value;
 
@@ -369,6 +482,7 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     }
   };
 
+  /** 全局点击监听（用于失焦处理） */
   @Listen('click', { target: 'window' })
   windowClick(evt) {
     const path = evt.path || evt.composedPath();
@@ -376,11 +490,21 @@ export class Slider implements ComponentInterface, InputComponentInterface {
       if (elm === this.elm) return;
     }
   }
+
+  /**
+   * 防抖时间变更监听
+   * 动态更新防抖函数
+   */
   @Watch('debounce')
   protected debounceChanged() {
     this.zaneChange = debounceEvent(this.zaneChange, this.debounce);
   }
 
+  /**
+   * 计算滑块轨道宽度
+   * @private
+   * 使用递归确保在视口内获取准确宽度
+   */
   #computeSliderWidth() {
     if (this.slideElementWidth === null && !isInViewport(this.elm)) {
       setTimeout(() => this.#computeSliderWidth(), 100);
@@ -390,20 +514,33 @@ export class Slider implements ComponentInterface, InputComponentInterface {
     this.slideElementWidth = this.slideElement.getBoundingClientRect().width;
   }
 
+  /** 滑块失焦处理 */
   private blurHandler = () => {
     this.hasFocus = false;
     this.openTooltip(this.thumbElement, false);
   };
 
+  /** 滑块获焦处理 */
   private focusHandler = () => {
     this.hasFocus = true;
   };
 
+  /**
+   * 获取格式化值
+   * @private
+   * @param {number|string} value - 原始值
+   * @returns {string} 格式化后的值
+   */
   private getFormattedValue(value: number | string) {
     if (this.formatter) return this.formatter(value);
     return value;
   }
 
+  /**
+   * 检查是否有有效值
+   * @private
+   * @returns {boolean} 是否存在有效值
+   */
   private hasValue(): boolean {
     return (this.value || '').toString().length > 0;
   }
